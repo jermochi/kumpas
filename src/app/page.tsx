@@ -1,4 +1,6 @@
 import Navbar from "../../components/layout/Navbar";
+import InputContainer from "../../components/layout/InputContainer";
+import { Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
@@ -6,10 +8,10 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Header */}
-      <section className="flex flex-col items-center px-6 pt-20 pb-16 sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
+      <section className="flex flex-col items-center px-6 pt-3 pb-4 sm:pt-5 sm:pb-5 md:pt-6 md:pb-6">
         {/* Pill badge */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-black/[0.08] bg-white/70 px-4 py-2 text-xs font-medium tracking-wide text-muted-text shadow-sm backdrop-blur-sm sm:text-sm">
-          <span className="text-forest">✦</span>
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-black/[0.08] bg-white/70 px-4 py-2 text-xs font-medium tracking-wide text-muted-text shadow-sm backdrop-blur-sm sm:text-sm">
+          <Sparkles size={14} className="text-forest" />
           Powered by Multi-Agent AI
         </div>
 
@@ -21,12 +23,17 @@ export default function Home() {
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-6 max-w-lg text-center text-base leading-7 text-muted-text sm:mt-8 sm:text-lg sm:leading-8">
-          Three specialized AI agents analyze student profiles,
-          career trends, and individual strengths to craft a personalized
-          guidance roadmap.
+        <p className="mt-4 max-w-md text-center text-xs leading-5 text-muted-text sm:mt-5 sm:text-sm sm:leading-6">
+          Three specialized AI agents analyze labor markets,
+          student feasibility, and emotional aspects to craft a personalized guidance roadmap.
         </p>
       </section>
+
+      {/* Input Container */}
+      <InputContainer />
+
+      {/* Bottom spacer */}
+      <div className="pb-20" />
     </div>
   );
 }
