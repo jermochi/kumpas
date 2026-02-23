@@ -4,11 +4,29 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background font-sans">
       <Navbar />
-      <main className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-8 px-6 py-32 text-center sm:items-start sm:text-left">
-        <h1 className="font-heading max-w-md text-4xl font-bold leading-tight tracking-tight text-ink">
-          Welcome to Kumpas
+
+      {/* Hero Header */}
+      <section className="flex flex-col items-center px-6 pt-20 pb-16 sm:pt-28 sm:pb-20 md:pt-36 md:pb-24">
+        {/* Pill badge */}
+        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-black/[0.08] bg-white/70 px-4 py-2 text-xs font-medium tracking-wide text-muted-text shadow-sm backdrop-blur-sm sm:text-sm">
+          <span className="text-forest">✦</span>
+          Powered by Multi-Agent AI
+        </div>
+
+        {/* Main heading */}
+        <h1 className="font-heading max-w-3xl text-center text-3xl font-bold leading-[1.1] tracking-tight text-ink sm:text-4xl md:text-5xl lg:text-6xl">
+          Counsel Smarter,
+          <br />
+          <em className="whitespace-nowrap text-forest">Guide Students Further</em>
         </h1>
-      </main>
+
+        {/* Subtitle */}
+        <p className="mt-6 max-w-lg text-center text-base leading-7 text-muted-text sm:mt-8 sm:text-lg sm:leading-8">
+          Three specialized AI agents analyze student profiles,
+          career trends, and individual strengths to craft a personalized
+          guidance roadmap.
+        </p>
+      </section>
     </div>
   );
 }
