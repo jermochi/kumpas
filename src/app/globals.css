@@ -157,3 +157,14 @@
     opacity: 0.4;
   }
 }
+
+/* Wave bar */
+.wave-bar {
+  width: 4px; background: var(--sage); border-radius: 2px;
+  transform-origin: bottom;
+}
+
+@keyframes wave-bar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}

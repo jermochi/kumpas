@@ -16,7 +16,7 @@ export default function InputContainer() {
     return (
         <section className="mx-auto w-full max-w-2xl px-4 sm:px-6">
             {/* Tab switcher — separate from card */}
-            <TabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
+            <TabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} setIsRecording={setIsRecording} />
 
             {/* Content card */}
             <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-card">
