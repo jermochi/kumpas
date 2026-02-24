@@ -16,8 +16,6 @@ export default function InputContainer() {
     const [isRecording, setIsRecording] = useState(false);
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [rawTranscript, setRawTranscript] = useState<string | null>(null);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [error, setError] = useState<string | null>(null);
     
     // Track if either tab has active data that shouldn't be lost
     const [recordingHasData, setRecordingHasData] = useState(false);
@@ -50,46 +48,25 @@ export default function InputContainer() {
         setRecordingHasData(false);
         setUploadHasData(false);
         setRawTranscript(null);
-        setError(null);
     };
 
     const handleDiscard = () => {
         if (pendingTab) executeTabChange(pendingTab);
     };
 
-    const handleBeginAnalysis = async () => {
-        if(!rawTranscript) return;
+    const handleBeginAnalysis = () => {
+        if (!rawTranscript) return;
 
-        setError(null);
-        setIsProcessing(true);
+        const sessionId = crypto.randomUUID();
+        sessionStorage.setItem(
+            `kumpas-session-${sessionId}`,
+            JSON.stringify({
+                rawTranscript,
+                createdAt: new Date().toISOString(),
+            })
+        );
 
-        try {
-            const res = await fetch("/api/process-transcript", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ transcript: rawTranscript }),
-            });
-
-            const data = await res.json() as Record<string, unknown>;
-
-            if(!res.ok) {
-                throw new Error((data.error as string) ?? "Transcription layer failed");
-            }
-
-            const sessionId = crypto.randomUUID();
-            sessionStorage.setItem(
-                `session_${sessionId}`,
-                JSON.stringify({
-                    structured: data,
-                })
-            );
-
-            router.push(`/analysis?session=${sessionId}`);
-        } catch (err) {
-            console.error("Analysis error:", err);
-            setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
-            setIsProcessing(false);
-        }
+        router.push(`/analysis?session=${sessionId}`);
     };
 
 
@@ -129,8 +106,6 @@ export default function InputContainer() {
                     onClick={handleBeginAnalysis}
                     icon={<Zap size={16} />}
                     disabled={!rawTranscript}
-                    isLoading={isProcessing}
-                    loadingText="Processing Transcript..."
                 />
             </div>
         </section>
