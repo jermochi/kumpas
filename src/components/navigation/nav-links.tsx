@@ -12,7 +12,7 @@ export default function NavLinks() {
             </Link>
             {/* to be linked to our github*/}
             <a
-                href="https://github.com"
+                href="https://github.com/jermochi/kumpas.git"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-black/[0.08] bg-white px-4 py-2 text-sm font-medium text-ink shadow-sm transition-all hover:border-black/[0.15] hover:shadow-md"
