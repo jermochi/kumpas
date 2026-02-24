@@ -1,5 +1,5 @@
-import Navbar from "../../components/layout/Navbar";
-import InputContainer from "../../components/layout/InputContainer";
+import Navbar from "@/components/navigation/nav-bar";
+import InputContainer from "@/components/input/input-container";
 import { Sparkles } from "lucide-react";
 
 export default function Home() {
