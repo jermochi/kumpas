@@ -1,15 +1,21 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import { Mic, Square, Upload, Check, Zap } from "lucide-react";
+import { Mic, Square, Upload, Check, Zap, Loader2 } from "lucide-react";
 
 type Tab = "recording" | "upload";
+type TranscriptionState = 
+    | { status: "idle" }
+    | { status: "loading" }
+    | { status: "success"; text: string }
+    | { status: "error"; message: string };
 
 export default function InputContainer() {
     const [activeTab, setActiveTab] = useState<Tab>("recording");
     const [isRecording, setIsRecording] = useState(false);
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [dragOver, setDragOver] = useState(false);
+    const [transcription, setTranscription] = useState<TranscriptionState>({ status: "idle" });
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const ACCEPTED_TYPES = ".mp3,.wav,.m4a,.txt";
@@ -22,6 +28,7 @@ export default function InputContainer() {
             return;
         }
         setUploadedFile(file);
+        setTranscription({ status: "idle" });
     }, []);
 
     const handleDrop = useCallback(
@@ -33,6 +40,37 @@ export default function InputContainer() {
         },
         [handleFileChange]
     );
+
+    const handleBeginAnalysis = async () => {
+        if (!uploadedFile) {
+            //disable button
+        return;
+        }
+
+        setTranscription({ status: "loading" });
+
+        const formData = new FormData();
+        formData.append("file", uploadedFile);
+
+        try {
+        const res = await fetch("/api/transcribe", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            setTranscription({ status: "error", message: data.error ?? "Unknown error" });
+            return;
+        }
+
+        console.log("Transcript:", data.text);
+        setTranscription({ status: "success", text: data.text });
+        } catch (err) {
+        setTranscription({ status: "error", message: "Network error. Please try again." });
+        }
+    };
 
     return (
         <section className="mx-auto w-full max-w-2xl px-4 sm:px-6">
@@ -165,9 +203,22 @@ export default function InputContainer() {
 
                 {/* Begin Analysis button */}
                 <div className="border-t border-black/[0.06] p-4 sm:p-6">
-                    <button className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-ink py-4 text-sm font-semibold text-white transition-colors hover:bg-forest">
-                        <Zap size={16} />
-                        Begin Multi-Agent Analysis
+                    <button
+                        onClick={handleBeginAnalysis}
+                        disabled={transcription.status === "loading" || !uploadedFile}
+                        className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-ink py-4 text-sm font-semibold text-white transition-colors hover:bg-forest disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                        {transcription.status === "loading" ? (
+                        <>
+                            <Loader2 size={16} className="animate-spin" />
+                            Transcribing...
+                        </>
+                        ) : (
+                        <>
+                            <Zap size={16} />
+                            Begin Multi-Agent Analysis
+                        </>
+                        )}
                     </button>
                 </div>
             </div>
