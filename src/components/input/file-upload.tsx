@@ -1,41 +1,83 @@
 "use client";
 
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
 import { Upload, Check } from "lucide-react";
+import Button from "@/components/button";
+import PlaybackTranscript from "./playback-transcript";
+import { TranscriptionState } from "@/types";
 
 interface FileUploadProps {
     uploadedFile: File | null;
     onFileChange: (file: File | null) => void;
+    onHasDataChange: (hasData: boolean) => void;
+    onTranscriptionComplete: (text: string | null) => void;
 }
 
-export default function FileUpload({ uploadedFile, onFileChange }: FileUploadProps) {
+export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange, onTranscriptionComplete }: FileUploadProps) {
     const [dragOver, setDragOver] = useState(false);
+    const [transcription, setTranscription] = useState<TranscriptionState>({ status: "idle" });
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const ACCEPTED_TYPES = ".mp3,.wav,.m4a,.txt";
     const MAX_SIZE_MB = 20;
 
-    const handleFileChange = useCallback((file: File | null) => {
-        if (!file) return;
+    useEffect(() => {
+        onHasDataChange(!!uploadedFile || transcription.status !== "idle");
+    }, [uploadedFile, transcription.status, onHasDataChange]);
+
+    const handleFileSelection = (file: File | null) => {
+        setTranscription({ status: "idle" });
+        onTranscriptionComplete(null);
+        if (!file) {
+            onFileChange(null);
+            return;
+        }
         if (file.size > MAX_SIZE_MB * 1024 * 1024) {
             alert(`File must be under ${MAX_SIZE_MB}MB`);
             return;
         }
         onFileChange(file);
-    }, [onFileChange]);
+        transcribeFile(file);
+    };
 
     const handleDrop = useCallback(
         (e: React.DragEvent) => {
             e.preventDefault();
             setDragOver(false);
             const file = e.dataTransfer.files?.[0];
-            handleFileChange(file ?? null);
+            handleFileSelection(file ?? null);
         },
-        [handleFileChange]
+        [onFileChange]
     );
 
+    const transcribeFile = async (file: File) => {
+        setTranscription({ status: "loading" });
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const res = await fetch("/api/transcribe", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                setTranscription({ status: "error", message: data.error ?? "Unknown error" });
+                return;
+            }
+
+            setTranscription({ status: "success", text: data.text });
+            onTranscriptionComplete(data.text);
+        } catch (err) {
+            setTranscription({ status: "error", message: "Network error. Please try again." });
+        }
+    };
+
     return (
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-6">
             <div
                 onDragOver={(e) => {
                     e.preventDefault();
@@ -57,7 +99,7 @@ export default function FileUpload({ uploadedFile, onFileChange }: FileUploadPro
                     accept={ACCEPTED_TYPES}
                     className="hidden"
                     onChange={(e) =>
-                        handleFileChange(e.target.files?.[0] ?? null)
+                        handleFileSelection(e.target.files?.[0] ?? null)
                     }
                 />
 
@@ -88,6 +130,16 @@ export default function FileUpload({ uploadedFile, onFileChange }: FileUploadPro
                     </>
                 )}
             </div>
+
+            {uploadedFile && (
+                <div className="w-full space-y-4">
+                    <PlaybackTranscript 
+                        hasRecorded={!!uploadedFile}
+                        isRecording={false}
+                        transcription={transcription}
+                    />
+                </div>
+            )}
         </div>
     );
 }

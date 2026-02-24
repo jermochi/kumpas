@@ -5,6 +5,8 @@ import Button from "@/components/button";
 import TabSwitcher from "@/components/input/tab-switcher";
 import LiveRecording from "@/components/input/live-recording";
 import FileUpload from "@/components/input/file-upload";
+import DiscardModal from "@/components/input/discard-modal";
+import { Zap } from "lucide-react";
 
 type Tab = "recording" | "upload";
 
@@ -12,30 +14,88 @@ export default function InputContainer() {
     const [activeTab, setActiveTab] = useState<Tab>("recording");
     const [isRecording, setIsRecording] = useState(false);
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+    const [finalTranscript, setFinalTranscript] = useState<string | null>(null);
+    
+    // Track if either tab has active data that shouldn't be lost
+    const [recordingHasData, setRecordingHasData] = useState(false);
+    const [uploadHasData, setUploadHasData] = useState(false);
+    
+    // Tab switching modal state
+    const [pendingTab, setPendingTab] = useState<Tab | null>(null);
+
+    const handleTabChangeAttempt = (newTab: Tab) => {
+        if (newTab === activeTab) return;
+
+        const currentTabHasData = activeTab === "recording" ? recordingHasData : uploadHasData;
+        
+        if (currentTabHasData) {
+            setPendingTab(newTab);
+        } else {
+            executeTabChange(newTab);
+        }
+    };
+
+    const executeTabChange = (newTab: Tab) => {
+        setActiveTab(newTab);
+        setPendingTab(null);
+        
+        // Reset state across both tabs thoroughly
+        setUploadedFile(null);
+        setIsRecording(false);
+        setRecordingHasData(false);
+        setUploadHasData(false);
+        setFinalTranscript(null);
+    };
+
+    const handleDiscard = () => {
+        if (pendingTab) {
+            executeTabChange(pendingTab);
+        }
+    };
 
     return (
-        <section className="mx-auto w-full max-w-2xl px-4 sm:px-6">
+        <section className="mx-auto w-full max-w-2xl px-4 sm:px-6 relative">
+            <DiscardModal 
+                isOpen={pendingTab !== null} 
+                onDiscard={handleDiscard} 
+                onCancel={() => setPendingTab(null)} 
+            />
+
             {/* Tab switcher — separate from card */}
-            <TabSwitcher activeTab={activeTab} setActiveTab={setActiveTab} />
+            <TabSwitcher activeTab={activeTab} setActiveTab={handleTabChangeAttempt} />
 
             {/* Content card */}
             <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-card">
                 <div className="p-6 sm:p-8">
-                    {activeTab === "recording" ? (
+                    {activeTab === "recording" && (
                         <LiveRecording 
                             isRecording={isRecording} 
                             onToggleRecording={() => setIsRecording(!isRecording)} 
+                            onHasDataChange={setRecordingHasData}
+                            onTranscriptionComplete={setFinalTranscript}
                         />
-                    ) : (
+                    )}
+                    {activeTab === "upload" && (
                         <FileUpload 
                             uploadedFile={uploadedFile} 
                             onFileChange={setUploadedFile} 
+                            onHasDataChange={setUploadHasData}
+                            onTranscriptionComplete={setFinalTranscript}
                         />
                     )}
                 </div>
-
-                {/* Begin Analysis button */}
-                <Button text="Begin Multi-Agent Analysis" />
+                <Button
+                    text="Begin Multi Agent Analysis"
+                    onClick={() => {
+                        if (finalTranscript) {
+                            sessionStorage.setItem("transcript", finalTranscript);
+                            console.log("Saved transcript to sessionStorage:", finalTranscript);
+                        }
+                    }}
+                    icon={<Zap size={16} />}
+                    disabled={!finalTranscript}
+                    isLoading={false}
+                />
             </div>
         </section>
     );
