@@ -1,5 +1,5 @@
 import Navbar from "@/components/navigation/nav-bar";
-
+import DocumentationSection from "@/components/documentation/documentation-section";
 export default function DocumentationPage() {
   return (
     <div className="min-h-screen bg-background font-sans">
@@ -17,7 +17,17 @@ export default function DocumentationPage() {
 
       {/* Main Content Area */}
       <main className="mx-auto max-w-4xl px-6 pb-20">
-        <div className="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm sm:p-8">
+        <DocumentationSection/>
+        <div className="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm sm:p-8 my-4">
+          <h2 className="text-xl font-semibold text-ink">Getting Started</h2>
+          <p className="mt-2 text-sm text-muted-text">
+            This is where you can start adding your documentation content, guides, and agent explanations.
+          </p>
+          
+          {/* Add more sections here */}
+          
+        </div>
+        <div className="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm sm:p-8 my-4">
           <h2 className="text-xl font-semibold text-ink">Getting Started</h2>
           <p className="mt-2 text-sm text-muted-text">
             This is where you can start adding your documentation content, guides, and agent explanations.
