@@ -1,4 +1,4 @@
-import { Zap, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 interface ButtonProps {
     text: string;
@@ -6,6 +6,7 @@ interface ButtonProps {
     disabled?: boolean;
     isLoading?: boolean;
     loadingText?: string;
+    icon?: React.ReactNode;
 }
 
 export default function Button({ 
@@ -13,7 +14,8 @@ export default function Button({
     onClick, 
     disabled, 
     isLoading, 
-    loadingText = "Loading..." 
+    loadingText = "Loading...",
+    icon
 }: ButtonProps) {
     return (
         <div className="border-t border-black/[0.06] p-4 sm:p-6">
@@ -29,7 +31,7 @@ export default function Button({
                     </>
                 ) : (
                     <>
-                        <Zap size={16} />
+                        {icon && <span>{icon}</span>}
                         {text}
                     </>
                 )}
