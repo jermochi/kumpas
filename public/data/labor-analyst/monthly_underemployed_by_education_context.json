@@ -1,0 +1,858 @@
+{
+    "metadata": {
+        "unit": "Underemployed Persons (in thousands)",
+        "description": "Underemployed persons by education (Annual and Monthly)"
+    },
+    "data": {
+        "Categories": {
+            "No grade completed": {
+                "2023": {
+                    "Annual_Average": 78.15,
+                    "Monthly": {
+                        "January": 70.084,
+                        "February": 103.343,
+                        "March": 46.6,
+                        "April": 77.355,
+                        "May": 54.442,
+                        "June": 90.204,
+                        "July": 104.849,
+                        "August": 92.812,
+                        "September": 70.699,
+                        "October": 83.841,
+                        "November": 49.281,
+                        "December": 94.285
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 77.1,
+                    "Monthly": {
+                        "January": 107.475,
+                        "February": 88.142,
+                        "March": 53.352,
+                        "April": 80.929,
+                        "May": 46.532,
+                        "June": 108.171,
+                        "July": 113.195,
+                        "August": 35.247,
+                        "September": 39.582,
+                        "October": 85.658,
+                        "November": 75.803,
+                        "December": 91.066
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 82.73,
+                    "Monthly": {
+                        "January": 88.697,
+                        "February": 104.607,
+                        "March": 83.23,
+                        "April": 90.878,
+                        "May": 94.079,
+                        "June": 93.501,
+                        "July": 97.113,
+                        "August": 65.424,
+                        "September": 55.056,
+                        "October": 89.145,
+                        "November": 78.707,
+                        "December": 52.297
+                    }
+                }
+            },
+            "Elementary": {
+                "2023": {
+                    "Annual_Average": 1701.79,
+                    "Monthly": {
+                        "January": 1912.458,
+                        "February": 1808.075,
+                        "March": 1675.17,
+                        "April": 1786.686,
+                        "May": 1499.638,
+                        "June": 1555.74,
+                        "July": 1999.129,
+                        "August": 1814.556,
+                        "September": 1426.546,
+                        "October": 1590.968,
+                        "November": 1508.67,
+                        "December": 1843.827
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 1565.59,
+                    "Monthly": {
+                        "January": 1871.275,
+                        "February": 1724.511,
+                        "March": 1521.878,
+                        "April": 1894.407,
+                        "May": 1252.473,
+                        "June": 1669.23,
+                        "July": 1583.017,
+                        "August": 1369.898,
+                        "September": 1591.594,
+                        "October": 1670.436,
+                        "November": 1397.658,
+                        "December": 1240.747
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 1550.68,
+                    "Monthly": {
+                        "January": 1827.469,
+                        "February": 1149.7,
+                        "March": 1559.899,
+                        "April": 1803.544,
+                        "May": 1599.505,
+                        "June": 1559.718,
+                        "July": 1852.421,
+                        "August": 1459.636,
+                        "September": 1443.06,
+                        "October": 1581.182,
+                        "November": 1636.941,
+                        "December": 1135.132
+                    }
+                }
+            },
+            "Elementary Undergraduate": {
+                "2023": {
+                    "Annual_Average": 866.0,
+                    "Monthly": {
+                        "January": 1016.354,
+                        "February": 916.412,
+                        "March": 832.08,
+                        "April": 912.409,
+                        "May": 773.115,
+                        "June": 762.807,
+                        "July": 1098.051,
+                        "August": 854.647,
+                        "September": 704.016,
+                        "October": 831.382,
+                        "November": 770.639,
+                        "December": 920.125
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 787.51,
+                    "Monthly": {
+                        "January": 1017.158,
+                        "February": 921.113,
+                        "March": 771.012,
+                        "April": 948.963,
+                        "May": 618.821,
+                        "June": 781.015,
+                        "July": 847.922,
+                        "August": 680.339,
+                        "September": 781.091,
+                        "October": 852.09,
+                        "November": 666.785,
+                        "December": 563.821
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 762.1,
+                    "Monthly": {
+                        "January": 879.429,
+                        "February": 509.935,
+                        "March": 756.685,
+                        "April": 879.262,
+                        "May": 813.008,
+                        "June": 738.134,
+                        "July": 987.736,
+                        "August": 678.778,
+                        "September": 677.418,
+                        "October": 787.664,
+                        "November": 843.612,
+                        "December": 593.594
+                    }
+                }
+            },
+            "Elementary Graduate": {
+                "2023": {
+                    "Annual_Average": 835.79,
+                    "Monthly": {
+                        "January": 896.104,
+                        "February": 891.663,
+                        "March": 843.09,
+                        "April": 874.277,
+                        "May": 726.523,
+                        "June": 792.933,
+                        "July": 901.078,
+                        "August": 959.909,
+                        "September": 722.53,
+                        "October": 759.586,
+                        "November": 738.031,
+                        "December": 923.702
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 778.08,
+                    "Monthly": {
+                        "January": 854.117,
+                        "February": 803.398,
+                        "March": 750.866,
+                        "April": 945.444,
+                        "May": 633.653,
+                        "June": 888.215,
+                        "July": 735.095,
+                        "August": 689.559,
+                        "September": 810.503,
+                        "October": 818.346,
+                        "November": 730.873,
+                        "December": 676.927
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 788.58,
+                    "Monthly": {
+                        "January": 948.039,
+                        "February": 639.765,
+                        "March": 803.214,
+                        "April": 924.282,
+                        "May": 786.496,
+                        "June": 821.584,
+                        "July": 864.685,
+                        "August": 780.858,
+                        "September": 765.642,
+                        "October": 793.519,
+                        "November": 793.329,
+                        "December": 541.538
+                    }
+                }
+            },
+            "Junior High School": {
+                "2023": {
+                    "Annual_Average": 2616.24,
+                    "Monthly": {
+                        "January": 2955.873,
+                        "February": 2798.672,
+                        "March": 2455.116,
+                        "April": 2665.661,
+                        "May": 2565.407,
+                        "June": 2549.623,
+                        "July": 3070.799,
+                        "August": 2304.762,
+                        "September": 2288.925,
+                        "October": 2473.319,
+                        "November": 2529.278,
+                        "December": 2737.437
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 2554.26,
+                    "Monthly": {
+                        "January": 2726.585,
+                        "February": 2608.228,
+                        "March": 2411.857,
+                        "April": 3156.667,
+                        "May": 2173.391,
+                        "June": 2792.939,
+                        "July": 2397.459,
+                        "August": 2452.391,
+                        "September": 2480.421,
+                        "October": 2712.916,
+                        "November": 2375.894,
+                        "December": 2362.395
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 2577.51,
+                    "Monthly": {
+                        "January": 2897.441,
+                        "February": 2461.949,
+                        "March": 2970.058,
+                        "April": 3109.766,
+                        "May": 2977.511,
+                        "June": 2408.011,
+                        "July": 2910.067,
+                        "August": 2393.599,
+                        "September": 2485.441,
+                        "October": 2563.499,
+                        "November": 2039.364,
+                        "December": 1713.425
+                    }
+                }
+            },
+            "Junior High Undergraduate": {
+                "2023": {
+                    "Annual_Average": 822.23,
+                    "Monthly": {
+                        "January": 892.288,
+                        "February": 873.064,
+                        "March": 846.094,
+                        "April": 852.5,
+                        "May": 728.042,
+                        "June": 736.707,
+                        "July": 1017.747,
+                        "August": 724.555,
+                        "September": 685.948,
+                        "October": 789.284,
+                        "November": 797.561,
+                        "December": 922.998
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 750.22,
+                    "Monthly": {
+                        "January": 884.341,
+                        "February": 723.666,
+                        "March": 766.018,
+                        "April": 912.391,
+                        "May": 704.481,
+                        "June": 809.487,
+                        "July": 690.123,
+                        "August": 597.603,
+                        "September": 732.247,
+                        "October": 818.342,
+                        "November": 677.834,
+                        "December": 686.076
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 742.18,
+                    "Monthly": {
+                        "January": 826.149,
+                        "February": 686.639,
+                        "March": 936.192,
+                        "April": 836.247,
+                        "May": 742.44,
+                        "June": 715.458,
+                        "July": 910.818,
+                        "August": 738.04,
+                        "September": 651.542,
+                        "October": 709.993,
+                        "November": 658.95,
+                        "December": 493.653
+                    }
+                }
+            },
+            "Junior High Completed": {
+                "2023": {
+                    "Annual_Average": 1794.01,
+                    "Monthly": {
+                        "January": 2063.585,
+                        "February": 1925.608,
+                        "March": 1609.021,
+                        "April": 1813.16,
+                        "May": 1837.365,
+                        "June": 1812.916,
+                        "July": 2053.052,
+                        "August": 1580.207,
+                        "September": 1602.977,
+                        "October": 1684.034,
+                        "November": 1731.718,
+                        "December": 1814.44
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 1804.04,
+                    "Monthly": {
+                        "January": 1842.244,
+                        "February": 1884.563,
+                        "March": 1645.839,
+                        "April": 2244.276,
+                        "May": 1468.911,
+                        "June": 1983.452,
+                        "July": 1707.337,
+                        "August": 1854.789,
+                        "September": 1748.174,
+                        "October": 1894.574,
+                        "November": 1698.06,
+                        "December": 1676.32
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 1835.33,
+                    "Monthly": {
+                        "January": 2071.291,
+                        "February": 1775.311,
+                        "March": 2033.866,
+                        "April": 2273.519,
+                        "May": 2235.071,
+                        "June": 1692.553,
+                        "July": 1999.249,
+                        "August": 1655.559,
+                        "September": 1833.899,
+                        "October": 1853.506,
+                        "November": 1380.414,
+                        "December": 1219.772
+                    }
+                }
+            },
+            "Senior High School": {
+                "2023": {
+                    "Annual_Average": 177.73,
+                    "Monthly": {
+                        "January": 203.969,
+                        "February": 176.105,
+                        "March": 151.877,
+                        "April": 185.275,
+                        "May": 209.388,
+                        "June": 159.763,
+                        "July": 214.294,
+                        "August": 196.509,
+                        "September": 110.833,
+                        "October": 149.303,
+                        "November": 199.64,
+                        "December": 175.76
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 216.67,
+                    "Monthly": {
+                        "January": 202.793,
+                        "February": 200.747,
+                        "March": 225.996,
+                        "April": 261.431,
+                        "May": 176.311,
+                        "June": 228.96,
+                        "July": 240.567,
+                        "August": 222.33,
+                        "September": 222.693,
+                        "October": 172.884,
+                        "November": 262.719,
+                        "December": 182.582
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 217.03,
+                    "Monthly": {
+                        "January": 217.694,
+                        "February": 148.299,
+                        "March": 260.56,
+                        "April": 268.503,
+                        "May": 251.34,
+                        "June": 206.551,
+                        "July": 256.964,
+                        "August": 234.028,
+                        "September": 193.81,
+                        "October": 219.053,
+                        "November": 186.136,
+                        "December": 161.391
+                    }
+                }
+            },
+            "Senior High Undergraduate": {
+                "2023": {
+                    "Annual_Average": 48.36,
+                    "Monthly": {
+                        "January": 48.655,
+                        "February": 54.762,
+                        "March": 62.618,
+                        "April": 51.298,
+                        "May": 29.713,
+                        "June": 57.609,
+                        "July": 59.615,
+                        "August": 65.993,
+                        "September": 38.018,
+                        "October": 36.868,
+                        "November": 39.117,
+                        "December": 36.082
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 51.49,
+                    "Monthly": {
+                        "January": 52.429,
+                        "February": 39.079,
+                        "March": 74.794,
+                        "April": 56.072,
+                        "May": 41.81,
+                        "June": 53.185,
+                        "July": 63.141,
+                        "August": 53.644,
+                        "September": 26.496,
+                        "October": 41.416,
+                        "November": 59.337,
+                        "December": 56.466
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 46.33,
+                    "Monthly": {
+                        "January": 39.774,
+                        "February": 24.798,
+                        "March": 31.662,
+                        "April": 58.22,
+                        "May": 63.056,
+                        "June": 71.412,
+                        "July": 46.563,
+                        "August": 40.91,
+                        "September": 54.077,
+                        "October": 35.92,
+                        "November": 54.251,
+                        "December": 35.329
+                    }
+                }
+            },
+            "Senior High Graduate": {
+                "2023": {
+                    "Annual_Average": 129.36,
+                    "Monthly": {
+                        "January": 155.314,
+                        "February": 121.343,
+                        "March": 89.259,
+                        "April": 133.977,
+                        "May": 179.674,
+                        "June": 102.154,
+                        "July": 154.679,
+                        "August": 130.517,
+                        "September": 72.815,
+                        "October": 112.435,
+                        "November": 160.522,
+                        "December": 139.678
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 165.18,
+                    "Monthly": {
+                        "January": 150.364,
+                        "February": 161.669,
+                        "March": 151.203,
+                        "April": 205.359,
+                        "May": 134.502,
+                        "June": 175.775,
+                        "July": 177.426,
+                        "August": 168.686,
+                        "September": 196.198,
+                        "October": 131.468,
+                        "November": 203.382,
+                        "December": 126.117
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 170.7,
+                    "Monthly": {
+                        "January": 177.919,
+                        "February": 123.502,
+                        "March": 228.898,
+                        "April": 210.283,
+                        "May": 188.284,
+                        "June": 135.138,
+                        "July": 210.401,
+                        "August": 193.118,
+                        "September": 139.733,
+                        "October": 183.133,
+                        "November": 131.885,
+                        "December": 126.061
+                    }
+                }
+            },
+            "Post Secondary": {
+                "2023": {
+                    "Annual_Average": 241.71,
+                    "Monthly": {
+                        "January": 247.034,
+                        "February": 323.277,
+                        "March": 227.14,
+                        "April": 292.552,
+                        "May": 291.881,
+                        "June": 291.108,
+                        "July": 239.79,
+                        "August": 194.58,
+                        "September": 233.365,
+                        "October": 177.639,
+                        "November": 216.904,
+                        "December": 165.215
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 222.47,
+                    "Monthly": {
+                        "January": 178.878,
+                        "February": 237.202,
+                        "March": 138.223,
+                        "April": 263.919,
+                        "May": 195.736,
+                        "June": 188.216,
+                        "July": 210.323,
+                        "August": 238.29,
+                        "September": 276.612,
+                        "October": 221.251,
+                        "November": 266.089,
+                        "December": 254.921
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 221.13,
+                    "Monthly": {
+                        "January": 198.299,
+                        "February": 203.638,
+                        "March": 285.797,
+                        "April": 276.501,
+                        "May": 303.22,
+                        "June": 287.458,
+                        "July": 220.687,
+                        "August": 205.335,
+                        "September": 196.791,
+                        "October": 189.151,
+                        "November": 185.521,
+                        "December": 101.219
+                    }
+                }
+            },
+            "Post Secondary Undergraduate": {
+                "2023": {
+                    "Annual_Average": 7.03,
+                    "Monthly": {
+                        "January": 11.866,
+                        "February": 1.321,
+                        "March": 2.022,
+                        "April": 2.184,
+                        "May": 8.058,
+                        "June": 2.978,
+                        "July": 7.054,
+                        "August": 2.531,
+                        "September": 6.253,
+                        "October": 4.518,
+                        "November": 35.518,
+                        "December": 0.0
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 9.37,
+                    "Monthly": {
+                        "January": 2.811,
+                        "February": 15.48,
+                        "March": 5.927,
+                        "April": 6.7,
+                        "May": 1.467,
+                        "June": 7.784,
+                        "July": 5.943,
+                        "August": 10.833,
+                        "September": 4.029,
+                        "October": 7.219,
+                        "November": 26.334,
+                        "December": 17.87
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 7.94,
+                    "Monthly": {
+                        "January": 5.164,
+                        "February": 0.0,
+                        "March": 32.656,
+                        "April": 9.264,
+                        "May": 7.485,
+                        "June": 0.0,
+                        "July": 8.768,
+                        "August": 11.582,
+                        "September": 2.155,
+                        "October": 6.149,
+                        "November": 10.853,
+                        "December": 1.154
+                    }
+                }
+            },
+            "Post Secondary Graduate": {
+                "2023": {
+                    "Annual_Average": 234.68,
+                    "Monthly": {
+                        "January": 235.169,
+                        "February": 321.956,
+                        "March": 225.118,
+                        "April": 290.369,
+                        "May": 283.823,
+                        "June": 288.13,
+                        "July": 232.736,
+                        "August": 192.049,
+                        "September": 227.112,
+                        "October": 173.121,
+                        "November": 181.386,
+                        "December": 165.215
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 213.11,
+                    "Monthly": {
+                        "January": 176.067,
+                        "February": 221.722,
+                        "March": 132.296,
+                        "April": 257.219,
+                        "May": 194.269,
+                        "June": 180.432,
+                        "July": 204.38,
+                        "August": 227.458,
+                        "September": 272.583,
+                        "October": 214.032,
+                        "November": 239.755,
+                        "December": 237.051
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 213.2,
+                    "Monthly": {
+                        "January": 193.135,
+                        "February": 203.638,
+                        "March": 253.141,
+                        "April": 267.237,
+                        "May": 295.734,
+                        "June": 287.458,
+                        "July": 211.919,
+                        "August": 193.753,
+                        "September": 194.636,
+                        "October": 183.002,
+                        "November": 174.668,
+                        "December": 100.065
+                    }
+                }
+            },
+            "College": {
+                "2023": {
+                    "Annual_Average": 1128.34,
+                    "Monthly": {
+                        "January": 1265.07,
+                        "February": 1077.128,
+                        "March": 885.763,
+                        "April": 1196.433,
+                        "May": 1039.798,
+                        "June": 1228.385,
+                        "July": 1439.998,
+                        "August": 1026.947,
+                        "September": 981.933,
+                        "October": 1121.728,
+                        "November": 1283.042,
+                        "December": 993.796
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 1182.03,
+                    "Monthly": {
+                        "January": 1209.603,
+                        "February": 1217.634,
+                        "March": 1039.355,
+                        "April": 1379.66,
+                        "May": 970.567,
+                        "June": 1095.355,
+                        "July": 1228.62,
+                        "August": 1165.543,
+                        "September": 1332.683,
+                        "October": 1219.939,
+                        "November": 976.581,
+                        "December": 1348.846
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 1174.27,
+                    "Monthly": {
+                        "January": 1239.81,
+                        "February": 890.35,
+                        "March": 1278.062,
+                        "April": 1541.909,
+                        "May": 1376.9,
+                        "June": 1207.417,
+                        "July": 1465.686,
+                        "August": 1022.654,
+                        "September": 1148.389,
+                        "October": 1168.474,
+                        "November": 983.577,
+                        "December": 768.038
+                    }
+                }
+            },
+            "College Undergraduate": {
+                "2023": {
+                    "Annual_Average": 454.07,
+                    "Monthly": {
+                        "January": 505.92,
+                        "February": 487.412,
+                        "March": 325.286,
+                        "April": 444.964,
+                        "May": 459.223,
+                        "June": 535.267,
+                        "July": 592.43,
+                        "August": 415.396,
+                        "September": 359.475,
+                        "October": 450.975,
+                        "November": 470.186,
+                        "December": 402.329
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 451.12,
+                    "Monthly": {
+                        "January": 486.928,
+                        "February": 503.426,
+                        "March": 424.667,
+                        "April": 517.266,
+                        "May": 416.153,
+                        "June": 460.968,
+                        "July": 478.802,
+                        "August": 422.853,
+                        "September": 424.96,
+                        "October": 430.711,
+                        "November": 356.637,
+                        "December": 490.058
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 475.51,
+                    "Monthly": {
+                        "January": 528.699,
+                        "February": 300.97,
+                        "March": 564.151,
+                        "April": 625.074,
+                        "May": 658.603,
+                        "June": 456.852,
+                        "July": 557.479,
+                        "August": 447.3,
+                        "September": 458.001,
+                        "October": 464.085,
+                        "November": 362.326,
+                        "December": 282.55
+                    }
+                }
+            },
+            "College Graduate": {
+                "2023": {
+                    "Annual_Average": 674.26,
+                    "Monthly": {
+                        "January": 759.15,
+                        "February": 589.716,
+                        "March": 560.477,
+                        "April": 751.469,
+                        "May": 580.575,
+                        "June": 693.119,
+                        "July": 847.568,
+                        "August": 611.55,
+                        "September": 622.459,
+                        "October": 670.753,
+                        "November": 812.856,
+                        "December": 591.467
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 730.91,
+                    "Monthly": {
+                        "January": 722.675,
+                        "February": 714.209,
+                        "March": 614.688,
+                        "April": 862.394,
+                        "May": 554.414,
+                        "June": 634.387,
+                        "July": 749.818,
+                        "August": 742.689,
+                        "September": 907.723,
+                        "October": 789.228,
+                        "November": 619.944,
+                        "December": 858.789
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 698.76,
+                    "Monthly": {
+                        "January": 711.111,
+                        "February": 589.38,
+                        "March": 713.911,
+                        "April": 916.835,
+                        "May": 718.297,
+                        "June": 750.565,
+                        "July": 908.207,
+                        "August": 575.354,
+                        "September": 690.388,
+                        "October": 704.389,
+                        "November": 621.251,
+                        "December": 485.489
+                    }
+                }
+            }
+        }
+    }
+}

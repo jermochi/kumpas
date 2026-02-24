@@ -1,0 +1,105 @@
+{
+    "metadata": {
+        "region": "Region VI (Western Visayas) - Negros Island",
+        "coverage_years": "2026-2027",
+        "source": "DOLE RO6 Jobs and Labor Market Forecast"
+    },
+    "key_employment_generators": [
+        "Wholesale and Retail Trade",
+        "Accommodation and Food Services (Tourism)",
+        "Construction and Infrastructure",
+        "Manufacturing",
+        "Financial and Business Process Services (IT-BPM)"
+    ],
+    "in_demand_occupations": {
+        "Information Technology": [
+            "BPO IT Experts",
+            "Software Programmers",
+            "Digital Marketing Specialists",
+            "Graphic Designers",
+            "Cybersecurity Experts"
+        ],
+        "Tourism": [
+            "Agri-tourism Professionals",
+            "Eco-tourism Professionals",
+            "Dive Tourism Specialists",
+            "Farm-based/Experiential Tourism Professionals"
+        ],
+        "Construction": [
+            "General Construction Workers",
+            "Electric Welders",
+            "Construction Laborers"
+        ],
+        "Logistics": [
+            "Heavy Equipment Operators"
+        ],
+        "Healthcare": [
+            "Healthcare Professionals (General)"
+        ],
+        "Maritime": [
+            "Skilled Seafarers"
+        ],
+        "Services & Retail": [
+            "Sales Clerks",
+            "Call Center Agents",
+            "Service Crew",
+            "Domestic Helpers/Cleaners"
+        ]
+    },
+    "hard_to_fill_occupations": [
+        "Healthcare Workers / Registered Nurses (Driven by low domestic pay and strong overseas demand)",
+        "Guidance Counselors (Shortage of licensed professionals)",
+        "Marine Officers / Instructors (Salary gaps between academe and industry)",
+        "Skilled Manufacturing Workers (High turnover to better-paying roles or abroad)",
+        "Agriculture and Fisheries Professionals (Insufficient graduates)",
+        "Software Developers (Competency deficits, limited experience, high salary expectations)",
+        "Heavy Equipment Operators",
+        "Electricians & Plumbers",
+        "Automotive Mechanics",
+        "Masons",
+        "Geologists"
+    ],
+    "emerging_economies_and_jobs": {
+        "Digital Economy": [
+            "Software Developers",
+            "Data Analysts",
+            "IT Support Technicians",
+            "Automation Developers",
+            "Digital Content Specialists",
+            "Cloud/Infrastructure Engineers",
+            "Digital Governance Officers"
+        ],
+        "Green Economy": [
+            "Renewable Energy System Installers",
+            "Environmental Planners",
+            "Agricultural and Biosystems Engineers",
+            "Waste Management Coordinators",
+            "Energy Efficiency and Conservation Officers",
+            "Sustainable Agriculture Technicians"
+        ],
+        "Blue Economy": [
+            "Marine Engineers",
+            "Marine Aquaculture Technicians",
+            "Fishery Technicians",
+            "Marine Biologists",
+            "Coastal Resource Managers",
+            "Fisheries Inspectors",
+            "Environmental Monitoring Officers"
+        ],
+        "Care Economy": [
+            "Registered Nurses",
+            "Midwives",
+            "Caregivers",
+            "Medical Technologists",
+            "Social Workers",
+            "Child Welfare Specialists",
+            "Telemedicine Coordinators"
+        ]
+    },
+    "skills_gaps_and_requirements": {
+        "Basic Digital Literacy": "Significant lack of proficiency in fundamental applications like MS Word and Excel across the applicant pool, including NC II holders.",
+        "Core Professional (Soft) Skills": "Employers report weak communication skills, inadequate interview preparation, and a problematic overreliance on AI-generated resumes.",
+        "Advanced Tech/Digital Competencies": "Urgent need for upskilling in AI technologies, robotics, cybersecurity, and advanced digital hospital systems for nurses.",
+        "Financial Literacy": "Need for training on financial management and the use of digital wallets, especially for gig workers and transitioning MSMEs."
+    }
+}
