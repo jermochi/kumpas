@@ -1,0 +1,559 @@
+[
+  {
+    "occupation_slug": "nurse",
+    "degree": "Bachelor of Science in Nursing",
+    "abbreviation": "BSN",
+    "ched_psg_reference": "CMO No. 14, s. 2009 / CMO No. 5, s. 2008",
+    "duration_years": 4,
+    "board_exam_required": true,
+    "board_exam_name": "Philippine Nursing Licensure Examination (PNLE)",
+    "board_exam_administering_body": "PRC Board of Nursing",
+    "recommended_strand": "STEM",
+    "accepted_strands": ["STEM", "HUMSS"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "Biology / Life Science",
+        "shs_equivalent": "General Biology 1 & 2",
+        "minimum_grade": 85,
+        "importance": "critical",
+        "college_use": "Anatomy, Physiology, Microbiology, Parasitology — all Year 1-2 core subjects",
+        "risk_if_low": "Will struggle with Anatomy and Physiology in Year 1"
+      },
+      {
+        "subject": "Chemistry",
+        "shs_equivalent": "General Chemistry 1 & 2",
+        "minimum_grade": 80,
+        "importance": "critical",
+        "college_use": "Biochemistry in Year 1, Pharmacology in Year 2-3",
+        "risk_if_low": "Drug dosage calculations and biochemistry will be difficult"
+      },
+      {
+        "subject": "Mathematics",
+        "shs_equivalent": "General Mathematics / Pre-Calculus",
+        "minimum_grade": 80,
+        "importance": "important",
+        "college_use": "Drug dosage calculations, statistics in nursing research",
+        "risk_if_low": "Pharmacology dosage errors are a patient safety concern — early intervention needed"
+      },
+      {
+        "subject": "English / Communication",
+        "shs_equivalent": "Reading and Writing / Oral Communication",
+        "minimum_grade": 80,
+        "importance": "important",
+        "college_use": "Clinical documentation, patient education, nursing research writing",
+        "risk_if_low": "Documentation quality and clinical communication affected"
+      }
+    ],
+    "key_college_subjects": [
+      "Anatomy and Physiology",
+      "Microbiology and Parasitology",
+      "Biochemistry",
+      "Pharmacology",
+      "Fundamentals of Nursing Practice",
+      "Health Assessment",
+      "Community Health Nursing",
+      "Care of Mother, Child and Adolescent",
+      "Nutrition and Diet Therapy",
+      "Nursing Research"
+    ],
+    "tesda_alternative": {
+      "available": true,
+      "qualification": "Health Care Services NC II",
+      "description": "Entry-level healthcare aide qualification. Can be pursued if full BSN is not immediately accessible.",
+      "duration_months": 3
+    }
+  },
+  {
+    "occupation_slug": "medical-technologist",
+    "degree": "Bachelor of Science in Medical Technology",
+    "abbreviation": "BS MedTech",
+    "ched_psg_reference": "CMO No. 14, s. 2006",
+    "duration_years": 4,
+    "board_exam_required": true,
+    "board_exam_name": "Medical Technology Licensure Examination",
+    "board_exam_administering_body": "PRC Board of Medical Technology",
+    "recommended_strand": "STEM",
+    "accepted_strands": ["STEM"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "Biology / Life Science",
+        "shs_equivalent": "General Biology 1 & 2",
+        "minimum_grade": 88,
+        "importance": "critical",
+        "college_use": "Microbiology, Parasitology, Hematology, Immunology",
+        "risk_if_low": "Core laboratory science subjects will be very difficult"
+      },
+      {
+        "subject": "Chemistry",
+        "shs_equivalent": "General Chemistry 1 & 2",
+        "minimum_grade": 88,
+        "importance": "critical",
+        "college_use": "Clinical Chemistry is the most heavily weighted board exam subject",
+        "risk_if_low": "Clinical Chemistry failure is the most common board exam reason"
+      },
+      {
+        "subject": "Mathematics",
+        "shs_equivalent": "General Mathematics / Statistics",
+        "minimum_grade": 83,
+        "importance": "important",
+        "college_use": "Laboratory calculations, quality control, statistics in clinical research",
+        "risk_if_low": "Reagent and result calculation errors in lab practice"
+      },
+      {
+        "subject": "Physics",
+        "shs_equivalent": "Earth Science / Physical Science",
+        "minimum_grade": 78,
+        "importance": "minor",
+        "college_use": "Medical instrumentation, spectrophotometry basics",
+        "risk_if_low": "Minor impact — can be remediated in college"
+      }
+    ],
+    "key_college_subjects": [
+      "Clinical Chemistry",
+      "Hematology and Blood Banking",
+      "Microbiology and Parasitology",
+      "Histopathology and Cytology",
+      "Immunology and Serology",
+      "Urinalysis and Body Fluids",
+      "Medical Laboratory Management"
+    ],
+    "tesda_alternative": {
+      "available": false,
+      "qualification": null,
+      "description": "No TESDA alternative for Medical Technology — full BSN degree is required for licensure.",
+      "duration_months": null
+    }
+  },
+  {
+    "occupation_slug": "civil-engineer",
+    "degree": "Bachelor of Science in Civil Engineering",
+    "abbreviation": "BSCE",
+    "ched_psg_reference": "CMO No. 30, s. 2007 / CHED Engineering PSG",
+    "duration_years": 5,
+    "board_exam_required": true,
+    "board_exam_name": "Civil Engineering Licensure Examination",
+    "board_exam_administering_body": "PRC Board of Civil Engineering",
+    "recommended_strand": "STEM",
+    "accepted_strands": ["STEM"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "Mathematics",
+        "shs_equivalent": "Pre-Calculus / Basic Calculus",
+        "minimum_grade": 88,
+        "importance": "critical",
+        "college_use": "Calculus 1-3, Differential Equations, Engineering Mathematics — all Year 1-2",
+        "risk_if_low": "Cannot pass Year 1 engineering math — high dropout risk"
+      },
+      {
+        "subject": "Physics",
+        "shs_equivalent": "Earth Science / Physical Science",
+        "minimum_grade": 85,
+        "importance": "critical",
+        "college_use": "Engineering Mechanics, Statics, Dynamics, Fluid Mechanics",
+        "risk_if_low": "Physics-based subjects will cause repeated failures"
+      },
+      {
+        "subject": "Chemistry",
+        "shs_equivalent": "General Chemistry 1",
+        "minimum_grade": 80,
+        "importance": "important",
+        "college_use": "Materials Science and Engineering — concrete, steel properties",
+        "risk_if_low": "Moderate impact — chemistry use is limited compared to math/physics"
+      },
+      {
+        "subject": "Mathematics — Analytical",
+        "shs_equivalent": "Statistics and Probability",
+        "minimum_grade": 83,
+        "importance": "important",
+        "college_use": "Structural analysis, probability in design",
+        "risk_if_low": "Affects quality of structural analysis work"
+      }
+    ],
+    "key_college_subjects": [
+      "Engineering Calculus 1-3",
+      "Differential Equations",
+      "Engineering Mechanics (Statics and Dynamics)",
+      "Fluid Mechanics and Hydraulics",
+      "Structural Theory",
+      "Reinforced Concrete Design",
+      "Geotechnical Engineering",
+      "Transportation Engineering",
+      "Construction Management"
+    ],
+    "tesda_alternative": {
+      "available": true,
+      "qualification": "Construction-related TESDA NCs (Masonry NC II, Plumbing NC II)",
+      "description": "Not equivalent to engineering but provides construction industry entry point if full degree is delayed.",
+      "duration_months": 3
+    }
+  },
+  {
+    "occupation_slug": "elementary-teacher",
+    "degree": "Bachelor of Elementary Education",
+    "abbreviation": "BEEd",
+    "ched_psg_reference": "CMO No. 82, s. 2017 — Teacher Education PSG",
+    "duration_years": 4,
+    "board_exam_required": true,
+    "board_exam_name": "Licensure Examination for Teachers — Elementary (LET)",
+    "board_exam_administering_body": "PRC Board for Professional Teachers",
+    "recommended_strand": "HUMSS",
+    "accepted_strands": ["HUMSS", "STEM", "ABM", "GAS"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "English / Communication",
+        "shs_equivalent": "Reading and Writing / Oral Communication",
+        "minimum_grade": 83,
+        "importance": "critical",
+        "college_use": "Language instruction, lesson planning, classroom communication",
+        "risk_if_low": "English communication is the primary teaching medium — major risk"
+      },
+      {
+        "subject": "Filipino",
+        "shs_equivalent": "Komunikasyon at Pananaliksik",
+        "minimum_grade": 80,
+        "importance": "important",
+        "college_use": "Filipino language instruction, mother tongue-based multilingual education",
+        "risk_if_low": "Required for teaching Filipino subjects — moderate impact"
+      },
+      {
+        "subject": "Mathematics",
+        "shs_equivalent": "General Mathematics",
+        "minimum_grade": 78,
+        "importance": "important",
+        "college_use": "Mathematics instruction in elementary grades, problem-solving pedagogy",
+        "risk_if_low": "Will struggle with teaching Math 1-6 confidently"
+      },
+      {
+        "subject": "Science",
+        "shs_equivalent": "Earth Science / General Biology",
+        "minimum_grade": 78,
+        "importance": "important",
+        "college_use": "Science instruction in Grade 3-6",
+        "risk_if_low": "Minor impact for early grades, more important for upper elementary"
+      }
+    ],
+    "key_college_subjects": [
+      "Child and Adolescent Learning and Development",
+      "The Teaching Profession",
+      "Curriculum and Instruction",
+      "Assessment in Learning 1 & 2",
+      "Language Teaching Approaches",
+      "Teaching Mathematics in Elementary Grades",
+      "Teaching Science in Elementary Grades",
+      "Field Study 1-6",
+      "Practice Teaching (Student Teaching)"
+    ],
+    "tesda_alternative": {
+      "available": false,
+      "qualification": null,
+      "description": "No TESDA alternative for licensed teaching. Day care workers do not require the same licensure.",
+      "duration_months": null
+    }
+  },
+  {
+    "occupation_slug": "secondary-teacher",
+    "degree": "Bachelor of Secondary Education",
+    "abbreviation": "BSEd",
+    "ched_psg_reference": "CMO No. 82, s. 2017 — Teacher Education PSG",
+    "duration_years": 4,
+    "board_exam_required": true,
+    "board_exam_name": "Licensure Examination for Teachers — Secondary (LET)",
+    "board_exam_administering_body": "PRC Board for Professional Teachers",
+    "recommended_strand": "HUMSS",
+    "accepted_strands": ["HUMSS", "STEM", "ABM", "GAS"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "Major subject alignment",
+        "shs_equivalent": "Relevant to chosen specialization",
+        "minimum_grade": 85,
+        "importance": "critical",
+        "college_use": "Students specialize: Math, Science, English, Filipino, Social Studies, MAPEH",
+        "risk_if_low": "Must match chosen specialization. Math major needs strong math grades."
+      },
+      {
+        "subject": "English / Communication",
+        "shs_equivalent": "Reading and Writing / Oral Communication",
+        "minimum_grade": 83,
+        "importance": "critical",
+        "college_use": "Instructional delivery, report writing, communication with students and parents",
+        "risk_if_low": "English communication is medium of instruction at secondary level"
+      }
+    ],
+    "key_college_subjects": [
+      "Foundations of Special and Inclusive Education",
+      "The Teaching Profession",
+      "Technology for Teaching and Learning",
+      "Assessment in Learning",
+      "Teaching Internship / Student Teaching",
+      "Specialization subjects (Math, Science, English, etc.)"
+    ],
+    "tesda_alternative": {
+      "available": false,
+      "qualification": null,
+      "description": null,
+      "duration_months": null
+    }
+  },
+  {
+    "occupation_slug": "software-developer",
+    "degree": "Bachelor of Science in Computer Science",
+    "abbreviation": "BSCS",
+    "ched_psg_reference": "CMO No. 25, s. 2015 — IT Education PSG",
+    "duration_years": 4,
+    "board_exam_required": false,
+    "board_exam_name": null,
+    "board_exam_administering_body": null,
+    "recommended_strand": "STEM",
+    "accepted_strands": ["STEM", "ABM", "GAS"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "Mathematics",
+        "shs_equivalent": "Pre-Calculus / Basic Calculus / Statistics and Probability",
+        "minimum_grade": 85,
+        "importance": "critical",
+        "college_use": "Discrete Math, Calculus, Linear Algebra, Statistics — foundational to CS theory",
+        "risk_if_low": "Algorithms and data structures course failure likely"
+      },
+      {
+        "subject": "Physics",
+        "shs_equivalent": "Physical Science",
+        "minimum_grade": 78,
+        "importance": "important",
+        "college_use": "Computer organization and architecture — logic gates, circuits",
+        "risk_if_low": "Minor impact unless pursuing hardware or embedded systems"
+      },
+      {
+        "subject": "English / Communication",
+        "shs_equivalent": "Reading and Writing",
+        "minimum_grade": 80,
+        "importance": "important",
+        "college_use": "Technical writing, documentation, collaborative coding environments",
+        "risk_if_low": "Affects ability to write technical specifications and documentation"
+      }
+    ],
+    "key_college_subjects": [
+      "Programming 1 & 2",
+      "Data Structures and Algorithms",
+      "Discrete Mathematics",
+      "Object-Oriented Programming",
+      "Database Management Systems",
+      "Software Engineering",
+      "Operating Systems",
+      "Computer Networks",
+      "Capstone Project"
+    ],
+    "tesda_alternative": {
+      "available": true,
+      "qualification": "Computer Systems Servicing NC II / Web Development (ICT-related NCs)",
+      "description": "TESDA ICT qualifications provide foundational skills for entry-level IT work. Not equivalent to BSCS but valid entry point into BPO or tech support roles.",
+      "duration_months": 4
+    }
+  },
+  {
+    "occupation_slug": "information-technology",
+    "degree": "Bachelor of Science in Information Technology",
+    "abbreviation": "BSIT",
+    "ched_psg_reference": "CMO No. 25, s. 2015 — IT Education PSG",
+    "duration_years": 4,
+    "board_exam_required": false,
+    "board_exam_name": null,
+    "board_exam_administering_body": null,
+    "recommended_strand": "STEM",
+    "accepted_strands": ["STEM", "ABM", "GAS", "TVL-ICT"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "Mathematics",
+        "shs_equivalent": "General Mathematics / Statistics and Probability",
+        "minimum_grade": 82,
+        "importance": "critical",
+        "college_use": "Applied math, networking calculations, database query optimization",
+        "risk_if_low": "Less math-heavy than BSCS but still needed for systems analysis"
+      },
+      {
+        "subject": "English / Communication",
+        "shs_equivalent": "Reading and Writing",
+        "minimum_grade": 80,
+        "importance": "important",
+        "college_use": "Systems documentation, client communication, project reporting",
+        "risk_if_low": "IT professionals need strong documentation skills in industry"
+      }
+    ],
+    "key_college_subjects": [
+      "Programming 1 & 2",
+      "Web Systems and Technologies",
+      "Database Management Systems",
+      "Systems Integration and Architecture",
+      "IT Infrastructure and Security",
+      "Social and Professional Issues",
+      "Capstone Project"
+    ],
+    "tesda_alternative": {
+      "available": true,
+      "qualification": "Computer Systems Servicing NC II / Technical Drafting NC II",
+      "description": "TESDA NCs provide direct BPO, tech support, or hardware servicing entry without a degree.",
+      "duration_months": 4
+    }
+  },
+  {
+    "occupation_slug": "midwife",
+    "degree": "Bachelor of Science in Midwifery",
+    "abbreviation": "BSM",
+    "ched_psg_reference": "CMO Midwifery PSG",
+    "duration_years": 4,
+    "board_exam_required": true,
+    "board_exam_name": "Midwifery Licensure Examination",
+    "board_exam_administering_body": "PRC Board of Midwifery",
+    "recommended_strand": "STEM",
+    "accepted_strands": ["STEM", "HUMSS"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "Biology / Life Science",
+        "shs_equivalent": "General Biology 1 & 2",
+        "minimum_grade": 82,
+        "importance": "critical",
+        "college_use": "Anatomy, Physiology, Microbiology — same core as nursing",
+        "risk_if_low": "Science subjects in Year 1 will be difficult"
+      },
+      {
+        "subject": "Chemistry",
+        "shs_equivalent": "General Chemistry 1",
+        "minimum_grade": 78,
+        "importance": "important",
+        "college_use": "Pharmacology basics for maternal medication",
+        "risk_if_low": "Less critical than in BSN — moderate risk"
+      },
+      {
+        "subject": "Mathematics",
+        "shs_equivalent": "General Mathematics",
+        "minimum_grade": 75,
+        "importance": "important",
+        "college_use": "Medication dosage for maternal and newborn care",
+        "risk_if_low": "Lower math threshold than nursing — manageable with effort"
+      }
+    ],
+    "key_college_subjects": [
+      "Anatomy and Physiology",
+      "Fundamentals of Midwifery",
+      "Normal Obstetrics",
+      "Newborn Care",
+      "Family Planning",
+      "Community Health Nursing",
+      "Pharmacology in Midwifery"
+    ],
+    "tesda_alternative": {
+      "available": true,
+      "qualification": "Midwifery — Community-based training programs",
+      "description": "TESDA and DOH community midwifery programs available for rural health units. Shorter path but limited scope of practice.",
+      "duration_months": 12
+    }
+  },
+  {
+    "occupation_slug": "physical-therapist",
+    "degree": "Bachelor of Science in Physical Therapy",
+    "abbreviation": "BSPT",
+    "ched_psg_reference": "CMO Physical Therapy / Allied Health PSG",
+    "duration_years": 4,
+    "board_exam_required": true,
+    "board_exam_name": "Physical Therapy Licensure Examination",
+    "board_exam_administering_body": "PRC Board of Physical and Occupational Therapy",
+    "recommended_strand": "STEM",
+    "accepted_strands": ["STEM"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "Biology / Life Science",
+        "shs_equivalent": "General Biology 1 & 2",
+        "minimum_grade": 85,
+        "importance": "critical",
+        "college_use": "Anatomy, Kinesiology, Exercise Physiology",
+        "risk_if_low": "Musculoskeletal anatomy is the foundation of all PT practice"
+      },
+      {
+        "subject": "Physics",
+        "shs_equivalent": "Physical Science",
+        "minimum_grade": 82,
+        "importance": "critical",
+        "college_use": "Biomechanics, modalities (ultrasound, electrical stimulation)",
+        "risk_if_low": "Physics is unusually important in PT — modalities rely on physical principles"
+      },
+      {
+        "subject": "Mathematics",
+        "shs_equivalent": "General Mathematics",
+        "minimum_grade": 78,
+        "importance": "minor",
+        "college_use": "Research statistics, gait analysis measurements",
+        "risk_if_low": "Low math demand compared to nursing or engineering"
+      }
+    ],
+    "key_college_subjects": [
+      "Anatomy and Physiology",
+      "Kinesiology and Biomechanics",
+      "Exercise Physiology",
+      "Physical Therapy Modalities",
+      "Musculoskeletal PT",
+      "Neurological PT",
+      "Pediatric PT",
+      "Geriatric PT",
+      "Community-Based Rehabilitation"
+    ],
+    "tesda_alternative": {
+      "available": false,
+      "qualification": null,
+      "description": "No direct TESDA equivalent. PT practice requires full licensure.",
+      "duration_months": null
+    }
+  },
+  {
+    "occupation_slug": "accountant",
+    "degree": "Bachelor of Science in Accountancy",
+    "abbreviation": "BSA",
+    "ched_psg_reference": "CMO No. 3, s. 2007 — Accountancy PSG",
+    "duration_years": 5,
+    "board_exam_required": true,
+    "board_exam_name": "Certified Public Accountant Examination (CPAE)",
+    "board_exam_administering_body": "PRC Board of Accountancy",
+    "recommended_strand": "ABM",
+    "accepted_strands": ["ABM", "STEM"],
+    "scct_self_efficacy_subjects": [
+      {
+        "subject": "Mathematics",
+        "shs_equivalent": "Business Mathematics / General Mathematics / Basic Calculus",
+        "minimum_grade": 88,
+        "importance": "critical",
+        "college_use": "Financial accounting, managerial accounting, taxation, auditing",
+        "risk_if_low": "All accounting subjects are math-heavy — high failure risk if below threshold"
+      },
+      {
+        "subject": "Business / Economics",
+        "shs_equivalent": "Applied Economics / Business Mathematics",
+        "minimum_grade": 83,
+        "importance": "critical",
+        "college_use": "Economics, business law, accounting theory",
+        "risk_if_low": "Business logic is foundation of accounting practice"
+      },
+      {
+        "subject": "English / Communication",
+        "shs_equivalent": "Reading and Writing",
+        "minimum_grade": 80,
+        "importance": "important",
+        "college_use": "Audit reports, financial statement notes, business communication",
+        "risk_if_low": "Report writing quality affects professional practice"
+      }
+    ],
+    "key_college_subjects": [
+      "Financial Accounting 1-4",
+      "Cost Accounting",
+      "Managerial Accounting",
+      "Auditing Theory and Practice",
+      "Taxation",
+      "Business Law and Regulation",
+      "Management Advisory Services",
+      "Accounting Information Systems"
+    ],
+    "tesda_alternative": {
+      "available": true,
+      "qualification": "Bookkeeping NC III",
+      "description": "TESDA Bookkeeping NC III is a valid entry point into accounting support roles. Not equivalent to CPA but recognized in business.",
+      "duration_months": 6
+    }
+  }
+]
