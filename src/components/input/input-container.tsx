@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import Button from "@/components/button";
 import TabSwitcher from "@/components/input/tab-switcher";
 import LiveRecording from "@/components/input/live-recording";
 import FileUpload from "@/components/input/file-upload";
 import DiscardModal from "@/components/input/discard-modal";
 import { Zap } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type Tab = "recording" | "upload";
 
@@ -14,7 +15,7 @@ export default function InputContainer() {
     const [activeTab, setActiveTab] = useState<Tab>("recording");
     const [isRecording, setIsRecording] = useState(false);
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
-    const [finalTranscript, setFinalTranscript] = useState<string | null>(null);
+    const [rawTranscript, setRawTranscript] = useState<string | null>(null);
     
     // Track if either tab has active data that shouldn't be lost
     const [recordingHasData, setRecordingHasData] = useState(false);
@@ -22,6 +23,8 @@ export default function InputContainer() {
     
     // Tab switching modal state
     const [pendingTab, setPendingTab] = useState<Tab | null>(null);
+
+    const router = useRouter();
 
     const handleTabChangeAttempt = (newTab: Tab) => {
         if (newTab === activeTab) return;
@@ -44,14 +47,28 @@ export default function InputContainer() {
         setIsRecording(false);
         setRecordingHasData(false);
         setUploadHasData(false);
-        setFinalTranscript(null);
+        setRawTranscript(null);
     };
 
     const handleDiscard = () => {
-        if (pendingTab) {
-            executeTabChange(pendingTab);
-        }
+        if (pendingTab) executeTabChange(pendingTab);
     };
+
+    const handleBeginAnalysis = () => {
+        if (!rawTranscript) return;
+
+        const sessionId = crypto.randomUUID();
+        sessionStorage.setItem(
+            `kumpas-session-${sessionId}`,
+            JSON.stringify({
+                rawTranscript,
+                createdAt: new Date().toISOString(),
+            })
+        );
+
+        router.push(`/analysis?session=${sessionId}`);
+    };
+
 
     return (
         <section className="mx-auto w-full max-w-2xl px-4 sm:px-6 relative">
@@ -72,7 +89,7 @@ export default function InputContainer() {
                             isRecording={isRecording} 
                             onToggleRecording={() => setIsRecording(!isRecording)} 
                             onHasDataChange={setRecordingHasData}
-                            onTranscriptionComplete={setFinalTranscript}
+                            onTranscriptionComplete={setRawTranscript}
                         />
                     )}
                     {activeTab === "upload" && (
@@ -80,21 +97,15 @@ export default function InputContainer() {
                             uploadedFile={uploadedFile} 
                             onFileChange={setUploadedFile} 
                             onHasDataChange={setUploadHasData}
-                            onTranscriptionComplete={setFinalTranscript}
+                            onTranscriptionComplete={setRawTranscript}
                         />
                     )}
                 </div>
                 <Button
                     text="Begin Multi Agent Analysis"
-                    onClick={() => {
-                        if (finalTranscript) {
-                            sessionStorage.setItem("transcript", finalTranscript);
-                            console.log("Saved transcript to sessionStorage:", finalTranscript);
-                        }
-                    }}
+                    onClick={handleBeginAnalysis}
                     icon={<Zap size={16} />}
-                    disabled={!finalTranscript}
-                    isLoading={false}
+                    disabled={!rawTranscript}
                 />
             </div>
         </section>
