@@ -18,13 +18,20 @@ export function getJsonContexts(directoryName: string) {
   const dirPath = path.join(process.cwd(), 'public/data/', directoryName);
   
   if (!fs.existsSync(dirPath)) {
+    console.warn(`Directory not found: ${dirPath}`);
     return '';
   }
 
-  const files = fs.readdirSync(dirPath);
+  // Log the directory 
+  console.log(`\n--- getJsonContexts ---`);
+  console.log(`Target Directory: ${dirPath}`);
+
+  const files = fs.readdirSync(dirPath)
+   .filter(file => file.endsWith('.json'));  // Making sure only JSON files are read
+  console.log(`Files found (${files.length}):`, files);
   
   const xmlContexts = files
-    .filter(file => file.endsWith('.json')) // Making sure only JSON files are read
+    .filter(file => file.endsWith('.json')) 
     .map(file => {
       const filePath = path.join(dirPath, file);
       const content = fs.readFileSync(filePath, 'utf8');
