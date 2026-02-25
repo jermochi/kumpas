@@ -1,0 +1,148 @@
+{
+    "metadata": {
+        "region": "Region VII (Central Visayas) - Cebu, Bohol, Negros Oriental, Siquijor",
+        "coverage_years": "2025-2026",
+        "sources": [
+            "DOLE-7 Regional Labor Market Reports",
+            "DOLE Trabaho Para sa Bayan Plan 2025-2034 (Central Visayas Launch, January 2026)",
+            "DOLE-7 National Labor and Employment Plan 2023-2028 Regional Consultation",
+            "PSA RSSO-7 Labor Force Survey 2024",
+            "DEPDev Region 7 Full Year 2024 Central Visayas Regional Economic Situationer",
+            "IBPAP IT-BPM Industry Report 2025",
+            "Philippine Economic Briefing Central Visayas, September 2025"
+        ],
+        "notes": "Negros Oriental and Siquijor were administratively transferred to the revived Negros Island Region (NIR) in June 2024 under RA 12000. Labor data for 2024 and earlier may still include these provinces. Data reflects Central Visayas context as of 2025-2026."
+    },
+    "key_employment_generators": [
+        "Information Technology and Business Process Management (IT-BPM) — Cebu accounts for 15% of national IT-BPM workforce (~170,000 workers); projected 20% growth over next three years",
+        "Tourism and Hospitality — Cebu ranked top domestic destination in 2023 DOT survey; region near pre-pandemic levels at 98% of 2019 domestic volumes",
+        "Manufacturing — Includes furniture, food processing, electronics, and shipbuilding (Tsuneishi Balamban facility)",
+        "Construction and Infrastructure — Cebu Bus Rapid Transit, Cebu International Container Port, Metro Cebu Expressway ongoing",
+        "Wholesale and Retail Trade",
+        "Shipbuilding and Marine Industry — Cebu hosts major facilities including world's first methanol-powered bulk carrier build"
+    ],
+    "in_demand_occupations": {
+        "Information Technology and IT-BPM": [
+            "Customer Service Representatives (BPO)",
+            "Software Developers",
+            "Data Scientists",
+            "AI and Machine Learning Engineers",
+            "Cybersecurity Analysts",
+            "Cloud and Infrastructure Engineers",
+            "Digital Marketing Specialists",
+            "UX/UI Designers",
+            "IT Support Technicians"
+        ],
+        "Tourism and Hospitality": [
+            "Service Crew",
+            "Kitchen Staff and Cooks",
+            "Hotel Front Office Staff",
+            "Tour Guides",
+            "Casino Dealers",
+            "Housekeeping Staff",
+            "Events and Conventions Coordinators"
+        ],
+        "Construction and Infrastructure": [
+            "Carpenters",
+            "Masons",
+            "Painters",
+            "Electricians",
+            "Plumbers",
+            "Construction Laborers",
+            "Heavy Equipment Operators"
+        ],
+        "Manufacturing": [
+            "Production Workers and Operators",
+            "Quality Assurance Officers",
+            "Machinists",
+            "Furniture Craftsmen and Woodworkers",
+            "Shipbuilding Technicians and Welders"
+        ],
+        "Healthcare": [
+            "Registered Nurses",
+            "Medical Technologists",
+            "Caregivers",
+            "Company Nurses"
+        ],
+        "Retail and Services": [
+            "Cashiers",
+            "Baggers",
+            "Sales Clerks",
+            "Supervisors",
+            "Accounting Staff"
+        ]
+    },
+    "hard_to_fill_occupations": [
+        "Data Science and AI Specialists (Competency gaps in emerging fields; companies like Sansan Cebu cite difficulty filling roles in data science, AI, and cybersecurity)",
+        "Software Developers with Advanced Competencies (High salary expectations, limited experienced candidates)",
+        "Cybersecurity Analysts (Foreign nationals being hired due to local shortage; DOLE AEP data 2024)",
+        "Cloud Computing Specialists (Scarce local talent; among top roles filled by foreign workers nationally)",
+        "Registered Nurses (Strong overseas demand and low domestic pay driving brain drain)",
+        "Marine Engineers and Naval Architects (Shipbuilding sector growth outpacing graduate supply)",
+        "Specialized Manufacturing Engineers (High turnover to better-paying Metro Manila or overseas roles)",
+        "Guidance Counselors (Shortage of licensed professionals nationally and regionally)",
+        "Skilled Trades — Electricians, Welders, Plumbers (TESDA-certified candidates insufficient for construction boom)",
+        "Heavy Equipment Operators",
+        "Furniture and Industrial Designers with Export-Quality Standards"
+    ],
+    "emerging_economies_and_jobs": {
+        "Digital and Knowledge Economy": [
+            "AI and Automation Developers",
+            "Knowledge Process Outsourcing (KPO) Specialists",
+            "Global Capability Center (GCC) Analysts",
+            "Digital Content Specialists",
+            "E-commerce Operations Specialists",
+            "Data Analysts",
+            "Business Intelligence Officers",
+            "Health Information Management Specialists (IT-BPM healthcare vertical)"
+        ],
+        "Green and Sustainable Economy": [
+            "Renewable Energy System Installers (Solar, Wind)",
+            "Energy Efficiency Officers",
+            "Environmental Planners",
+            "Green Building Specialists",
+            "Sustainable Fisheries Technicians",
+            "Agricultural and Biosystems Engineers"
+        ],
+        "Blue Economy": [
+            "Marine Engineers",
+            "Shipbuilding Technicians",
+            "Marine Aquaculture Technicians",
+            "Dive Tourism Specialists",
+            "Fisheries Inspectors",
+            "Coastal Resource Managers",
+            "Marine Biologists"
+        ],
+        "Care Economy": [
+            "Registered Nurses",
+            "Caregivers",
+            "Medical Technologists",
+            "Telemedicine Coordinators",
+            "Social Workers",
+            "Mental Health Specialists"
+        ],
+        "Creative Economy": [
+            "Furniture and Product Designers (Export-oriented; CFIF-supported)",
+            "Animators and Multimedia Artists",
+            "Digital Content Creators",
+            "Graphic Designers",
+            "Events and Conventions Professionals"
+        ]
+    },
+    "skills_gaps_and_requirements": {
+        "Advanced Digital and AI Competencies": "Critical shortage of workers skilled in AI, data science, cybersecurity, and cloud infrastructure. IT-BPM companies including Sansan Cebu explicitly cite inability to fill these roles locally and are investing in internal upskilling programs.",
+        "Digital Skills Gap in Workforce Transition": "Significant portion of applicants and TESDA NC II holders lack proficiency in basic digital tools. Industry and DOLE-7 identify this as a primary barrier to employment across all sectors.",
+        "Core Professional and Soft Skills": "DOLE-7 reports weak communication skills, low interview preparedness, and overreliance on AI-generated application materials among job seekers. Confidence-building flagged as a priority intervention area.",
+        "Technical Trades Certification": "Construction boom creating demand faster than TESDA can certify skilled tradespeople. Electricians, welders, plumbers, and masons are chronically undersupplied.",
+        "Marine and Shipbuilding Specializations": "Shipbuilding sector growth (green shipping milestone at Tsuneishi Balamban) is not matched by graduate pipeline from marine engineering and naval architecture programs.",
+        "English and Communication for High-Value BPO": "Transition from voice-based to non-voice and KPO services requires stronger written communication, analytical reasoning, and domain-specific English proficiency beyond basic call center skills.",
+        "Financial and Entrepreneurial Literacy": "Need for financial management training particularly for gig workers, freelancers, and MSMEs in the retail and tourism sectors."
+    },
+    "regional_economic_context": {
+        "gdp_growth": "Central Visayas grew 7.3% in both 2023 and 2024, fastest among all 17 Philippine regions (DOF, Philippine Economic Briefing 2025)",
+        "it_bpm_footprint": "Cebu accounts for 15% of national IT-BPM full-time employees; over 160,000 FTEs in Cebu alone; Visayas total at approximately 400,000 FTEs (IBPAP 2025)",
+        "job_target": "DOLE-7 targeting 20,000 new local jobs by 2028 as regional contribution to the National Labor and Employment Plan 2023-2028",
+        "minimum_wage": "₱501/day for Class A areas (Expanded Metro Cebu) effective October 2025 per Wage Order No. ROVII-26",
+        "trabaho_para_sa_bayan": "TPB Plan 2025-2034 launched in Central Visayas on January 20, 2026; action planning workshop held January 21, 2026 with regional agencies, academe, and private sector"
+    }
+}

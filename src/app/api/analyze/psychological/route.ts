@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { callAgent } from '@/lib/llm';
+import { buildPsychSystemPrompt } from '@/lib/analysts/psychological';
 import fs from 'fs';
 import path from 'path';
 
@@ -9,24 +10,14 @@ const psychologicalAnalystInstructions = fs.readFileSync(filePath, 'utf8');
 export async function POST(req: Request) {
   try {
     const { transcript } = await req.json();
+    if (!transcript) return NextResponse.json({ error: 'Transcript required' }, { status: 400 });
 
-    if (!transcript) {
-      return NextResponse.json({ error: 'Transcript is required' }, { status: 400 });
-    }
+    const psychologicalPrompt = buildPsychSystemPrompt();
+    const psychologicalAnalysis = await callAgent(psychologicalPrompt, transcript, process.env.PSYCHOLOGICAL_AGENT_API_KEY as string);
 
-    const analysis = await callAgent(
-      psychologicalAnalystInstructions, 
-      transcript, 
-      process.env.PSYCHOLOGICAL_AGENT_API_KEY as string
-    );
-
-    return NextResponse.json({
-      status: 'success',
-      data: analysis
-    });
-
+    return NextResponse.json({ status: 'success', data: psychologicalAnalysis });
   } catch (error) {
-    console.error('Error processing Psychological Analysis:', error);
-    return NextResponse.json({ error: 'Failed to analyze psychological factors' }, { status: 500 });
+    console.error('Psychological Analyst Error:', error);
+    return NextResponse.json({ error: 'Psychological analysis failed' }, { status: 500 });
   }
 }

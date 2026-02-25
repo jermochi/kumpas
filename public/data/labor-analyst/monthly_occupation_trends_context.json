@@ -1,0 +1,1320 @@
+{
+    "metadata": {
+        "unit": "Employed Persons (in thousands)",
+        "description": "Employed persons by occupation (Annual and Monthly)"
+    },
+    "data": {
+        "Categories": {
+            "Managers": {
+                "2016": {
+                    "Annual_Average": 6998.16,
+                    "Monthly": {
+                        "April": 6986.073,
+                        "July": 7068.234,
+                        "October": 6940.168
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 6489.76,
+                    "Monthly": {
+                        "January": 6606.569,
+                        "April": 6574.628,
+                        "July": 6137.915,
+                        "October": 6639.918
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 6588.17,
+                    "Monthly": {
+                        "January": 6785.057,
+                        "April": 6540.97,
+                        "July": 6428.494,
+                        "October": 6598.151
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 4774.96,
+                    "Monthly": {
+                        "January": 5080.142,
+                        "April": 4575.141,
+                        "July": 4645.757,
+                        "October": 4798.803
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 3556.52,
+                    "Monthly": {
+                        "January": 3979.553,
+                        "April": 3136.491,
+                        "July": 3540.112,
+                        "October": 3569.912
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 3297.11,
+                    "Monthly": {
+                        "January": 3417.107,
+                        "February": 3802.294,
+                        "March": 3510.159,
+                        "April": 3551.555,
+                        "May": 3508.763,
+                        "June": 3101.36,
+                        "July": 3486.928,
+                        "August": 3310.96,
+                        "September": 3049.963,
+                        "October": 3649.454,
+                        "November": 3332.451,
+                        "December": 1844.291
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 2205.95,
+                    "Monthly": {
+                        "January": 1980.538,
+                        "February": 1840.163,
+                        "March": 2613.135,
+                        "April": 3018.947,
+                        "May": 3426.259,
+                        "June": 1542.967,
+                        "July": 2296.031,
+                        "August": 1992.47,
+                        "September": 2020.156,
+                        "October": 1572.984,
+                        "November": 2421.083,
+                        "December": 1746.707
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 1754.62,
+                    "Monthly": {
+                        "January": 1764.859,
+                        "February": 2005.713,
+                        "March": 1817.833,
+                        "April": 2081.678,
+                        "May": 1991.904,
+                        "June": 1401.912,
+                        "July": 1928.714,
+                        "August": 1508.87,
+                        "September": 1758.145,
+                        "October": 1748.701,
+                        "November": 1503.679,
+                        "December": 1543.478
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 1678.3,
+                    "Monthly": {
+                        "January": 1650.817,
+                        "February": 1402.556,
+                        "March": 2009.004,
+                        "April": 1670.988,
+                        "May": 1401.889,
+                        "June": 1439.59,
+                        "July": 1756.432,
+                        "August": 1632.065,
+                        "September": 1925.476,
+                        "October": 1716.25,
+                        "November": 1794.813,
+                        "December": 1739.759
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 1800.28,
+                    "Monthly": {
+                        "January": 1962.286,
+                        "February": 1901.851,
+                        "March": 1678.494,
+                        "April": 1671.096,
+                        "May": 1915.985,
+                        "June": 1710.56,
+                        "July": 1996.882,
+                        "August": 1462.16,
+                        "September": 1742.205,
+                        "October": 1835.797,
+                        "November": 1941.158,
+                        "December": 1784.91
+                    }
+                }
+            },
+            "Professionals": {
+                "2016": {
+                    "Annual_Average": 2065.15,
+                    "Monthly": {
+                        "April": 2045.454,
+                        "July": 2077.855,
+                        "October": 2072.13
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 2149.27,
+                    "Monthly": {
+                        "January": 2145.013,
+                        "April": 2089.445,
+                        "July": 2105.324,
+                        "October": 2257.281
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 2242.63,
+                    "Monthly": {
+                        "January": 2202.998,
+                        "April": 2198.502,
+                        "July": 2242.583,
+                        "October": 2326.445
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 2362.43,
+                    "Monthly": {
+                        "January": 2304.227,
+                        "April": 2261.758,
+                        "July": 2307.818,
+                        "October": 2575.904
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 2225.57,
+                    "Monthly": {
+                        "January": 2456.98,
+                        "April": 1968.583,
+                        "July": 2086.723,
+                        "October": 2389.979
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 2443.62,
+                    "Monthly": {
+                        "January": 2359.204,
+                        "February": 2708.761,
+                        "March": 2277.773,
+                        "April": 2516.598,
+                        "May": 2642.852,
+                        "June": 2543.663,
+                        "July": 2285.479,
+                        "August": 2041.248,
+                        "September": 2264.938,
+                        "October": 2421.896,
+                        "November": 2748.966,
+                        "December": 2512.043
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 2538.27,
+                    "Monthly": {
+                        "January": 2329.217,
+                        "February": 2548.904,
+                        "March": 2661.773,
+                        "April": 2564.025,
+                        "May": 2486.393,
+                        "June": 2530.007,
+                        "July": 2456.578,
+                        "August": 2665.429,
+                        "September": 2652.003,
+                        "October": 2448.29,
+                        "November": 2696.004,
+                        "December": 2420.633
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 2695.51,
+                    "Monthly": {
+                        "January": 2581.092,
+                        "February": 2741.604,
+                        "March": 2645.14,
+                        "April": 2746.221,
+                        "May": 2638.817,
+                        "June": 2780.828,
+                        "July": 2551.178,
+                        "August": 2530.222,
+                        "September": 2889.358,
+                        "October": 2850.404,
+                        "November": 2688.493,
+                        "December": 2702.818
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 2771.28,
+                    "Monthly": {
+                        "January": 2712.174,
+                        "February": 2692.21,
+                        "March": 2813.164,
+                        "April": 2697.078,
+                        "May": 2844.762,
+                        "June": 2591.772,
+                        "July": 2618.192,
+                        "August": 2860.691,
+                        "September": 3025.638,
+                        "October": 2898.894,
+                        "November": 2886.808,
+                        "December": 2613.951
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 2842.92,
+                    "Monthly": {
+                        "January": 2761.794,
+                        "February": 2725.939,
+                        "March": 2837.152,
+                        "April": 2803.607,
+                        "May": 2745.92,
+                        "June": 2703.179,
+                        "July": 2771.703,
+                        "August": 2844.02,
+                        "September": 2930.876,
+                        "October": 2835.908,
+                        "November": 3073.854,
+                        "December": 3081.059
+                    }
+                }
+            },
+            "Technicians and Associate Professionals": {
+                "2016": {
+                    "Annual_Average": 1439.62,
+                    "Monthly": {
+                        "April": 1514.53,
+                        "July": 1375.162,
+                        "October": 1429.178
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 1533.46,
+                    "Monthly": {
+                        "January": 1435.763,
+                        "April": 1449.983,
+                        "July": 1563.138,
+                        "October": 1684.964
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 1662.51,
+                    "Monthly": {
+                        "January": 1535.029,
+                        "April": 1682.149,
+                        "July": 1789.528,
+                        "October": 1643.334
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 1768.32,
+                    "Monthly": {
+                        "January": 1802.592,
+                        "April": 1775.055,
+                        "July": 1799.636,
+                        "October": 1695.996
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 1483.53,
+                    "Monthly": {
+                        "January": 1611.329,
+                        "April": 1318.138,
+                        "July": 1392.403,
+                        "October": 1612.248
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 1668.01,
+                    "Monthly": {
+                        "January": 1541.617,
+                        "February": 1621.326,
+                        "March": 1590.04,
+                        "April": 1611.486,
+                        "May": 1565.55,
+                        "June": 1680.356,
+                        "July": 1908.916,
+                        "August": 1613.807,
+                        "September": 1507.594,
+                        "October": 1803.331,
+                        "November": 1772.647,
+                        "December": 1799.449
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 1796.37,
+                    "Monthly": {
+                        "January": 1807.867,
+                        "February": 1656.835,
+                        "March": 2017.97,
+                        "April": 1662.774,
+                        "May": 1504.974,
+                        "June": 1623.587,
+                        "July": 2066.17,
+                        "August": 1783.852,
+                        "September": 2092.446,
+                        "October": 1779.622,
+                        "November": 1976.189,
+                        "December": 1584.095
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 1940.32,
+                    "Monthly": {
+                        "January": 1870.37,
+                        "February": 1768.524,
+                        "March": 2053.019,
+                        "April": 1936.53,
+                        "May": 2071.378,
+                        "June": 2002.75,
+                        "July": 2090.926,
+                        "August": 1838.734,
+                        "September": 2061.788,
+                        "October": 2055.767,
+                        "November": 1673.763,
+                        "December": 1860.296
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 1991.2,
+                    "Monthly": {
+                        "January": 2079.116,
+                        "February": 1922.298,
+                        "March": 1943.858,
+                        "April": 2117.657,
+                        "May": 1895.638,
+                        "June": 1905.523,
+                        "July": 2009.377,
+                        "August": 2002.667,
+                        "September": 2126.006,
+                        "October": 2093.737,
+                        "November": 1841.669,
+                        "December": 1956.876
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 2048.79,
+                    "Monthly": {
+                        "January": 1966.096,
+                        "February": 2035.726,
+                        "March": 2056.412,
+                        "April": 2014.235,
+                        "May": 2148.971,
+                        "June": 2003.562,
+                        "July": 2202.32,
+                        "August": 1909.559,
+                        "September": 2013.257,
+                        "October": 2105.506,
+                        "November": 2094.974,
+                        "December": 2034.9
+                    }
+                }
+            },
+            "Clerical Support Workers": {
+                "2016": {
+                    "Annual_Average": 2207.47,
+                    "Monthly": {
+                        "April": 2166.424,
+                        "July": 2125.469,
+                        "October": 2330.523
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 2283.4,
+                    "Monthly": {
+                        "January": 2155.305,
+                        "April": 2255.988,
+                        "July": 2282.482,
+                        "October": 2439.82
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 2389.23,
+                    "Monthly": {
+                        "January": 2346.873,
+                        "April": 2404.708,
+                        "July": 2331.401,
+                        "October": 2473.925
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 2615.73,
+                    "Monthly": {
+                        "January": 2563.547,
+                        "April": 2589.987,
+                        "July": 2519.614,
+                        "October": 2789.779
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 2467.16,
+                    "Monthly": {
+                        "January": 2844.93,
+                        "April": 2166.58,
+                        "July": 2373.082,
+                        "October": 2484.064
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 2852.8,
+                    "Monthly": {
+                        "January": 2633.426,
+                        "February": 2507.04,
+                        "March": 2684.392,
+                        "April": 2699.268,
+                        "May": 2629.664,
+                        "June": 2797.019,
+                        "July": 2812.054,
+                        "August": 2918.176,
+                        "September": 3078.669,
+                        "October": 2987.299,
+                        "November": 3211.062,
+                        "December": 3275.577
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 3347.81,
+                    "Monthly": {
+                        "January": 3172.24,
+                        "February": 3057.772,
+                        "March": 3300.989,
+                        "April": 3169.993,
+                        "May": 3006.681,
+                        "June": 3191.355,
+                        "July": 3363.846,
+                        "August": 3364.379,
+                        "September": 3438.774,
+                        "October": 3555.426,
+                        "November": 3915.999,
+                        "December": 3636.315
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 3484.17,
+                    "Monthly": {
+                        "January": 3578.562,
+                        "February": 3427.126,
+                        "March": 3337.979,
+                        "April": 3666.797,
+                        "May": 3471.903,
+                        "June": 3479.197,
+                        "July": 3249.699,
+                        "August": 3352.372,
+                        "September": 3719.103,
+                        "October": 3599.525,
+                        "November": 3492.403,
+                        "December": 3435.421
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 3850.58,
+                    "Monthly": {
+                        "January": 3504.911,
+                        "February": 3670.455,
+                        "March": 4070.608,
+                        "April": 3581.586,
+                        "May": 3646.084,
+                        "June": 3992.291,
+                        "July": 3836.702,
+                        "August": 3697.158,
+                        "September": 4534.343,
+                        "October": 3806.74,
+                        "November": 3914.491,
+                        "December": 3951.614
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 3976.74,
+                    "Monthly": {
+                        "January": 3698.087,
+                        "February": 3599.897,
+                        "March": 3748.98,
+                        "April": 3861.735,
+                        "May": 4122.587,
+                        "June": 4212.436,
+                        "July": 3795.693,
+                        "August": 4290.766,
+                        "September": 4428.898,
+                        "October": 3963.886,
+                        "November": 4009.52,
+                        "December": 3988.375
+                    }
+                }
+            },
+            "Service and Sales Workers": {
+                "2016": {
+                    "Annual_Average": 6303.27,
+                    "Monthly": {
+                        "April": 6382.191,
+                        "July": 6212.772,
+                        "October": 6314.835
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 6069.08,
+                    "Monthly": {
+                        "January": 6076.336,
+                        "April": 6038.973,
+                        "July": 5812.902,
+                        "October": 6348.121
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 6170.96,
+                    "Monthly": {
+                        "January": 6155.721,
+                        "April": 6056.12,
+                        "July": 6122.458,
+                        "October": 6349.556
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 7759.88,
+                    "Monthly": {
+                        "January": 7150.021,
+                        "April": 7843.82,
+                        "July": 8084.66,
+                        "October": 7961.006
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 7594.12,
+                    "Monthly": {
+                        "January": 8465.191,
+                        "April": 6235.495,
+                        "July": 7862.651,
+                        "October": 7813.152
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 9038.64,
+                    "Monthly": {
+                        "January": 8193.7,
+                        "February": 8852.045,
+                        "March": 9397.666,
+                        "April": 8993.267,
+                        "May": 9228.548,
+                        "June": 9657.154,
+                        "July": 8303.637,
+                        "August": 8831.612,
+                        "September": 8657.876,
+                        "October": 8735.864,
+                        "November": 9240.429,
+                        "December": 10371.936
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 10746.59,
+                    "Monthly": {
+                        "January": 10166.117,
+                        "February": 10501.413,
+                        "March": 9854.797,
+                        "April": 9611.195,
+                        "May": 10572.335,
+                        "June": 10694.024,
+                        "July": 10798.032,
+                        "August": 11433.406,
+                        "September": 11040.194,
+                        "October": 11060.648,
+                        "November": 11515.931,
+                        "December": 11710.987
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 11205.95,
+                    "Monthly": {
+                        "January": 11268.335,
+                        "February": 11366.93,
+                        "March": 10982.143,
+                        "April": 11203.241,
+                        "May": 10770.01,
+                        "June": 11163.133,
+                        "July": 10267.662,
+                        "August": 10978.136,
+                        "September": 11038.811,
+                        "October": 11420.386,
+                        "November": 11954.413,
+                        "December": 12058.157
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 11882.67,
+                    "Monthly": {
+                        "January": 10866.711,
+                        "February": 11979.114,
+                        "March": 11577.626,
+                        "April": 12047.418,
+                        "May": 11778.78,
+                        "June": 11999.351,
+                        "July": 11512.906,
+                        "August": 12714.563,
+                        "September": 11522.251,
+                        "October": 11588.063,
+                        "November": 12135.98,
+                        "December": 12869.239
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 11747.44,
+                    "Monthly": {
+                        "January": 11710.433,
+                        "February": 12349.304,
+                        "March": 12001.317,
+                        "April": 11742.88,
+                        "May": 12071.506,
+                        "June": 11900.198,
+                        "July": 10768.965,
+                        "August": 11777.814,
+                        "September": 11609.115,
+                        "October": 11317.252,
+                        "November": 11509.761,
+                        "December": 12210.686
+                    }
+                }
+            },
+            "Skilled Agricultural Forestry and Fishery Workers": {
+                "2016": {
+                    "Annual_Average": 5244.34,
+                    "Monthly": {
+                        "April": 4884.489,
+                        "July": 5324.241,
+                        "October": 5524.279
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 5426.16,
+                    "Monthly": {
+                        "January": 5253.258,
+                        "April": 5435.764,
+                        "July": 5427.421,
+                        "October": 5588.196
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 5096.2,
+                    "Monthly": {
+                        "January": 5477.189,
+                        "April": 5094.93,
+                        "July": 4802.941,
+                        "October": 5009.733
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 4815.37,
+                    "Monthly": {
+                        "January": 4462.174,
+                        "April": 4833.139,
+                        "July": 4982.741,
+                        "October": 4983.44
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 5259.46,
+                    "Monthly": {
+                        "January": 4854.681,
+                        "April": 4761.82,
+                        "July": 5781.43,
+                        "October": 5639.918
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 5455.2,
+                    "Monthly": {
+                        "January": 5461.838,
+                        "February": 5469.844,
+                        "March": 5560.451,
+                        "April": 5342.839,
+                        "May": 5160.956,
+                        "June": 5547.68,
+                        "July": 4709.447,
+                        "August": 5695.964,
+                        "September": 5342.424,
+                        "October": 5445.237,
+                        "November": 5583.055,
+                        "December": 6142.639
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 5568.71,
+                    "Monthly": {
+                        "January": 4859.603,
+                        "February": 5758.59,
+                        "March": 6012.597,
+                        "April": 5436.994,
+                        "May": 5343.104,
+                        "June": 5977.717,
+                        "July": 5539.745,
+                        "August": 5385.825,
+                        "September": 5478.685,
+                        "October": 5586.042,
+                        "November": 5431.802,
+                        "December": 6013.834
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 5647.49,
+                    "Monthly": {
+                        "January": 5221.457,
+                        "February": 5633.04,
+                        "March": 5655.725,
+                        "April": 5327.855,
+                        "May": 5933.175,
+                        "June": 5865.95,
+                        "July": 4709.818,
+                        "August": 5953.28,
+                        "September": 5391.64,
+                        "October": 5679.991,
+                        "November": 6223.521,
+                        "December": 6174.389
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 5422.28,
+                    "Monthly": {
+                        "January": 4806.543,
+                        "February": 5255.302,
+                        "March": 5295.774,
+                        "April": 5263.65,
+                        "May": 5694.324,
+                        "June": 5465.169,
+                        "July": 5612.711,
+                        "August": 5264.289,
+                        "September": 5732.108,
+                        "October": 5661.936,
+                        "November": 5398.14,
+                        "December": 5617.437
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 5437.11,
+                    "Monthly": {
+                        "January": 5594.045,
+                        "February": 5473.988,
+                        "March": 5250.637,
+                        "April": 5313.487,
+                        "May": 5742.73,
+                        "June": 5361.601,
+                        "July": 4638.709,
+                        "August": 5581.238,
+                        "September": 5650.189,
+                        "October": 5676.824,
+                        "November": 5465.52,
+                        "December": 5496.409
+                    }
+                }
+            },
+            "Craft and Related Trades Workers": {
+                "2016": {
+                    "Annual_Average": 3245.88,
+                    "Monthly": {
+                        "April": 3344.509,
+                        "July": 3261.116,
+                        "October": 3132.016
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 3197.6,
+                    "Monthly": {
+                        "January": 3191.103,
+                        "April": 3003.491,
+                        "July": 3376.388,
+                        "October": 3219.421
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 3230.37,
+                    "Monthly": {
+                        "January": 2966.185,
+                        "April": 3407.431,
+                        "July": 3338.824,
+                        "October": 3209.052
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 3357.46,
+                    "Monthly": {
+                        "January": 3435.121,
+                        "April": 3397.134,
+                        "July": 3312.311,
+                        "October": 3285.288
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 2828.5,
+                    "Monthly": {
+                        "January": 3256.12,
+                        "April": 2167.246,
+                        "July": 2988.717,
+                        "October": 2901.911
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 3104.23,
+                    "Monthly": {
+                        "January": 2972.425,
+                        "February": 2914.238,
+                        "March": 3221.838,
+                        "April": 2953.511,
+                        "May": 3072.868,
+                        "June": 2938.827,
+                        "July": 3229.546,
+                        "August": 3192.684,
+                        "September": 3309.122,
+                        "October": 3088.218,
+                        "November": 3082.945,
+                        "December": 3274.516
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 3425.86,
+                    "Monthly": {
+                        "January": 3364.922,
+                        "February": 3239.644,
+                        "March": 3280.888,
+                        "April": 3481.985,
+                        "May": 3332.191,
+                        "June": 3409.533,
+                        "July": 3342.907,
+                        "August": 3606.744,
+                        "September": 3153.21,
+                        "October": 3631.629,
+                        "November": 3877.737,
+                        "December": 3388.905
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 3350.96,
+                    "Monthly": {
+                        "January": 3373.392,
+                        "February": 3123.275,
+                        "March": 3567.414,
+                        "April": 3234.105,
+                        "May": 2978.555,
+                        "June": 3303.073,
+                        "July": 3518.884,
+                        "August": 3257.216,
+                        "September": 3538.682,
+                        "October": 3290.392,
+                        "November": 3013.829,
+                        "December": 4012.687
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 3488.66,
+                    "Monthly": {
+                        "January": 3484.546,
+                        "February": 3670.079,
+                        "March": 3397.323,
+                        "April": 3562.746,
+                        "May": 3514.666,
+                        "June": 3578.651,
+                        "July": 3579.621,
+                        "August": 3358.494,
+                        "September": 3346.403,
+                        "October": 3282.536,
+                        "November": 3564.469,
+                        "December": 3524.418
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 3498.58,
+                    "Monthly": {
+                        "January": 3465.23,
+                        "February": 3567.011,
+                        "March": 3602.787,
+                        "April": 3462.512,
+                        "May": 3562.497,
+                        "June": 3298.045,
+                        "July": 3486.348,
+                        "August": 3535.317,
+                        "September": 3626.242,
+                        "October": 3470.528,
+                        "November": 3505.612,
+                        "December": 3400.843
+                    }
+                }
+            },
+            "Plant and Machine Operators and Assemblers": {
+                "2016": {
+                    "Annual_Average": 2408.15,
+                    "Monthly": {
+                        "April": 2451.534,
+                        "July": 2376.353,
+                        "October": 2396.553
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 2552.45,
+                    "Monthly": {
+                        "January": 2397.463,
+                        "April": 2550.668,
+                        "July": 2635.33,
+                        "October": 2626.344
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 2623.17,
+                    "Monthly": {
+                        "January": 2655.522,
+                        "April": 2558.432,
+                        "July": 2638.228,
+                        "October": 2640.484
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 3294.04,
+                    "Monthly": {
+                        "January": 3166.361,
+                        "April": 3445.48,
+                        "July": 3137.007,
+                        "October": 3427.318
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 3124.92,
+                    "Monthly": {
+                        "January": 3448.481,
+                        "April": 2620.81,
+                        "July": 3298.934,
+                        "October": 3131.456
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 3281.34,
+                    "Monthly": {
+                        "January": 3296.536,
+                        "February": 3295.719,
+                        "March": 3494.387,
+                        "April": 3160.656,
+                        "May": 3433.397,
+                        "June": 3192.223,
+                        "July": 3307.023,
+                        "August": 3409.354,
+                        "September": 3472.821,
+                        "October": 3075.436,
+                        "November": 2983.991,
+                        "December": 3254.546
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 3657.05,
+                    "Monthly": {
+                        "January": 3464.364,
+                        "February": 3503.101,
+                        "March": 3400.636,
+                        "April": 3720.899,
+                        "May": 3372.912,
+                        "June": 3838.375,
+                        "July": 3518.061,
+                        "August": 3656.596,
+                        "September": 4049.113,
+                        "October": 3909.067,
+                        "November": 3737.789,
+                        "December": 3713.7
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 3933.91,
+                    "Monthly": {
+                        "January": 4008.794,
+                        "February": 3623.596,
+                        "March": 3956.659,
+                        "April": 3971.943,
+                        "May": 3732.361,
+                        "June": 3996.342,
+                        "July": 3926.375,
+                        "August": 4030.861,
+                        "September": 4179.597,
+                        "October": 3940.51,
+                        "November": 3880.21,
+                        "December": 3959.622
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 4282.01,
+                    "Monthly": {
+                        "January": 4046.282,
+                        "February": 4106.632,
+                        "March": 4098.043,
+                        "April": 4265.116,
+                        "May": 4445.616,
+                        "June": 4378.271,
+                        "July": 4017.461,
+                        "August": 4459.582,
+                        "September": 4451.991,
+                        "October": 4162.497,
+                        "November": 4487.897,
+                        "December": 4464.678
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 4222.16,
+                    "Monthly": {
+                        "January": 4195.505,
+                        "February": 4130.006,
+                        "March": 4105.748,
+                        "April": 4216.362,
+                        "May": 4108.985,
+                        "June": 4115.024,
+                        "July": 4228.238,
+                        "August": 4417.872,
+                        "September": 4261.86,
+                        "October": 4436.508,
+                        "November": 4183.697,
+                        "December": 4266.099
+                    }
+                }
+            },
+            "Elementary Occupations": {
+                "2016": {
+                    "Annual_Average": 11096.14,
+                    "Monthly": {
+                        "April": 10793.558,
+                        "July": 11032.26,
+                        "October": 11462.609
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 10537.82,
+                    "Monthly": {
+                        "January": 9981.662,
+                        "April": 10784.255,
+                        "July": 10755.692,
+                        "October": 10629.662
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 11059.53,
+                    "Monthly": {
+                        "January": 11536.162,
+                        "April": 10873.305,
+                        "July": 10838.648,
+                        "October": 10990.018
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 11103.86,
+                    "Monthly": {
+                        "January": 10876.46,
+                        "April": 10964.879,
+                        "July": 11624.07,
+                        "October": 10950.049
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 10737.87,
+                    "Monthly": {
+                        "January": 11523.296,
+                        "April": 9381.687,
+                        "July": 11840.458,
+                        "October": 10206.051
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 12758.24,
+                    "Monthly": {
+                        "January": 11283.193,
+                        "February": 11903.083,
+                        "March": 13490.051,
+                        "April": 12340.165,
+                        "May": 13357.329,
+                        "June": 13500.196,
+                        "July": 11543.364,
+                        "August": 13161.163,
+                        "September": 12859.123,
+                        "October": 12527.159,
+                        "November": 13421.312,
+                        "December": 13712.684
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 13512.51,
+                    "Monthly": {
+                        "January": 12033.436,
+                        "February": 13242.168,
+                        "March": 13714.153,
+                        "April": 12885.506,
+                        "May": 12978.191,
+                        "June": 13706.959,
+                        "July": 13901.04,
+                        "August": 13912.5,
+                        "September": 13586.067,
+                        "October": 13438.281,
+                        "November": 14071.157,
+                        "December": 14680.65
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 14055.06,
+                    "Monthly": {
+                        "January": 13596.389,
+                        "February": 14858.418,
+                        "March": 14480.513,
+                        "April": 13807.438,
+                        "May": 14588.59,
+                        "June": 14761.043,
+                        "July": 12209.268,
+                        "August": 14548.852,
+                        "September": 12986.747,
+                        "October": 13107.457,
+                        "November": 15055.014,
+                        "December": 14661.02
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 13380.03,
+                    "Monthly": {
+                        "January": 12655.872,
+                        "February": 14104.076,
+                        "March": 13854.149,
+                        "April": 13056.313,
+                        "May": 13556.404,
+                        "June": 14833.484,
+                        "July": 12638.226,
+                        "August": 13089.136,
+                        "September": 13128.2,
+                        "October": 12866.539,
+                        "November": 13437.632,
+                        "December": 13340.36
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 13335.61,
+                    "Monthly": {
+                        "January": 13026.87,
+                        "February": 13306.224,
+                        "March": 12686.421,
+                        "April": 13455.672,
+                        "May": 13743.125,
+                        "June": 15111.556,
+                        "July": 12023.671,
+                        "August": 14199.814,
+                        "September": 13247.15,
+                        "October": 12769.871,
+                        "November": 13417.22,
+                        "December": 13039.736
+                    }
+                }
+            },
+            "Armed Forces Occupations": {
+                "2016": {
+                    "Annual_Average": 92.68,
+                    "Monthly": {
+                        "April": 95.252,
+                        "July": 100.321,
+                        "October": 82.482
+                    }
+                },
+                "2017": {
+                    "Annual_Average": 95.0,
+                    "Monthly": {
+                        "January": 104.925,
+                        "April": 87.863,
+                        "July": 74.411,
+                        "October": 112.782
+                    }
+                },
+                "2018": {
+                    "Annual_Average": 93.76,
+                    "Monthly": {
+                        "January": 94.299,
+                        "April": 79.819,
+                        "July": 116.606,
+                        "October": 84.329
+                    }
+                },
+                "2019": {
+                    "Annual_Average": 85.95,
+                    "Monthly": {
+                        "January": 83.067,
+                        "April": 83.527,
+                        "July": 107.873,
+                        "October": 69.348
+                    }
+                },
+                "2020": {
+                    "Annual_Average": 100.19,
+                    "Monthly": {
+                        "January": 102.379,
+                        "April": 73.361,
+                        "July": 137.141,
+                        "October": 87.874
+                    }
+                },
+                "2021": {
+                    "Annual_Average": 89.11,
+                    "Monthly": {
+                        "January": 88.683,
+                        "February": 79.12,
+                        "March": 104.793,
+                        "April": 99.623,
+                        "May": 116.971,
+                        "June": 117.154,
+                        "July": 84.589,
+                        "August": 56.072,
+                        "September": 50.398,
+                        "October": 87.659,
+                        "November": 97.428,
+                        "December": 86.788
+                    }
+                },
+                "2022": {
+                    "Annual_Average": 87.51,
+                    "Monthly": {
+                        "January": 86.078,
+                        "February": 131.433,
+                        "March": 118.093,
+                        "April": 77.987,
+                        "May": 60.549,
+                        "June": 77.036,
+                        "July": 109.087,
+                        "August": 69.327,
+                        "September": 72.147,
+                        "October": 81.904,
+                        "November": 61.227,
+                        "December": 105.284
+                    }
+                },
+                "2023": {
+                    "Annual_Average": 109.77,
+                    "Monthly": {
+                        "January": 88.508,
+                        "February": 248.656,
+                        "March": 84.842,
+                        "April": 82.274,
+                        "May": 83.804,
+                        "June": 87.172,
+                        "July": 103.451,
+                        "August": 74.64,
+                        "September": 102.048,
+                        "October": 95.126,
+                        "November": 149.924,
+                        "December": 116.8
+                    }
+                },
+                "2024": {
+                    "Annual_Average": 94.44,
+                    "Monthly": {
+                        "January": 95.189,
+                        "February": 147.826,
+                        "March": 93.435,
+                        "April": 91.804,
+                        "May": 87.315,
+                        "June": 93.981,
+                        "July": 102.234,
+                        "August": 75.236,
+                        "September": 79.863,
+                        "October": 79.702,
+                        "November": 79.572,
+                        "December": 107.138
+                    }
+                },
+                "2025": {
+                    "Annual_Average": 103.54,
+                    "Monthly": {
+                        "January": 106.295,
+                        "February": 64.721,
+                        "March": 56.912,
+                        "April": 130.063,
+                        "May": 127.454,
+                        "June": 58.555,
+                        "July": 133.923,
+                        "August": 77.591,
+                        "September": 92.086,
+                        "October": 207.387,
+                        "November": 63.466,
+                        "December": 124.006
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,2307 @@
+{
+    "metadata": {
+        "unit": "Philippine Peso (PHP)",
+        "description": "Average daily basic pay of wage and salary workers by major industry group (Annual and Monthly)"
+    },
+    "industries": {
+        "TOTAL": {
+            "2016": {
+                "Annual_Average": 400.95,
+                "Monthly": {
+                    "January": 387.56,
+                    "April": 403.59,
+                    "July": 401.53,
+                    "October": 411.49
+                }
+            },
+            "2017": {
+                "Annual_Average": 415.17,
+                "Monthly": {
+                    "January": 414.64,
+                    "April": 408.8,
+                    "July": 412.92,
+                    "October": 423.89
+                }
+            },
+            "2018": {
+                "Annual_Average": 442.97,
+                "Monthly": {
+                    "January": 427.76,
+                    "April": 435.87,
+                    "July": 451.56,
+                    "October": 455.93
+                }
+            },
+            "2019": {
+                "Annual_Average": 485.58,
+                "Monthly": {
+                    "January": 470.13,
+                    "April": 486.31,
+                    "July": 479.88,
+                    "October": 506.58
+                }
+            },
+            "2020": {
+                "Annual_Average": 503.28,
+                "Monthly": {
+                    "January": 499.5,
+                    "April": 504.43,
+                    "July": 498.3,
+                    "October": 511.71
+                }
+            },
+            "2021": {
+                "Annual_Average": 517.37,
+                "Monthly": {
+                    "January": 510.14,
+                    "April": 511.79,
+                    "July": 515.4,
+                    "October": 531.61
+                }
+            },
+            "2022": {
+                "Annual_Average": 543.48,
+                "Monthly": {
+                    "January": 535.73,
+                    "April": 537.61,
+                    "July": 549.34,
+                    "October": 550.68
+                }
+            },
+            "2023": {
+                "Annual_Average": 580.79,
+                "Monthly": {
+                    "January": 572.16,
+                    "April": 580.85,
+                    "July": 570.3,
+                    "October": 600.1
+                }
+            },
+            "2024": {
+                "Annual_Average": 609.52,
+                "Monthly": {
+                    "January": 592.56,
+                    "April": 612.65,
+                    "July": 609.4,
+                    "October": 624.51
+                }
+            },
+            "2025": {
+                "Annual_Average": 657.86,
+                "Monthly": {
+                    "January": 629.99,
+                    "April": 650.44,
+                    "July": 671.1,
+                    "October": 678.87
+                }
+            }
+        },
+        "AGRICULTURE": {
+            "2016": {
+                "Annual_Average": 209.33,
+                "Monthly": {
+                    "January": 201.55,
+                    "April": 214.3,
+                    "July": 204.31,
+                    "October": 220.09
+                }
+            },
+            "2017": {
+                "Annual_Average": 220.26,
+                "Monthly": {
+                    "January": 210.13,
+                    "April": 220.37,
+                    "July": 229.69,
+                    "October": 219.89
+                }
+            },
+            "2018": {
+                "Annual_Average": 237.38,
+                "Monthly": {
+                    "January": 222.26,
+                    "April": 229.43,
+                    "July": 244.14,
+                    "October": 253.92
+                }
+            },
+            "2019": {
+                "Annual_Average": 260.28,
+                "Monthly": {
+                    "January": 260.37,
+                    "April": 259.99,
+                    "July": 259.11,
+                    "October": 261.69
+                }
+            },
+            "2020": {
+                "Annual_Average": 270.25,
+                "Monthly": {
+                    "January": 263.37,
+                    "April": 264.48,
+                    "July": 271.38,
+                    "October": 283.15
+                }
+            },
+            "2021": {
+                "Annual_Average": 285.92,
+                "Monthly": {
+                    "January": 279.88,
+                    "April": 280.67,
+                    "July": 293.78,
+                    "October": 286.42
+                }
+            },
+            "2022": {
+                "Annual_Average": 301.14,
+                "Monthly": {
+                    "January": 298.35,
+                    "April": 293.04,
+                    "July": 306.67,
+                    "October": 306.9
+                }
+            },
+            "2023": {
+                "Annual_Average": 321.77,
+                "Monthly": {
+                    "January": 310.58,
+                    "April": 311.47,
+                    "July": 333.23,
+                    "October": 327.91
+                }
+            },
+            "2024": {
+                "Annual_Average": 350.16,
+                "Monthly": {
+                    "January": 340.62,
+                    "April": 344.26,
+                    "July": 349.9,
+                    "October": 356.49
+                }
+            },
+            "2025": {
+                "Annual_Average": 366.95,
+                "Monthly": {
+                    "January": 354.68,
+                    "April": 357.31,
+                    "July": 376.09,
+                    "October": 377.56
+                }
+            }
+        },
+        "Agriculture and Forestry": {
+            "2016": {
+                "Annual_Average": 208.25,
+                "Monthly": {
+                    "January": 200.39,
+                    "April": 213.28,
+                    "July": 203.07,
+                    "October": 219.12
+                }
+            },
+            "2017": {
+                "Annual_Average": 219.57,
+                "Monthly": {
+                    "January": 210.21,
+                    "April": 218.31,
+                    "July": 229.11,
+                    "October": 219.71
+                }
+            },
+            "2018": {
+                "Annual_Average": 235.4,
+                "Monthly": {
+                    "January": 221.39,
+                    "April": 227.2,
+                    "July": 240.88,
+                    "October": 252.55
+                }
+            },
+            "2019": {
+                "Annual_Average": 258.13,
+                "Monthly": {
+                    "January": 256.86,
+                    "April": 259.0,
+                    "July": 256.13,
+                    "October": 260.8
+                }
+            },
+            "2020": {
+                "Annual_Average": 269.61,
+                "Monthly": {
+                    "January": 261.45,
+                    "April": 263.51,
+                    "July": 270.59,
+                    "October": 284.72
+                }
+            },
+            "2021": {
+                "Annual_Average": 281.73,
+                "Monthly": {
+                    "January": 275.48,
+                    "April": 272.42,
+                    "July": 292.57,
+                    "October": 282.54
+                }
+            },
+            "2022": {
+                "Annual_Average": 300.28,
+                "Monthly": {
+                    "January": 296.02,
+                    "April": 293.68,
+                    "July": 305.8,
+                    "October": 305.87
+                }
+            },
+            "2023": {
+                "Annual_Average": 319.9,
+                "Monthly": {
+                    "January": 308.62,
+                    "April": 310.38,
+                    "July": 331.62,
+                    "October": 325.54
+                }
+            },
+            "2024": {
+                "Annual_Average": 346.62,
+                "Monthly": {
+                    "January": 338.41,
+                    "April": 344.08,
+                    "July": 342.49,
+                    "October": 353.09
+                }
+            },
+            "2025": {
+                "Annual_Average": 365.57,
+                "Monthly": {
+                    "January": 350.43,
+                    "April": 356.98,
+                    "July": 375.82,
+                    "October": 377.06
+                }
+            }
+        },
+        "Fishing and aquaculture": {
+            "2016": {
+                "Annual_Average": 225.95,
+                "Monthly": {
+                    "January": 219.48,
+                    "April": 227.09,
+                    "July": 222.37,
+                    "October": 241.45
+                }
+            },
+            "2017": {
+                "Annual_Average": 232.51,
+                "Monthly": {
+                    "January": 208.58,
+                    "April": 252.06,
+                    "July": 240.83,
+                    "October": 222.97
+                }
+            },
+            "2018": {
+                "Annual_Average": 266.1,
+                "Monthly": {
+                    "January": 237.9,
+                    "April": 263.34,
+                    "July": 279.06,
+                    "October": 275.73
+                }
+            },
+            "2019": {
+                "Annual_Average": 287.47,
+                "Monthly": {
+                    "January": 302.35,
+                    "April": 277.4,
+                    "July": 291.81,
+                    "October": 272.27
+                }
+            },
+            "2020": {
+                "Annual_Average": 281.01,
+                "Monthly": {
+                    "January": 296.72,
+                    "April": 281.32,
+                    "July": 284.99,
+                    "October": 259.18
+                }
+            },
+            "2021": {
+                "Annual_Average": 340.6,
+                "Monthly": {
+                    "January": 334.37,
+                    "April": 424.73,
+                    "July": 309.36,
+                    "October": 330.01
+                }
+            },
+            "2022": {
+                "Annual_Average": 313.46,
+                "Monthly": {
+                    "January": 331.05,
+                    "April": 285.23,
+                    "July": 322.06,
+                    "October": 322.13
+                }
+            },
+            "2023": {
+                "Annual_Average": 344.73,
+                "Monthly": {
+                    "January": 338.64,
+                    "April": 327.09,
+                    "July": 348.73,
+                    "October": 358.55
+                }
+            },
+            "2024": {
+                "Annual_Average": 404.47,
+                "Monthly": {
+                    "January": 362.21,
+                    "April": 346.69,
+                    "July": 445.07,
+                    "October": 435.4
+                }
+            },
+            "2025": {
+                "Annual_Average": 384.22,
+                "Monthly": {
+                    "January": 412.1,
+                    "April": 361.71,
+                    "July": 379.1,
+                    "October": 383.89
+                }
+            }
+        },
+        "INDUSTRY": {
+            "2016": {
+                "Annual_Average": 376.4,
+                "Monthly": {
+                    "January": 364.04,
+                    "April": 370.61,
+                    "July": 378.69,
+                    "October": 391.74
+                }
+            },
+            "2017": {
+                "Annual_Average": 387.63,
+                "Monthly": {
+                    "January": 382.1,
+                    "April": 380.22,
+                    "July": 393.01,
+                    "October": 394.38
+                }
+            },
+            "2018": {
+                "Annual_Average": 411.47,
+                "Monthly": {
+                    "January": 404.27,
+                    "April": 402.89,
+                    "July": 418.22,
+                    "October": 420.16
+                }
+            },
+            "2019": {
+                "Annual_Average": 442.73,
+                "Monthly": {
+                    "January": 437.3,
+                    "April": 435.56,
+                    "July": 436.98,
+                    "October": 461.6
+                }
+            },
+            "2020": {
+                "Annual_Average": 449.02,
+                "Monthly": {
+                    "January": 450.09,
+                    "April": 446.58,
+                    "July": 436.78,
+                    "October": 463.43
+                }
+            },
+            "2021": {
+                "Annual_Average": 464.65,
+                "Monthly": {
+                    "January": 451.19,
+                    "April": 455.51,
+                    "July": 473.59,
+                    "October": 477.37
+                }
+            },
+            "2022": {
+                "Annual_Average": 491.83,
+                "Monthly": {
+                    "January": 485.2,
+                    "April": 490.46,
+                    "July": 492.67,
+                    "October": 498.53
+                }
+            },
+            "2023": {
+                "Annual_Average": 522.69,
+                "Monthly": {
+                    "January": 503.03,
+                    "April": 515.23,
+                    "July": 526.95,
+                    "October": 543.85
+                }
+            },
+            "2024": {
+                "Annual_Average": 548.18,
+                "Monthly": {
+                    "January": 547.16,
+                    "April": 546.77,
+                    "July": 547.37,
+                    "October": 550.45
+                }
+            },
+            "2025": {
+                "Annual_Average": 594.4,
+                "Monthly": {
+                    "January": 575.25,
+                    "April": 587.62,
+                    "July": 597.58,
+                    "October": 616.08
+                }
+            }
+        },
+        "Mining and Quarrying": {
+            "2016": {
+                "Annual_Average": 356.11,
+                "Monthly": {
+                    "January": 362.53,
+                    "April": 348.95,
+                    "July": 362.25,
+                    "October": 352.28
+                }
+            },
+            "2017": {
+                "Annual_Average": 363.72,
+                "Monthly": {
+                    "January": 306.07,
+                    "April": 362.58,
+                    "July": 379.93,
+                    "October": 400.31
+                }
+            },
+            "2018": {
+                "Annual_Average": 398.73,
+                "Monthly": {
+                    "January": 376.51,
+                    "April": 388.67,
+                    "July": 435.15,
+                    "October": 394.26
+                }
+            },
+            "2019": {
+                "Annual_Average": 441.61,
+                "Monthly": {
+                    "January": 452.44,
+                    "April": 415.24,
+                    "July": 408.76,
+                    "October": 497.16
+                }
+            },
+            "2020": {
+                "Annual_Average": 399.09,
+                "Monthly": {
+                    "January": 386.07,
+                    "April": 368.42,
+                    "July": 382.89,
+                    "October": 472.1
+                }
+            },
+            "2021": {
+                "Annual_Average": 447.72,
+                "Monthly": {
+                    "January": 443.97,
+                    "April": 440.58,
+                    "July": 480.32,
+                    "October": 413.93
+                }
+            },
+            "2022": {
+                "Annual_Average": 521.45,
+                "Monthly": {
+                    "January": 501.85,
+                    "April": 494.55,
+                    "July": 555.15,
+                    "October": 531.11
+                }
+            },
+            "2023": {
+                "Annual_Average": 497.92,
+                "Monthly": {
+                    "January": 499.37,
+                    "April": 493.79,
+                    "July": 526.41,
+                    "October": 443.77
+                }
+            },
+            "2024": {
+                "Annual_Average": 509.01,
+                "Monthly": {
+                    "January": 535.78,
+                    "April": 541.34,
+                    "July": 456.39,
+                    "October": 522.78
+                }
+            },
+            "2025": {
+                "Annual_Average": 595.96,
+                "Monthly": {
+                    "January": 588.95,
+                    "April": 634.18,
+                    "July": 566.75,
+                    "October": 606.97
+                }
+            }
+        },
+        "Manufacturing": {
+            "2016": {
+                "Annual_Average": 383.65,
+                "Monthly": {
+                    "January": 361.49,
+                    "April": 373.84,
+                    "July": 390.08,
+                    "October": 408.92
+                }
+            },
+            "2017": {
+                "Annual_Average": 394.15,
+                "Monthly": {
+                    "January": 373.64,
+                    "April": 391.76,
+                    "July": 411.87,
+                    "October": 397.49
+                }
+            },
+            "2018": {
+                "Annual_Average": 418.5,
+                "Monthly": {
+                    "January": 417.16,
+                    "April": 410.35,
+                    "July": 420.55,
+                    "October": 425.64
+                }
+            },
+            "2019": {
+                "Annual_Average": 446.48,
+                "Monthly": {
+                    "January": 449.13,
+                    "April": 433.23,
+                    "July": 436.95,
+                    "October": 467.2
+                }
+            },
+            "2020": {
+                "Annual_Average": 455.81,
+                "Monthly": {
+                    "January": 455.9,
+                    "April": 456.7,
+                    "July": 442.18,
+                    "October": 470.7
+                }
+            },
+            "2021": {
+                "Annual_Average": 466.65,
+                "Monthly": {
+                    "January": 451.17,
+                    "April": 458.65,
+                    "July": 474.24,
+                    "October": 481.53
+                }
+            },
+            "2022": {
+                "Annual_Average": 485.05,
+                "Monthly": {
+                    "January": 480.49,
+                    "April": 489.06,
+                    "July": 487.26,
+                    "October": 483.43
+                }
+            },
+            "2023": {
+                "Annual_Average": 518.97,
+                "Monthly": {
+                    "January": 497.55,
+                    "April": 512.4,
+                    "July": 522.07,
+                    "October": 543.22
+                }
+            },
+            "2024": {
+                "Annual_Average": 544.45,
+                "Monthly": {
+                    "January": 546.46,
+                    "April": 546.64,
+                    "July": 544.98,
+                    "October": 541.6
+                }
+            },
+            "2025": {
+                "Annual_Average": 602.15,
+                "Monthly": {
+                    "January": 573.33,
+                    "April": 591.37,
+                    "July": 603.15,
+                    "October": 636.52
+                }
+            }
+        },
+        "Electricity Gas Steam and Airconditioning Supply": {
+            "2016": {
+                "Annual_Average": 742.32,
+                "Monthly": {
+                    "January": 655.28,
+                    "April": 722.08,
+                    "July": 691.49,
+                    "October": 931.42
+                }
+            },
+            "2017": {
+                "Annual_Average": 668.26,
+                "Monthly": {
+                    "January": 821.61,
+                    "April": 531.86,
+                    "July": 659.23,
+                    "October": 641.51
+                }
+            },
+            "2018": {
+                "Annual_Average": 699.01,
+                "Monthly": {
+                    "January": 679.62,
+                    "April": 591.03,
+                    "July": 802.29,
+                    "October": 766.42
+                }
+            },
+            "2019": {
+                "Annual_Average": 739.18,
+                "Monthly": {
+                    "January": 760.84,
+                    "April": 723.64,
+                    "July": 813.5,
+                    "October": 669.04
+                }
+            },
+            "2020": {
+                "Annual_Average": 715.67,
+                "Monthly": {
+                    "January": 723.58,
+                    "April": 688.95,
+                    "July": 765.47,
+                    "October": 665.8
+                }
+            },
+            "2021": {
+                "Annual_Average": 726.54,
+                "Monthly": {
+                    "January": 708.55,
+                    "April": 705.08,
+                    "July": 719.02,
+                    "October": 778.85
+                }
+            },
+            "2022": {
+                "Annual_Average": 748.51,
+                "Monthly": {
+                    "January": 815.15,
+                    "April": 738.16,
+                    "July": 777.02,
+                    "October": 677.94
+                }
+            },
+            "2023": {
+                "Annual_Average": 813.35,
+                "Monthly": {
+                    "January": 674.98,
+                    "April": 823.84,
+                    "July": 830.6,
+                    "October": 929.37
+                }
+            },
+            "2024": {
+                "Annual_Average": 914.41,
+                "Monthly": {
+                    "January": 906.39,
+                    "April": 905.54,
+                    "July": 951.92,
+                    "October": 882.11
+                }
+            },
+            "2025": {
+                "Annual_Average": 988.9,
+                "Monthly": {
+                    "January": 960.71,
+                    "April": 1094.79,
+                    "July": 946.22,
+                    "October": 935.97
+                }
+            }
+        },
+        "Water Supply; Sewerage Waste Management and Remediation Activities": {
+            "2016": {
+                "Annual_Average": 443.19,
+                "Monthly": {
+                    "January": 470.1,
+                    "April": 434.9,
+                    "July": 442.53,
+                    "October": 428.91
+                }
+            },
+            "2017": {
+                "Annual_Average": 457.58,
+                "Monthly": {
+                    "January": 407.26,
+                    "April": 486.61,
+                    "July": 423.86,
+                    "October": 522.24
+                }
+            },
+            "2018": {
+                "Annual_Average": 454.59,
+                "Monthly": {
+                    "January": 492.49,
+                    "April": 409.29,
+                    "July": 458.4,
+                    "October": 469.97
+                }
+            },
+            "2019": {
+                "Annual_Average": 537.92,
+                "Monthly": {
+                    "January": 460.24,
+                    "April": 588.06,
+                    "July": 523.45,
+                    "October": 590.39
+                }
+            },
+            "2020": {
+                "Annual_Average": 498.24,
+                "Monthly": {
+                    "January": 489.56,
+                    "April": 594.66,
+                    "July": 447.95,
+                    "October": 485.44
+                }
+            },
+            "2021": {
+                "Annual_Average": 497.28,
+                "Monthly": {
+                    "January": 448.26,
+                    "April": 540.15,
+                    "July": 478.74,
+                    "October": 517.33
+                }
+            },
+            "2022": {
+                "Annual_Average": 497.46,
+                "Monthly": {
+                    "January": 515.3,
+                    "April": 558.35,
+                    "July": 433.07,
+                    "October": 497.54
+                }
+            },
+            "2023": {
+                "Annual_Average": 588.45,
+                "Monthly": {
+                    "January": 526.49,
+                    "April": 603.48,
+                    "July": 556.74,
+                    "October": 673.72
+                }
+            },
+            "2024": {
+                "Annual_Average": 614.24,
+                "Monthly": {
+                    "January": 588.05,
+                    "April": 691.59,
+                    "July": 599.23,
+                    "October": 555.5
+                }
+            },
+            "2025": {
+                "Annual_Average": 578.03,
+                "Monthly": {
+                    "January": 558.62,
+                    "April": 588.9,
+                    "July": 583.23,
+                    "October": 585.22
+                }
+            }
+        },
+        "Construction": {
+            "2016": {
+                "Annual_Average": 360.22,
+                "Monthly": {
+                    "January": 356.12,
+                    "April": 358.32,
+                    "July": 359.92,
+                    "October": 366.25
+                }
+            },
+            "2017": {
+                "Annual_Average": 375.51,
+                "Monthly": {
+                    "January": 379.5,
+                    "April": 366.42,
+                    "July": 373.72,
+                    "October": 383.01
+                }
+            },
+            "2018": {
+                "Annual_Average": 399.48,
+                "Monthly": {
+                    "January": 386.52,
+                    "April": 393.37,
+                    "July": 407.86,
+                    "October": 409.39
+                }
+            },
+            "2019": {
+                "Annual_Average": 432.13,
+                "Monthly": {
+                    "January": 420.1,
+                    "April": 427.89,
+                    "July": 429.99,
+                    "October": 450.82
+                }
+            },
+            "2020": {
+                "Annual_Average": 438.98,
+                "Monthly": {
+                    "January": 439.39,
+                    "April": 433.54,
+                    "July": 427.91,
+                    "October": 454.53
+                }
+            },
+            "2021": {
+                "Annual_Average": 458.49,
+                "Monthly": {
+                    "January": 446.87,
+                    "April": 448.09,
+                    "July": 467.96,
+                    "October": 470.32
+                }
+            },
+            "2022": {
+                "Annual_Average": 489.57,
+                "Monthly": {
+                    "January": 480.67,
+                    "April": 484.44,
+                    "July": 489.18,
+                    "October": 502.93
+                }
+            },
+            "2023": {
+                "Annual_Average": 518.14,
+                "Monthly": {
+                    "January": 502.17,
+                    "April": 509.5,
+                    "July": 523.3,
+                    "October": 535.19
+                }
+            },
+            "2024": {
+                "Annual_Average": 543.49,
+                "Monthly": {
+                    "January": 539.94,
+                    "April": 539.26,
+                    "July": 541.6,
+                    "October": 549.71
+                }
+            },
+            "2025": {
+                "Annual_Average": 581.08,
+                "Monthly": {
+                    "January": 568.3,
+                    "April": 571.97,
+                    "July": 587.45,
+                    "October": 596.76
+                }
+            }
+        },
+        "SERVICES": {
+            "2016": {
+                "Annual_Average": 455.7,
+                "Monthly": {
+                    "January": 445.44,
+                    "April": 457.42,
+                    "July": 459.88,
+                    "October": 460.3
+                }
+            },
+            "2017": {
+                "Annual_Average": 466.04,
+                "Monthly": {
+                    "January": 468.56,
+                    "April": 461.52,
+                    "July": 460.42,
+                    "October": 473.13
+                }
+            },
+            "2018": {
+                "Annual_Average": 499.75,
+                "Monthly": {
+                    "January": 482.6,
+                    "April": 493.35,
+                    "July": 508.71,
+                    "October": 513.37
+                }
+            },
+            "2019": {
+                "Annual_Average": 545.34,
+                "Monthly": {
+                    "January": 525.13,
+                    "April": 548.31,
+                    "July": 539.4,
+                    "October": 568.86
+                }
+            },
+            "2020": {
+                "Annual_Average": 566.98,
+                "Monthly": {
+                    "January": 561.29,
+                    "April": 568.09,
+                    "July": 571.87,
+                    "October": 567.79
+                }
+            },
+            "2021": {
+                "Annual_Average": 580.23,
+                "Monthly": {
+                    "January": 574.92,
+                    "April": 574.07,
+                    "July": 577.12,
+                    "October": 594.16
+                }
+            },
+            "2022": {
+                "Annual_Average": 601.98,
+                "Monthly": {
+                    "January": 594.35,
+                    "April": 596.81,
+                    "July": 610.2,
+                    "October": 605.87
+                }
+            },
+            "2023": {
+                "Annual_Average": 639.32,
+                "Monthly": {
+                    "January": 634.47,
+                    "April": 639.2,
+                    "July": 626.07,
+                    "October": 657.7
+                }
+            },
+            "2024": {
+                "Annual_Average": 673.28,
+                "Monthly": {
+                    "January": 650.22,
+                    "April": 671.75,
+                    "July": 663.87,
+                    "October": 683.78
+                }
+            },
+            "2025": {
+                "Annual_Average": 715.21,
+                "Monthly": {
+                    "January": 682.19,
+                    "April": 704.84,
+                    "July": 734.35,
+                    "October": 738.36
+                }
+            }
+        },
+        "Whosale and Retail Trade; Repair of Motor Vehicles and Motorcycles": {
+            "2016": {
+                "Annual_Average": 330.5,
+                "Monthly": {
+                    "January": 322.24,
+                    "April": 322.68,
+                    "July": 335.63,
+                    "October": 341.23
+                }
+            },
+            "2017": {
+                "Annual_Average": 343.09,
+                "Monthly": {
+                    "January": 334.57,
+                    "April": 339.72,
+                    "July": 343.66,
+                    "October": 353.83
+                }
+            },
+            "2018": {
+                "Annual_Average": 371.32,
+                "Monthly": {
+                    "January": 358.37,
+                    "April": 375.01,
+                    "July": 371.64,
+                    "October": 380.45
+                }
+            },
+            "2019": {
+                "Annual_Average": 390.24,
+                "Monthly": {
+                    "January": 384.09,
+                    "April": 388.89,
+                    "July": 377.93,
+                    "October": 409.3
+                }
+            },
+            "2020": {
+                "Annual_Average": 395.98,
+                "Monthly": {
+                    "January": 401.88,
+                    "April": 395.96,
+                    "July": 389.12,
+                    "October": 395.73
+                }
+            },
+            "2021": {
+                "Annual_Average": 405.19,
+                "Monthly": {
+                    "January": 396.35,
+                    "April": 396.2,
+                    "July": 413.69,
+                    "October": 413.42
+                }
+            },
+            "2022": {
+                "Annual_Average": 418.18,
+                "Monthly": {
+                    "January": 417.01,
+                    "April": 416.45,
+                    "July": 420.78,
+                    "October": 418.2
+                }
+            },
+            "2023": {
+                "Annual_Average": 450.09,
+                "Monthly": {
+                    "January": 444.12,
+                    "April": 436.04,
+                    "July": 458.41,
+                    "October": 461.56
+                }
+            },
+            "2024": {
+                "Annual_Average": 477.24,
+                "Monthly": {
+                    "January": 473.33,
+                    "April": 467.8,
+                    "July": 481.13,
+                    "October": 483.08
+                }
+            },
+            "2025": {
+                "Annual_Average": 508.89,
+                "Monthly": {
+                    "January": 485.87,
+                    "April": 499.5,
+                    "July": 525.07,
+                    "October": 524.31
+                }
+            }
+        },
+        "Transportation and Storage": {
+            "2016": {
+                "Annual_Average": 438.81,
+                "Monthly": {
+                    "January": 426.23,
+                    "April": 441.76,
+                    "July": 433.03,
+                    "October": 456.37
+                }
+            },
+            "2017": {
+                "Annual_Average": 430.82,
+                "Monthly": {
+                    "January": 424.69,
+                    "April": 434.02,
+                    "July": 430.02,
+                    "October": 433.71
+                }
+            },
+            "2018": {
+                "Annual_Average": 469.33,
+                "Monthly": {
+                    "January": 464.51,
+                    "April": 485.75,
+                    "July": 454.45,
+                    "October": 475.35
+                }
+            },
+            "2019": {
+                "Annual_Average": 516.49,
+                "Monthly": {
+                    "January": 492.7,
+                    "April": 539.74,
+                    "July": 527.05,
+                    "October": 508.67
+                }
+            },
+            "2020": {
+                "Annual_Average": 519.56,
+                "Monthly": {
+                    "January": 547.79,
+                    "April": 513.69,
+                    "July": 488.46,
+                    "October": 527.17
+                }
+            },
+            "2021": {
+                "Annual_Average": 511.39,
+                "Monthly": {
+                    "January": 502.42,
+                    "April": 501.39,
+                    "July": 514.31,
+                    "October": 525.74
+                }
+            },
+            "2022": {
+                "Annual_Average": 540.83,
+                "Monthly": {
+                    "January": 524.07,
+                    "April": 559.87,
+                    "July": 541.28,
+                    "October": 542.69
+                }
+            },
+            "2023": {
+                "Annual_Average": 595.54,
+                "Monthly": {
+                    "January": 562.27,
+                    "April": 626.25,
+                    "July": 577.76,
+                    "October": 623.6
+                }
+            },
+            "2024": {
+                "Annual_Average": 622.05,
+                "Monthly": {
+                    "January": 583.33,
+                    "April": 619.22,
+                    "July": 591.24,
+                    "October": 652.38
+                }
+            },
+            "2025": {
+                "Annual_Average": 657.6,
+                "Monthly": {
+                    "January": 633.0,
+                    "April": 649.97,
+                    "July": 659.53,
+                    "October": 683.79
+                }
+            }
+        },
+        "Accommodation and Food Service Activities": {
+            "2016": {
+                "Annual_Average": 338.58,
+                "Monthly": {
+                    "January": 333.34,
+                    "April": 344.67,
+                    "July": 334.85,
+                    "October": 341.18
+                }
+            },
+            "2017": {
+                "Annual_Average": 355.46,
+                "Monthly": {
+                    "January": 346.15,
+                    "April": 358.62,
+                    "July": 354.27,
+                    "October": 362.02
+                }
+            },
+            "2018": {
+                "Annual_Average": 379.85,
+                "Monthly": {
+                    "January": 360.57,
+                    "April": 390.74,
+                    "July": 377.06,
+                    "October": 390.09
+                }
+            },
+            "2019": {
+                "Annual_Average": 405.89,
+                "Monthly": {
+                    "January": 390.85,
+                    "April": 428.43,
+                    "July": 397.52,
+                    "October": 407.2
+                }
+            },
+            "2020": {
+                "Annual_Average": 417.0,
+                "Monthly": {
+                    "January": 408.91,
+                    "April": 424.64,
+                    "July": 420.11,
+                    "October": 419.52
+                }
+            },
+            "2021": {
+                "Annual_Average": 422.51,
+                "Monthly": {
+                    "January": 426.65,
+                    "April": 384.84,
+                    "July": 421.53,
+                    "October": 451.78
+                }
+            },
+            "2022": {
+                "Annual_Average": 431.77,
+                "Monthly": {
+                    "January": 424.41,
+                    "April": 438.99,
+                    "July": 418.22,
+                    "October": 445.01
+                }
+            },
+            "2023": {
+                "Annual_Average": 457.23,
+                "Monthly": {
+                    "January": 440.98,
+                    "April": 453.97,
+                    "July": 470.11,
+                    "October": 463.88
+                }
+            },
+            "2024": {
+                "Annual_Average": 501.23,
+                "Monthly": {
+                    "January": 478.9,
+                    "April": 486.85,
+                    "July": 507.78,
+                    "October": 509.01
+                }
+            },
+            "2025": {
+                "Annual_Average": 521.52,
+                "Monthly": {
+                    "January": 509.07,
+                    "April": 514.22,
+                    "July": 540.13,
+                    "October": 522.93
+                }
+            }
+        },
+        "Information and Communication": {
+            "2016": {
+                "Annual_Average": 661.83,
+                "Monthly": {
+                    "January": 679.86,
+                    "April": 635.66,
+                    "July": 656.36,
+                    "October": 677.03
+                }
+            },
+            "2017": {
+                "Annual_Average": 691.73,
+                "Monthly": {
+                    "January": 688.77,
+                    "April": 619.99,
+                    "July": 711.37,
+                    "October": 751.44
+                }
+            },
+            "2018": {
+                "Annual_Average": 708.37,
+                "Monthly": {
+                    "January": 711.38,
+                    "April": 671.36,
+                    "July": 692.66,
+                    "October": 763.66
+                }
+            },
+            "2019": {
+                "Annual_Average": 792.4,
+                "Monthly": {
+                    "January": 758.21,
+                    "April": 807.68,
+                    "July": 782.06,
+                    "October": 818.61
+                }
+            },
+            "2020": {
+                "Annual_Average": 802.51,
+                "Monthly": {
+                    "January": 913.86,
+                    "April": 825.38,
+                    "July": 769.23,
+                    "October": 723.32
+                }
+            },
+            "2021": {
+                "Annual_Average": 836.32,
+                "Monthly": {
+                    "January": 803.91,
+                    "April": 893.68,
+                    "July": 797.28,
+                    "October": 865.62
+                }
+            },
+            "2022": {
+                "Annual_Average": 940.3,
+                "Monthly": {
+                    "January": 831.9,
+                    "April": 805.4,
+                    "July": 1257.04,
+                    "October": 884.82
+                }
+            },
+            "2023": {
+                "Annual_Average": 956.26,
+                "Monthly": {
+                    "January": 988.88,
+                    "April": 971.94,
+                    "July": 907.34,
+                    "October": 959.2
+                }
+            },
+            "2024": {
+                "Annual_Average": 1053.41,
+                "Monthly": {
+                    "January": 980.73,
+                    "April": 1090.75,
+                    "July": 1062.78,
+                    "October": 1015.61
+                }
+            },
+            "2025": {
+                "Annual_Average": 1043.83,
+                "Monthly": {
+                    "January": 971.05,
+                    "April": 1043.29,
+                    "July": 1118.26,
+                    "October": 1042.54
+                }
+            }
+        },
+        "Financial and Insurance Activities": {
+            "2016": {
+                "Annual_Average": 679.29,
+                "Monthly": {
+                    "January": 655.64,
+                    "April": 754.06,
+                    "July": 676.52,
+                    "October": 631.63
+                }
+            },
+            "2017": {
+                "Annual_Average": 630.46,
+                "Monthly": {
+                    "January": 659.53,
+                    "April": 579.04,
+                    "July": 637.28,
+                    "October": 645.34
+                }
+            },
+            "2018": {
+                "Annual_Average": 683.31,
+                "Monthly": {
+                    "January": 651.02,
+                    "April": 686.94,
+                    "July": 739.55,
+                    "October": 647.45
+                }
+            },
+            "2019": {
+                "Annual_Average": 720.48,
+                "Monthly": {
+                    "January": 698.24,
+                    "April": 687.82,
+                    "July": 729.01,
+                    "October": 759.92
+                }
+            },
+            "2020": {
+                "Annual_Average": 713.9,
+                "Monthly": {
+                    "January": 703.86,
+                    "April": 776.57,
+                    "July": 684.39,
+                    "October": 704.77
+                }
+            },
+            "2021": {
+                "Annual_Average": 746.15,
+                "Monthly": {
+                    "January": 757.75,
+                    "April": 720.82,
+                    "July": 758.3,
+                    "October": 745.48
+                }
+            },
+            "2022": {
+                "Annual_Average": 774.51,
+                "Monthly": {
+                    "January": 772.18,
+                    "April": 772.9,
+                    "July": 771.57,
+                    "October": 781.03
+                }
+            },
+            "2023": {
+                "Annual_Average": 808.72,
+                "Monthly": {
+                    "January": 791.78,
+                    "April": 809.84,
+                    "July": 826.75,
+                    "October": 805.89
+                }
+            },
+            "2024": {
+                "Annual_Average": 800.67,
+                "Monthly": {
+                    "January": 821.6,
+                    "April": 807.72,
+                    "July": 785.71,
+                    "October": 808.96
+                }
+            },
+            "2025": {
+                "Annual_Average": 885.71,
+                "Monthly": {
+                    "January": 836.92,
+                    "April": 853.55,
+                    "July": 979.25,
+                    "October": 871.98
+                }
+            }
+        },
+        "Real Estate Activities": {
+            "2016": {
+                "Annual_Average": 730.98,
+                "Monthly": {
+                    "January": 622.76,
+                    "April": 716.4,
+                    "July": 867.64,
+                    "October": 727.6
+                }
+            },
+            "2017": {
+                "Annual_Average": 588.85,
+                "Monthly": {
+                    "January": 586.7,
+                    "April": 549.56,
+                    "July": 564.71,
+                    "October": 634.08
+                }
+            },
+            "2018": {
+                "Annual_Average": 686.11,
+                "Monthly": {
+                    "January": 524.37,
+                    "April": 777.15,
+                    "July": 817.47,
+                    "October": 638.44
+                }
+            },
+            "2019": {
+                "Annual_Average": 725.36,
+                "Monthly": {
+                    "January": 648.8,
+                    "April": 669.05,
+                    "July": 691.52,
+                    "October": 861.7
+                }
+            },
+            "2020": {
+                "Annual_Average": 581.51,
+                "Monthly": {
+                    "January": 562.44,
+                    "April": 582.35,
+                    "July": 607.62,
+                    "October": 568.09
+                }
+            },
+            "2021": {
+                "Annual_Average": 662.41,
+                "Monthly": {
+                    "January": 645.45,
+                    "April": 665.37,
+                    "July": 684.41,
+                    "October": 651.83
+                }
+            },
+            "2022": {
+                "Annual_Average": 688.7,
+                "Monthly": {
+                    "January": 639.79,
+                    "April": 707.34,
+                    "July": 703.09,
+                    "October": 697.73
+                }
+            },
+            "2023": {
+                "Annual_Average": 790.89,
+                "Monthly": {
+                    "January": 801.54,
+                    "April": 723.93,
+                    "July": 773.41,
+                    "October": 880.94
+                }
+            },
+            "2024": {
+                "Annual_Average": 807.41,
+                "Monthly": {
+                    "January": 848.22,
+                    "April": 988.85,
+                    "July": 778.41,
+                    "October": 683.6
+                }
+            },
+            "2025": {
+                "Annual_Average": 772.23,
+                "Monthly": {
+                    "January": 864.22,
+                    "April": 661.15,
+                    "July": 884.04,
+                    "October": 722.22
+                }
+            }
+        },
+        "Professional Scientific  and Technical Activities": {
+            "2016": {
+                "Annual_Average": 713.22,
+                "Monthly": {
+                    "January": 802.97,
+                    "April": 694.85,
+                    "July": 668.59,
+                    "October": 673.86
+                }
+            },
+            "2017": {
+                "Annual_Average": 735.05,
+                "Monthly": {
+                    "January": 682.59,
+                    "April": 714.46,
+                    "July": 764.12,
+                    "October": 775.52
+                }
+            },
+            "2018": {
+                "Annual_Average": 780.26,
+                "Monthly": {
+                    "January": 690.89,
+                    "April": 788.28,
+                    "July": 735.28,
+                    "October": 882.44
+                }
+            },
+            "2019": {
+                "Annual_Average": 853.36,
+                "Monthly": {
+                    "January": 766.06,
+                    "April": 797.02,
+                    "July": 812.97,
+                    "October": 1054.94
+                }
+            },
+            "2020": {
+                "Annual_Average": 870.28,
+                "Monthly": {
+                    "January": 958.82,
+                    "April": 791.02,
+                    "July": 861.49,
+                    "October": 865.17
+                }
+            },
+            "2021": {
+                "Annual_Average": 870.91,
+                "Monthly": {
+                    "January": 903.93,
+                    "April": 831.05,
+                    "July": 851.3,
+                    "October": 904.46
+                }
+            },
+            "2022": {
+                "Annual_Average": 897.77,
+                "Monthly": {
+                    "January": 847.92,
+                    "April": 887.13,
+                    "July": 885.67,
+                    "October": 986.4
+                }
+            },
+            "2023": {
+                "Annual_Average": 942.77,
+                "Monthly": {
+                    "January": 960.78,
+                    "April": 941.37,
+                    "July": 919.26,
+                    "October": 958.64
+                }
+            },
+            "2024": {
+                "Annual_Average": 1024.2,
+                "Monthly": {
+                    "January": 979.94,
+                    "April": 1013.44,
+                    "July": 1000.6,
+                    "October": 1056.77
+                }
+            },
+            "2025": {
+                "Annual_Average": 1078.39,
+                "Monthly": {
+                    "January": 1023.36,
+                    "April": 980.14,
+                    "July": 1173.72,
+                    "October": 1115.7
+                }
+            }
+        },
+        "Administrative and Support Service Activities": {
+            "2016": {
+                "Annual_Average": 582.86,
+                "Monthly": {
+                    "January": 582.37,
+                    "April": 581.44,
+                    "July": 589.17,
+                    "October": 578.93
+                }
+            },
+            "2017": {
+                "Annual_Average": 555.42,
+                "Monthly": {
+                    "January": 567.4,
+                    "April": 549.69,
+                    "July": 537.46,
+                    "October": 565.7
+                }
+            },
+            "2018": {
+                "Annual_Average": 598.82,
+                "Monthly": {
+                    "January": 587.16,
+                    "April": 578.33,
+                    "July": 609.33,
+                    "October": 620.56
+                }
+            },
+            "2019": {
+                "Annual_Average": 644.05,
+                "Monthly": {
+                    "January": 630.58,
+                    "April": 639.14,
+                    "July": 639.12,
+                    "October": 667.11
+                }
+            },
+            "2020": {
+                "Annual_Average": 644.03,
+                "Monthly": {
+                    "January": 649.15,
+                    "April": 653.5,
+                    "July": 656.66,
+                    "October": 618.57
+                }
+            },
+            "2021": {
+                "Annual_Average": 655.35,
+                "Monthly": {
+                    "January": 637.51,
+                    "April": 649.35,
+                    "July": 657.41,
+                    "October": 674.28
+                }
+            },
+            "2022": {
+                "Annual_Average": 693.59,
+                "Monthly": {
+                    "January": 676.24,
+                    "April": 688.57,
+                    "July": 707.55,
+                    "October": 700.86
+                }
+            },
+            "2023": {
+                "Annual_Average": 752.02,
+                "Monthly": {
+                    "January": 744.27,
+                    "April": 756.52,
+                    "July": 716.46,
+                    "October": 790.23
+                }
+            },
+            "2024": {
+                "Annual_Average": 787.61,
+                "Monthly": {
+                    "January": 765.79,
+                    "April": 791.58,
+                    "July": 769.54,
+                    "October": 800.69
+                }
+            },
+            "2025": {
+                "Annual_Average": 820.97,
+                "Monthly": {
+                    "January": 802.35,
+                    "April": 795.44,
+                    "July": 840.11,
+                    "October": 845.75
+                }
+            }
+        },
+        "Public Administration and Defense; Compulsory Social Security": {
+            "2016": {
+                "Annual_Average": 609.89,
+                "Monthly": {
+                    "January": 601.37,
+                    "April": 616.5,
+                    "July": 606.22,
+                    "October": 615.41
+                }
+            },
+            "2017": {
+                "Annual_Average": 620.08,
+                "Monthly": {
+                    "January": 639.61,
+                    "April": 633.63,
+                    "July": 595.91,
+                    "October": 615.63
+                }
+            },
+            "2018": {
+                "Annual_Average": 667.35,
+                "Monthly": {
+                    "January": 661.41,
+                    "April": 636.82,
+                    "July": 697.48,
+                    "October": 671.33
+                }
+            },
+            "2019": {
+                "Annual_Average": 735.91,
+                "Monthly": {
+                    "January": 704.66,
+                    "April": 733.85,
+                    "July": 752.57,
+                    "October": 752.16
+                }
+            },
+            "2020": {
+                "Annual_Average": 787.59,
+                "Monthly": {
+                    "January": 808.12,
+                    "April": 761.77,
+                    "July": 821.96,
+                    "October": 753.44
+                }
+            },
+            "2021": {
+                "Annual_Average": 738.52,
+                "Monthly": {
+                    "January": 748.98,
+                    "April": 763.89,
+                    "July": 686.14,
+                    "October": 760.99
+                }
+            },
+            "2022": {
+                "Annual_Average": 759.51,
+                "Monthly": {
+                    "January": 740.95,
+                    "April": 729.67,
+                    "July": 787.3,
+                    "October": 779.84
+                }
+            },
+            "2023": {
+                "Annual_Average": 791.39,
+                "Monthly": {
+                    "January": 795.43,
+                    "April": 799.67,
+                    "July": 763.17,
+                    "October": 805.36
+                }
+            },
+            "2024": {
+                "Annual_Average": 857.92,
+                "Monthly": {
+                    "January": 817.08,
+                    "April": 871.79,
+                    "July": 842.05,
+                    "October": 858.49
+                }
+            },
+            "2025": {
+                "Annual_Average": 903.38,
+                "Monthly": {
+                    "January": 868.04,
+                    "April": 896.39,
+                    "July": 916.1,
+                    "October": 929.52
+                }
+            }
+        },
+        "Education": {
+            "2016": {
+                "Annual_Average": 783.11,
+                "Monthly": {
+                    "January": 766.85,
+                    "April": 798.94,
+                    "July": 802.24,
+                    "October": 766.14
+                }
+            },
+            "2017": {
+                "Annual_Average": 778.11,
+                "Monthly": {
+                    "January": 801.0,
+                    "April": 779.88,
+                    "July": 749.16,
+                    "October": 781.98
+                }
+            },
+            "2018": {
+                "Annual_Average": 803.16,
+                "Monthly": {
+                    "January": 787.82,
+                    "April": 784.39,
+                    "July": 805.69,
+                    "October": 831.52
+                }
+            },
+            "2019": {
+                "Annual_Average": 844.1,
+                "Monthly": {
+                    "January": 836.5,
+                    "April": 868.66,
+                    "July": 809.54,
+                    "October": 862.76
+                }
+            },
+            "2020": {
+                "Annual_Average": 899.65,
+                "Monthly": {
+                    "January": 854.76,
+                    "April": 922.02,
+                    "July": 939.2,
+                    "October": 890.92
+                }
+            },
+            "2021": {
+                "Annual_Average": 920.42,
+                "Monthly": {
+                    "January": 904.59,
+                    "April": 922.62,
+                    "July": 904.02,
+                    "October": 950.03
+                }
+            },
+            "2022": {
+                "Annual_Average": 987.48,
+                "Monthly": {
+                    "January": 970.56,
+                    "April": 982.2,
+                    "July": 991.96,
+                    "October": 1003.79
+                }
+            },
+            "2023": {
+                "Annual_Average": 1028.14,
+                "Monthly": {
+                    "January": 1023.34,
+                    "April": 1029.1,
+                    "July": 1002.66,
+                    "October": 1054.55
+                }
+            },
+            "2024": {
+                "Annual_Average": 1058.12,
+                "Monthly": {
+                    "January": 1022.76,
+                    "April": 1084.77,
+                    "July": 1025.25,
+                    "October": 1063.23
+                }
+            },
+            "2025": {
+                "Annual_Average": 1121.15,
+                "Monthly": {
+                    "January": 1101.3,
+                    "April": 1124.4,
+                    "July": 1132.11,
+                    "October": 1126.42
+                }
+            }
+        },
+        "Human Health and Social Work Activities": {
+            "2016": {
+                "Annual_Average": 597.05,
+                "Monthly": {
+                    "January": 574.01,
+                    "April": 600.66,
+                    "July": 581.93,
+                    "October": 631.88
+                }
+            },
+            "2017": {
+                "Annual_Average": 611.78,
+                "Monthly": {
+                    "January": 653.27,
+                    "April": 578.44,
+                    "July": 639.04,
+                    "October": 575.63
+                }
+            },
+            "2018": {
+                "Annual_Average": 614.44,
+                "Monthly": {
+                    "January": 602.27,
+                    "April": 595.63,
+                    "July": 628.84,
+                    "October": 631.78
+                }
+            },
+            "2019": {
+                "Annual_Average": 713.32,
+                "Monthly": {
+                    "January": 690.53,
+                    "April": 698.67,
+                    "July": 698.38,
+                    "October": 758.92
+                }
+            },
+            "2020": {
+                "Annual_Average": 707.67,
+                "Monthly": {
+                    "January": 711.94,
+                    "April": 710.82,
+                    "July": 698.48,
+                    "October": 709.41
+                }
+            },
+            "2021": {
+                "Annual_Average": 749.68,
+                "Monthly": {
+                    "January": 780.99,
+                    "April": 725.12,
+                    "July": 722.85,
+                    "October": 767.64
+                }
+            },
+            "2022": {
+                "Annual_Average": 797.92,
+                "Monthly": {
+                    "January": 792.95,
+                    "April": 812.77,
+                    "July": 771.36,
+                    "October": 813.94
+                }
+            },
+            "2023": {
+                "Annual_Average": 839.11,
+                "Monthly": {
+                    "January": 885.11,
+                    "April": 812.83,
+                    "July": 808.4,
+                    "October": 855.47
+                }
+            },
+            "2024": {
+                "Annual_Average": 920.46,
+                "Monthly": {
+                    "January": 877.16,
+                    "April": 914.11,
+                    "July": 917.13,
+                    "October": 928.94
+                }
+            },
+            "2025": {
+                "Annual_Average": 948.38,
+                "Monthly": {
+                    "January": 871.3,
+                    "April": 958.72,
+                    "July": 977.19,
+                    "October": 980.29
+                }
+            }
+        },
+        "Arts Entertainment and Recreation": {
+            "2016": {
+                "Annual_Average": 456.77,
+                "Monthly": {
+                    "January": 437.09,
+                    "April": 411.19,
+                    "July": 474.78,
+                    "October": 515.22
+                }
+            },
+            "2017": {
+                "Annual_Average": 460.59,
+                "Monthly": {
+                    "January": 496.69,
+                    "April": 455.25,
+                    "July": 431.19,
+                    "October": 462.62
+                }
+            },
+            "2018": {
+                "Annual_Average": 438.49,
+                "Monthly": {
+                    "January": 468.7,
+                    "April": 401.11,
+                    "July": 427.11,
+                    "October": 462.87
+                }
+            },
+            "2019": {
+                "Annual_Average": 499.74,
+                "Monthly": {
+                    "January": 488.82,
+                    "April": 523.86,
+                    "July": 479.65,
+                    "October": 510.02
+                }
+            },
+            "2020": {
+                "Annual_Average": 528.77,
+                "Monthly": {
+                    "January": 537.26,
+                    "April": 520.72,
+                    "July": 516.11,
+                    "October": 532.25
+                }
+            },
+            "2021": {
+                "Annual_Average": 488.3,
+                "Monthly": {
+                    "January": 567.17,
+                    "April": 427.59,
+                    "July": 469.97,
+                    "October": 501.39
+                }
+            },
+            "2022": {
+                "Annual_Average": 542.34,
+                "Monthly": {
+                    "January": 520.72,
+                    "April": 512.72,
+                    "July": 581.8,
+                    "October": 549.03
+                }
+            },
+            "2023": {
+                "Annual_Average": 547.84,
+                "Monthly": {
+                    "January": 581.39,
+                    "April": 545.84,
+                    "July": 576.09,
+                    "October": 488.01
+                }
+            },
+            "2024": {
+                "Annual_Average": 611.17,
+                "Monthly": {
+                    "January": 615.12,
+                    "April": 683.99,
+                    "July": 597.68,
+                    "October": 532.64
+                }
+            },
+            "2025": {
+                "Annual_Average": 653.17,
+                "Monthly": {
+                    "January": 628.18,
+                    "April": 646.18,
+                    "July": 665.16,
+                    "October": 671.6
+                }
+            }
+        },
+        "Other Service Activities": {
+            "2016": {
+                "Annual_Average": 203.85,
+                "Monthly": {
+                    "January": 197.83,
+                    "April": 207.48,
+                    "July": 201.1,
+                    "October": 209.82
+                }
+            },
+            "2017": {
+                "Annual_Average": 220.81,
+                "Monthly": {
+                    "January": 219.81,
+                    "April": 214.24,
+                    "July": 222.83,
+                    "October": 225.8
+                }
+            },
+            "2018": {
+                "Annual_Average": 238.61,
+                "Monthly": {
+                    "January": 220.81,
+                    "April": 239.01,
+                    "July": 247.19,
+                    "October": 246.51
+                }
+            },
+            "2019": {
+                "Annual_Average": 268.27,
+                "Monthly": {
+                    "January": 274.98,
+                    "April": 277.54,
+                    "July": 261.44,
+                    "October": 257.67
+                }
+            },
+            "2020": {
+                "Annual_Average": 278.44,
+                "Monthly": {
+                    "January": 277.37,
+                    "April": 280.38,
+                    "July": 277.29,
+                    "October": 278.94
+                }
+            },
+            "2021": {
+                "Annual_Average": 299.06,
+                "Monthly": {
+                    "January": 283.28,
+                    "April": 290.64,
+                    "July": 325.74,
+                    "October": 295.69
+                }
+            },
+            "2022": {
+                "Annual_Average": 303.85,
+                "Monthly": {
+                    "January": 304.62,
+                    "April": 304.81,
+                    "July": 311.11,
+                    "October": 295.21
+                }
+            },
+            "2023": {
+                "Annual_Average": 334.17,
+                "Monthly": {
+                    "January": 324.21,
+                    "April": 323.15,
+                    "July": 350.59,
+                    "October": 338.07
+                }
+            },
+            "2024": {
+                "Annual_Average": 359.43,
+                "Monthly": {
+                    "January": 364.5,
+                    "April": 351.36,
+                    "July": 370.12,
+                    "October": 356.91
+                }
+            },
+            "2025": {
+                "Annual_Average": 377.95,
+                "Monthly": {
+                    "January": 358.12,
+                    "April": 376.48,
+                    "July": 391.31,
+                    "October": 388.45
+                }
+            }
+        },
+        "Activities of Extraterritorial Organizations and Bodies": {
+            "2016": {
+                "Annual_Average": 829.12,
+                "Monthly": {
+                    "January": 967.86,
+                    "April": 807.75,
+                    "July": 702.92,
+                    "October": 738.4
+                }
+            },
+            "2017": {
+                "Annual_Average": 1187.9,
+                "Monthly": {
+                    "January": 696.22,
+                    "April": 1703.14,
+                    "July": 1231.74,
+                    "October": 803.79
+                }
+            },
+            "2018": {
+                "Annual_Average": 815.91,
+                "Monthly": {
+                    "January": 861.58,
+                    "April": 531.95,
+                    "July": 1589.13,
+                    "October": 639.51
+                }
+            },
+            "2019": {
+                "Annual_Average": 815.91,
+                "Monthly": {
+                    "April": 800.49,
+                    "July": 1686.25,
+                    "October": 1512.45
+                }
+            },
+            "2020": {
+                "Annual_Average": 754.93,
+                "Monthly": {
+                    "January": 1014.08,
+                    "April": 699.95,
+                    "July": 767.85,
+                    "October": 366.36
+                }
+            },
+            "2021": {
+                "Annual_Average": 800.06,
+                "Monthly": {
+                    "January": 757.5,
+                    "April": 599.12,
+                    "July": 988.27,
+                    "October": 1279.06
+                }
+            },
+            "2022": {
+                "Annual_Average": 1099.84,
+                "Monthly": {
+                    "January": 721.71,
+                    "April": 1411.78,
+                    "July": 853.3,
+                    "October": 703.55
+                }
+            },
+            "2023": {
+                "Annual_Average": 1036.99,
+                "Monthly": {
+                    "January": 527.06,
+                    "April": 1552.46,
+                    "July": 762.73,
+                    "October": 1195.42
+                }
+            },
+            "2024": {
+                "Annual_Average": 1063.76,
+                "Monthly": {
+                    "January": 1256.77,
+                    "April": 883.97,
+                    "July": 1571.03,
+                    "October": 749.72
+                }
+            },
+            "2025": {
+                "Annual_Average": 3589.7,
+                "Monthly": {
+                    "January": 6620.08,
+                    "April": 699.19,
+                    "July": 2329.94,
+                    "October": 869.66
+                }
+            }
+        }
+    }
+}
