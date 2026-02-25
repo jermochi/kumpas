@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { CheckCircle2, Circle, Loader2, AlertCircle, ArrowLeft } from "lucide-react";
 
@@ -114,7 +114,7 @@ const STAGE_ORDER: StageName[] = [
     "verdict",
 ];
 
-export default function AnalysisPage() {
+function AnalysisContent() {
     const [state, setState] = useState<AnalysisState>({
         phase:           "processing",
         completedStages: [],
@@ -240,6 +240,19 @@ export default function AnalysisPage() {
                 />
             )}
         </main>
+    );
+}
+
+//  useSearchParams() suspends during prerender.
+export default function AnalysisPage() {
+    return (
+        <Suspense fallback={
+            <main className="flex min-h-screen items-center justify-center bg-background">
+                <Loader2 size={24} className="animate-spin text-muted-text" />
+            </main>
+        }>
+            <AnalysisContent />
+        </Suspense>
     );
 }
 
