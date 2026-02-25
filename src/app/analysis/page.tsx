@@ -3,6 +3,8 @@
 import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import LoadingScreen from "@/components/analysis/loading-screen";
+import DashboardAnalysis from "@/components/analysis/dashboard/detailed-analysis";
 
 import type {
     AnalysisState,
@@ -173,3 +175,30 @@ export default function AnalysisPage() {
         </Suspense>
     );
 }
+'use client';
+
+// export default function Page() {
+//   const [isLoading, setIsLoading] = useState(true);
+//   const [projectData, setProjectData] = useState({});
+//   const searchParams = useSearchParams();
+//   const sessionId = searchParams.get("session");
+//   const router = useRouter();
+
+//   useEffect(() => {
+//     const savedProjectData = sessionStorage.getItem(`kumpas-session-${sessionId}`);
+//     if (savedProjectData) {
+//       const parsedData = JSON.parse(savedProjectData);
+//       setProjectData(parsedData);
+//     } else {
+//       router.push("/");
+//     }
+//   }, [router]);
+
+//   return (
+//     <>
+//       { isLoading 
+//         ? <LoadingScreen finishLoading={() => setIsLoading(false)} /> 
+//         : <DashboardAnalysis data={projectData} /> }
+//     </>
+//   );
+// }

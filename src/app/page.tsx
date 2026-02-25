@@ -1,11 +1,9 @@
-import Navbar from "@/components/navigation/nav-bar";
 import InputContainer from "@/components/input/input-container";
 import { Sparkles } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-background font-sans">
-      <Navbar />
 
       {/* Hero Header */}
       <section className="flex flex-col items-center px-6 pt-3 pb-4 sm:pt-5 sm:pb-5 md:pt-6 md:pb-6">
