@@ -1,0 +1,490 @@
+[
+  {
+    "job_title": "Accountant",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Customer Service Representative",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Driver",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Cashier",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Electrician",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Heavy Equipment Operator",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Mason",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Safety Officer",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Sales Representative",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Welder",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Delivery Driver",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Mechanical Engineer",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Web Developer",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Carpenter",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Laborer",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Office Staff",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Bookkeeper",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Engineer",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Forklift Operator",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "IT Specialist",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Merchandiser",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Nurse",
+    "demand_status": ["In-Demand", "Hard-to-Fill", "Emerging"]
+  },
+  {
+    "job_title": "Service Crew",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Teacher / Education Professionals",
+    "demand_status": ["In-Demand", "Emerging"]
+  },
+  {
+    "job_title": "Automotive Mechanic / Mechanic",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Bagger",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Call Center Agent",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Chef",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Content Writer",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Cook",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Digital Marketer / Digital Marketing Specialist",
+    "demand_status": ["In-Demand", "Emerging"]
+  },
+  {
+    "job_title": "Domestic Helper",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Electrical Engineer",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Farmer",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Housekeeping Staff / Housekeeper",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Librarian",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Pipefitter / Pipe Fitter",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Production Crew / Production Worker",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Sales Clerk / Salesman",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Software Developer",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Supervisor",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Tour guide",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Truck Driver",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Virtual Assistant",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Accounting Staff",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Architect",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Automotive Servicing",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Bartender",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Chemical Engineer",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Computer Programmer",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Elementary Occupation",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Equipment Operator",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Foreign Language Specialist",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Front Office Staff",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Guidance Counselor",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Kitchen Staff",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Layout Artist",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Lineman",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Machinist",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Marketing Personnel",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Online Tutor",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Operator",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Pharmacist",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Pollution Control Officer",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Production Engineer",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Receptionist",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Researcher",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Security Guard",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Social Media Manager / Specialists",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Stockman",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Technician",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Telemarketer",
+    "demand_status": ["In-Demand"]
+  },
+  {
+    "job_title": "Bank Teller",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Utility Worker",
+    "demand_status": ["In-Demand", "Hard-to-Fill"]
+  },
+  {
+    "job_title": "Manager / Managerial Position",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Medical Technologist",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Civil Engineer",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Finance Manager",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Industrial Engineer",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Surveyor",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Chemist",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Data Analyst",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Geologist",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Internal Auditor",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Laboratory Analyst",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Machine Operator",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Radiologic Technologist",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Agriculturist",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Aircon Technician",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Animator",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Audit Staff / Auditor",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "AutoCAD Operator",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Automation Engineer",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Business Analyst",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Company Nurse",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Doctor / Medical Specialist",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Environment Community Relations Assistant",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Graphic Designer",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Human Resource Officer",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Mining Engineer",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Payroll Clerk",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Plumber",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Quality Assurance / Control Officer",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Refrigeration Technician",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Accounting Clerk / Supervisor",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Accounts Management Associates",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Actuarian",
+    "demand_status": ["Hard-to-Fill"]
+  },
+  {
+    "job_title": "Frontline E-commerce Workers",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Good Time Management", "Customer Service", "Leadership quality"]
+  },
+  {
+    "job_title": "Loan and Mortgage Experts",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Risk Management", "Customer Service", "Credit Analysis"]
+  },
+  {
+    "job_title": "Health Care Support Staff",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Patient Education", "Data Entry", "Physician Relations"]
+  },
+  {
+    "job_title": "Business Development and Sales Professionals",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Customer Retention", "Sales Process", "Team Building"]
+  },
+  {
+    "job_title": "Experts in Workplace Diversity",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Community Outreach", "Teaching", "Organizational Development"]
+  },
+  {
+    "job_title": "Digital Content Creators",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Video Editing", "Creative Writing", "Public Speaking"]
+  },
+  {
+    "job_title": "Professional and Personal Coaches",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Mentoring", "Social Media", "Entrepreneurship"]
+  },
+  {
+    "job_title": "Specialized Engineers",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Programming knowledge (Python, Java, C++)", "Web development", "knowledge of DBMS"]
+  },
+  {
+    "job_title": "Mental Health Specialists",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Play Therapy", "Mindfulness", "Cognitive Behavioral Therapy (CBT)"]
+  },
+  {
+    "job_title": "User Experience (UX) Professionals",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Web Design", "Design Thinking", "User Experience Testing"]
+  },
+  {
+    "job_title": "Data Science Specialists",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Math", "ML (machine learning)", "SQL", "programming knowledge"]
+  },
+  {
+    "job_title": "Artificial Intelligence Practitioners",
+    "demand_status": ["Emerging"],
+    "common_skills": ["Programming Knowledge (Python)", "web services knowledge", "ML"]
+  }
+]
