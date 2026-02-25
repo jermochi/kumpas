@@ -65,23 +65,25 @@ function AnalysisContent() {
                 .join("\n");
 
             // ── Stage 2–4: Three agents in parallel ─────────────────
+            const careerPathTitle = structured.career_path;
+
             const [labor, feasibility, psychological] = await Promise.all([
                 fetch("/api/analyze/labor", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transcript: redactedText }),
+                    body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
                 }).then((r) => r.json()),
 
                 fetch("/api/analyze/feasibility", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transcript: redactedText }),
+                    body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
                 }).then((r) => r.json()),
 
                 fetch("/api/analyze/psychological", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transcript: redactedText }),
+                    body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
                 }).then((r) => r.json()),
             ]);
 
