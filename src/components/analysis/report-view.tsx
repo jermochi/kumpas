@@ -4,7 +4,6 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import type { VerdictReport, StructuredTranscript, AgentKey } from "@/lib/analysis-types";
 import { buildAgentPanels, buildRelatedCareers } from "@/lib/analysis-helpers";
 
-import Navbar from "@/components/navigation/nav-bar";
 import ScoreCardsRow from "@/components/analysis/score-cards-row";
 import AgentDetailPanel from "@/components/analysis/agent-detail-panel";
 import TranscriptPanel from "@/components/analysis/transcript-panel";
@@ -51,8 +50,6 @@ export default function ReportView({ report, structured }: ReportViewProps) {
 
     return (
         <>
-            <Navbar />
-
             <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10 space-y-6">
 
                 {/* ── Header ──────────────────────────────────────────── */}

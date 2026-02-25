@@ -4,7 +4,6 @@ import { useEffect, useState, useCallback, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import LoadingScreen from "@/components/analysis/loading-screen";
-import DashboardAnalysis from "@/components/analysis/dashboard/detailed-analysis";
 
 import type {
     AnalysisState,
@@ -13,16 +12,16 @@ import type {
     StoredSession,
 } from "@/lib/analysis-types";
 
-import ProcessingView, { STAGE_ORDER } from "@/components/analysis/processing-view";
+import { STAGE_ORDER } from "@/components/analysis/processing-view";
 import ReportView from "@/components/analysis/report-view";
 import ErrorView from "@/components/analysis/error-view";
 
-// ─── Inner component (needs useSearchParams) ───────────────────────
 function AnalysisContent() {
     const [state, setState] = useState<AnalysisState>({
         phase: "processing",
         completedStages: [],
     });
+    const [sessionData, setSessionData] = useState<any>(null);
 
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -41,6 +40,7 @@ function AnalysisContent() {
         }
 
         const session = JSON.parse(raw) as StoredSession;
+        setSessionData(session);
         setState({ phase: "processing", completedStages: [] });
 
         try {
@@ -53,15 +53,13 @@ function AnalysisContent() {
             if (!tlRes.ok) throw new Error("Transcription layer failed");
             const structured = await tlRes.json() as StructuredTranscript;
 
-            setState({ phase: "processing", completedStages: ["transcriptionLayer"] });
+            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer"] }));
 
-            // Persist structured transcript for the report UI
             sessionStorage.setItem(
                 `kumpas-structured-${sessionId}`,
                 JSON.stringify(structured),
             );
 
-            // Flatten redacted turns for specialist agents
             const redactedText = structured.turns
                 .map((t) => `${t.speaker}: ${t.text}`)
                 .join("\n");
@@ -87,10 +85,10 @@ function AnalysisContent() {
                 }).then((r) => r.json()),
             ]);
 
-            setState({
-                phase: "processing",
+            setState(prev => ({
+                ...prev,
                 completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "psychological"],
-            });
+            }));
 
             // ── Stage 5: Verdict ────────────────────────────────────
             const verdictRes = await fetch("/api/analyze/verdict", {
@@ -107,11 +105,10 @@ function AnalysisContent() {
             if (!verdictRes.ok) throw new Error("Verdict generation failed");
             const report = await verdictRes.json() as VerdictReport;
 
-            // All 5 stages complete
-            setState({ phase: "processing", completedStages: STAGE_ORDER });
-            await new Promise((r) => setTimeout(r, 500));
+            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "psychological", "verdict"] }));
+            // Give the UI a moment to show 100% completion before switching
+            await new Promise((r) => setTimeout(r, 1000));
 
-            // Cache for back-navigation
             sessionStorage.setItem(`kumpas-report-${sessionId}`, JSON.stringify(report));
 
             setState({ phase: "complete", report, structured });
@@ -127,6 +124,9 @@ function AnalysisContent() {
 
     useEffect(() => {
         if (sessionId) {
+            const raw = sessionStorage.getItem(`kumpas-session-${sessionId}`);
+            if (raw) setSessionData(JSON.parse(raw));
+
             const cachedReport = sessionStorage.getItem(`kumpas-report-${sessionId}`);
             const cachedStructured = sessionStorage.getItem(`kumpas-structured-${sessionId}`);
 
@@ -138,6 +138,8 @@ function AnalysisContent() {
                 });
                 return;
             }
+        } else {
+          router.push("/");
         }
         runPipeline();
     }, [runPipeline, sessionId]);
@@ -145,7 +147,7 @@ function AnalysisContent() {
     return (
         <main className="min-h-screen bg-background">
             {state.phase === "processing" && (
-                <ProcessingView completedStages={state.completedStages} />
+                <LoadingScreen completedStages={state.completedStages} />
             )}
             {state.phase === "complete" && (
                 <ReportView report={state.report} structured={state.structured} />
@@ -161,12 +163,11 @@ function AnalysisContent() {
     );
 }
 
-// ─── Page wrapper with Suspense ─────────────────────────────────────
-export default function AnalysisPage() {
+export default function Page() {
     return (
         <Suspense
             fallback={
-                <main className="flex min-h-screen items-center justify-center bg-background">
+                <main className="flex min-h-[60vh] items-center justify-center bg-background">
                     <Loader2 size={24} className="animate-spin text-muted-text" />
                 </main>
             }
@@ -175,30 +176,3 @@ export default function AnalysisPage() {
         </Suspense>
     );
 }
-'use client';
-
-// export default function Page() {
-//   const [isLoading, setIsLoading] = useState(true);
-//   const [projectData, setProjectData] = useState({});
-//   const searchParams = useSearchParams();
-//   const sessionId = searchParams.get("session");
-//   const router = useRouter();
-
-//   useEffect(() => {
-//     const savedProjectData = sessionStorage.getItem(`kumpas-session-${sessionId}`);
-//     if (savedProjectData) {
-//       const parsedData = JSON.parse(savedProjectData);
-//       setProjectData(parsedData);
-//     } else {
-//       router.push("/");
-//     }
-//   }, [router]);
-
-//   return (
-//     <>
-//       { isLoading 
-//         ? <LoadingScreen finishLoading={() => setIsLoading(false)} /> 
-//         : <DashboardAnalysis data={projectData} /> }
-//     </>
-//   );
-// }
