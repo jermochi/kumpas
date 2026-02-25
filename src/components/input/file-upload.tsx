@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from "react";
-import { Upload, Check } from "lucide-react";
-import Button from "@/components/button";
+import { Upload, Check, X } from "lucide-react";
 import PlaybackTranscript from "./playback-transcript";
 import { TranscriptionState } from "@/types";
+import { toast } from "sonner"
 
 interface FileUploadProps {
     uploadedFile: File | null;
@@ -18,7 +18,7 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
     const [transcription, setTranscription] = useState<TranscriptionState>({ status: "idle" });
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    const ACCEPTED_TYPES = ".mp3,.wav,.m4a,.txt";
+    const ACCEPTED_TYPES = [".mp3", ".wav", ".m4a"];
     const MAX_SIZE_MB = 20;
 
     useEffect(() => {
@@ -29,13 +29,28 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
         setTranscription({ status: "idle" });
         onTranscriptionComplete(null);
         if (!file) {
+            if (fileInputRef.current) fileInputRef.current.value = "";
             onFileChange(null);
             return;
         }
-        if (file.size > MAX_SIZE_MB * 1024 * 1024) {
-            alert(`File must be under ${MAX_SIZE_MB}MB`);
+
+        // 1. Validate File Type
+        const fileName = file.name.toLowerCase();
+        const isValidType = ACCEPTED_TYPES.some(ext => fileName.endsWith(ext));
+
+        if (!isValidType) {
+            toast.error("Invalid file type.", {description: `Please upload one of the following: ${ACCEPTED_TYPES.join(", ")}` , position: "top-center" });
+            if (fileInputRef.current) fileInputRef.current.value = ""; // Reset input
             return;
         }
+
+        // 2. Validate File Size
+        if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+            toast.error(`File must be under ${MAX_SIZE_MB}MB`, { position: "top-center" });
+            if (fileInputRef.current) fileInputRef.current.value = ""; // Reset input
+            return;
+        }
+
         onFileChange(file);
         transcribeFile(file);
     };
@@ -47,7 +62,7 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
             const file = e.dataTransfer.files?.[0];
             handleFileSelection(file ?? null);
         },
-        [onFileChange]
+        [onFileChange] 
     );
 
     const transcribeFile = async (file: File) => {
@@ -65,7 +80,9 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
             const data = await res.json();
 
             if (!res.ok) {
-                setTranscription({ status: "error", message: data.error ?? "Unknown error" });
+                const errorMessage = data.error ?? "Unknown error occurred during transcription.";
+                setTranscription({ status: "error", message: errorMessage });
+                toast.error(errorMessage, { position: "top-center" });
                 return;
             }
 
@@ -73,6 +90,7 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
             onTranscriptionComplete(data.text);
         } catch (err) {
             setTranscription({ status: "error", message: "Network error. Please try again." });
+            toast.error("Network error", { description: "Please check your connection and try again.", position: "top-center" });
         }
     };
 
@@ -86,7 +104,7 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
                 onDragLeave={() => setDragOver(false)}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
-                className={`flex w-full cursor-pointer flex-col items-center gap-3 rounded-xl border-2 border-dashed px-6 py-10 text-center transition-colors ${dragOver
+                className={`relative flex w-full cursor-pointer flex-col items-center gap-3 rounded-xl border-2 border-dashed px-6 py-10 text-center transition-colors ${dragOver
                         ? "border-forest bg-forest/5"
                         : uploadedFile
                             ? "border-forest/40 bg-forest/[0.03]"
@@ -96,7 +114,7 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
                 <input
                     ref={fileInputRef}
                     type="file"
-                    accept={ACCEPTED_TYPES}
+                    accept={ACCEPTED_TYPES.join(",")}
                     className="hidden"
                     onChange={(e) =>
                         handleFileSelection(e.target.files?.[0] ?? null)
@@ -105,6 +123,18 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
 
                 {uploadedFile ? (
                     <>
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleFileSelection(null);
+                            }}
+                            className="absolute right-3 top-3 rounded-full p-1.5 text-muted-text transition-colors hover:bg-black/5 hover:text-ink"
+                            aria-label="Remove file"
+                        >
+                            <X size={18} />
+                        </button>
+
                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-forest/10 text-forest">
                             <Check size={22} />
                         </div>
@@ -125,7 +155,7 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
                             Drag & drop or click to browse
                         </p>
                         <p className="text-xs text-muted-text">
-                            MP3, WAV, M4A, TXT — up to {MAX_SIZE_MB}MB
+                            MP3, WAV, M4A — up to {MAX_SIZE_MB}MB
                         </p>
                     </>
                 )}

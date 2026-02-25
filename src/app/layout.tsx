@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { dmSans, playfair } from "./fonts";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Kumpas",
@@ -18,6 +19,7 @@ export default function RootLayout({
         className="antialiased"
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );
