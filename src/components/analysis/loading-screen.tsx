@@ -6,7 +6,7 @@ import { AgentSpinner } from "./agent-spinner";
 import { ProgressSection } from "./progress-section";
 import { AgentStatusPills } from "./agent-status-pills";
 
-export default function LoadingScreen() {
+export default function LoadingScreen({ finishLoading }: { finishLoading: () => void }) {
     const [stepIdx, setStepIdx] = useState(0);
     const [progress, setProgress] = useState(0);
 
@@ -29,6 +29,7 @@ export default function LoadingScreen() {
 
     const onComplete = () => {
         console.log("Analysis complete!");
+        finishLoading();
     };
 
     return (

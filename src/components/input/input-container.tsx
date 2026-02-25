@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 import Button from "@/components/button";
 import TabSwitcher from "@/components/input/tab-switcher";
 import LiveRecording from "@/components/input/live-recording";
@@ -8,7 +8,6 @@ import FileUpload from "@/components/input/file-upload";
 import DiscardModal from "@/components/input/discard-modal";
 import { Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 type Tab = "recording" | "upload";
 
