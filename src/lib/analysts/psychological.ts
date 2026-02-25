@@ -1,15 +1,17 @@
-import { getSystemInstructions, getJsonContexts  } from '../utils';
+import { getSystemInstructions, getJsonContexts } from '../utils';
 
-export function buildPsychSystemPrompt(): string {
+export function buildPsychSystemPrompt(careerPathTitle: string): string {
   const baseInstructions = getSystemInstructions('psychological_analyst.md');
-  const laborContexts = getJsonContexts('psych-analyst');
-  
-  // Combine base instructions with context
-   return `
-  <psychological_data_context>
-  ${laborContexts}
-  </psychological_data_context>
-  
-  ${baseInstructions}
-  `;
+  const psychContexts = getJsonContexts('psych-analyst');
+
+  // Combine career path, data context, and base instructions
+  return `
+<career_path_title>${careerPathTitle}</career_path_title>
+
+<psychological_data_context>
+${psychContexts}
+</psychological_data_context>
+
+${baseInstructions}
+`;
 }
