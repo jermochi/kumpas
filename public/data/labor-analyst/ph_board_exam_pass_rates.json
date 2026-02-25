@@ -1,0 +1,620 @@
+{
+  "metadata": {
+    "title": "Philippine Board Examination Pass Rates by Profession",
+    "description": "Pass rate data for licensure examinations administered by the Professional Regulation Commission (PRC) of the Philippines and other national regulatory bodies. Data is sourced from official PRC announcements and the Supreme Court of the Philippines. Figures include the number of passers, total examinees, and computed pass rate for each exam cycle. This dataset is structured for use as LLM context — each profession entry includes its regulatory body, exam acronym, field category, and a list of recent exam results ordered from most recent to oldest.",
+    "primary_sources": [
+      "Professional Regulation Commission (PRC) — prc.gov.ph",
+      "Supreme Court of the Philippines — sc.judiciary.gov.ph"
+    ],
+    "data_collection_date": "2026-02-25",
+    "coverage_period": "2024–2026 (most recent available data per profession)",
+    "notes": [
+      "Pass rates are computed as passers / total_examinees × 100, rounded to 2 decimal places.",
+      "Some professions hold exams multiple times per year; all available cycles within the coverage period are included.",
+      "Exams labeled 'SPLE' (Special Professional Licensure Examination) are administered abroad and are listed separately.",
+      "The Bar Examination (law) is administered by the Supreme Court, not the PRC.",
+      "The Licensure Examination for Professional Teachers (LET) distinguishes between elementary and secondary levels.",
+      "Professions for which recent numeric results were not publicly announced in time for this dataset are noted with a null value."
+    ]
+  },
+  "professions": [
+    {
+      "profession": "Nursing",
+      "acronym": "NLE",
+      "full_exam_name": "Nurses Licensure Examination",
+      "regulatory_body": "PRC Board of Nursing",
+      "field_category": "Health Sciences",
+      "passing_score_threshold": "75% general average, no subject below 60%",
+      "exam_frequency": "Twice per year (May and November)",
+      "results": [
+        {
+          "exam_period": "November 2025",
+          "passers": 40692,
+          "total_examinees": 45192,
+          "pass_rate_percent": 90.04,
+          "source_url": "https://www.prc.gov.ph/article/november-2025-nurses-licensure-examination-results-released-fifteen-15-working-days"
+        },
+        {
+          "exam_period": "May 2025",
+          "passers": 6935,
+          "total_examinees": 10770,
+          "pass_rate_percent": 64.39,
+          "source_url": "https://www.prc.gov.ph/article/may-2025-philippine-nurses-licensure-examination-results-released-five-5-working-days"
+        },
+        {
+          "exam_period": "November 2024",
+          "passers": 29349,
+          "total_examinees": 34534,
+          "pass_rate_percent": 84.99,
+          "source_url": "https://www.prcboard.org/pnle-results-november-2025-nurse-licensure-exam-list-of-passers"
+        }
+      ]
+    },
+    {
+      "profession": "Accountancy (CPA)",
+      "acronym": "CPALE",
+      "full_exam_name": "Certified Public Accountant Licensure Examination",
+      "regulatory_body": "PRC Board of Accountancy",
+      "field_category": "Business and Finance",
+      "passing_score_threshold": "75% general average, no subject below 65%",
+      "exam_frequency": "Twice per year (May and October/December)",
+      "results": [
+        {
+          "exam_period": "October 2025",
+          "passers": 3460,
+          "total_examinees": 10171,
+          "pass_rate_percent": 34.02,
+          "source_url": "https://prc.gov.ph/article/october-2025-licensure-examination-certified-public-accountants-results-released-five-5"
+        },
+        {
+          "exam_period": "May 2025",
+          "passers": 3156,
+          "total_examinees": 9533,
+          "pass_rate_percent": 33.11,
+          "source_url": "https://www.prc.gov.ph/article/may-2025-licensure-examination-certified-public-accountants-results-released-five-5-working"
+        },
+        {
+          "exam_period": "December 2024",
+          "passers": 3058,
+          "total_examinees": 10136,
+          "pass_rate_percent": 30.17,
+          "source_url": "https://www.prcboard.com/cpale-results-may-2025-certified-public-accountant-licensure-exam-list-of-passers"
+        },
+        {
+          "exam_period": "May 2024",
+          "passers": 3155,
+          "total_examinees": 10421,
+          "pass_rate_percent": 30.28,
+          "source_url": "https://www.prcboard.com/cpale-results-may-2025-certified-public-accountant-licensure-exam-list-of-passers"
+        }
+      ]
+    },
+    {
+      "profession": "Medicine (Physician)",
+      "acronym": "PLE",
+      "full_exam_name": "Physicians Licensure Examination",
+      "regulatory_body": "PRC Board of Medicine",
+      "field_category": "Health Sciences",
+      "passing_score_threshold": "75% general average, no subject below 60%",
+      "exam_frequency": "Twice per year (March and October)",
+      "results": [
+        {
+          "exam_period": "October 2025",
+          "passers": 4570,
+          "total_examinees": 5900,
+          "pass_rate_percent": 77.46,
+          "source_url": "https://www.prc.gov.ph/article/october-2025-physicians-licensure-examination-topnotchers"
+        },
+        {
+          "exam_period": "October 2024",
+          "passers": 3845,
+          "total_examinees": 6600,
+          "pass_rate_percent": 58.26,
+          "source_url": "https://www.prc.gov.ph/node/7314"
+        }
+      ]
+    },
+    {
+      "profession": "Law (Bar)",
+      "acronym": "BAR",
+      "full_exam_name": "Philippine Bar Examination",
+      "regulatory_body": "Supreme Court of the Philippines",
+      "field_category": "Law and Jurisprudence",
+      "passing_score_threshold": "75% general weighted average",
+      "exam_frequency": "Annually (typically held in September)",
+      "results": [
+        {
+          "exam_period": "September 2025 (Results: January 7, 2026)",
+          "passers": 5594,
+          "total_examinees": 11420,
+          "pass_rate_percent": 48.98,
+          "source_url": "https://sc.judiciary.gov.ph/press-briefer-january-07-2026/"
+        },
+        {
+          "exam_period": "2024",
+          "passers": 3962,
+          "total_examinees": null,
+          "pass_rate_percent": 37.84,
+          "source_url": "https://www.philstar.com/headlines/2026/01/07/2499136/full-list-2025-bar-exams-passers"
+        }
+      ]
+    },
+    {
+      "profession": "Teaching (LET) — Elementary",
+      "acronym": "LET-Elem",
+      "full_exam_name": "Licensure Examination for Professional Teachers (Elementary Level)",
+      "regulatory_body": "PRC Board for Professional Teachers",
+      "field_category": "Education",
+      "passing_score_threshold": "75% general average",
+      "exam_frequency": "Twice per year (March and September/November)",
+      "results": [
+        {
+          "exam_period": "September–November 2025",
+          "passers": 21967,
+          "total_examinees": 43035,
+          "pass_rate_percent": 51.04,
+          "source_url": "https://www.prc.gov.ph/article/september-and-november-2025-licensure-examination-professional-teachers-results-released"
+        },
+        {
+          "exam_period": "March 2025",
+          "passers": 16282,
+          "total_examinees": 34810,
+          "pass_rate_percent": 46.77,
+          "source_url": "https://www.prc.gov.ph/article/march-2025-licensure-examination-professional-teachers-results-released-forty-one-41"
+        }
+      ]
+    },
+    {
+      "profession": "Teaching (LET) — Secondary",
+      "acronym": "LET-Sec",
+      "full_exam_name": "Licensure Examination for Professional Teachers (Secondary Level)",
+      "regulatory_body": "PRC Board for Professional Teachers",
+      "field_category": "Education",
+      "passing_score_threshold": "75% general average",
+      "exam_frequency": "Twice per year (March and September/November)",
+      "results": [
+        {
+          "exam_period": "September–November 2025",
+          "passers": 57729,
+          "total_examinees": 79493,
+          "pass_rate_percent": 72.62,
+          "source_url": "https://www.prc.gov.ph/article/september-and-november-2025-licensure-examination-professional-teachers-results-released"
+        },
+        {
+          "exam_period": "March 2025",
+          "passers": 38747,
+          "total_examinees": 62225,
+          "pass_rate_percent": 62.27,
+          "source_url": "https://www.prc.gov.ph/article/march-2025-licensure-examination-professional-teachers-results-released-forty-one-41"
+        }
+      ]
+    },
+    {
+      "profession": "Civil Engineering",
+      "acronym": "CELE",
+      "full_exam_name": "Civil Engineers Licensure Examination",
+      "regulatory_body": "PRC Board of Civil Engineering",
+      "field_category": "Engineering",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Twice per year (April and November)",
+      "results": [
+        {
+          "exam_period": "November 2025",
+          "passers": 4268,
+          "total_examinees": 14043,
+          "pass_rate_percent": 30.39,
+          "source_url": "https://www.prc.gov.ph/article/november-2025-civil-engineers-licensure-examination-results-released-five-5-working-days"
+        },
+        {
+          "exam_period": "April 2025",
+          "passers": 4940,
+          "total_examinees": 16913,
+          "pass_rate_percent": 29.21,
+          "source_url": "https://www.prc.gov.ph/article/april-2025-civil-engineers-licensure-examination-results-released-four-4-working-days"
+        },
+        {
+          "exam_period": "November–December 2024",
+          "passers": 6835,
+          "total_examinees": 18436,
+          "pass_rate_percent": 37.07,
+          "source_url": "https://www.prc.gov.ph/article/november-and-december-2024-civil-engineers-licensure-examination-results-released-three-3"
+        }
+      ]
+    },
+    {
+      "profession": "Architecture",
+      "acronym": "ALE / LEA",
+      "full_exam_name": "Licensure Examination for Architects",
+      "regulatory_body": "PRC Board of Architecture",
+      "field_category": "Design and Built Environment",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Twice per year (January/June)",
+      "results": [
+        {
+          "exam_period": "January 2026",
+          "passers": 1998,
+          "total_examinees": 2434,
+          "pass_rate_percent": 82.08,
+          "source_url": "https://www.prc.gov.ph/articles/exam-results"
+        },
+        {
+          "exam_period": "June 2025",
+          "passers": 1352,
+          "total_examinees": 2075,
+          "pass_rate_percent": 65.16,
+          "source_url": "https://prc.gov.ph/article/june-2025-licensure-examination-architects-results-released-three-3-working-days"
+        }
+      ]
+    },
+    {
+      "profession": "Electronics Engineering",
+      "acronym": "ECE",
+      "full_exam_name": "Electronics Engineers Licensure Examination",
+      "regulatory_body": "PRC Board of Electronics Engineering",
+      "field_category": "Engineering",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Twice per year (April and October)",
+      "results": [
+        {
+          "exam_period": "October 2025",
+          "passers": 1040,
+          "total_examinees": 2319,
+          "pass_rate_percent": 44.85,
+          "source_url": "https://www.prc.gov.ph/article/october-2025-electronics-engineers-and-electronics-technicians-licensure-examinations"
+        },
+        {
+          "exam_period": "April 2025",
+          "passers": 1280,
+          "total_examinees": 2820,
+          "pass_rate_percent": 45.39,
+          "source_url": "https://prc.gov.ph/article/april-2025-electronics-engineers-and-electronics-technicians-licensure-examinations-results"
+        }
+      ]
+    },
+    {
+      "profession": "Electronics Technician",
+      "acronym": "ECT",
+      "full_exam_name": "Electronics Technicians Licensure Examination",
+      "regulatory_body": "PRC Board of Electronics Engineering",
+      "field_category": "Engineering / Technology",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Twice per year (April and October)",
+      "results": [
+        {
+          "exam_period": "October 2025",
+          "passers": 1142,
+          "total_examinees": 1751,
+          "pass_rate_percent": 65.22,
+          "source_url": "https://www.prc.gov.ph/article/october-2025-electronics-engineers-and-electronics-technicians-licensure-examinations"
+        },
+        {
+          "exam_period": "April 2025",
+          "passers": 1971,
+          "total_examinees": 2411,
+          "pass_rate_percent": 81.75,
+          "source_url": "https://prc.gov.ph/article/april-2025-electronics-engineers-and-electronics-technicians-licensure-examinations-results"
+        }
+      ]
+    },
+    {
+      "profession": "Mechanical Engineering",
+      "acronym": "MELE",
+      "full_exam_name": "Mechanical Engineers Licensure Examination",
+      "regulatory_body": "PRC Board of Mechanical Engineering",
+      "field_category": "Engineering",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Twice per year (February and August)",
+      "results": [
+        {
+          "exam_period": "February 2026",
+          "passers": 3264,
+          "total_examinees": 6294,
+          "pass_rate_percent": 51.86,
+          "source_url": "https://www.prc.gov.ph/articles/exam-results"
+        },
+        {
+          "exam_period": "February 2025",
+          "passers": 3089,
+          "total_examinees": 6318,
+          "pass_rate_percent": 48.89,
+          "source_url": "https://www.prc.gov.ph/article/february-2025-mechanical-engineers-licensure-examination-topnotchers"
+        }
+      ]
+    },
+    {
+      "profession": "Electrical Engineering",
+      "acronym": "EE (REE)",
+      "full_exam_name": "Registered Electrical Engineers Licensure Examination",
+      "regulatory_body": "PRC Board of Electrical Engineering",
+      "field_category": "Engineering",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Twice per year (April and October)",
+      "results": [
+        {
+          "exam_period": "April 2025",
+          "passers": 4137,
+          "total_examinees": 6741,
+          "pass_rate_percent": 61.37,
+          "source_url": "https://www.prc.gov.ph/article/april-2025-registered-electrical-engineers-and-registered-master-electricians-licensure"
+        }
+      ]
+    },
+    {
+      "profession": "Master Electrician",
+      "acronym": "RME",
+      "full_exam_name": "Registered Master Electricians Licensure Examination",
+      "regulatory_body": "PRC Board of Electrical Engineering",
+      "field_category": "Engineering / Trades",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Twice per year (April and October)",
+      "results": [
+        {
+          "exam_period": "April 2025",
+          "passers": 668,
+          "total_examinees": 977,
+          "pass_rate_percent": 68.37,
+          "source_url": "https://www.prc.gov.ph/article/april-2025-registered-electrical-engineers-and-registered-master-electricians-licensure"
+        }
+      ]
+    },
+    {
+      "profession": "Criminology",
+      "acronym": "CLE",
+      "full_exam_name": "Licensure Examination for Criminologists",
+      "regulatory_body": "PRC Board of Criminology",
+      "field_category": "Criminology and Law Enforcement",
+      "passing_score_threshold": "75% general average, no subject below 60%",
+      "exam_frequency": "Twice per year (February and August)",
+      "results": [
+        {
+          "exam_period": "February 2025",
+          "passers": 22245,
+          "total_examinees": 36768,
+          "pass_rate_percent": 60.50,
+          "source_url": "https://www.prc.gov.ph/article/february-2025-licensure-examination-criminologists-results-released-twenty-20-working-days"
+        }
+      ]
+    },
+    {
+      "profession": "Medical Technology",
+      "acronym": "MTLE",
+      "full_exam_name": "Medical Technologists Licensure Examination",
+      "regulatory_body": "PRC Board of Medical Technology",
+      "field_category": "Health Sciences",
+      "passing_score_threshold": "75% general average, no subject below 60%",
+      "exam_frequency": "Multiple times per year (March, August, and others)",
+      "results": [
+        {
+          "exam_period": "August 2025",
+          "passers": 3360,
+          "total_examinees": 4720,
+          "pass_rate_percent": 71.19,
+          "source_url": "https://www.prc.gov.ph/article/august-2025-medical-technologists-licensure-examination-results-released-five-5-working"
+        },
+        {
+          "exam_period": "March 2025",
+          "passers": 6147,
+          "total_examinees": 7659,
+          "pass_rate_percent": 80.26,
+          "source_url": "https://www.prc.gov.ph/article/march-2025-medical-technologists-licensure-examination-results-released-four-4-working-days"
+        }
+      ]
+    },
+    {
+      "profession": "Pharmacy",
+      "acronym": "PHLE",
+      "full_exam_name": "Pharmacists Licensure Examination",
+      "regulatory_body": "PRC Board of Pharmacy",
+      "field_category": "Health Sciences",
+      "passing_score_threshold": "75% general average, no subject below 60%",
+      "exam_frequency": "Twice per year (May and November)",
+      "results": [
+        {
+          "exam_period": "November 2025",
+          "passers": 3670,
+          "total_examinees": 4555,
+          "pass_rate_percent": 80.57,
+          "source_url": "https://www.prc.gov.ph/article/november-2025-pharmacists-licensure-examination-results-released-five-5-working-days"
+        }
+      ]
+    },
+    {
+      "profession": "Dentistry",
+      "acronym": "DLE",
+      "full_exam_name": "Licensure Examination for Dentists",
+      "regulatory_body": "PRC Board of Dentistry",
+      "field_category": "Health Sciences",
+      "passing_score_threshold": "75% general average, no subject below 60%",
+      "exam_frequency": "Twice per year (May and November)",
+      "results": [
+        {
+          "exam_period": "May 2025",
+          "passers": 764,
+          "total_examinees": 969,
+          "pass_rate_percent": 78.84,
+          "source_url": "https://www.prc.gov.ph/article/may-2025-licensure-examination-dentists-results-released-three-3-working-days"
+        }
+      ]
+    },
+    {
+      "profession": "Certified Plant Mechanics",
+      "acronym": "CPMLE",
+      "full_exam_name": "Certified Plant Mechanics Computer-Based Licensure Examination",
+      "regulatory_body": "PRC Board of Mechanical Engineering",
+      "field_category": "Engineering / Trades",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Twice per year (February and August)",
+      "results": [
+        {
+          "exam_period": "February 2026",
+          "passers": 100,
+          "total_examinees": 120,
+          "pass_rate_percent": 83.33,
+          "source_url": "https://www.prc.gov.ph/articles/exam-results"
+        }
+      ]
+    },
+    {
+      "profession": "Respiratory Therapy",
+      "acronym": "RTLE",
+      "full_exam_name": "Respiratory Therapists Computer-Based Licensure Examination",
+      "regulatory_body": "PRC Board of Respiratory Therapy",
+      "field_category": "Health Sciences",
+      "passing_score_threshold": "75% general average, no subject below 60%",
+      "exam_frequency": "Multiple times per year",
+      "results": [
+        {
+          "exam_period": "February 2026",
+          "passers": 776,
+          "total_examinees": 1046,
+          "pass_rate_percent": 74.19,
+          "source_url": "https://www.prc.gov.ph/articles/exam-results"
+        }
+      ]
+    },
+    {
+      "profession": "Sanitary Engineering",
+      "acronym": "SELE",
+      "full_exam_name": "Sanitary Engineers Computer-Based Licensure Examination",
+      "regulatory_body": "PRC Board of Sanitary Engineering",
+      "field_category": "Engineering",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Twice per year (January and July)",
+      "results": [
+        {
+          "exam_period": "January 2026",
+          "passers": 174,
+          "total_examinees": 270,
+          "pass_rate_percent": 64.44,
+          "source_url": "https://www.prc.gov.ph/articles/exam-results"
+        }
+      ]
+    },
+    {
+      "profession": "Aeronautical Engineering",
+      "acronym": "AELE",
+      "full_exam_name": "Aeronautical Engineering Licensure Examination",
+      "regulatory_body": "PRC Board of Aeronautical Engineering",
+      "field_category": "Engineering",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Annually (December)",
+      "results": [
+        {
+          "exam_period": "December 2025",
+          "passers": null,
+          "total_examinees": null,
+          "pass_rate_percent": null,
+          "note": "Exam conducted December 8-10, 2025. Specific passers/takers count not confirmed in public announcements retrieved."
+        }
+      ]
+    },
+    {
+      "profession": "Real Estate Service",
+      "acronym": "RESA / RESLE",
+      "full_exam_name": "Real Estate Service Licensure Examination (Appraisers, Brokers, Consultants)",
+      "regulatory_body": "PRC Board of Real Estate Service",
+      "field_category": "Business and Finance",
+      "passing_score_threshold": "75% general average, no subject below 60%",
+      "exam_frequency": "Multiple per year by specialization",
+      "results": [
+        {
+          "exam_period": "December 2025 (Real Estate Consultants)",
+          "passers": 8,
+          "total_examinees": 8,
+          "pass_rate_percent": 100.0,
+          "source_url": "https://www.prc.gov.ph/articles/exam-results",
+          "note": "Very small cohort for the consultants category; broker and appraiser exams have much larger pools."
+        }
+      ]
+    },
+    {
+      "profession": "Agricultural and Biosystems Engineering",
+      "acronym": "ABELE",
+      "full_exam_name": "Agricultural and Biosystems Engineering Licensure Examination",
+      "regulatory_body": "PRC Board of Agricultural and Biosystems Engineering",
+      "field_category": "Engineering / Agriculture",
+      "passing_score_threshold": "70% general average, no subject below 50%",
+      "exam_frequency": "Annually (December)",
+      "results": [
+        {
+          "exam_period": "December 2025",
+          "passers": null,
+          "total_examinees": null,
+          "pass_rate_percent": null,
+          "note": "Exam conducted December 4-5, 2025. Specific numeric results not confirmed in public announcements retrieved."
+        }
+      ]
+    },
+    {
+      "profession": "Physical Therapy",
+      "acronym": "PTLE",
+      "full_exam_name": "Physical Therapist Licensure Examination",
+      "regulatory_body": "PRC Board of Physical Therapy",
+      "field_category": "Health Sciences",
+      "passing_score_threshold": "75% general average, no subject below 60%",
+      "exam_frequency": "Twice per year (June and December)",
+      "results": [
+        {
+          "exam_period": "December 2025",
+          "passers": null,
+          "total_examinees": null,
+          "pass_rate_percent": null,
+          "note": "Exam conducted December 4-5, 2025. Specific numeric results not confirmed in public announcements retrieved."
+        }
+      ]
+    }
+  ],
+  "summary_statistics": {
+    "description": "Overview computed from the most recent available exam cycle per profession (excluding null-result entries).",
+    "highest_pass_rate": {
+      "profession": "Real Estate Consultants (small cohort)",
+      "pass_rate_percent": 100.0,
+      "exam_period": "December 2025",
+      "note": "Only 8 examinees; not representative. Excluding this, the highest mainstream pass rate is Nursing (November 2025) at 90.04%."
+    },
+    "mainstream_highest_pass_rate": {
+      "profession": "Nursing",
+      "pass_rate_percent": 90.04,
+      "exam_period": "November 2025"
+    },
+    "lowest_pass_rate": {
+      "profession": "Civil Engineering",
+      "pass_rate_percent": 29.21,
+      "exam_period": "April 2025"
+    },
+    "largest_examinee_pool": {
+      "profession": "Teaching (LET) — Secondary Level",
+      "total_examinees": 79493,
+      "exam_period": "September–November 2025"
+    },
+    "most_competitive_exam": {
+      "profession": "Accountancy (CPALE)",
+      "average_recent_pass_rate_percent": 31.65,
+      "note": "Average across October 2025 (34.02%), May 2025 (33.11%), December 2024 (30.17%), May 2024 (30.28%)."
+    }
+  },
+  "all_prc_recognized_professions": {
+    "description": "Complete list of professions regulated by PRC and other national bodies in the Philippines. Entries not in the data above currently lack coverage-period numeric results in this dataset.",
+    "prc_regulated": [
+      "Accountancy", "Aeronautical Engineering", "Agricultural and Biosystems Engineering",
+      "Architecture", "Chemical Engineering", "Civil Engineering", "Criminology",
+      "Customs Brokerage", "Dentistry", "Electrical Engineering", "Electronics Engineering",
+      "Environmental Planning", "Fisheries Technology", "Food Technology", "Forestry",
+      "Geology", "Interior Design", "Landscape Architecture", "Librarianship",
+      "Master Plumbing", "Mechanical Engineering", "Medical Technology", "Medicine",
+      "Metallurgical Engineering", "Midwifery", "Naval Architecture and Marine Engineering",
+      "Nursing", "Nutrition and Dietetics", "Occupational Therapy", "Optometry",
+      "Pharmacy", "Physical Therapy", "Psychology", "Real Estate Service",
+      "Respiratory Therapy", "Sanitary Engineering", "Social Work",
+      "Speech Language Pathology", "Teaching (LET)", "Veterinary Medicine",
+      "Certified Plant Mechanics", "Electronics Technicians", "Registered Master Electricians"
+    ],
+    "other_national_bodies": [
+      "Law / Bar Examination (Supreme Court of the Philippines)",
+      "Maritime Professions — STCW Officers (MARINA)",
+      "Civil Service Eligibility (Civil Service Commission)",
+      "Police Service Entrance / Promotion Exams (NAPOLCOM)",
+      "Aviation Professionals — Pilots, AMTs, ATCOs (CAAP)"
+    ]
+  }
+}

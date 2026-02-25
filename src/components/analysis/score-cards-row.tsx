@@ -1,10 +1,10 @@
 "use client";
 
-import type { AgentKey, AgentVerdict } from "@/lib/analysis-types";
+import type { AgentKey } from "@/lib/analysis-types";
 import { BarChart3, Compass, Brain } from "lucide-react";
 
 interface ScoreCardsRowProps {
-    verdicts: Record<AgentKey, AgentVerdict>;
+    verdicts: Record<AgentKey, string>;
     scores: Record<AgentKey, number>;
     activeAgent: AgentKey;
     onSelect: (key: AgentKey) => void;
@@ -59,7 +59,7 @@ export default function ScoreCardsRow({ verdicts, scores, activeAgent, onSelect 
 
                         {/* Verdict */}
                         <p className={`text-sm font-semibold ${isActive ? "text-forest-light" : "text-forest"}`}>
-                            {verdicts[key].verdict}
+                            {verdicts[key]}
                         </p>
 
                         {/* Framework citation */}

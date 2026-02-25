@@ -1,21 +1,18 @@
-import type { AgentPanelData, AgentKey, VerdictReport } from "./analysis-types";
+import type { AgentPanelData, AgentKey, AdjacentCareerReport } from "./analysis-types";
 
 /**
  * Build dummy agent-panel detail data keyed by agent.
- * Uses real scores/verdicts from the VerdictReport where available,
- * but KEY SIGNALS and supporting data are placeholder content.
+ * Currently returns placeholder content — will be wired to real agent output.
  */
-export function buildAgentPanels(report: VerdictReport): Record<AgentKey, AgentPanelData> {
-    const primary = report.ranked_career_paths.find((p) => p.recommendation_type === "PRIMARY");
-
+export function buildAgentPanels(): Record<AgentKey, AgentPanelData> {
     return {
         labor_market: {
             key: "labor_market",
             label: "Labor Market",
             framework: "LMI Framework",
             frameworkCite: "LMI Framework · Arulmani et al., 2014",
-            score: primary?.market_fit_score ? primary.market_fit_score * 10 : 82,
-            verdict: report.agent_verdicts.labor_market.verdict,
+            score: 82,
+            verdict: "Highly Favorable",
             keySignals: [
                 { icon: "up", label: "DOLE Status", value: "In-Demand (2023–2024)" },
                 { icon: "up", label: "Board Pass Rate", value: "43.6% — low supply", subNote: "Low pass rate = less competition for those who pass" },
@@ -33,8 +30,8 @@ export function buildAgentPanels(report: VerdictReport): Record<AgentKey, AgentP
             label: "Feasibility",
             framework: "SCCT",
             frameworkCite: "SCCT · Lent, Brown & Hackett, 1994",
-            score: primary?.feasibility_score ? primary.feasibility_score * 10 : 63,
-            verdict: report.agent_verdicts.feasibility.verdict,
+            score: 63,
+            verdict: "Feasible",
             keySignals: [
                 { icon: "neutral", label: "Academic Fit", value: "Bio 90 ✓ Chem 88 ✓ Math 78 ✗", subNote: "Math below BSN 80 threshold — pharmacology risk in Year 2" },
                 { icon: "down", label: "Financial Barrier", value: "High — named by student" },
@@ -51,8 +48,8 @@ export function buildAgentPanels(report: VerdictReport): Record<AgentKey, AgentP
             label: "Psychological",
             framework: "JD-R Model",
             frameworkCite: "JD-R Model · Demerouti et al., 2001",
-            score: primary?.psychological_fit_score ? primary.psychological_fit_score * 10 : 71,
-            verdict: report.agent_verdicts.psychological.verdict,
+            score: 71,
+            verdict: "Moderately Aligned",
             keySignals: [
                 { icon: "down", label: "Career Demands", value: "High — emotional + moral" },
                 { icon: "up", label: "Student Resources", value: "Moderate-Strong", subNote: "Intrinsic motivation + peer support + role model are proven burnout buffers" },
@@ -67,25 +64,20 @@ export function buildAgentPanels(report: VerdictReport): Record<AgentKey, AgentP
     };
 }
 
-/** Map related careers from VerdictReport into a display-friendly format */
-export function buildRelatedCareers(report: VerdictReport) {
-    const alternatives = report.ranked_career_paths
-        .filter((p) => p.recommendation_type === "ALTERNATIVE")
-        .sort((a, b) => b.composite_score - a.composite_score);
-
-    // Dummy fallback if no alternatives exist in the report
+/** Map related careers from AdjacentCareerReport into a display-friendly format */
+export function buildRelatedCareers(report: AdjacentCareerReport) {
+    // Fallback if agent returns empty or malformed data
     const fallback = [
         { career: "Medical Technology", status: "In-Demand" as const, score: 88 },
         { career: "Health Informatics", status: "Emerging" as const, score: 79 },
         { career: "Midwifery", status: "In-Demand" as const, score: 73 },
-        { career: "Physical Therapy", status: "Stable" as const, score: 67 },
     ];
 
-    if (alternatives.length === 0) return fallback;
+    if (!report.related_careers || report.related_careers.length === 0) return fallback;
 
-    return alternatives.map((alt) => ({
-        career: alt.career_path,
-        status: (alt.composite_score >= 7.5 ? "In-Demand" : alt.composite_score >= 6 ? "Emerging" : "Stable") as "In-Demand" | "Emerging" | "Stable",
-        score: Math.round(alt.composite_score * 10),
+    return report.related_careers.map((rc) => ({
+        career: rc.career_path,
+        status: rc.demand_status,
+        score: rc.composite_score,
     }));
 }

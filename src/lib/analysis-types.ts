@@ -12,72 +12,16 @@ export interface TranscriptTurn {
     text: string;
 }
 
-// ─── Verdict Report ─────────────────────────────────────────────────
-export interface VerdictReport {
-    report_metadata: {
-        grade_level: string;
-        region: string;
-        generated_by: string;
-    };
-    confidence_score: number;
-    agent_verdicts: {
-        labor_market: AgentVerdict;
-        feasibility: AgentVerdict;
-        psychological: AgentVerdict;
-    };
-    agent_agreement_map: {
-        high_agreement_areas: string[];
-        tensions: AgentTension[];
-    };
-    ranked_career_paths: RankedCareerPath[];
-    roadmap: RoadmapPhase[];
-    scholarships: Scholarship[];
-    analyst_note: string;
-    analyst_note_attribution: string;
-    overall_verdict: string;
-    counselor_talking_points: string[];
+// ─── Adjacent Career Report ─────────────────────────────────────────
+export interface AdjacentCareerReport {
+    related_careers: RelatedCareer[];
 }
 
-export interface AgentVerdict {
-    verdict: string;
-    sub_label: string;
-}
-
-export interface AgentTension {
-    tension_type: string;
-    path_affected: string;
-    description: string;
-    counselor_note: string;
-}
-
-export interface RankedCareerPath {
-    rank: number;
+export interface RelatedCareer {
     career_path: string;
     composite_score: number;
-    market_fit_score: number;
-    feasibility_score: number;
-    psychological_fit_score: number;
-    insufficient_data: boolean;
-    recommendation_type: "PRIMARY" | "ALTERNATIVE";
+    demand_status: "In-Demand" | "Emerging" | "Stable";
     rationale: string;
-    key_strengths: string[];
-    key_risks: string[];
-    risk_mitigations: string[];
-}
-
-export interface RoadmapPhase {
-    phase: number;
-    label: string;
-    timeline: string;
-    title: string;
-    actions: string[];
-}
-
-export interface Scholarship {
-    name: string;
-    provider: string;
-    eligibility_note: string;
-    how_to_apply: string;
 }
 
 // ─── Agent Detail Panel (dummy-data shape) ──────────────────────────
@@ -118,7 +62,7 @@ export type StageName =
 
 export type AnalysisState =
     | { phase: "processing"; completedStages: StageName[] }
-    | { phase: "complete"; report: VerdictReport; structured: StructuredTranscript }
+    | { phase: "complete"; report: AdjacentCareerReport; structured: StructuredTranscript }
     | { phase: "error"; message: string };
 
 export interface StoredSession {
