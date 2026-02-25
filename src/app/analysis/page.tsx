@@ -7,7 +7,7 @@ import { Loader2 } from "lucide-react";
 import type {
     AnalysisState,
     StructuredTranscript,
-    VerdictReport,
+    AdjacentCareerReport,
     StoredSession,
 } from "@/lib/analysis-types";
 
@@ -105,7 +105,7 @@ function AnalysisContent() {
                 }),
             });
             if (!verdictRes.ok) throw new Error("Verdict generation failed");
-            const report = await verdictRes.json() as VerdictReport;
+            const report = await verdictRes.json() as AdjacentCareerReport;
 
             // All 5 stages complete
             setState({ phase: "processing", completedStages: STAGE_ORDER });
@@ -133,7 +133,7 @@ function AnalysisContent() {
             if (cachedReport && cachedStructured) {
                 setState({
                     phase: "complete",
-                    report: JSON.parse(cachedReport) as VerdictReport,
+                    report: JSON.parse(cachedReport) as AdjacentCareerReport,
                     structured: JSON.parse(cachedStructured) as StructuredTranscript,
                 });
                 return;

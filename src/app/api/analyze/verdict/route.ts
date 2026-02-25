@@ -1,20 +1,14 @@
 import { NextResponse } from "next/server";
 import { callAgent } from "@/lib/llm";
-import fs from "fs";
-import path from "path";
-
-function getPrompt(filename: string): string {
-    const filePath = path.join(process.cwd(), "src/prompts", filename);
-    return fs.readFileSync(filePath, "utf8");
-}
+import { getSystemInstructions } from "@/lib/utils";
 
 export async function POST(req: Request) {
     try {
         const body = await req.json() as {
-            labor?:         unknown;
-            feasibility?:   unknown;
+            labor?: unknown;
+            feasibility?: unknown;
             psychological?: unknown;
-            career_path?:   string;
+            career_path?: string;
             career_path_source?: string;
         };
 
@@ -25,31 +19,31 @@ export async function POST(req: Request) {
             );
         }
 
-        const systemPrompt = getPrompt("verdict_generator.md");
+        const systemPrompt = getSystemInstructions("adjacent_career.md");
 
-        // The Verdict Generator receives all 3 agent JSON outputs as a single
-        // structured input — it works exclusively from agent JSON, not the transcript
+        // The Adjacent Career Finder receives all 3 agent JSON outputs
+        // and the career path — it identifies related alternative careers
         const agentInput = JSON.stringify({
             career_path_detected: body.career_path,
-            career_path_source:   body.career_path_source,
-            labor_market_analysis:  body.labor,
-            feasibility_analysis:   body.feasibility,
+            career_path_source: body.career_path_source,
+            labor_market_analysis: body.labor,
+            feasibility_analysis: body.feasibility,
             psychological_analysis: body.psychological,
         });
 
-        const verdict = await callAgent(
+        const result = await callAgent(
             systemPrompt,
             agentInput,
             process.env.VERDICT_AGENT_API_KEY as string
         );
 
-        if (verdict.error) {
-            return NextResponse.json({ error: verdict.error }, { status: 500 });
+        if (result.error) {
+            return NextResponse.json({ error: result.error }, { status: 500 });
         }
 
-        return NextResponse.json(verdict);
+        return NextResponse.json(result);
     } catch (err) {
-        console.error("Verdict generator error:", err);
-        return NextResponse.json({ error: "Failed to generate verdict" }, { status: 500 });
+        console.error("Adjacent career finder error:", err);
+        return NextResponse.json({ error: "Failed to find adjacent careers" }, { status: 500 });
     }
 }
