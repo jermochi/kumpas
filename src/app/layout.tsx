@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { dmSans, playfair } from "./fonts";
 import "./globals.css";
 import Navbar from "@/components/navigation/nav-bar";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Kumpas",
@@ -20,6 +21,7 @@ export default function RootLayout({
         <main className="flex-1 flex flex-col">
         {children}
         </main>
+        <Toaster />
       </body>
     </html>
   );
