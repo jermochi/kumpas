@@ -8,6 +8,7 @@ import FileUpload from "@/components/input/file-upload";
 import DiscardModal from "@/components/input/discard-modal";
 import { Zap } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type Tab = "recording" | "upload";
 

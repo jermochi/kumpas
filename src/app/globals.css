@@ -17,6 +17,17 @@
   --color-gold: #C9963A;
   --color-muted-text: #7A7A72;
   --color-card-custom: #FDFCF8;
+  --color-charcoal:  #1C1917;
+  --color-charcoal-2:#3C3733;
+  --color-charcoal-3:#6B6560;
+  --color-sage:      #6B8C6B;
+  --color-sage-light:#D4E6D4;
+  --color-ochre:     #C4861C;
+  --color-ochre-light:#F5E6CC;
+  --color-ochre-pale: #FBF3E3;
+  --color-amber:     #D97706;
+  --color-red-soft:  #C85A4A;
+  --red-light: #FAE8E5;
 
   /* SHADOWS */
   --shadow-card: 0 2px 40px rgba(26, 26, 24, 0.07), 0 1px 4px rgba(26, 26, 24, 0.05);
@@ -96,6 +107,16 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  
+  --cream: #f7f4ef;
+  --cream-mid: #ede9e1;
+  --cream-deep: #e0d9ce;
+  --charcoal: #1c1917;
+  --charcoal-2: #3c3733;
+  --charcoal-3: #6b6560;
+  --sage: #6b8c6b;
+  --sage-light: #d4e6d4;
+  --ochre: #c4861c;
 }
 
 .dark {
@@ -156,15 +177,36 @@
     z-index: 999;
     opacity: 0.4;
   }
-}
 
-/* Wave bar */
-.wave-bar {
-  width: 4px; background: var(--sage); border-radius: 2px;
-  transform-origin: bottom;
+  .wave-bar {
+    width: 4px; background: var(--sage); border-radius: 2px;
+    transform-origin: bottom;
+  }
+
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+
+  .animate-spin-slow-reverse {
+    animation: spin-reverse 2.5s linear infinite;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
 }
 
 @keyframes wave-bar {
   0%, 100% { transform: scaleY(0.3); }
   50% { transform: scaleY(1); }
+}
+
+@keyframes spin-reverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
