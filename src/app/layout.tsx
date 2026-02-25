@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { dmSans, playfair } from "./fonts";
 import "./globals.css";
+import Navbar from "@/components/navigation/nav-bar";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
@@ -15,10 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${dmSans.variable} ${playfair.variable}`}>
-      <body
-        className="antialiased"
-      >
+      <body className="antialiased flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1 flex flex-col">
         {children}
+        </main>
         <Toaster />
       </body>
     </html>
