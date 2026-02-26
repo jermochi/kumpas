@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect } from "react";
-import type { AdjacentCareerReport, StructuredTranscript, AgentKey } from "@/lib/analysis-types";
-import { buildAgentPanels, buildRelatedCareers } from "@/lib/analysis-helpers";
+import type { AdjacentCareerReport, StructuredTranscript, AgentKey, AgentPanelData } from "@/lib/analysis-types";
+import { buildRelatedCareers } from "@/lib/analysis-helpers";
 
 import ScoreCardsRow from "@/components/analysis/score-cards-row";
 import AgentDetailPanel from "@/components/analysis/agent-detail-panel";
@@ -14,24 +14,24 @@ import FullscreenModal from "@/components/analysis/fullscreen-modal";
 interface ReportViewProps {
     report: AdjacentCareerReport;
     structured: StructuredTranscript;
+    agentData: Record<AgentKey, AgentPanelData>;
 }
 
-export default function ReportView({ report, structured }: ReportViewProps) {
+export default function ReportView({ report, structured, agentData }: ReportViewProps) {
     const [activeAgent, setActiveAgent] = useState<AgentKey>("labor_market");
     const [modalContent, setModalContent] = useState<"transcript" | AgentKey | null>(null);
 
-    const agentPanels = useMemo(() => buildAgentPanels(), []);
     const relatedCareers = useMemo(() => buildRelatedCareers(report), [report]);
 
     const wordCount = structured.turns.reduce((n, t) => n + t.text.split(/\s+/).length, 0);
 
     const scores: Record<AgentKey, number> = {
-        labor_market: agentPanels.labor_market.score,
-        feasibility: agentPanels.feasibility.score,
-        psychological: agentPanels.psychological.score,
+        labor_market: agentData.labor_market.score,
+        feasibility: agentData.feasibility.score,
+        psychological: agentData.psychological.score,
     };
 
-    const activePanel = agentPanels[activeAgent];
+    const activePanel = agentData[activeAgent];
 
     const leftRef = useRef<HTMLDivElement>(null);
     const [sidebarMaxH, setSidebarMaxH] = useState<number | undefined>(undefined);
@@ -48,9 +48,9 @@ export default function ReportView({ report, structured }: ReportViewProps) {
     }, [activeAgent]);
 
     const verdicts: Record<AgentKey, string> = {
-        labor_market: agentPanels.labor_market.verdict,
-        feasibility: agentPanels.feasibility.verdict,
-        psychological: agentPanels.psychological.verdict,
+        labor_market: agentData.labor_market.verdict,
+        feasibility: agentData.feasibility.verdict,
+        psychological: agentData.psychological.verdict,
     };
 
     return (
@@ -136,10 +136,10 @@ export default function ReportView({ report, structured }: ReportViewProps) {
                         key={key}
                         isOpen={modalContent === key}
                         onClose={() => setModalContent(null)}
-                        title={`${agentPanels[key].label} · ${agentPanels[key].framework}`}
+                        title={`${agentData[key].label} · ${agentData[key].framework}`}
                     >
                         <AgentDetailPanel
-                            data={agentPanels[key]}
+                            data={agentData[key]}
                             onFullscreen={() => { }}
                             isFullscreen
                         />
