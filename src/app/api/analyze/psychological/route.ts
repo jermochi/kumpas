@@ -9,7 +9,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Transcript and careerPathTitle required' }, { status: 400 });
 
     const psychologicalPrompt = buildPsychSystemPrompt(careerPathTitle);
-    console.log('Psychological Prompt:', psychologicalPrompt);
     const psychologicalAnalysis = await callAgent(psychologicalPrompt, transcript, process.env.PSYCHOLOGICAL_AGENT_API_KEY as string);
 
     return NextResponse.json({ status: 'success', data: psychologicalAnalysis });
