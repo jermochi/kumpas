@@ -5,7 +5,7 @@ export default function NavLinks() {
         <div className="flex items-center gap-2 md:gap-4">
             {/* to be linked to documentation page*/}
             <Link
-                href="/docs"
+                href="/documentation"
                 className="text-sm font-medium text-muted-text transition-colors hover:text-ink"
             >
                 Documentation
