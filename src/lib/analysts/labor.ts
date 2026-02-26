@@ -1,8 +1,8 @@
-import { getSystemInstructions, getJsonContexts } from '../utils';
+import { getSystemInstructions, getFilteredLaborContexts } from '../utils';
 
 export function buildLaborSystemPrompt(careerPathTitle: string): string {
   const baseInstructions = getSystemInstructions('labor_analyst.md');
-  const laborContexts = getJsonContexts('labor-analyst');
+  const laborContexts = getFilteredLaborContexts(careerPathTitle);
 
   // Combine career path, data context, and base instructions
   return `
