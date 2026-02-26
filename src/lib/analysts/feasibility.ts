@@ -1,8 +1,8 @@
-import { getSystemInstructions, getJsonContexts } from '../utils';
+import { getSystemInstructions, getFilteredFeasibilityContexts } from '../utils';
 
 export function buildFeasibilitySystemPrompt(careerPathTitle: string): string {
   const baseInstructions = getSystemInstructions('feasibility_analyst.md');
-  const feasibilityContexts = getJsonContexts('feasibility-analyst');
+  const feasibilityContexts = getFilteredFeasibilityContexts(careerPathTitle);
 
   // Combine career path, data context, and base instructions
   return `
