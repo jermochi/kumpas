@@ -12,8 +12,12 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // Fetch the audio file from Vercel Blob
-    const audioResponse = await fetch(blobUrl);
+    // Fetch the audio file from Vercel Blob (private store requires auth)
+    const audioResponse = await fetch(blobUrl, {
+      headers: {
+        Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}`,
+      },
+    });
     if (!audioResponse.ok) {
       return NextResponse.json(
         { error: "Failed to fetch audio from blob storage" },

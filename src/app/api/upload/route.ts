@@ -1,6 +1,7 @@
 import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { NextResponse } from "next/server";
 
+// POST /api/upload — token generation for client-side blob uploads
 export async function POST(request: Request): Promise<NextResponse> {
     try {
         const body = (await request.json()) as HandleUploadBody;
@@ -14,7 +15,7 @@ export async function POST(request: Request): Promise<NextResponse> {
                 };
             },
             onUploadCompleted: async () => {
-                // No-op: we don't need to track completions
+                // No-op
             },
         });
 
