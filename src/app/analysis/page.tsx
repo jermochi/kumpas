@@ -10,7 +10,9 @@ import type {
     StructuredTranscript,
     AdjacentCareerReport,
     StoredSession,
+    RawAgentResponse,
 } from "@/lib/analysis-types";
+import { buildAgentPanels } from "@/lib/analysis-helpers";
 
 import { STAGE_ORDER } from "@/components/analysis/processing-view";
 import ReportView from "@/components/analysis/report-view";
@@ -67,7 +69,7 @@ function AnalysisContent() {
             // ── Stage 2–4: Three agents in parallel ─────────────────
             const careerPathTitle = structured.career_path;
 
-            const [labor, feasibility, psychological] = await Promise.all([
+            const [laborRes, feasibilityRes, psychologicalRes] = await Promise.all([
                 fetch("/api/analyze/labor", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -86,6 +88,14 @@ function AnalysisContent() {
                     body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
                 }).then((r) => r.json()),
             ]);
+
+            if (laborRes.error) throw new Error(laborRes.error);
+            if (feasibilityRes.error) throw new Error(feasibilityRes.error);
+            if (psychologicalRes.error) throw new Error(psychologicalRes.error);
+
+            const labor = laborRes.data;
+            const feasibility = feasibilityRes.data;
+            const psychological = psychologicalRes.data;
 
             setState(prev => ({
                 ...prev,
@@ -107,13 +117,16 @@ function AnalysisContent() {
             if (!verdictRes.ok) throw new Error("Verdict generation failed");
             const report = await verdictRes.json() as AdjacentCareerReport;
 
+            const agentData = buildAgentPanels(labor, feasibility, psychological);
+
             setState(prev => ({ ...prev, completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "psychological", "verdict"] }));
             // Give the UI a moment to show 100% completion before switching
             await new Promise((r) => setTimeout(r, 1000));
 
             sessionStorage.setItem(`kumpas-report-${sessionId}`, JSON.stringify(report));
+            sessionStorage.setItem(`kumpas-agent-data-${sessionId}`, JSON.stringify(agentData));
 
-            setState({ phase: "complete", report, structured });
+            setState({ phase: "complete", report, structured, agentData });
 
         } catch (err) {
             console.error("Pipeline error:", err);
@@ -131,17 +144,19 @@ function AnalysisContent() {
 
             const cachedReport = sessionStorage.getItem(`kumpas-report-${sessionId}`);
             const cachedStructured = sessionStorage.getItem(`kumpas-structured-${sessionId}`);
+            const cachedAgentData = sessionStorage.getItem(`kumpas-agent-data-${sessionId}`);
 
-            if (cachedReport && cachedStructured) {
+            if (cachedReport && cachedStructured && cachedAgentData) {
                 setState({
                     phase: "complete",
                     report: JSON.parse(cachedReport) as AdjacentCareerReport,
                     structured: JSON.parse(cachedStructured) as StructuredTranscript,
+                    agentData: JSON.parse(cachedAgentData),
                 });
                 return;
             }
         } else {
-          router.push("/");
+            router.push("/");
         }
         runPipeline();
     }, [runPipeline, sessionId]);
@@ -152,7 +167,7 @@ function AnalysisContent() {
                 <LoadingScreen completedStages={state.completedStages} />
             )}
             {state.phase === "complete" && (
-                <ReportView report={state.report} structured={state.structured} />
+                <ReportView report={state.report} structured={state.structured} agentData={state.agentData} />
             )}
             {state.phase === "error" && (
                 <ErrorView

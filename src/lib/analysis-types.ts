@@ -27,6 +27,23 @@ export interface RelatedCareer {
 // ─── Agent Detail Panel (dummy-data shape) ──────────────────────────
 export type AgentKey = "labor_market" | "feasibility" | "psychological";
 
+export interface RawAgentResponse {
+    score: number;
+    verdict: string;
+    key_signals: {
+        icon: "up" | "down" | "neutral";
+        label: string;
+        value: string;
+        sub_note?: string;
+    }[];
+    summary: string;
+    supporting_data: {
+        icon: "up" | "down" | "neutral";
+        label: string;
+        value: string;
+    }[];
+}
+
 export interface AgentPanelData {
     key: AgentKey;
     label: string;
@@ -62,7 +79,7 @@ export type StageName =
 
 export type AnalysisState =
     | { phase: "processing"; completedStages: StageName[] }
-    | { phase: "complete"; report: AdjacentCareerReport; structured: StructuredTranscript }
+    | { phase: "complete"; report: AdjacentCareerReport; structured: StructuredTranscript; agentData: Record<AgentKey, AgentPanelData> }
     | { phase: "error"; message: string };
 
 export interface StoredSession {
