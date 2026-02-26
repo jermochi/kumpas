@@ -19,7 +19,7 @@ export default function PlaybackTranscript({
             {hasRecorded && (!transcription || transcription.status !== 'success') && (
                 <div className="w-full rounded-xl border border-black/[0.06] bg-black/[0.02] p-5 text-sm animate-in fade-in slide-in-from-bottom-2">
                     <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-text/70">
-                        Live Transcript
+                        Transcript
                     </p>
                     <p className="leading-relaxed text-ink/80 italic">
                         {isRecording 
@@ -34,7 +34,7 @@ export default function PlaybackTranscript({
             )}
 
             {transcription?.status === 'success' && (
-                <div className="w-full rounded-xl border border-black/[0.06] bg-black/[0.02] p-5 text-sm animate-in fade-in slide-in-from-bottom-2 max-h-[400px] overflow-y-scroll">
+                <div className="w-full rounded-xl border border-black/[0.06] bg-black/[0.02] p-5 text-sm animate-in fade-in slide-in-from-bottom-2 h-[200px] max-h-[400px] overflow-y-scroll">
                     <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-text/70">
                         Transcript
                     </p>

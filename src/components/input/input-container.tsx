@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { useState } from "react";
 import Button from "@/components/button";
 import TabSwitcher from "@/components/input/tab-switcher";
 import LiveRecording from "@/components/input/live-recording";

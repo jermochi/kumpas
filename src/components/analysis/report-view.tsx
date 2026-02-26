@@ -1,10 +1,9 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect } from "react";
-import type { VerdictReport, StructuredTranscript, AgentKey } from "@/lib/analysis-types";
+import type { AdjacentCareerReport, StructuredTranscript, AgentKey } from "@/lib/analysis-types";
 import { buildAgentPanels, buildRelatedCareers } from "@/lib/analysis-helpers";
 
-import Navbar from "@/components/navigation/nav-bar";
 import ScoreCardsRow from "@/components/analysis/score-cards-row";
 import AgentDetailPanel from "@/components/analysis/agent-detail-panel";
 import TranscriptPanel from "@/components/analysis/transcript-panel";
@@ -13,7 +12,7 @@ import PdfFooter from "@/components/analysis/pdf-footer";
 import FullscreenModal from "@/components/analysis/fullscreen-modal";
 
 interface ReportViewProps {
-    report: VerdictReport;
+    report: AdjacentCareerReport;
     structured: StructuredTranscript;
 }
 
@@ -21,10 +20,9 @@ export default function ReportView({ report, structured }: ReportViewProps) {
     const [activeAgent, setActiveAgent] = useState<AgentKey>("labor_market");
     const [modalContent, setModalContent] = useState<"transcript" | AgentKey | null>(null);
 
-    const agentPanels = useMemo(() => buildAgentPanels(report), [report]);
+    const agentPanels = useMemo(() => buildAgentPanels(), []);
     const relatedCareers = useMemo(() => buildRelatedCareers(report), [report]);
 
-    const primary = report.ranked_career_paths.find((p) => p.recommendation_type === "PRIMARY");
     const wordCount = structured.turns.reduce((n, t) => n + t.text.split(/\s+/).length, 0);
 
     const scores: Record<AgentKey, number> = {
@@ -49,10 +47,14 @@ export default function ReportView({ report, structured }: ReportViewProps) {
         return () => ro.disconnect();
     }, [activeAgent]);
 
+    const verdicts: Record<AgentKey, string> = {
+        labor_market: agentPanels.labor_market.verdict,
+        feasibility: agentPanels.feasibility.verdict,
+        psychological: agentPanels.psychological.verdict,
+    };
+
     return (
         <>
-            <Navbar />
-
             <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10 space-y-6">
 
                 {/* ── Header ──────────────────────────────────────────── */}
@@ -62,7 +64,7 @@ export default function ReportView({ report, structured }: ReportViewProps) {
                     </p>
                     <h1 className="font-heading mt-1 text-3xl font-bold leading-tight text-ink sm:text-4xl">
                         Assessment for{" "}
-                        <em className="text-forest">{structured.career_path || primary?.career_path || "Career"}</em>
+                        <em className="text-forest">{structured.career_path || "Career"}</em>
                     </h1>
                     <p className="mt-1 text-xs text-muted-text">
                         Three agents · <span className="font-semibold text-ink">LMI Framework</span> · <span className="font-semibold text-ink">SCCT</span> · <span className="font-semibold text-ink">JD-R Model</span>
@@ -71,7 +73,7 @@ export default function ReportView({ report, structured }: ReportViewProps) {
 
                 {/* ── Score Cards Row ──────────────────────────────────── */}
                 <ScoreCardsRow
-                    verdicts={report.agent_verdicts}
+                    verdicts={verdicts}
                     scores={scores}
                     activeAgent={activeAgent}
                     onSelect={setActiveAgent}
