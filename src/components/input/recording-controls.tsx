@@ -15,22 +15,21 @@ export default function RecordingControls({
     onToggle,
     onReset
 }: RecordingControlsProps) {
+    const isResetState = hasRecorded && !isRecording;
+
+    const handleClick = () => {
+        if (isResetState) {
+            onReset();
+        } else {
+            onToggle();
+        }
+    };
+
     return (
         <div className="relative flex w-full max-w-[220px] items-center justify-center">
-            {/* Reset button */}
-            {hasRecorded && !isPending && (
-                <button
-                    onClick={onReset}
-                    className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full bg-black/5 text-muted-text transition-all hover:bg-black/10 hover:text-ink animate-in fade-in zoom-in"
-                    title="Reset Recording"
-                >
-                    <RotateCcw size={18} />
-                </button>
-            )}
-
-            {/* Record button */}
+            {/* Record/Reset button */}
             <button
-                onClick={onToggle}
+                onClick={handleClick}
                 disabled={isPending}
                 className={`flex h-16 w-16 z-10 cursor-pointer items-center justify-center rounded-full transition-all duration-200 ${isRecording
                         ? "scale-110 bg-forest text-white shadow-lg"
@@ -41,6 +40,8 @@ export default function RecordingControls({
                     <Loader2 size={20} className="animate-spin" />
                 ) : isRecording ? (
                     <Square size={20} fill="currentColor" />
+                ) : isResetState ? (
+                    <RotateCcw size={22} />
                 ) : (
                     <Mic size={22} />
                 )}
