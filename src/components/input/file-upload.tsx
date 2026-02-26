@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useCallback, useState, useEffect } from "react";
+import { upload } from "@vercel/blob/client";
 import { Upload, Check, X } from "lucide-react";
 import PlaybackTranscript from "./playback-transcript";
 import { TranscriptionState } from "@/types";
@@ -39,7 +40,7 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
         const isValidType = ACCEPTED_TYPES.some(ext => fileName.endsWith(ext));
 
         if (!isValidType) {
-            toast.error("Invalid file type.", {description: `Please upload one of the following: ${ACCEPTED_TYPES.join(", ")}` , position: "top-center" });
+            toast.error("Invalid file type.", { description: `Please upload one of the following: ${ACCEPTED_TYPES.join(", ")}`, position: "top-center" });
             if (fileInputRef.current) fileInputRef.current.value = ""; // Reset input
             return;
         }
@@ -62,19 +63,24 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
             const file = e.dataTransfer.files?.[0];
             handleFileSelection(file ?? null);
         },
-        [onFileChange] 
+        [onFileChange]
     );
 
     const transcribeFile = async (file: File) => {
         setTranscription({ status: "loading" });
 
-        const formData = new FormData();
-        formData.append("file", file);
-
         try {
+            // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
+            const blob = await upload(file.name, file, {
+                access: "public",
+                handleUploadUrl: "/api/upload",
+            });
+
+            // Step 2: Send blob URL to transcribe API
             const res = await fetch("/api/transcribe", {
                 method: "POST",
-                body: formData,
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ blobUrl: blob.url }),
             });
 
             const data = await res.json();
@@ -105,10 +111,10 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
                 className={`relative flex w-full cursor-pointer flex-col items-center gap-3 rounded-xl border-2 border-dashed px-6 py-10 text-center transition-colors ${dragOver
-                        ? "border-forest bg-forest/5"
-                        : uploadedFile
-                            ? "border-forest/40 bg-forest/[0.03]"
-                            : "border-black/10 hover:border-forest hover:bg-forest/[0.02]"
+                    ? "border-forest bg-forest/5"
+                    : uploadedFile
+                        ? "border-forest/40 bg-forest/[0.03]"
+                        : "border-black/10 hover:border-forest hover:bg-forest/[0.02]"
                     }`}
             >
                 <input
@@ -163,7 +169,7 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
 
             {uploadedFile && (
                 <div className="w-full space-y-4">
-                    <PlaybackTranscript 
+                    <PlaybackTranscript
                         hasRecorded={!!uploadedFile}
                         isRecording={false}
                         transcription={transcription}
