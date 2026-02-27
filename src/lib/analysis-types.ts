@@ -85,4 +85,7 @@ export type AnalysisState =
 export interface StoredSession {
     rawTranscript: string;
     createdAt: string;
+    careerOverride?: string;
+    parentSessionId?: string;
+    originalCareer?: string;
 }

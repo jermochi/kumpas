@@ -47,13 +47,33 @@ function AnalysisContent() {
 
         try {
             // ── Stage 1: Transcription Layer ────────────────────────
-            const tlRes = await fetch("/api/transcription-layer", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ transcript: session.rawTranscript }),
-            });
-            if (!tlRes.ok) throw new Error("Transcription layer failed");
-            const structured = await tlRes.json() as StructuredTranscript;
+            let structured: StructuredTranscript | null = null;
+            if (session.parentSessionId) {
+                const parentStructuredStr = sessionStorage.getItem(`kumpas-structured-${session.parentSessionId}`);
+                if (parentStructuredStr) {
+                    structured = JSON.parse(parentStructuredStr);
+                }
+            }
+
+            if (!structured) {
+                const tlRes = await fetch("/api/transcription-layer", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ transcript: session.rawTranscript }),
+                });
+                if (!tlRes.ok) throw new Error("Transcription layer failed");
+                structured = (await tlRes.json()) as StructuredTranscript;
+            }
+
+            // Override the career title in structured so ReportView shows the correct title
+            if (session.careerOverride) {
+                if (!session.originalCareer) {
+                    session.originalCareer = structured.career_path;
+                    sessionStorage.setItem(`kumpas-session-${sessionId}`, JSON.stringify(session));
+                }
+                structured.career_path = session.careerOverride;
+                structured.career_path_source = "derived";
+            }
 
             setState(prev => ({ ...prev, completedStages: ["transcriptionLayer"] }));
 
@@ -67,7 +87,7 @@ function AnalysisContent() {
                 .join("\n");
 
             // ── Stage 2–4: Three agents in parallel ─────────────────
-            const careerPathTitle = structured.career_path;
+            const careerPathTitle = session.careerOverride || structured.career_path;
 
             const [laborRes, feasibilityRes, psychologicalRes] = await Promise.all([
                 fetch("/api/analyze/labor", {
@@ -107,8 +127,8 @@ function AnalysisContent() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    career_path: structured.career_path,
-                    career_path_source: structured.career_path_source,
+                    career_path: session.careerOverride || structured.career_path,
+                    career_path_source: session.careerOverride ? "derived" : structured.career_path_source,
                     labor,
                     feasibility,
                     psychological,
@@ -116,6 +136,19 @@ function AnalysisContent() {
             });
             if (!verdictRes.ok) throw new Error("Verdict generation failed");
             const report = await verdictRes.json() as AdjacentCareerReport;
+
+            // Prepend original career to allow navigating back
+            if (session.originalCareer && session.originalCareer !== structured.career_path) {
+                const alreadyExists = report.related_careers.some(c => c.career_path === session.originalCareer);
+                if (!alreadyExists) {
+                    report.related_careers.unshift({
+                        career_path: session.originalCareer,
+                        composite_score: 100,
+                        demand_status: "Stable",
+                        rationale: "Return to your original career assessment.",
+                    });
+                }
+            }
 
             const agentData = buildAgentPanels(labor, feasibility, psychological);
 
