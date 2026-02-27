@@ -2,6 +2,7 @@
 
 import WaveForm from "@/components/audio/waveform";
 import { useState, useEffect, useRef } from "react";
+import { upload } from "@vercel/blob/client";
 import useRecordVoice from "./use-voice-record";
 import PermissionModal from "./permission-modal";
 import RecordingControls from "./recording-controls";
@@ -21,7 +22,7 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
     const [isPending, setIsPending] = useState(false);
     const [showPermissionModal, setShowPermissionModal] = useState(false);
     const [transcription, setTranscription] = useState<TranscriptionState>({ status: "idle" });
-    
+
     const { mediaRecorder, initRecording, clearRecording } = useRecordVoice();
     const audioChunks = useRef<Blob[]>([]);
 
@@ -59,9 +60,9 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
         const handleStop = async () => {
             const audioBlob = new Blob(audioChunks.current, { type: "audio/webm" });
             const file = new File([audioBlob], "recording.webm", { type: "audio/webm" });
-            
+
             audioChunks.current = [];
-            
+
             // Release the microphone stream
             mediaRecorder.stream.getTracks().forEach(track => track.stop());
             clearRecording();
@@ -69,13 +70,18 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
             // Auto-transcribe
             setTranscription({ status: "loading" });
 
-            const formData = new FormData();
-            formData.append("file", file);
-
             try {
+                // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
+                const blob = await upload(file.name, file, {
+                    access: "private",
+                    handleUploadUrl: "/api/upload",
+                });
+
+                // Step 2: Send blob URL to transcribe API
                 const res = await fetch("/api/transcribe", {
                     method: "POST",
-                    body: formData,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ blobUrl: blob.url }),
                 });
 
                 const data = await res.json();
@@ -126,7 +132,7 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
             try {
                 const recorder = await initRecording();
                 setIsPending(false);
-                if (!recorder) return; 
+                if (!recorder) return;
             } catch (err) {
                 // User denied permission or device failed
                 setIsPending(false);
@@ -134,7 +140,7 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
                 return;
             }
         }
-        
+
         onToggleRecording();
     };
 
@@ -148,15 +154,15 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
         onTranscriptionComplete(null);
         audioChunks.current = [];
     };
-    
+
     return (
         <div className="flex w-full flex-col items-center gap-6">
-            <PermissionModal 
-                isOpen={showPermissionModal} 
-                onClose={() => setShowPermissionModal(false)} 
+            <PermissionModal
+                isOpen={showPermissionModal}
+                onClose={() => setShowPermissionModal(false)}
             />
 
-            <RecordingControls 
+            <RecordingControls
                 isRecording={isRecording}
                 isPending={isPending}
                 hasRecorded={hasRecorded}
@@ -173,14 +179,14 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
             <p className="text-sm text-muted-text">
                 {isRecording
                     ? `Recording... ${formatTime(recTime)}`
-                    : hasRecorded 
+                    : hasRecorded
                         ? `Recorded: ${formatTime(recTime)}`
                         : isPending
-                        ? "Requesting microphone access..."
-                        : "Click to start speaking"}
+                            ? "Requesting microphone access..."
+                            : "Click to start speaking"}
             </p>
 
-            <PlaybackTranscript 
+            <PlaybackTranscript
                 hasRecorded={hasRecorded}
                 isRecording={isRecording}
                 transcription={transcription}
