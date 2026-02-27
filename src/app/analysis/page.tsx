@@ -67,7 +67,7 @@ function AnalysisContent() {
                 .join("\n");
 
             // ── Stage 2–4: Three agents in parallel ─────────────────
-            const careerPathTitle = structured.career_path;
+            const careerPathTitle = session.careerOverride || structured.career_path;
 
             const [laborRes, feasibilityRes, psychologicalRes] = await Promise.all([
                 fetch("/api/analyze/labor", {
@@ -107,8 +107,8 @@ function AnalysisContent() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    career_path: structured.career_path,
-                    career_path_source: structured.career_path_source,
+                    career_path: session.careerOverride || structured.career_path,
+                    career_path_source: session.careerOverride ? "derived" : structured.career_path_source,
                     labor,
                     feasibility,
                     psychological,
