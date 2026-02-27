@@ -134,11 +134,121 @@ function keywordOverlap(a: string, b: string): number {
   return aWords.filter(aw => bWords.some(bw => bw.includes(aw) || aw.includes(bw))).length;
 }
 
+// Helper: aggressively filter macro data to reduce token usage
+function compressMacroData(rawData: string, careerTitle: string, tagName: string): string {
+  try {
+    const data = JSON.parse(rawData);
+
+    // Filter properties to keep only Annual_Average and >= 2021
+    const filterYears = (obj: any) => {
+      const result: any = {};
+      for (const year in obj) {
+        if (parseInt(year) >= 2021) {
+          result[year] = { Annual_Average: obj[year].Annual_Average };
+        }
+      }
+      return result;
+    };
+
+    if (data.data && data.data.Categories) {
+      // Monthly Occupation Trends / Employed by Education structure
+      const categories = data.data.Categories;
+      const matchedCategories: any = {};
+
+      const exact = Object.keys(categories).find(c => c.toLowerCase() === careerTitle.toLowerCase());
+      if (exact) {
+        matchedCategories[exact] = filterYears(categories[exact]);
+      } else {
+        const scored = Object.keys(categories).map(c => ({
+          name: c,
+          score: keywordOverlap(c, careerTitle)
+        })).filter(s => s.score > 0).sort((a, b) => b.score - a.score).slice(0, 2);
+
+        scored.forEach(s => {
+          matchedCategories[s.name] = filterYears(categories[s.name]);
+        });
+
+        // Always include "Total" or similar baseline if it exists and wasn't matched
+        if (categories["Total"] && !matchedCategories["Total"]) {
+          matchedCategories["Total"] = filterYears(categories["Total"]);
+        }
+      }
+      return JSON.stringify({ metadata: data.metadata, data: { Categories: matchedCategories } }, null, 2);
+
+    } else if (data.data && typeof data.data === 'object') {
+      // Monthly Industry Trends structure
+      const sectors = data.data;
+      const matchedSectors: any = {};
+      let totalKeys = 0;
+
+      for (const sectorGroup in sectors) {
+        const industries = sectors[sectorGroup];
+        const exact = Object.keys(industries).find(i => i.toLowerCase() === careerTitle.toLowerCase());
+        if (exact) {
+          matchedSectors[sectorGroup] = { [exact]: filterYears(industries[exact]) };
+          totalKeys++;
+        }
+      }
+
+      if (totalKeys === 0) {
+        // Fuzzy match if no exact match
+        const scoredIndustries: { group: string, name: string, score: number }[] = [];
+        for (const sectorGroup in sectors) {
+          const industries = sectors[sectorGroup];
+          for (const ind in industries) {
+            const score = keywordOverlap(ind, careerTitle);
+            if (score > 0) scoredIndustries.push({ group: sectorGroup, name: ind, score });
+          }
+        }
+
+        const topMatches = scoredIndustries.sort((a, b) => b.score - a.score).slice(0, 2);
+        topMatches.forEach(m => {
+          if (!matchedSectors[m.group]) matchedSectors[m.group] = {};
+          matchedSectors[m.group][m.name] = filterYears(sectors[m.group][m.name]);
+        });
+      }
+      return JSON.stringify({ metadata: data.metadata, data: matchedSectors }, null, 2);
+
+    } else if (data.industries) {
+      // Monthly Average Daily Pay structure
+      const industries = data.industries;
+      const matchedIndustries: any = {};
+
+      const exact = Object.keys(industries).find(i => i.toLowerCase() === careerTitle.toLowerCase());
+
+      if (exact) {
+        matchedIndustries[exact] = filterYears(industries[exact]);
+      } else {
+        const scored = Object.keys(industries).map(i => ({
+          name: i,
+          score: keywordOverlap(i, careerTitle)
+        })).filter(s => s.score > 0).sort((a, b) => b.score - a.score).slice(0, 2);
+
+        scored.forEach(s => {
+          matchedIndustries[s.name] = filterYears(industries[s.name]);
+        });
+      }
+
+      // Always include TOTAL baseline
+      if (industries["TOTAL"]) {
+        matchedIndustries["TOTAL"] = filterYears(industries["TOTAL"]);
+      }
+      return JSON.stringify({ metadata: data.metadata, industries: matchedIndustries }, null, 2);
+    }
+
+    // Fallback if structure is unknown, just return raw
+    return rawData;
+  } catch (e) {
+    console.error(`Error compressing macro data for ${tagName}:`, e);
+    return rawData;
+  }
+}
+
 /**
  * Load labor-analyst JSON files with career-specific filtering.
  * - dole_jobs.json: filter by job_title (exact + fuzzy)
  * - ph_board_exam_pass_rates.json: filter professions[] by profession name
- * - All other files (macro/aggregate data): loaded as-is
+ * - All other files (macro/aggregate data): heavily filtered based on career relevance + recent years
  */
 export function getFilteredLaborContexts(careerPathTitle: string): string {
   const dirPath = path.join(process.cwd(), 'public/data/labor-analyst');
@@ -207,8 +317,9 @@ export function getFilteredLaborContexts(careerPathTitle: string): string {
       } catch { return `<${tagName}>\n${raw}\n</${tagName}>`; }
     }
 
-    // All other files — load as-is (macro/aggregate data)
-    return `<${tagName}>\n${raw}\n</${tagName}>`;
+    // All other files — heavily filter macro/aggregate data
+    const compressedRaw = compressMacroData(raw, careerPathTitle, tagName);
+    return `<${tagName}>\n${compressedRaw}\n</${tagName}>`;
   });
 
   const result = xmlContexts.join('\n\n');
