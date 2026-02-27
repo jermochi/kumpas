@@ -59,7 +59,8 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
 
         const handleStop = async () => {
             const audioBlob = new Blob(audioChunks.current, { type: "audio/webm" });
-            const file = new File([audioBlob], "recording.webm", { type: "audio/webm" });
+            const fileName = `recording_${Date.now()}.webm`;
+            const file = new File([audioBlob], fileName, { type: "audio/webm" });
 
             audioChunks.current = [];
 
@@ -72,8 +73,8 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
 
             try {
                 // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
-                const blob = await upload(file.name, file, {
-                    access: "private",
+                const blob = await upload(fileName, file, {
+                    access: "public",
                     handleUploadUrl: "/api/upload",
                 });
 
