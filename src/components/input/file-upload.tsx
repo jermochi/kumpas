@@ -83,7 +83,8 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
         try {
             // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
             const safeName = sanitizeFileName(file.name);
-            const blob = await upload(safeName, file, {
+            const uniqueName = `${Date.now()}-${safeName}`;
+            const blob = await upload(uniqueName, file, {
                 access: "public",
                 handleUploadUrl: "/api/upload",
             });
