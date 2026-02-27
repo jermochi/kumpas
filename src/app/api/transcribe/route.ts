@@ -12,34 +12,39 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // Fetch the audio file from Vercel Blob using the SDK (required for private blobs)
-    console.log("Transcribe: fetching blob at URL:", blobUrl);
-    let result;
-    try {
-      result = await get(blobUrl, { access: "private" });
-    } catch (blobErr) {
-      console.error("Blob get() threw:", blobErr);
+    // Fetch the audio file from Vercel Blob using a standard fetch for public blobs
+    console.log("Transcribe: fetching public blob at URL:", blobUrl);
+
+    // Retry logic: Vercel CDN sometimes takes a few seconds to propagate the public blob
+    let result: Response | null = null;
+    let attempts = 0;
+    const maxAttempts = 5;
+
+    while (attempts < maxAttempts) {
+      result = await fetch(blobUrl);
+      if (result.ok) break;
+
+      if (result.status === 404) {
+        console.log(`Blob not found, retrying in 1s (Attempt ${attempts + 1}/${maxAttempts})...`);
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        attempts++;
+      } else {
+        break;
+      }
+    }
+
+    if (!result || !result.ok) {
+      console.error("Fetch failed after retries:", result?.status);
       return NextResponse.json(
-        { error: `Failed to fetch audio from blob storage: ${(blobErr as Error).message}` },
+        { error: "Failed to fetch audio from blob storage after multiple attempts" },
         { status: 500 }
       );
     }
 
-    if (!result || result.statusCode !== 200) {
-      console.error("Blob get() returned:", result?.statusCode ?? "null");
-      return NextResponse.json(
-        { error: "Failed to fetch audio from blob storage" },
-        { status: 500 }
-      );
-    }
-
-    // Convert the ReadableStream into a Blob
-    const audioBlob = new Blob(
-      [await new Response(result.stream).arrayBuffer()],
-      { type: result.blob.contentType ?? "audio/webm" }
-    );
+    // Convert the Response into a Blob
+    const audioBlob = await result.blob();
     const fileName = blobUrl.split("/").pop() || "audio.webm";
-    const file = new File([audioBlob], fileName, { type: audioBlob.type });
+    const file = new File([audioBlob], fileName, { type: audioBlob.type || "audio/webm" });
 
     console.log("Transcribe: sending to Groq, file size:", audioBlob.size, "type:", audioBlob.type);
 

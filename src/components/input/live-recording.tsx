@@ -74,7 +74,7 @@ export default function LiveRecording({ isRecording, onToggleRecording, onHasDat
             try {
                 // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
                 const blob = await upload(fileName, file, {
-                    access: "private",
+                    access: "public",
                     handleUploadUrl: "/api/upload",
                 });
 
