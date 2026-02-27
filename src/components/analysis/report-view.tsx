@@ -10,6 +10,8 @@ import TranscriptPanel from "@/components/analysis/transcript-panel";
 import RelatedCareersPanel from "@/components/analysis/related-careers-panel";
 import PdfFooter from "@/components/analysis/pdf-footer";
 import FullscreenModal from "@/components/analysis/fullscreen-modal";
+import PdfModal from "@/components/analysis/pdf-modal";
+import { PdfDocument } from "@/components/analysis/pdf-document";
 
 interface ReportViewProps {
     report: AdjacentCareerReport;
@@ -20,6 +22,47 @@ interface ReportViewProps {
 export default function ReportView({ report, structured, agentData }: ReportViewProps) {
     const [activeAgent, setActiveAgent] = useState<AgentKey>("labor_market");
     const [modalContent, setModalContent] = useState<"transcript" | AgentKey | null>(null);
+
+    // PDF Generation State
+    const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+    const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
+    const pdfContentRef = useRef<HTMLDivElement>(null);
+
+    const handleGeneratePdf = async () => {
+        if (!pdfContentRef.current) return;
+        setIsGeneratingPdf(true);
+        try {
+            // Dynamically import html2pdf to avoid SSR issues
+            // @ts-ignore
+            const html2pdf = (await import("html2pdf.js")).default;
+            const element = pdfContentRef.current;
+
+            const opt = {
+                margin: 0,
+                filename: `Kumpas_Assessment_${structured.career_path || "Report"}.pdf`,
+                image: { type: 'jpeg' as const, quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    // Remove all external/global stylesheets from the cloned document
+                    onclone: (clonedDoc: Document) => {
+                        const styles = clonedDoc.querySelectorAll('style, link[rel="stylesheet"]');
+                        styles.forEach(s => s.remove());
+                    }
+                },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const }
+            };
+
+            const pdfBlobUrl = await html2pdf().set(opt).from(element).output('bloburl');
+            setPdfBlobUrl(pdfBlobUrl);
+        } catch (error) {
+            console.error("PDF generation failed:", error);
+            alert("Failed to generate PDF. Please try again.");
+        } finally {
+            setIsGeneratingPdf(false);
+        }
+    };
 
     const relatedCareers = useMemo(() => buildRelatedCareers(report), [report]);
 
@@ -106,9 +149,28 @@ export default function ReportView({ report, structured, agentData }: ReportView
                 </div>
 
                 {/* ── PDF Footer ───────────────────────────────────────── */}
-                <PdfFooter />
+                <PdfFooter
+                    onGenerate={handleGeneratePdf}
+                    isGenerating={isGeneratingPdf}
+                />
+
+                {/* ── Hidden Printable PDF Content ─────────────────────── */}
+                <div style={{ position: "absolute", left: "-9999px", top: 0 }}>
+                    <PdfDocument
+                        ref={pdfContentRef}
+                        report={report}
+                        structured={structured}
+                        agentData={agentData}
+                    />
+                </div>
 
                 {/* ── Modals ───────────────────────────────────────────── */}
+
+                <PdfModal
+                    isOpen={!!pdfBlobUrl}
+                    onClose={() => setPdfBlobUrl(null)}
+                    pdfUrl={pdfBlobUrl}
+                />
 
                 {/* Transcript Modal */}
                 <FullscreenModal
