@@ -96,9 +96,9 @@ export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
                                 </div>
 
                                 {panel.supportingData && (
-                                    <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginTop: "auto", flexShrink: 0, height: "170px" }}>
+                                    <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginTop: "auto", flexShrink: 0 }}>
                                         {panel.supportingData.slice(0, 3).map((m, i) => (
-                                            <div key={i} style={{ border: "1px solid #f3f4f6", borderRadius: "4px", padding: "6px 8px", backgroundColor: "#fdfdfd", flex: 1, display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                                            <div key={i} style={{ border: "1px solid #f3f4f6", borderRadius: "4px", padding: "6px 8px", backgroundColor: "#fdfdfd", display: "flex", flexDirection: "column", justifyContent: "center" }}>
                                                 <div style={{ fontSize: "9px", color: "#6b7280", textTransform: "uppercase", fontWeight: "bold", marginBottom: "3px", lineHeight: 1 }}>{m.label}</div>
                                                 <div style={{ fontWeight: "800", fontSize: "11px", lineHeight: 1.2, color: "#111827" }}>{m.value}</div>
                                             </div>
