@@ -1,5 +1,5 @@
 import Groq from "groq-sdk";
-import { del } from "@vercel/blob";
+import { del, get } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
@@ -12,22 +12,36 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // Fetch the audio file from Vercel Blob (private store requires auth)
-    const audioResponse = await fetch(blobUrl, {
-      headers: {
-        Authorization: `Bearer ${process.env.BLOB_READ_WRITE_TOKEN}`,
-      },
-    });
-    if (!audioResponse.ok) {
+    // Fetch the audio file from Vercel Blob using the SDK (required for private blobs)
+    console.log("Transcribe: fetching blob at URL:", blobUrl);
+    let result;
+    try {
+      result = await get(blobUrl, { access: "private" });
+    } catch (blobErr) {
+      console.error("Blob get() threw:", blobErr);
+      return NextResponse.json(
+        { error: `Failed to fetch audio from blob storage: ${(blobErr as Error).message}` },
+        { status: 500 }
+      );
+    }
+
+    if (!result || result.statusCode !== 200) {
+      console.error("Blob get() returned:", result?.statusCode ?? "null");
       return NextResponse.json(
         { error: "Failed to fetch audio from blob storage" },
         { status: 500 }
       );
     }
 
-    const audioBlob = await audioResponse.blob();
+    // Convert the ReadableStream into a Blob
+    const audioBlob = new Blob(
+      [await new Response(result.stream).arrayBuffer()],
+      { type: result.blob.contentType ?? "audio/webm" }
+    );
     const fileName = blobUrl.split("/").pop() || "audio.webm";
     const file = new File([audioBlob], fileName, { type: audioBlob.type });
+
+    console.log("Transcribe: sending to Groq, file size:", audioBlob.size, "type:", audioBlob.type);
 
     const transcription = await groq.audio.transcriptions.create({
       file,
@@ -44,9 +58,9 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ text: transcription.text });
   } catch (err) {
-    console.error("Groq transcription error:", err);
+    console.error("Transcription error:", err);
     return NextResponse.json(
-      { error: "Transcription failed" },
+      { error: `Transcription failed: ${(err as Error).message}` },
       { status: 500 }
     );
   }

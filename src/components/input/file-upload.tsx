@@ -66,12 +66,24 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
         [onFileChange]
     );
 
+    /** Strip special chars that break Vercel Blob pathname handling */
+    const sanitizeFileName = (name: string): string => {
+        const ext = name.lastIndexOf(".") >= 0 ? name.slice(name.lastIndexOf(".")) : "";
+        const base = name.slice(0, name.length - ext.length);
+        const clean = base
+            .replace(/\s+/g, "_")           // spaces → underscores
+            .replace(/[^a-zA-Z0-9._-]/g, "") // strip unsafe chars
+            .replace(/[_-]{2,}/g, "_");      // collapse repeats
+        return (clean || "audio") + ext;
+    };
+
     const transcribeFile = async (file: File) => {
         setTranscription({ status: "loading" });
 
         try {
             // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
-            const blob = await upload(file.name, file, {
+            const safeName = sanitizeFileName(file.name);
+            const blob = await upload(safeName, file, {
                 access: "private",
                 handleUploadUrl: "/api/upload",
             });
