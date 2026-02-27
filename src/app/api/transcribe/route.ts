@@ -5,6 +5,35 @@ import { NextRequest, NextResponse } from "next/server";
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export async function POST(req: NextRequest) {
+  const contentType = req.headers.get("content-type") || "";
+
+  if (contentType.includes("multipart/form-data")) {
+    try {
+      const formData = await req.formData();
+      const file = formData.get("file") as File | null;
+
+      if (!file) {
+        return NextResponse.json({ error: "No file provided" }, { status: 400 });
+      }
+
+      console.log("Transcribe: sending direct file to Groq, size:", file.size, "type:", file.type);
+
+      const transcription = await groq.audio.transcriptions.create({
+        file,
+        model: "whisper-large-v3-turbo",
+        response_format: "verbose_json",
+      });
+
+      return NextResponse.json({ text: transcription.text });
+    } catch (err) {
+      console.error("Transcription error (direct):", err);
+      return NextResponse.json(
+        { error: `Transcription failed: ${(err as Error).message}` },
+        { status: 500 }
+      );
+    }
+  }
+
   const { blobUrl } = (await req.json()) as { blobUrl?: string };
 
   if (!blobUrl) {
