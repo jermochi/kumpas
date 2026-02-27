@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 interface RelatedCareer {
     career: string;
@@ -21,8 +22,38 @@ const STATUS_STYLES: Record<string, string> = {
 
 export default function RelatedCareersPanel({ careers }: RelatedCareersPanelProps) {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+    const [isGenerating, setIsGenerating] = useState(false);
 
-    const isUnlocked = selectedIndex !== null;
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const sessionId = searchParams.get("session");
+
+    const isUnlocked = selectedIndex !== null && !isGenerating;
+
+    const handleExplore = () => {
+        if (selectedIndex === null || !sessionId) return;
+        setIsGenerating(true);
+
+        const raw = sessionStorage.getItem(`kumpas-session-${sessionId}`);
+        if (!raw) return;
+
+        const session = JSON.parse(raw);
+        const selectedCareer = careers[selectedIndex];
+
+        // Create new session ID and save overriding data
+        const newSessionId = crypto.randomUUID();
+        sessionStorage.setItem(
+            `kumpas-session-${newSessionId}`,
+            JSON.stringify({
+                ...session,
+                careerOverride: selectedCareer.career,
+                createdAt: new Date().toISOString(),
+            })
+        );
+
+        // Navigate to the new session
+        router.push(`/analysis?session=${newSessionId}`);
+    };
 
     return (
         <div className="rounded-2xl border border-black/[0.06] bg-white p-4 sm:p-5">
@@ -68,6 +99,7 @@ export default function RelatedCareersPanel({ careers }: RelatedCareersPanelProp
             {/* Explore alternative button — unlocked when a career is selected */}
             <button
                 disabled={!isUnlocked}
+                onClick={handleExplore}
                 className={`
                     mt-4 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold transition-colors
                     ${isUnlocked
@@ -76,7 +108,7 @@ export default function RelatedCareersPanel({ careers }: RelatedCareersPanelProp
                     }
                 `}
             >
-                Explore alternative
+                {isGenerating ? "Setting up..." : "Explore alternative"}
             </button>
         </div>
     );
