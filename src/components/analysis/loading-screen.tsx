@@ -87,7 +87,7 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
 
                 <div className="flex flex-col gap-4 w-full items-center">
                     <ProgressRow 
-                        label="1. Transcription Layer" 
+                        label="Transcription Layer" 
                         progress={transcriptionProgress} 
                         isDone={hasTranscription} 
                         active={true}
@@ -99,11 +99,11 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
                             <div className={`p-1.5 rounded-full ${hasParallel ? "bg-[var(--charcoal)] text-white" : (hasTranscription ? "bg-gray-100 text-[var(--charcoal)]" : "bg-gray-200 text-gray-400")}`}>
                                 {hasParallel ? <CheckCircle2 size={14} /> : (hasTranscription ? <Loader2 size={14} className="animate-spin" /> : <CircleDashed size={14} />)}
                             </div>
-                            <span className={`text-sm font-medium ${hasTranscription ? "text-[var(--charcoal)]" : "text-gray-400"}`}>2. Parallel Agent Analysis</span>
+                            <span className={`text-sm font-medium ${hasTranscription ? "text-[var(--charcoal)]" : "text-gray-400"}`}>Agent Analysis</span>
                         </div>
                         <div className="pl-[2.25rem] flex flex-col gap-4">
                             <AgentSubProgress 
-                                label="Labor Market Analyst" 
+                                label="Labor Market" 
                                 icon={BarChart3} 
                                 progress={agentProgress.labor} 
                                 color="#6B8C6B" 
@@ -111,15 +111,15 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
                                 done={hasParallel} 
                             />
                             <AgentSubProgress 
-                                label="Feasibility Risk Scan" 
+                                label="Feasibility" 
                                 icon={Shield} 
                                 progress={agentProgress.feasi} 
                                 color="#C4861C" 
                                 active={hasTranscription && !hasParallel} 
-                                done={hasParallel} 
+                                done={hasParallel}
                             />
                             <AgentSubProgress 
-                                label="Psychological Profiler" 
+                                label="Psychological" 
                                 icon={Brain} 
                                 progress={agentProgress.psych} 
                                 color="#5B7FA6" 
@@ -130,7 +130,7 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
                     </div>
 
                     <ProgressRow 
-                        label="3. Final Verdict Synthesis" 
+                        label="Verdict Synthesis" 
                         progress={verdictProgress} 
                         isDone={hasVerdict} 
                         active={hasParallel}
