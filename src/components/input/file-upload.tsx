@@ -66,24 +66,51 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
         [onFileChange]
     );
 
+    /** Strip special chars that break Vercel Blob pathname handling */
+    const sanitizeFileName = (name: string): string => {
+        const ext = name.lastIndexOf(".") >= 0 ? name.slice(name.lastIndexOf(".")) : "";
+        const base = name.slice(0, name.length - ext.length);
+        const clean = base
+            .replace(/\s+/g, "_")           // spaces → underscores
+            .replace(/[^a-zA-Z0-9._-]/g, "") // strip unsafe chars
+            .replace(/[_-]{2,}/g, "_");      // collapse repeats
+        return (clean || "audio") + ext;
+    };
+
     const transcribeFile = async (file: File) => {
         setTranscription({ status: "loading" });
 
         try {
-            // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
-            const blob = await upload(file.name, file, {
-                access: "private",
-                handleUploadUrl: "/api/upload",
-            });
+            let res: Response;
+            let data: any;
+            const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
-            // Step 2: Send blob URL to transcribe API
-            const res = await fetch("/api/transcribe", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ blobUrl: blob.url }),
-            });
+            if (isLocalhost) {
+                const formData = new FormData();
+                formData.append("file", file);
 
-            const data = await res.json();
+                res = await fetch("/api/transcribe", {
+                    method: "POST",
+                    body: formData,
+                });
+            } else {
+                // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
+                const safeName = sanitizeFileName(file.name);
+                const uniqueName = `${Date.now()}-${safeName}`;
+                const blob = await upload(uniqueName, file, {
+                    access: "public",
+                    handleUploadUrl: "/api/upload",
+                });
+
+                // Step 2: Send blob URL to transcribe API
+                res = await fetch("/api/transcribe", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ blobUrl: blob.url }),
+                });
+            }
+
+            data = await res.json();
 
             if (!res.ok) {
                 const errorMessage = data.error ?? "Unknown error occurred during transcription.";
