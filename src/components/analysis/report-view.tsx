@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect } from "react";
+import { RotateCcw } from "lucide-react";
 import type { AdjacentCareerReport, StructuredTranscript, AgentKey, AgentPanelData } from "@/lib/analysis-types";
 import { buildRelatedCareers } from "@/lib/analysis-helpers";
 
@@ -15,9 +16,10 @@ interface ReportViewProps {
     report: AdjacentCareerReport;
     structured: StructuredTranscript;
     agentData: Record<AgentKey, AgentPanelData>;
+    onNewSession: () => void;
 }
 
-export default function ReportView({ report, structured, agentData }: ReportViewProps) {
+export default function ReportView({ report, structured, agentData, onNewSession }: ReportViewProps) {
     const [activeAgent, setActiveAgent] = useState<AgentKey>("labor_market");
     const [modalContent, setModalContent] = useState<"transcript" | AgentKey | null>(null);
 
@@ -59,15 +61,45 @@ export default function ReportView({ report, structured, agentData }: ReportView
 
                 {/* ── Header ──────────────────────────────────────────── */}
                 <header>
+                    {/* Eyebrow */}
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-text">
                         Career Assessment · Session Output
                     </p>
-                    <h1 className="font-heading mt-1 text-3xl font-bold leading-tight text-ink sm:text-4xl">
-                        Assessment for{" "}
-                        <em className="text-forest">{structured.career_path || "Career"}</em>
-                    </h1>
+
+                    {/* h1 + button on the same baseline row */}
+                    <div className="mt-1 flex items-baseline justify-between gap-4">
+                        <h1 className="font-heading text-3xl font-bold leading-tight text-ink sm:text-4xl">
+                            Assessment for{" "}
+                            <em className="text-forest">{structured.career_path || "Career"}</em>
+                        </h1>
+
+                        {/* New Session — sits on the h1 baseline, calm secondary style */}
+                        <button
+                            onClick={onNewSession}
+                            className="
+                                flex shrink-0 items-center gap-1.5
+                                rounded-lg border border-black/[0.1]
+                                bg-white
+                                px-3.5 py-2
+                                text-xs font-semibold uppercase tracking-wider
+                                text-muted-text
+                                transition-all duration-150
+                                hover:border-black/[0.18] hover:text-ink hover:shadow-sm
+                                active:scale-[0.97]
+                                cursor-pointer
+                            "
+                        >
+                            <RotateCcw size={12} strokeWidth={2.5} />
+                            New Session
+                        </button>
+                    </div>
+
+                    {/* Frameworks line */}
                     <p className="mt-1 text-xs text-muted-text">
-                        Three agents · <span className="font-semibold text-ink">LMI Framework</span> · <span className="font-semibold text-ink">SCCT</span> · <span className="font-semibold text-ink">JD-R Model</span>
+                        Three agents ·{" "}
+                        <span className="font-semibold text-ink">LMI Framework</span> ·{" "}
+                        <span className="font-semibold text-ink">SCCT</span> ·{" "}
+                        <span className="font-semibold text-ink">JD-R Model</span>
                     </p>
                 </header>
 
