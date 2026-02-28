@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect } from "react";
-import { PlusCircle } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import type { AdjacentCareerReport, StructuredTranscript, AgentKey, AgentPanelData } from "@/lib/analysis-types";
 import { buildRelatedCareers } from "@/lib/analysis-helpers";
 
@@ -59,27 +59,47 @@ export default function ReportView({ report, structured, agentData, onNewSession
             <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10 space-y-6">
 
                 {/* ── Header ──────────────────────────────────────────── */}
-                <header className="flex items-start justify-between gap-4">
-                    <div>
-                        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-text">
-                            Career Assessment · Session Output
-                        </p>
-                        <h1 className="font-heading mt-1 text-3xl font-bold leading-tight text-ink sm:text-4xl">
+                <header>
+                    {/* Eyebrow */}
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-text">
+                        Career Assessment · Session Output
+                    </p>
+
+                    {/* h1 + button on the same baseline row */}
+                    <div className="mt-1 flex items-baseline justify-between gap-4">
+                        <h1 className="font-heading text-3xl font-bold leading-tight text-ink sm:text-4xl">
                             Assessment for{" "}
                             <em className="text-forest">{structured.career_path || "Career"}</em>
                         </h1>
-                        <p className="mt-1 text-xs text-muted-text">
-                            Three agents · <span className="font-semibold text-ink">LMI Framework</span> · <span className="font-semibold text-ink">SCCT</span> · <span className="font-semibold text-ink">JD-R Model</span>
-                        </p>
+
+                        {/* New Session — sits on the h1 baseline, calm secondary style */}
+                        <button
+                            onClick={onNewSession}
+                            className="
+                                flex shrink-0 items-center gap-1.5
+                                rounded-lg border border-black/[0.1]
+                                bg-white
+                                px-3.5 py-2
+                                text-xs font-semibold uppercase tracking-wider
+                                text-muted-text
+                                transition-all duration-150
+                                hover:border-black/[0.18] hover:text-ink hover:shadow-sm
+                                active:scale-[0.97]
+                                cursor-pointer
+                            "
+                        >
+                            <RotateCcw size={12} strokeWidth={2.5} />
+                            New Session
+                        </button>
                     </div>
 
-                    {/* New Session button */}
-                    <button
-                        onClick={onNewSession}
-                        className="flex shrink-0 items-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm font-medium text-ink hover:bg-black/[0.03] transition-colors cursor-pointer"
-                    >
-                        New Session
-                    </button>
+                    {/* Frameworks line */}
+                    <p className="mt-1 text-xs text-muted-text">
+                        Three agents ·{" "}
+                        <span className="font-semibold text-ink">LMI Framework</span> ·{" "}
+                        <span className="font-semibold text-ink">SCCT</span> ·{" "}
+                        <span className="font-semibold text-ink">JD-R Model</span>
+                    </p>
                 </header>
 
                 {/* ── Score Cards Row ──────────────────────────────────── */}

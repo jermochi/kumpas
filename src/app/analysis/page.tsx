@@ -29,6 +29,16 @@ function AnalysisContent() {
     const router = useRouter();
     const sessionId = searchParams.get("session");
 
+    const onNewSession = useCallback(() => {
+        if (sessionId) {
+            sessionStorage.removeItem(`kumpas-session-${sessionId}`);
+            sessionStorage.removeItem(`kumpas-structured-${sessionId}`);
+            sessionStorage.removeItem(`kumpas-report-${sessionId}`);
+            sessionStorage.removeItem(`kumpas-agent-data-${sessionId}`);
+        }
+        router.push("/");
+    }, [sessionId, router]);
+
     const runPipeline = useCallback(async () => {
         if (!sessionId) {
             setState({ phase: "error", message: "No session ID found. Please start a new session." });
@@ -167,7 +177,7 @@ function AnalysisContent() {
                 <LoadingScreen completedStages={state.completedStages} />
             )}
             {state.phase === "complete" && (
-                <ReportView report={state.report} structured={state.structured} agentData={state.agentData} />
+                <ReportView report={state.report} structured={state.structured} agentData={state.agentData} onNewSession={onNewSession} />
             )}
             {state.phase === "error" && (
                 <ErrorView
