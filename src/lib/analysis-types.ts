@@ -27,6 +27,12 @@ export interface RelatedCareer {
 // ─── Agent Detail Panel (dummy-data shape) ──────────────────────────
 export type AgentKey = "labor_market" | "feasibility" | "psychological";
 
+export interface ScoreBreakdownItem {
+    label: string;
+    value: number;
+    weight: string; // e.g. "30%"
+}
+
 export interface RawAgentResponse {
     score: number;
     verdict: string;
@@ -37,6 +43,11 @@ export interface RawAgentResponse {
         sub_note?: string;
     }[];
     summary: string;
+    score_breakdown: {
+        label: string;
+        value: number;
+        weight: string;
+    }[];
     supporting_data: {
         icon: "up" | "down" | "neutral";
         label: string;
@@ -53,6 +64,7 @@ export interface AgentPanelData {
     verdict: string;
     keySignals: KeySignal[];
     summary: string;
+    scoreBreakdown: ScoreBreakdownItem[];
     supportingData: SupportingRow[];
 }
 

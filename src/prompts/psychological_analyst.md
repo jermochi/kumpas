@@ -105,6 +105,28 @@ Return a valid JSON object with this exact schema:
     }
   ],
   "summary": "<3-4 sentence narrative synthesizing the JD-R balance, motivation authenticity, and burnout risk>",
+  "score_breakdown": [
+    {
+      "label": "Intrinsic Motivation",
+      "value": <0-100 integer>,
+      "weight": "30%"
+    },
+    {
+      "label": "Social Support",
+      "value": <0-100 integer>,
+      "weight": "25%"
+    },
+    {
+      "label": "Self-Efficacy",
+      "value": <0-100 integer>,
+      "weight": "25%"
+    },
+    {
+      "label": "Stress Tolerance",
+      "value": <0-100 integer>,
+      "weight": "20%"
+    }
+  ],
   "supporting_data": [
     {
       "icon": "<up | down | neutral>",
@@ -125,6 +147,14 @@ The `key_signals` array must contain **exactly 3 items** in this order:
 - `"up"` = positive signal (strong resources, low demands, good alignment)
 - `"down"` = negative signal (weak resources, high demands, burnout risk)
 - `"neutral"` = mixed or moderate signal, or insufficient data
+
+### Score Breakdown Rules
+The `score_breakdown` array must contain exactly these 4 items derived from the **Student Resource Score** calculation section:
+1. `Intrinsic Motivation` (weight 30%)
+2. `Social Support` (weight 25%)
+3. `Self-Efficacy` (weight 25%)
+4. `Stress Tolerance` (weight 20%)
+(Note: These breakdown values represent the raw *Student Resource* subscale scores prior to any JD-R penalty/bonus adjustments mapped to the final score.)
 
 ### Supporting Data Rules
 The `supporting_data` array can contain **1 or more items** — include relevant JD-R details that add nuance. Examples:
