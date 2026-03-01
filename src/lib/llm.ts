@@ -1,4 +1,4 @@
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI, HarmCategory, HarmBlockThreshold } from '@google/genai';
 
 /**
  * Sanitize a raw LLM output string so it can be safely JSON.parsed.
@@ -76,10 +76,31 @@ export async function callAgent(
       config: {
         systemInstruction: systemPromptText,
         responseMimeType: 'application/json',
+        safetySettings: [
+          {
+            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+        ]
       }
     });
 
   const textOutput = response.text;
+
+  console.log(`Text output: ${textOutput}`);
+  console.log(`User transcript: ${userTranscript}`);
 
   // Token metadata for estimating costs and monitoring usage
   const usage = response.usageMetadata;
@@ -98,7 +119,8 @@ export async function callAgent(
   console.log(lines.join("\n"));
 
     if (!textOutput) {
-      throw new Error("No text returned from Gemini");
+      console.error("Gemini rejected generation. Safety settings limits reached? Candidates info:", JSON.stringify(response));
+      throw new Error(`No text returned from Gemini: Prompt Feedback: ${JSON.stringify(response.promptFeedback)}`);
     }
 
     // Tier 1: Direct parse

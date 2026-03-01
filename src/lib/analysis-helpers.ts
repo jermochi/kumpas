@@ -8,6 +8,9 @@ export function buildAgentPanels(
     feasibility: RawAgentResponse,
     psychological: RawAgentResponse
 ): Record<AgentKey, AgentPanelData> {
+    console.log("Labor:", labor);
+    console.log("Feasibility:", feasibility);
+    console.log("Psychological:", psychological);
     return {
         labor_market: {
             key: "labor_market",
