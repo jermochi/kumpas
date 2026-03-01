@@ -8,7 +8,7 @@ export interface StructuredTranscript {
 }
 
 export interface TranscriptTurn {
-    speaker: "Counselor" | "Student";
+    speaker: "Counselor" | "Student" | "Unknown";
     text: string;
 }
 
@@ -53,6 +53,10 @@ export interface RawAgentResponse {
         label: string;
         value: string;
     }[];
+
+    // Parse failure shape
+    error?: string;
+    agent?: string;
 }
 
 export interface AgentPanelData {

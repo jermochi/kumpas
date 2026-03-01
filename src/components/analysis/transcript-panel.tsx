@@ -40,10 +40,14 @@ export default function TranscriptPanel({ turns, wordCount, onFullscreen, classN
             <div className="flex-1 overflow-y-auto space-y-3 pr-1 scrollbar-thin max-h-[350px]">
                 {turns.map((turn, i) => (
                     <div key={i}>
-                        <p className="text-[10px] font-semibold uppercase tracking-wider text-white/70 mb-0.5">
+                        <p className={`text-[10px] font-semibold uppercase tracking-wider mb-0.5 ${
+                            turn.speaker === "Unknown" ? "text-white/30 italic" : "text-white/70"
+                            }`}>
                             {turn.speaker}
                         </p>
-                        <p className="text-xs leading-relaxed text-white/90">
+                        <p className={`text-xs font-semibold tracking-wider mb-0.5 ${
+                            turn.speaker === "Unknown" ? "text-muted-text/40 italic" : "text-muted-text"
+                            }`}>
                             {turn.text}
                         </p>
                     </div>
