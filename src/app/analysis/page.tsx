@@ -30,14 +30,8 @@ function AnalysisContent() {
     const sessionId = searchParams.get("session");
 
     const onNewSession = useCallback(() => {
-        if (sessionId) {
-            sessionStorage.removeItem(`kumpas-session-${sessionId}`);
-            sessionStorage.removeItem(`kumpas-structured-${sessionId}`);
-            sessionStorage.removeItem(`kumpas-report-${sessionId}`);
-            sessionStorage.removeItem(`kumpas-agent-data-${sessionId}`);
-        }
         router.push("/");
-    }, [sessionId, router]);
+    }, [router]);
 
     const runPipeline = useCallback(async () => {
         if (!sessionId) {
