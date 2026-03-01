@@ -21,7 +21,8 @@ export async function POST(req: Request) {
         const structured = await callAgent(
             systemPrompt,
             transcript,
-            process.env.TRANSCRIPTION_LAYER_API_KEY as string
+            process.env.TRANSCRIPTION_LAYER_API_KEY as string,
+            "Verdict Agent: Transcription Layer"
         );
 
         if (structured.error) {

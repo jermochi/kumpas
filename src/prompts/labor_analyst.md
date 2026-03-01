@@ -86,6 +86,33 @@ Return a valid JSON object with this exact schema:
     }
   ],
   "summary": "<3-4 sentence narrative synthesizing key findings, risks, and opportunities>",
+  "score_breakdown": [
+    {
+      "label": "DOLE Demand Status",
+      "value": <0-100 integer>,
+      "weight": "30%"
+    },
+    {
+      "label": "Board Pass Rate Signal",
+      "value": <0-100 integer>,
+      "weight": "25%"
+    },
+    {
+      "label": "Salary Competitiveness",
+      "value": <0-100 integer>,
+      "weight": "20%"
+    },
+    {
+      "label": "Growth Trend",
+      "value": <0-100 integer>,
+      "weight": "15%"
+    },
+    {
+      "label": "Regional Availability",
+      "value": <0-100 integer>,
+      "weight": "10%"
+    }
+  ],
   "supporting_data": [
     {
       "icon": "<up | down | neutral>",
@@ -106,6 +133,14 @@ The `key_signals` array must contain **exactly 3 items** in this order:
 - `"up"` = positive signal (in-demand, high salary, growing, etc.)
 - `"down"` = negative signal (not listed, declining, very low pass rate as risk, etc.)
 - `"neutral"` = mixed or moderate signal
+
+### Score Breakdown Rules
+The `score_breakdown` array must contain exactly these 5 items derived from the **LMI Score Calculation** section:
+1. `DOLE Demand Status` (weight 30%)
+2. `Board Pass Rate Signal` (weight 25%)
+3. `Salary Competitiveness` (weight 20%)
+4. `Growth Trend` (weight 15%)
+5. `Regional Availability` (weight 10%)
 
 ### Supporting Data Rules
 The `supporting_data` array can contain **1 or more items** — include any relevant data points that strengthen or add nuance to the analysis. Examples:

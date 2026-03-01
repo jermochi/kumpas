@@ -81,22 +81,36 @@ export default function FileUpload({ uploadedFile, onFileChange, onHasDataChange
         setTranscription({ status: "loading" });
 
         try {
-            // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
-            const safeName = sanitizeFileName(file.name);
-            const uniqueName = `${Date.now()}-${safeName}`;
-            const blob = await upload(uniqueName, file, {
-                access: "public",
-                handleUploadUrl: "/api/upload",
-            });
+            let res: Response;
+            let data: any;
+            const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
 
-            // Step 2: Send blob URL to transcribe API
-            const res = await fetch("/api/transcribe", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ blobUrl: blob.url }),
-            });
+            if (isLocalhost) {
+                const formData = new FormData();
+                formData.append("file", file);
 
-            const data = await res.json();
+                res = await fetch("/api/transcribe", {
+                    method: "POST",
+                    body: formData,
+                });
+            } else {
+                // Step 1: Upload to Vercel Blob (bypasses 4.5MB body limit)
+                const safeName = sanitizeFileName(file.name);
+                const uniqueName = `${Date.now()}-${safeName}`;
+                const blob = await upload(uniqueName, file, {
+                    access: "public",
+                    handleUploadUrl: "/api/upload",
+                });
+
+                // Step 2: Send blob URL to transcribe API
+                res = await fetch("/api/transcribe", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ blobUrl: blob.url }),
+                });
+            }
+
+            data = await res.json();
 
             if (!res.ok) {
                 const errorMessage = data.error ?? "Unknown error occurred during transcription.";

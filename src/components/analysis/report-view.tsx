@@ -1,33 +1,79 @@
 "use client";
 
 import { useState, useMemo, useRef, useEffect } from "react";
+import { RotateCcw } from "lucide-react";
 import type { AdjacentCareerReport, StructuredTranscript, AgentKey, AgentPanelData } from "@/lib/analysis-types";
 import { buildRelatedCareers } from "@/lib/analysis-helpers";
 
 import ScoreCardsRow from "@/components/analysis/score-cards-row";
 import AgentDetailPanel from "@/components/analysis/agent-detail-panel";
+import ScoreBreakdown from "@/components/analysis/score-breakdown";
 import TranscriptPanel from "@/components/analysis/transcript-panel";
 import RelatedCareersPanel from "@/components/analysis/related-careers-panel";
 import PdfFooter from "@/components/analysis/pdf-footer";
 import FullscreenModal from "@/components/analysis/fullscreen-modal";
+import PdfModal from "@/components/analysis/pdf-modal";
+import { PdfDocument } from "@/components/analysis/pdf-document";
 
 interface ReportViewProps {
-    report: AdjacentCareerReport;
-    structured: StructuredTranscript;
-    agentData: Record<AgentKey, AgentPanelData>;
+    report:       AdjacentCareerReport;
+    structured:   StructuredTranscript;
+    agentData:    Record<AgentKey, AgentPanelData>;
+    onNewSession: () => void;
 }
 
-export default function ReportView({ report, structured, agentData }: ReportViewProps) {
+export default function ReportView({ report, structured, agentData, onNewSession }: ReportViewProps) {
     const [activeAgent, setActiveAgent] = useState<AgentKey>("labor_market");
     const [modalContent, setModalContent] = useState<"transcript" | AgentKey | null>(null);
+
+    // PDF Generation State
+    const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+    const [pdfBlobUrl, setPdfBlobUrl] = useState<string | null>(null);
+    const pdfContentRef = useRef<HTMLDivElement>(null);
+
+    const handleGeneratePdf = async () => {
+        if (!pdfContentRef.current) return;
+        setIsGeneratingPdf(true);
+        try {
+            // Dynamically import html2pdf to avoid SSR issues
+            // @ts-ignore
+            const html2pdf = (await import("html2pdf.js")).default;
+            const element = pdfContentRef.current;
+
+            const opt = {
+                margin: 0,
+                filename: `Kumpas_Assessment_${structured.career_path || "Report"}.pdf`,
+                image: { type: 'jpeg' as const, quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    // Remove all external/global stylesheets from the cloned document
+                    onclone: (clonedDoc: Document) => {
+                        const styles = clonedDoc.querySelectorAll('style, link[rel="stylesheet"]');
+                        styles.forEach(s => s.remove());
+                    }
+                },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const }
+            };
+
+            const pdfBlobUrl = await html2pdf().set(opt).from(element).output('bloburl');
+            setPdfBlobUrl(pdfBlobUrl);
+        } catch (error) {
+            console.error("PDF generation failed:", error);
+            alert("Failed to generate PDF. Please try again.");
+        } finally {
+            setIsGeneratingPdf(false);
+        }
+    };
 
     const relatedCareers = useMemo(() => buildRelatedCareers(report), [report]);
 
     const wordCount = structured.turns.reduce((n, t) => n + t.text.split(/\s+/).length, 0);
 
     const scores: Record<AgentKey, number> = {
-        labor_market: agentData.labor_market.score,
-        feasibility: agentData.feasibility.score,
+        labor_market:  agentData.labor_market.score,
+        feasibility:   agentData.feasibility.score,
         psychological: agentData.psychological.score,
     };
 
@@ -36,7 +82,6 @@ export default function ReportView({ report, structured, agentData }: ReportView
     const leftRef = useRef<HTMLDivElement>(null);
     const [sidebarMaxH, setSidebarMaxH] = useState<number | undefined>(undefined);
 
-    /* Sync right column max-height to left column's rendered height */
     useEffect(() => {
         const el = leftRef.current;
         if (!el) return;
@@ -48,8 +93,8 @@ export default function ReportView({ report, structured, agentData }: ReportView
     }, [activeAgent]);
 
     const verdicts: Record<AgentKey, string> = {
-        labor_market: agentData.labor_market.verdict,
-        feasibility: agentData.feasibility.verdict,
+        labor_market:  agentData.labor_market.verdict,
+        feasibility:   agentData.feasibility.verdict,
         psychological: agentData.psychological.verdict,
     };
 
@@ -59,15 +104,45 @@ export default function ReportView({ report, structured, agentData }: ReportView
 
                 {/* ── Header ──────────────────────────────────────────── */}
                 <header>
+                    {/* Eyebrow */}
                     <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-text">
                         Career Assessment · Session Output
                     </p>
-                    <h1 className="font-heading mt-1 text-3xl font-bold leading-tight text-ink sm:text-4xl">
-                        Assessment for{" "}
-                        <em className="text-forest">{structured.career_path || "Career"}</em>
-                    </h1>
+
+                    {/* h1 + button on the same baseline row */}
+                    <div className="mt-1 flex items-baseline justify-between gap-4">
+                        <h1 className="font-heading text-3xl font-bold leading-tight text-ink sm:text-4xl">
+                            Assessment for{" "}
+                            <em className="text-forest">{structured.career_path || "Career"}</em>
+                        </h1>
+
+                        {/* New Session — sits on the h1 baseline, calm secondary style */}
+                        <button
+                            onClick={onNewSession}
+                            className="
+                                flex shrink-0 items-center gap-1.5
+                                rounded-lg border border-black/[0.1]
+                                bg-white
+                                px-3.5 py-2
+                                text-xs font-semibold uppercase tracking-wider
+                                text-muted-text
+                                transition-all duration-150
+                                hover:border-black/[0.18] hover:text-ink hover:shadow-sm
+                                active:scale-[0.97]
+                                cursor-pointer
+                            "
+                        >
+                            <RotateCcw size={12} strokeWidth={2.5} />
+                            New Session
+                        </button>
+                    </div>
+
+                    {/* Frameworks line */}
                     <p className="mt-1 text-xs text-muted-text">
-                        Three agents · <span className="font-semibold text-ink">LMI Framework</span> · <span className="font-semibold text-ink">SCCT</span> · <span className="font-semibold text-ink">JD-R Model</span>
+                        Three agents ·{" "}
+                        <span className="font-semibold text-ink">LMI Framework</span> ·{" "}
+                        <span className="font-semibold text-ink">SCCT</span> ·{" "}
+                        <span className="font-semibold text-ink">JD-R Model</span>
                     </p>
                 </header>
 
@@ -79,10 +154,12 @@ export default function ReportView({ report, structured, agentData }: ReportView
                     onSelect={setActiveAgent}
                 />
 
+                {/* ── Score Breakdown ──────────────────────────────────── */}
+                <ScoreBreakdown data={activePanel.scoreBreakdown} />
+
                 {/* ── Two-Column Body ─────────────────────────────────── */}
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-4 items-start">
 
-                    {/* Left — drives the height */}
                     <div ref={leftRef}>
                         <AgentDetailPanel
                             data={activePanel}
@@ -90,7 +167,6 @@ export default function ReportView({ report, structured, agentData }: ReportView
                         />
                     </div>
 
-                    {/* Right — capped to left column's height */}
                     <div
                         className="flex flex-col gap-4 overflow-hidden"
                         style={sidebarMaxH ? { maxHeight: sidebarMaxH } : undefined}
@@ -106,9 +182,28 @@ export default function ReportView({ report, structured, agentData }: ReportView
                 </div>
 
                 {/* ── PDF Footer ───────────────────────────────────────── */}
-                <PdfFooter />
+                <PdfFooter
+                    onGenerate={handleGeneratePdf}
+                    isGenerating={isGeneratingPdf}
+                />
+
+                {/* ── Hidden Printable PDF Content ─────────────────────── */}
+                <div style={{ position: "absolute", left: "-9999px", top: 0 }}>
+                    <PdfDocument
+                        ref={pdfContentRef}
+                        report={report}
+                        structured={structured}
+                        agentData={agentData}
+                    />
+                </div>
 
                 {/* ── Modals ───────────────────────────────────────────── */}
+
+                <PdfModal
+                    isOpen={!!pdfBlobUrl}
+                    onClose={() => setPdfBlobUrl(null)}
+                    pdfUrl={pdfBlobUrl}
+                />
 
                 {/* Transcript Modal */}
                 <FullscreenModal
@@ -130,7 +225,6 @@ export default function ReportView({ report, structured, agentData }: ReportView
                     </div>
                 </FullscreenModal>
 
-                {/* Agent Detail Modals — fullscreen shows all data */}
                 {(["labor_market", "feasibility", "psychological"] as AgentKey[]).map((key) => (
                     <FullscreenModal
                         key={key}
@@ -140,7 +234,7 @@ export default function ReportView({ report, structured, agentData }: ReportView
                     >
                         <AgentDetailPanel
                             data={agentData[key]}
-                            onFullscreen={() => { }}
+                            onFullscreen={() => {}}
                             isFullscreen
                         />
                     </FullscreenModal>

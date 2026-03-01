@@ -34,7 +34,8 @@ export async function POST(req: Request) {
         const result = await callAgent(
             systemPrompt,
             agentInput,
-            process.env.VERDICT_AGENT_API_KEY as string
+            process.env.VERDICT_AGENT_API_KEY as string,
+            "Verdict Agent: Career Adjacency Finder"
         );
 
         if (result.error) {
