@@ -9,7 +9,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Transcript and careerPathTitle required' }, { status: 400 });
 
     const laborPrompt = buildLaborSystemPrompt(careerPathTitle);
-    const laborAnalysis = await callAgent(laborPrompt, transcript, process.env.LABOR_AGENT_API_KEY as string);
+    const laborAnalysis = await callAgent(laborPrompt, transcript, process.env.LABOR_AGENT_API_KEY as string, "labor_analyst");
 
     return NextResponse.json({ status: 'success', data: laborAnalysis });
   } catch (error) {

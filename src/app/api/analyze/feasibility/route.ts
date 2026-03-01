@@ -9,7 +9,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Transcript and careerPathTitle required' }, { status: 400 });
 
     const feasibilityPrompt = buildFeasibilitySystemPrompt(careerPathTitle);
-    const feasibilityAnalysis = await callAgent(feasibilityPrompt, transcript, process.env.FEASIBILITY_AGENT_API_KEY as string);
+    const feasibilityAnalysis = await callAgent(feasibilityPrompt, transcript, process.env.FEASIBILITY_AGENT_API_KEY as string, "feasibility_analyst");
 
     return NextResponse.json({ status: 'success', data: feasibilityAnalysis });
   } catch (error) {

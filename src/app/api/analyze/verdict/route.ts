@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { callAgent } from "@/lib/llm";
+import { callAgent, isAgentFailure } from "@/lib/llm";
 import { getSystemInstructions } from "@/lib/utils";
 
 export async function POST(req: Request) {
@@ -21,8 +21,6 @@ export async function POST(req: Request) {
 
         const systemPrompt = getSystemInstructions("adjacent_career.md");
 
-        // The Adjacent Career Finder receives all 3 agent JSON outputs
-        // and the career path — it identifies related alternative careers
         const agentInput = JSON.stringify({
             career_path_detected: body.career_path,
             career_path_source: body.career_path_source,
@@ -34,10 +32,11 @@ export async function POST(req: Request) {
         const result = await callAgent(
             systemPrompt,
             agentInput,
-            process.env.VERDICT_AGENT_API_KEY as string
+            process.env.VERDICT_AGENT_API_KEY as string,
+            "adjacent_career"
         );
 
-        if (result.error) {
+        if (isAgentFailure(result)) {
             return NextResponse.json({ error: result.error }, { status: 500 });
         }
 

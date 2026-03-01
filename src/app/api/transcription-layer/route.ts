@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { callAgent } from "@/lib/llm";
+import { callAgent, isAgentFailure } from "@/lib/llm";
 import fs from "fs";
 import path from "path";
 
@@ -21,10 +21,11 @@ export async function POST(req: Request) {
         const structured = await callAgent(
             systemPrompt,
             transcript,
-            process.env.TRANSCRIPTION_LAYER_API_KEY as string
+            process.env.TRANSCRIPTION_LAYER_API_KEY as string,
+            "transcription_layer"
         );
 
-        if (structured.error) {
+        if (isAgentFailure(structured)) {
             return NextResponse.json({ error: structured.error }, { status: 500 });
         }
 
