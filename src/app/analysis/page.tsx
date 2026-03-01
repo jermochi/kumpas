@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, Suspense } from "react";
+import { useEffect, useState, useCallback, Suspense, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import LoadingScreen from "@/components/analysis/loading-screen";
@@ -24,6 +24,7 @@ function AnalysisContent() {
         completedStages: [],
     });
     const [sessionData, setSessionData] = useState<any>(null);
+    const hasRun = useRef(false);
 
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -194,9 +195,14 @@ function AnalysisContent() {
             }
         } else {
             router.push("/");
+            return;
         }
+
+        if (hasRun.current) return;
+        hasRun.current = true;
+
         runPipeline();
-    }, [runPipeline, sessionId]);
+    }, [runPipeline, sessionId, router]);
 
     return (
         <main className="min-h-screen bg-background">
