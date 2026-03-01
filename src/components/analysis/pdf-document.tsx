@@ -17,7 +17,7 @@ export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
                 ref={ref}
                 style={{
                     width: "800px",
-                    height: "1123px", // Force exactly one A4 page 
+                    height: "1120px", // Force exactly one A4 page 
                     overflow: "hidden", // Prevent breaking into page 2
                     fontSize: "12px",
                     lineHeight: "1.4",
@@ -84,7 +84,33 @@ export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
                                     </p>
                                 </div>
 
+                                {panel.scoreBreakdown && panel.scoreBreakdown.length > 0 && (
+                                    <div style={{ marginBottom: "12px", flexShrink: 0 }}>
+                                        <h3 style={{ fontSize: "10px", fontWeight: "bold", textTransform: "uppercase", color: "#6b7280", margin: "0 0 6px 0", lineHeight: "1.2" }}>Score Breakdown</h3>
+                                        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+                                            {panel.scoreBreakdown.map((item, i) => (
+                                                <div key={i} style={{ display: "flex", alignItems: "center", fontSize: "9px" }}>
+                                                    <span style={{ fontWeight: "600", color: "#111827", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", width: "105px", lineHeight: "2", padding: "1px 0", flexShrink: 0 }} title={item.label}>
+                                                        {item.label}
+                                                    </span>
+                                                    <div style={{ display: "flex", alignItems: "center", gap: "6px", flex: 1, minWidth: 0 }}>
+                                                        <span style={{ color: "#6b7280", width: "24px", textAlign: "right", lineHeight: "1.4", padding: "2px 0", flexShrink: 0 }}>{item.weight}</span>
+                                                        <div style={{ height: "6px", width: "66px", backgroundColor: "rgba(0,0,0,0.06)", borderRadius: "9999px", overflow: "hidden", flexShrink: 0}}>
+                                                            <div
+                                                                style={{ height: "100%", backgroundColor: "#6b8f71", borderRadius: "9999px", width: `${Math.max(0, Math.min(100, item.value))}%` }}
+                                                            />
+                                                        </div>
+                                                        <span style={{ fontWeight: "bold", color: "#6b8f71", width: "16px", textAlign: "right", lineHeight: "1.4", padding: "2px 0", flexShrink: 0 }}>{item.value}</span>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
                                 <p style={{ margin: "0 0 10px 0", fontSize: "11px", lineHeight: "1.4", flexShrink: 0 }}>{panel.summary}</p>
+
+
 
                                 <div style={{ flex: 1 }}>
                                     <h3 style={{ fontSize: "10px", fontWeight: "bold", textTransform: "uppercase", color: "#6b7280", margin: "0 0 4px 0" }}>Key Signals</h3>

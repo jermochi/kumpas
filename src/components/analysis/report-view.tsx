@@ -7,6 +7,7 @@ import { buildRelatedCareers } from "@/lib/analysis-helpers";
 
 import ScoreCardsRow from "@/components/analysis/score-cards-row";
 import AgentDetailPanel from "@/components/analysis/agent-detail-panel";
+import ScoreBreakdown from "@/components/analysis/score-breakdown";
 import TranscriptPanel from "@/components/analysis/transcript-panel";
 import RelatedCareersPanel from "@/components/analysis/related-careers-panel";
 import PdfFooter from "@/components/analysis/pdf-footer";
@@ -152,6 +153,9 @@ export default function ReportView({ report, structured, agentData, onNewSession
                     activeAgent={activeAgent}
                     onSelect={setActiveAgent}
                 />
+
+                {/* ── Score Breakdown ──────────────────────────────────── */}
+                <ScoreBreakdown data={activePanel.scoreBreakdown} />
 
                 {/* ── Two-Column Body ─────────────────────────────────── */}
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-4 items-start">

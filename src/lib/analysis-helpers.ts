@@ -23,6 +23,11 @@ export function buildAgentPanels(
                 subNote: s.sub_note,
             })),
             summary: labor.summary,
+            scoreBreakdown: labor.score_breakdown ? labor.score_breakdown.map(b => ({
+                label: b.label,
+                value: b.value,
+                weight: b.weight,
+            })) : [],
             supportingData: labor.supporting_data.map(d => ({
                 icon: d.icon,
                 label: d.label,
@@ -43,6 +48,11 @@ export function buildAgentPanels(
                 subNote: s.sub_note,
             })),
             summary: feasibility.summary,
+            scoreBreakdown: feasibility.score_breakdown ? feasibility.score_breakdown.map(b => ({
+                label: b.label,
+                value: b.value,
+                weight: b.weight,
+            })) : [],
             supportingData: feasibility.supporting_data.map(d => ({
                 icon: d.icon,
                 label: d.label,
@@ -63,6 +73,11 @@ export function buildAgentPanels(
                 subNote: s.sub_note,
             })),
             summary: psychological.summary,
+            scoreBreakdown: psychological.score_breakdown ? psychological.score_breakdown.map(b => ({
+                label: b.label,
+                value: b.value,
+                weight: b.weight,
+            })) : [],
             supportingData: psychological.supporting_data.map(d => ({
                 icon: d.icon,
                 label: d.label,

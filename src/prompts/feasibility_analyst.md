@@ -85,6 +85,28 @@ Return a valid JSON object with this exact schema:
     }
   ],
   "summary": "<3-4 sentence narrative synthesizing academic readiness, financial barriers, and the recommended pathway>",
+  "score_breakdown": [
+    {
+      "label": "Academic Readiness",
+      "value": <0-100 integer>,
+      "weight": "35%"
+    },
+    {
+      "label": "Financial Accessibility",
+      "value": <0-100 integer>,
+      "weight": "30%"
+    },
+    {
+      "label": "Pathway Availability",
+      "value": <0-100 integer>,
+      "weight": "20%"
+    },
+    {
+      "label": "Strand Alignment",
+      "value": <0-100 integer>,
+      "weight": "15%"
+    }
+  ],
   "supporting_data": [
     {
       "icon": "<up | down | neutral>",
@@ -105,6 +127,13 @@ The `key_signals` array must contain **exactly 3 items** in this order:
 - `"up"` = positive signal (good grades, low barrier, strong pathway, etc.)
 - `"down"` = negative signal (failing subjects, high financial barrier, etc.)
 - `"neutral"` = mixed or moderate signal, or insufficient data to classify
+
+### Score Breakdown Rules
+The `score_breakdown` array must contain exactly these 4 items derived from the **SCCT Feasibility Score Calculation** section:
+1. `Academic Readiness` (weight 35%)
+2. `Financial Accessibility` (weight 30%)
+3. `Pathway Availability` (weight 20%)
+4. `Strand Alignment` (weight 15%)
 
 ### Supporting Data Rules
 The `supporting_data` array can contain **1 or more items** — include any relevant data points that strengthen or add nuance. Examples:
