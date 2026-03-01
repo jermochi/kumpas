@@ -61,12 +61,16 @@ function AnalysisContent() {
             }
 
             if (!structured) {
+                console.log("Transcription layer API called");
                 const tlRes = await fetch("/api/transcription-layer", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ transcript: session.rawTranscript }),
                 });
-                if (!tlRes.ok) throw new Error("Transcription layer failed");
+                if (!tlRes.ok) {
+                    const errData = await tlRes.json().catch(() => null);
+                    throw new Error(errData?.error || "Transcription layer failed");
+                }
                 structured = (await tlRes.json()) as StructuredTranscript;
             }
 

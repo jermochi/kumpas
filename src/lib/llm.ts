@@ -99,6 +99,9 @@ export async function callAgent(
 
   const textOutput = response.text;
 
+  console.log(`Text output: ${textOutput}`);
+  console.log(`User transcript: ${userTranscript}`);
+
   // Token metadata for estimating costs and monitoring usage
   const usage = response.usageMetadata;
   const pad = (s: string | number, n: number) => String(s).padEnd(n);
@@ -117,7 +120,7 @@ export async function callAgent(
 
     if (!textOutput) {
       console.error("Gemini rejected generation. Safety settings limits reached? Candidates info:", JSON.stringify(response));
-      throw new Error("No text returned from Gemini");
+      throw new Error(`No text returned from Gemini: Prompt Feedback: ${JSON.stringify(response.promptFeedback)}`);
     }
 
     // Tier 1: Direct parse
