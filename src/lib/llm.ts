@@ -60,7 +60,8 @@ function extractJsonBlock(raw: string): string | null {
 export async function callAgent(
   systemPromptText: string,
   userTranscript: string,
-  apiKey: string
+  apiKey: string,
+  analyst: string = "Agent"
 ) {
   if (!apiKey) {
     throw new Error("API key is missing for this agent.");
@@ -78,7 +79,23 @@ export async function callAgent(
       }
     });
 
-    const textOutput = response.text;
+  const textOutput = response.text;
+
+  // Token metadata for estimating costs and monitoring usage
+  const usage = response.usageMetadata;
+  const pad = (s: string | number, n: number) => String(s).padEnd(n);
+  const lines = [
+    `\nToken Usage — ${analyst}`,
+    `${"─".repeat(35)}`,
+    `${pad("Prompt (input)",          25)} ${pad(usage?.promptTokenCount        ?? 0, 8)}`,
+    `${pad("Response (output)",       25)} ${pad(usage?.candidatesTokenCount    ?? 0, 8)}`,
+    `${pad("Thinking",                25)} ${pad(usage?.thoughtsTokenCount      ?? 0, 8)}`,
+    `${pad("Cached input",            25)} ${pad(usage?.cachedContentTokenCount ?? 0, 8)}`,
+    `${"─".repeat(35)}`,
+    `${pad("Total",                   25)} ${pad(usage?.totalTokenCount         ?? 0, 8)}`,
+  ];
+
+  console.log(lines.join("\n"));
 
     if (!textOutput) {
       throw new Error("No text returned from Gemini");
