@@ -1,14 +1,15 @@
 import React from "react";
-import type { AdjacentCareerReport, StructuredTranscript, AgentKey, AgentPanelData } from "@/lib/analysis-types";
+import type { AdjacentCareerReport, SessionIntakeOutput, AgentKey, AgentPanelData } from "@/lib/analysis-types";
 
 interface PdfDocumentProps {
     report: AdjacentCareerReport;
-    structured: StructuredTranscript;
+    sessionIntake: SessionIntakeOutput;
+    counselorNotes: string;
     agentData: Record<AgentKey, AgentPanelData>;
 }
 
 export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
-    ({ report, structured, agentData }, ref) => {
+    ({ report, sessionIntake, counselorNotes, agentData }, ref) => {
         // Prepare some structured score and verdict bindings
         const agents: AgentKey[] = ["labor_market", "feasibility", "psychological"];
 
@@ -38,7 +39,7 @@ export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
                                 Kumpas · Career Assessment Report
                             </p>
                             <h1 style={{ fontSize: "28px", fontWeight: "900", color: "#000", margin: 0, lineHeight: 1.1 }}>
-                                {structured.career_path || "Career"}
+                                {sessionIntake.career_goal.title || "Career"}
                             </h1>
                         </div>
                         <div style={{ textAlign: "right" }}>
@@ -95,7 +96,7 @@ export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
                                                     </span>
                                                     <div style={{ display: "flex", alignItems: "center", gap: "6px", flex: 1, minWidth: 0 }}>
                                                         <span style={{ color: "#6b7280", width: "24px", textAlign: "right", lineHeight: "1.4", padding: "2px 0", flexShrink: 0 }}>{item.weight}</span>
-                                                        <div style={{ height: "6px", width: "66px", backgroundColor: "rgba(0,0,0,0.06)", borderRadius: "9999px", overflow: "hidden", flexShrink: 0}}>
+                                                        <div style={{ height: "6px", width: "66px", backgroundColor: "rgba(0,0,0,0.06)", borderRadius: "9999px", overflow: "hidden", flexShrink: 0 }}>
                                                             <div
                                                                 style={{ height: "100%", backgroundColor: "#6b8f71", borderRadius: "9999px", width: `${Math.max(0, Math.min(100, item.value))}%` }}
                                                             />
