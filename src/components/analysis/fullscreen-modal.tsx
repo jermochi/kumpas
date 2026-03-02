@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import { X } from "lucide-react";
+import styles from "@/styles/analysis.module.css";
 
 interface FullscreenModalProps {
     isOpen: boolean;
@@ -42,12 +43,10 @@ export default function FullscreenModal({ isOpen, onClose, title, children }: Fu
         <div
             ref={backdropRef}
             onClick={handleBackdropClick}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 sm:p-8"
-            style={{ animation: "modalFadeIn 0.25s ease-out" }}
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 sm:p-8 ${styles.modalBackdropIn}`}
         >
             <div
-                className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
-                style={{ animation: "modalScaleIn 0.25s ease-out" }}
+                className={`relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ${styles.modalContentIn}`}
             >
                 {/* Header */}
                 <div className="flex items-center justify-between border-b border-black/[0.06] px-6 py-4">

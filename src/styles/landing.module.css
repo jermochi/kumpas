@@ -1,0 +1,124 @@
+/* LANDING PAGE — scoped module */
+
+/* ── ambient gradient blobs ── */
+.blobGreen {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  width: 500px;
+  height: 500px;
+  top: -80px;
+  left: -120px;
+  background: radial-gradient(circle, #6b8f71 0%, transparent 70%);
+  animation: blobDrift 14s ease-in-out infinite alternate;
+}
+
+.blobGold {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  width: 420px;
+  height: 420px;
+  bottom: -60px;
+  right: -100px;
+  background: radial-gradient(circle, #c9963a 0%, transparent 70%);
+  animation: blobDrift 12s ease-in-out 2s infinite alternate-reverse;
+}
+
+@keyframes blobDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(40px, 30px) scale(1.08); }
+  100% { transform: translate(-20px, 50px) scale(0.95); }
+}
+
+/* ── floating lucide icons ── */
+.floatIcon {
+  position: absolute;
+  z-index: 1;
+  opacity: 0.4;
+  pointer-events: none;
+  animation: floatIcon 7s ease-in-out infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes floatIcon {
+  0%   { transform: translateY(0) rotate(0deg); }
+  25%  { transform: translateY(-14px) rotate(10deg); }
+  50%  { transform: translateY(-6px) rotate(-8deg); }
+  75%  { transform: translateY(-18px) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
+/* ── bubble phrases ── */
+.bubble {
+  position: absolute;
+  z-index: 1;
+  max-width: 220px;
+  padding: 12px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 0.75rem;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-charcoal-2);
+  line-height: 1.4;
+  pointer-events: none;
+  opacity: 0.95;
+  animation: bubbleFloat 8s ease-in-out infinite;
+  animation-fill-mode: both;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 24px;
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transform: rotate(45deg);
+}
+
+@keyframes bubbleFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+/* ── hero fade-up entrance ── */
+.fadeUp {
+  opacity: 0;
+  animation: landingFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes landingFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── responsive adjustments ── */
+@media (max-width: 640px) {
+  .bubble { 
+    display: none;
+  }
+  .floatIcon { opacity: 0.25 !important; }
+  .blob { opacity: 0.2; }
+  .ctaButton {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.875rem !important; /* text-sm equivalent */
+  }
+  .heroHeading {
+    font-size: 2.5rem !important; /* slightly smaller on narrow screens */
+    line-height: 1.1 !important;
+  }
+}
