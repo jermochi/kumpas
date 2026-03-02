@@ -132,9 +132,6 @@ export default function LandingPage() {
         </Link>
       </section>
 
-      {/* Input Container */}
-      <InputContainer />
-
       {/* Footer */}
       <footer className="pb-10 flex flex-col items-center gap-2">
         <div className="h-px w-48 bg-black/[0.06]" />
