@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
+import { getSystemInstructions } from "@/lib/utils";
+import type { ExtractedNotes } from "@/lib/analysis-types";
 
 export const maxDuration = 60;
 
@@ -15,19 +17,7 @@ export async function POST(req: Request) {
 
     const ai = new GoogleGenAI({ apiKey });
 
-    const systemPrompt = `You are a handwriting extraction assistant for a school counselor app.
-You will receive a photo of handwritten counselor notes about a student.
-
-Extract and organize the notes into exactly 5 sections. Return ONLY a raw JSON object (no markdown fences, no explanation) with these keys:
-- careerGoal
-- interests
-- financial
-- concerns
-- impression
-
-Each value must be an HTML fragment using only: <p>, <strong>, <em>, <ul>, <li>, <ol>.
-If a section is not found, return "<p></p>" for that key.
-Keep original meaning. Clean up grammar only if needed for clarity.`;
+    const systemPrompt = getSystemInstructions('notes_analysis.md');
 
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash",
@@ -36,7 +26,7 @@ Keep original meaning. Clean up grammar only if needed for clarity.`;
           role: "user",
           parts: [
             { inlineData: { mimeType, data: imageBase64 } },
-            { text: "Extract the handwritten counselor notes from this image. Map them to the 5 sections: Career Goal, Personal Interests & Strengths, Family & Financial Situation, Concerns & Red Flags, and Counselor's Overall Impression. Return only the raw JSON object." },
+            { text: "Extract the counselor notes from this image. Map them to the 5 sections: careerGoal, interests, financial, concerns, impression. Return only the raw JSON object with HTML-formatted values." },
           ],
         },
       ],
@@ -51,7 +41,28 @@ Keep original meaning. Clean up grammar only if needed for clarity.`;
       return NextResponse.json({ error: "No response from vision model" }, { status: 500 });
 
     const cleaned = text.trim().replace(/^```(?:json)?\s*\n?/i, "").replace(/\n?```\s*$/i, "");
-    return NextResponse.json(JSON.parse(cleaned));
+    const parsed = JSON.parse(cleaned);
+
+    // Ensure each value is valid HTML for contentEditable — wrap plain text in <p> tags
+    const wrapHtml = (val: unknown): string => {
+      if (!val || typeof val !== "string") return "";
+      const trimmed = val.trim();
+      if (!trimmed) return "";
+      // If it already starts with an HTML tag, return as-is
+      if (/^<[a-z]/i.test(trimmed)) return trimmed;
+      // Otherwise wrap each line in <p>
+      return trimmed.split(/\n+/).map(line => `<p>${line}</p>`).join("");
+    };
+
+    const result: ExtractedNotes = {
+      careerGoal: wrapHtml(parsed.careerGoal),
+      interests:  wrapHtml(parsed.interests),
+      financial:  wrapHtml(parsed.financial),
+      concerns:   wrapHtml(parsed.concerns),
+      impression: wrapHtml(parsed.impression),
+    };
+
+    return NextResponse.json(result);
   } catch (err) {
     console.error("Extract notes error:", err);
     return NextResponse.json(
