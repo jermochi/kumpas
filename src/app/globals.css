@@ -10,6 +10,7 @@
   --font-heading: var(--font-playfair), serif;
   /* COLORS */
   --color-cream: #F2EFE8;
+  --color-cream-light: #FDFAF6;
   --color-cream-dark: #E8E4DB;
   --color-ink: #1A1A18;
   --color-forest: #6b8f71;
@@ -194,6 +195,17 @@
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
   }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, #f0eeea 25%, #e4e1db 37%, #f0eeea 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
 }
 
 @keyframes wave-bar {
