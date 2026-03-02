@@ -20,7 +20,8 @@ Map the content to the predefined JSON schema below. Counselors may not follow a
 
 ### 5. HTML Formatting
 * Each value must be an **HTML fragment** compatible with a `contentEditable` rich-text editor.
-* **Allowed tags:** `<p>`, `<strong>`, `<em>`, `<ul>`, `<li>`, `<ol>`.
+* **Allowed tags:** `<p>`, `<strong>`, `<em>`, `<ul>`, `<li>`, `<ol>`, `<h3>`.
+* Wrap each section label in `<h3>` tags using exactly these labels: `Career Goal`, `Personal Interests & Strengths`, `Family & Financial Situation`, `Concerns & Red Flags`, or `Counselor's Overall Impression`. Do not include the extended definitions in the `<h3>` tags.
 * Wrap plain text in `<p>` tags. Use `<ul>`/<li>` for lists, and `<strong>` for emphasis.
 * If a section is empty, return `""` (empty string).
 

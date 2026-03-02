@@ -52,22 +52,44 @@ export default function InputContainer() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  /* state */
+  /* ─── shared state ─── */
   const [guideOpen, setGuideOpen] = useState(false);
-  const [notesFile, setNotesFile] = useState<File | null>(null);
-  const [drag, setDrag] = useState(false);
-  const [scanning, setScanning] = useState(false);
-  const [scanError, setScanError] = useState<string | null>(null);
-  const [sectionsReady, setSectionsReady] = useState(false);
-  const [sectionHtml, setSectionHtml] = useState<ExtractedNotes>(EMPTY_NOTES);
   const [slotFiles, setSlotFiles] = useState<{ 1: File | null; 2: File | null }>({ 1: null, 2: null });
   const [slotTypes, setSlotTypes] = useState<{ 1: string; 2: string }>({ 1: "", 2: "" });
   const [analyzing, setAnalyzing] = useState(false);
   const [analyzeStep, setAnalyzeStep] = useState(0);
 
-  /* helpers */
+  /* ─── tab state ─── */
+  const [activeTab, setActiveTab] = useState<InputMode>("image");
+  const [pendingTab, setPendingTab] = useState<InputMode | null>(null);
+  const [showSwitchDialog, setShowSwitchDialog] = useState(false);
+
+  /* ─── image analysis state ─── */
+  const [notesFile, setNotesFile] = useState<File | null>(null);
+  const [drag, setDrag] = useState(false);
+  const [scanning, setScanning] = useState(false);
+  const [scanError, setScanError] = useState<string | null>(null);
+  const [imageSectionsReady, setImageSectionsReady] = useState(false);
+  const [imageSectionHtml, setImageSectionHtml] = useState<ExtractedNotes>(EMPTY_NOTES);
+
+  /* ─── manual input state ─── */
+  const [manualSectionHtml, setManualSectionHtml] = useState<ExtractedNotes>(EMPTY_NOTES);
+
+  /* ─── derived ─── */
+  const sectionHtml = activeTab === "image" ? imageSectionHtml : manualSectionHtml;
+  const sectionsReady = activeTab === "image" ? imageSectionsReady : true; // manual is always "ready"
   const hasDocs = !!(slotFiles[1] || slotFiles[2]);
-  const canAnalyze = sectionsReady && !scanning && !scanError;
+  const canAnalyze = activeTab === "image"
+    ? imageSectionsReady && !scanning && !scanError
+    : Object.values(manualSectionHtml).some(v => v.trim() !== "");
+
+  /** Check if a tab has data entered */
+  const tabHasData = (tab: InputMode): boolean => {
+    if (tab === "image") {
+      return !!(notesFile || Object.values(imageSectionHtml).some(v => v.trim() !== ""));
+    }
+    return Object.values(manualSectionHtml).some(v => v.trim() !== "");
+  };
 
   /* ─── tab switching ─── */
   const handleTabChange = (newTab: string) => {
@@ -185,7 +207,12 @@ export default function InputContainer() {
       if (step > OVERLAY_STEPS.length) {
         clearInterval(iv);
         setTimeout(() => {
-          const combined = SECTIONS.map(s => `${s.label}: ${sectionHtml[s.key]}`).join("\n\n");
+          const combined = SECTIONS.map(s => {
+            const content = sectionHtml[s.key]?.trim() || "";
+            if (!content) return "";
+            if (content.toLowerCase().startsWith("<h3")) return content;
+            return `<h3>${s.label}</h3>\n${content}`;
+          }).filter(Boolean).join("\n\n");
           const sid = crypto.randomUUID();
 
           // Store all data

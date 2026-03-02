@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSystemInstructions } from "@/lib/utils";
+import { getSystemInstructions } from "@/lib/server-utils";
 import { extractDocumentData } from "@/lib/llm";
 
 export async function POST(req: NextRequest) {
