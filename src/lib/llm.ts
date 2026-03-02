@@ -58,23 +58,25 @@ function extractJsonBlock(raw: string): string | null {
 }
 
 export async function callAgent(
-  systemPromptText: string,
-  userTranscript: string,
+  systemInstruction: string,
+  inputData: string,
   apiKey: string,
-  analyst: string = "Agent"
+  agentName: string = "Agent"
 ) {
   if (!apiKey) {
-    throw new Error("API key is missing for this agent.");
+    throw new Error(`API Key missing for ${agentName}`);
   }
 
-  const ai = new GoogleGenAI({ apiKey: apiKey });
-
   try {
-    const response = await ai.models.generateContent({
+    const ai = new GoogleGenAI({ apiKey });
+
+    // We send a unified message combining system instructions and user input
+    // because some models prefer this formatting over a separate init config
+    const req = {
       model: 'gemini-2.5-flash',
-      contents: `Analyze this session transcript: ${userTranscript}`,
+      contents: `Analyze this context provided by the user: ${inputData}`,
       config: {
-        systemInstruction: systemPromptText,
+        systemInstruction,
         responseMimeType: 'application/json',
         safetySettings: [
           {
@@ -95,18 +97,20 @@ export async function callAgent(
           },
         ]
       }
-    });
+    };
+
+    const response = await ai.models.generateContent(req);
 
     const textOutput = response.text;
 
     console.log(`Text output: ${textOutput}`);
-    console.log(`User transcript: ${userTranscript}`);
+    console.log(`User context: ${inputData}`);
 
     // Token metadata for estimating costs and monitoring usage
     const usage = response.usageMetadata;
     const pad = (s: string | number, n: number) => String(s).padEnd(n);
     const lines = [
-      `\nToken Usage — ${analyst}`,
+      `\nToken Usage — ${agentName}`,
       `${"─".repeat(35)}`,
       `${pad("Prompt (input)", 25)} ${pad(usage?.promptTokenCount ?? 0, 8)}`,
       `${pad("Response (output)", 25)} ${pad(usage?.candidatesTokenCount ?? 0, 8)}`,
