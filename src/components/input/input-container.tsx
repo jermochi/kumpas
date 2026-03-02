@@ -404,17 +404,17 @@ export default function InputContainer() {
           <div className="flex items-start gap-3 mb-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ochre-pale text-ochre"><FolderOpen size={20} /></div>
             <div>
-              <h2 className="text-base font-semibold text-ink leading-snug flex items-center gap-2">
+              <h2 className="text-base font-semibold text-ink leading-snug flex flex-wrap items-center gap-2">
                 Supporting Documents
-                <span className="rounded-full bg-black/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-text">Optional — Max 2</span>
+                <span className="rounded-full bg-black/[0.04] px-2 py-0.5 text-[10px] whitespace-nowrap font-bold uppercase tracking-wider text-muted-text">Optional — Max 2</span>
               </h2>
               <p className="mt-1 text-xs text-muted-text leading-relaxed">Upload student records to improve AI accuracy. Select the document type.</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg bg-ochre-pale/60 border border-ochre/10 px-3 py-2 mb-4 text-xs text-ochre">
-            <Info size={14} className="shrink-0" />
-            Accepted: NCAE Results, Report Card, or NAT Results — as PDF or photo
+          <div className="flex items-start sm:items-center gap-2.5 rounded-lg bg-ochre-pale/60 border border-ochre/10 px-3 py-2.5 mb-4 text-xs text-ochre leading-snug">
+            <Info size={14} className="shrink-0 mt-0.5 sm:mt-0" />
+            <span>Accepted: NCAE Results, Report Card, or NAT Results — as PDF or photo</span>
           </div>
 
           <div className="space-y-3">
