@@ -21,29 +21,29 @@ import {
 
 /* ─── section config ─── */
 const SECTIONS = [
-  { key: "careerGoal",  label: "Career Goal",                      icon: Target,        iconBg: "#dcfce7", iconFg: "#166534", labelColor: "#166534", ph: "Start typing the student's career goal here…" },
-  { key: "interests",   label: "Personal Interests & Strengths",   icon: Heart,         iconBg: "#fef08a", iconFg: "#854d0e", labelColor: "#b45309", ph: "Describe the student's interests and natural strengths…" },
-  { key: "financial",   label: "Family & Financial Situation",     icon: Wallet,        iconBg: "#ecfccb", iconFg: "#3f6212", labelColor: "#3f6212", ph: "Note the family support situation and any financial constraints…" },
-  { key: "concerns",    label: "Concerns & Red Flags",             icon: Flag,          iconBg: "#fee2e2", iconFg: "#991b1b", labelColor: "#b91c1c", ph: "Flag any mismatches or concerns you observed…" },
-  { key: "impression",  label: "Counselor's Overall Impression",   icon: MessageSquare, iconBg: "#d1fae5", iconFg: "#065f46", labelColor: "#065f46", ph: "Write your overall impression of the student…" },
+  { key: "careerGoal", label: "Career Goal", icon: Target, iconBg: "#dcfce7", iconFg: "#166534", labelColor: "#166534", ph: "Start typing the student's career goal here…" },
+  { key: "interests", label: "Personal Interests & Strengths", icon: Heart, iconBg: "#fef08a", iconFg: "#854d0e", labelColor: "#b45309", ph: "Describe the student's interests and natural strengths…" },
+  { key: "financial", label: "Family & Financial Situation", icon: Wallet, iconBg: "#ecfccb", iconFg: "#3f6212", labelColor: "#3f6212", ph: "Note the family support situation and any financial constraints…" },
+  { key: "concerns", label: "Concerns & Red Flags", icon: Flag, iconBg: "#fee2e2", iconFg: "#991b1b", labelColor: "#b91c1c", ph: "Flag any mismatches or concerns you observed…" },
+  { key: "impression", label: "Counselor's Overall Impression", icon: MessageSquare, iconBg: "#d1fae5", iconFg: "#065f46", labelColor: "#065f46", ph: "Write your overall impression of the student…" },
 ] as const;
 
 const GUIDE = [
-  { icon: Target,        title: "Section 1 — Career Goal",                   bullets: ["What course or career does the student want to pursue?", "Why do they want this? Write their exact words.", "How certain are they?", "Do they have a backup plan?"] },
-  { icon: Heart,         title: "Section 2 — Personal Interests & Strengths", bullets: ["Subjects or activities they enjoy the most", "What they are naturally good at", "Topics that made them visibly excited during the interview"] },
-  { icon: Wallet,        title: "Section 3 — Family & Financial Situation",   bullets: ["Can the family support the preferred course?", "Is there family pressure toward a specific career?", "Any financial or logistical barriers?"] },
-  { icon: Flag,          title: "Section 4 — Concerns & Red Flags",           bullets: ["Any mismatch between stated goal and observed strengths", "Does the student understand what the career involves day-to-day?", "Signs external pressure is overriding genuine interest"] },
+  { icon: Target, title: "Section 1 — Career Goal", bullets: ["What course or career does the student want to pursue?", "Why do they want this? Write their exact words.", "How certain are they?", "Do they have a backup plan?"] },
+  { icon: Heart, title: "Section 2 — Personal Interests & Strengths", bullets: ["Subjects or activities they enjoy the most", "What they are naturally good at", "Topics that made them visibly excited during the interview"] },
+  { icon: Wallet, title: "Section 3 — Family & Financial Situation", bullets: ["Can the family support the preferred course?", "Is there family pressure toward a specific career?", "Any financial or logistical barriers?"] },
+  { icon: Flag, title: "Section 4 — Concerns & Red Flags", bullets: ["Any mismatch between stated goal and observed strengths", "Does the student understand what the career involves day-to-day?", "Signs external pressure is overriding genuine interest"] },
   { icon: MessageSquare, title: "Section 5 — Counselor's Overall Impression", bullets: ["Free-form narrative — gut feel, confidence in their goals", "Anything not captured in sections above", "Recommended focus areas for AI analysis"] },
 ];
 
 const OVERLAY_STEPS = [
-  { title: "Reading counselor notes…",        sub: "AI Vision is parsing your handwriting" },
-  { title: "Extracting sections…",            sub: "Identifying Career Goal, Interests, Red Flags…" },
-  { title: "Processing supporting docs…",     sub: "Reading NCAE scores and academic records" },
-  { title: "Labor Market Analysis…",          sub: "Matching against PSA employment statistics" },
-  { title: "Feasibility Analysis…",           sub: "Evaluating financial and logistical factors" },
-  { title: "Labor Demand Analysis…",          sub: "Identifying passion-skill alignment" },
-  { title: "Generating guidance roadmap…",    sub: "Synthesizing all three agent outputs" },
+  { title: "Reading counselor notes…", sub: "AI Vision is parsing your handwriting" },
+  { title: "Extracting sections…", sub: "Identifying Career Goal, Interests, Red Flags…" },
+  { title: "Processing supporting docs…", sub: "Reading NCAE scores and academic records" },
+  { title: "Labor Market Analysis…", sub: "Matching against PSA employment statistics" },
+  { title: "Feasibility Analysis…", sub: "Evaluating financial and logistical factors" },
+  { title: "Labor Demand Analysis…", sub: "Identifying passion-skill alignment" },
+  { title: "Generating guidance roadmap…", sub: "Synthesizing all three agent outputs" },
 ];
 
 type InputMode = "image" | "manual";
@@ -52,44 +52,22 @@ export default function InputContainer() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  /* ─── shared state ─── */
-  const [guideOpen, setGuideOpen]       = useState(false);
-  const [slotFiles, setSlotFiles]       = useState<{ 1: File | null; 2: File | null }>({ 1: null, 2: null });
-  const [slotTypes, setSlotTypes]       = useState<{ 1: string; 2: string }>({ 1: "", 2: "" });
-  const [analyzing, setAnalyzing]       = useState(false);
-  const [analyzeStep, setAnalyzeStep]   = useState(0);
+  /* state */
+  const [guideOpen, setGuideOpen] = useState(false);
+  const [notesFile, setNotesFile] = useState<File | null>(null);
+  const [drag, setDrag] = useState(false);
+  const [scanning, setScanning] = useState(false);
+  const [scanError, setScanError] = useState<string | null>(null);
+  const [sectionsReady, setSectionsReady] = useState(false);
+  const [sectionHtml, setSectionHtml] = useState<ExtractedNotes>(EMPTY_NOTES);
+  const [slotFiles, setSlotFiles] = useState<{ 1: File | null; 2: File | null }>({ 1: null, 2: null });
+  const [slotTypes, setSlotTypes] = useState<{ 1: string; 2: string }>({ 1: "", 2: "" });
+  const [analyzing, setAnalyzing] = useState(false);
+  const [analyzeStep, setAnalyzeStep] = useState(0);
 
-  /* ─── tab state ─── */
-  const [activeTab, setActiveTab]             = useState<InputMode>("image");
-  const [pendingTab, setPendingTab]           = useState<InputMode | null>(null);
-  const [showSwitchDialog, setShowSwitchDialog] = useState(false);
-
-  /* ─── image analysis state ─── */
-  const [notesFile, setNotesFile]       = useState<File | null>(null);
-  const [drag, setDrag]                 = useState(false);
-  const [scanning, setScanning]         = useState(false);
-  const [scanError, setScanError]       = useState<string | null>(null);
-  const [imageSectionsReady, setImageSectionsReady] = useState(false);
-  const [imageSectionHtml, setImageSectionHtml]     = useState<ExtractedNotes>(EMPTY_NOTES);
-
-  /* ─── manual input state ─── */
-  const [manualSectionHtml, setManualSectionHtml] = useState<ExtractedNotes>(EMPTY_NOTES);
-
-  /* ─── derived ─── */
-  const sectionHtml    = activeTab === "image" ? imageSectionHtml : manualSectionHtml;
-  const sectionsReady  = activeTab === "image" ? imageSectionsReady : true; // manual is always "ready"
-  const hasDocs        = !!(slotFiles[1] || slotFiles[2]);
-  const canAnalyze     = activeTab === "image"
-    ? imageSectionsReady && !scanning && !scanError
-    : Object.values(manualSectionHtml).some(v => v.trim() !== "");
-
-  /** Check if a tab has data entered */
-  const tabHasData = (tab: InputMode): boolean => {
-    if (tab === "image") {
-      return !!(notesFile || Object.values(imageSectionHtml).some(v => v.trim() !== ""));
-    }
-    return Object.values(manualSectionHtml).some(v => v.trim() !== "");
-  };
+  /* helpers */
+  const hasDocs = !!(slotFiles[1] || slotFiles[2]);
+  const canAnalyze = sectionsReady && !scanning && !scanError;
 
   /* ─── tab switching ─── */
   const handleTabChange = (newTab: string) => {
@@ -148,9 +126,9 @@ export default function InputContainer() {
         if (data.error) throw new Error(data.error);
         const notes: ExtractedNotes = {
           careerGoal: data.careerGoal || "",
-          interests:  data.interests  || "",
-          financial:  data.financial  || "",
-          concerns:   data.concerns   || "",
+          interests: data.interests || "",
+          financial: data.financial || "",
+          concerns: data.concerns || "",
           impression: data.impression || "",
         };
         setImageSectionHtml(notes);
@@ -173,8 +151,34 @@ export default function InputContainer() {
   };
 
   /* ─── analysis ─── */
-  const beginAnalysis = () => {
+  const beginAnalysis = async () => {
     setAnalyzing(true); setAnalyzeStep(1);
+
+    // 1. Process documents first
+    const extractedDocs: any[] = [];
+    for (const key of [1, 2] as const) {
+      if (slotFiles[key]) {
+        try {
+          const fd = new FormData();
+          fd.append("file", slotFiles[key]);
+          const res = await fetch("/api/process-assessment", {
+            method: "POST",
+            body: fd
+          });
+          if (res.ok) {
+            const data = await res.json();
+            extractedDocs.push(data);
+          } else {
+            toast.error(`Failed to process document ${key}`);
+          }
+        } catch (e) {
+          console.error("Doc upload error", e);
+          toast.error(`Failed to upload document ${key}`);
+        }
+      }
+    }
+
+    // 2. Run standard UI animation
     let step = 1;
     const iv = setInterval(() => {
       step++;
@@ -183,7 +187,16 @@ export default function InputContainer() {
         setTimeout(() => {
           const combined = SECTIONS.map(s => `${s.label}: ${sectionHtml[s.key]}`).join("\n\n");
           const sid = crypto.randomUUID();
-          sessionStorage.setItem(`kumpas-session-${sid}`, JSON.stringify({ rawTranscript: combined, createdAt: new Date().toISOString() }));
+
+          // Store all data
+          const sessionPayload = {
+            counselorNotes: combined,
+            createdAt: new Date().toISOString(),
+            extractedDocuments: extractedDocs
+          };
+
+          console.log("Final Session Payload:", sessionPayload);
+          sessionStorage.setItem(`kumpas-session-${sid}`, JSON.stringify(sessionPayload));
           router.push(`/analysis?session=${sid}`);
         }, 800);
       } else setAnalyzeStep(step);
@@ -434,9 +447,9 @@ export default function InputContainer() {
             Begin Multi Agent Analysis
           </button>
           <p className="mt-3 text-center text-xs font-medium text-muted-text">
-            {sectionsReady && !hasDocs ? <><span className="text-sage">{activeTab === "image" ? "Notes extracted!" : "Notes ready!"}</span> Add supporting documents for a more accurate analysis (optional)</> :
-             sectionsReady && hasDocs  ? <span className="text-sage">All inputs ready. Click above to begin the analysis.</span> :
-             helperText}
+            {sectionsReady && !hasDocs ? <><span className="text-sage">Notes extracted!</span> Add supporting documents for a more accurate analysis (optional)</> :
+              sectionsReady && hasDocs ? <span className="text-sage">All inputs ready. Click above to begin the analysis.</span> :
+                helperText}
           </p>
         </div>
       </div>
