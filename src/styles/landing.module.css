@@ -1,0 +1,100 @@
+/* LANDING PAGE — scoped module */
+
+/* ── ambient gradient blobs ── */
+.blobGreen {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  width: 500px;
+  height: 500px;
+  top: -80px;
+  left: -120px;
+  background: radial-gradient(circle, #6b8f71 0%, transparent 70%);
+  animation: blobDrift 14s ease-in-out infinite alternate;
+}
+
+.blobGold {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  width: 420px;
+  height: 420px;
+  bottom: -60px;
+  right: -100px;
+  background: radial-gradient(circle, #c9963a 0%, transparent 70%);
+  animation: blobDrift 12s ease-in-out 2s infinite alternate-reverse;
+}
+
+@keyframes blobDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(40px, 30px) scale(1.08); }
+  100% { transform: translate(-20px, 50px) scale(0.95); }
+}
+
+/* ── floating lucide icons ── */
+.floatIcon {
+  position: absolute;
+  z-index: 1;
+  color: var(--color-forest);
+  opacity: 0.15;
+  pointer-events: none;
+  animation: floatIcon 7s ease-in-out infinite;
+  animation-fill-mode: both;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25%      { transform: translateY(-14px) rotate(4deg); }
+  50%      { transform: translateY(-6px) rotate(-3deg); }
+  75%      { transform: translateY(-18px) rotate(2deg); }
+}
+
+/* ── bubble phrases ── */
+.bubble {
+  position: absolute;
+  z-index: 1;
+  max-width: 220px;
+  padding: 10px 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 0.75rem;
+  font-style: italic;
+  color: var(--color-muted-text);
+  line-height: 1.4;
+  pointer-events: none;
+  opacity: 0.65;
+  animation: bubbleFloat 8s ease-in-out infinite;
+  animation-fill-mode: both;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+@keyframes bubbleFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+/* ── hero fade-up entrance ── */
+.fadeUp {
+  opacity: 0;
+  animation: landingFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes landingFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── responsive adjustments ── */
+@media (max-width: 640px) {
+  .bubble      { display: none; }
+  .floatIcon   { opacity: 0.08 !important; }
+  .blob        { opacity: 0.2; }
+}
