@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import styles from "@/styles/analysis.module.css";
 
 interface RelatedCareer {
     career: string;
@@ -107,7 +108,7 @@ export default function RelatedCareersPanel({ careers }: RelatedCareersPanelProp
                 <p className="text-[10px] text-muted-text">Scored across all three frameworks</p>
             </div>
 
-            <div className="mt-3 space-y-2 max-h-[200px] overflow-y-auto scrollbar-thin">
+            <div className={`mt-3 space-y-2 max-h-[200px] overflow-y-auto ${styles.scrollbarThin}`}>
                 {(() => {
                     const currentSessionStr = sessionId ? sessionStorage.getItem(`kumpas-session-${sessionId}`) : null;
                     const currentSession = currentSessionStr ? JSON.parse(currentSessionStr) : null;

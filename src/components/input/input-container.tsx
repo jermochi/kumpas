@@ -13,6 +13,7 @@ import FileSlot from "./file-slot";
 import { toast } from "sonner";
 import { ExtractedNotes, EMPTY_NOTES } from "@/lib/analysis-types";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import inputStyles from "@/styles/input.module.css";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel,
   AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
@@ -203,7 +204,7 @@ export default function InputContainer() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-2xl px-4 sm:px-6 relative">
+    <section className="mx-auto w-full max-w-4xl px-4 sm:px-6 relative">
       <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-cream-light shadow-card">
 
         <div className="p-6 sm:p-8">
@@ -227,8 +228,12 @@ export default function InputContainer() {
               onClick={() => setGuideOpen(!guideOpen)}
               className="flex w-full items-center justify-between px-4 py-3 bg-sage/[0.07] text-sage text-[13px] font-medium cursor-pointer hover:bg-sage/[0.12] transition-colors"
             >
-              <span className="flex items-center gap-2"><Info size={16} /> Notes Format Guide — What to write in each section</span>
-              <ChevronDown size={16} className={`transition-transform duration-200 ${guideOpen ? "rotate-180" : ""}`} />
+              <div className="flex items-center gap-3">
+                <Info size={16} />
+                <span className="text-left">Notes Format Guide — What to write in each section</span>
+                <ChevronDown size={16} className={`transition-transform duration-200 ${guideOpen ? "rotate-180" : ""}`} />
+              </div>
+              
             </button>
             {guideOpen && (
               <div className="p-4 space-y-4 animate-fade-in">
@@ -330,8 +335,8 @@ export default function InputContainer() {
                       <div className="p-4 space-y-6">
                         {[37, 50, 42, 58, 65].map((w, i) => (
                           <div key={i} className="space-y-2">
-                            <div className="h-3.5 rounded animate-shimmer" style={{ width: `${w}%` }} />
-                            <div className="rounded animate-shimmer" style={{ height: `${74 + i * 4}px` }} />
+                            <div className={`h-3.5 rounded ${inputStyles.shimmer}`} style={{ width: `${w}%` }} />
+                            <div className={`rounded ${inputStyles.shimmer}`} style={{ height: `${74 + i * 4}px` }} />
                           </div>
                         ))}
                       </div>
@@ -403,17 +408,17 @@ export default function InputContainer() {
           <div className="flex items-start gap-3 mb-4">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-ochre-pale text-ochre"><FolderOpen size={20} /></div>
             <div>
-              <h2 className="text-base font-semibold text-ink leading-snug flex items-center gap-2">
+              <h2 className="text-base font-semibold text-ink leading-snug flex flex-wrap items-center gap-2">
                 Supporting Documents
-                <span className="rounded-full bg-black/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-text">Optional — Max 2</span>
+                <span className="rounded-full bg-black/[0.04] px-2 py-0.5 text-[10px] whitespace-nowrap font-bold uppercase tracking-wider text-muted-text">Optional — Max 2</span>
               </h2>
               <p className="mt-1 text-xs text-muted-text leading-relaxed">Upload student records to improve AI accuracy. Select the document type.</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-lg bg-ochre-pale/60 border border-ochre/10 px-3 py-2 mb-4 text-xs text-ochre">
-            <Info size={14} className="shrink-0" />
-            Accepted: NCAE Results, Report Card, or NAT Results — as PDF or photo
+          <div className="flex items-start sm:items-center gap-2.5 rounded-lg bg-ochre-pale/60 border border-ochre/10 px-3 py-2.5 mb-4 text-xs text-ochre leading-snug">
+            <Info size={14} className="shrink-0 mt-0.5 sm:mt-0" />
+            <span>Accepted: NCAE Results, Report Card, or NAT Results — as PDF or photo</span>
           </div>
 
           <div className="space-y-3">

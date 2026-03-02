@@ -2,6 +2,7 @@
 
 import { Maximize2, FileText } from "lucide-react";
 import type { TranscriptTurn } from "@/lib/analysis-types";
+import styles from "@/styles/analysis.module.css";
 
 interface TranscriptPanelProps {
     turns: TranscriptTurn[];
@@ -37,7 +38,7 @@ export default function TranscriptPanel({ turns, wordCount, onFullscreen, classN
             </div>
 
             {/* Scrollable transcript body — capped height */}
-            <div className="flex-1 overflow-y-auto space-y-3 pr-1 scrollbar-thin max-h-[350px]">
+            <div className={`flex-1 overflow-y-auto space-y-3 pr-1 ${styles.scrollbarThin} max-h-[350px]`}>
                 {turns.map((turn, i) => (
                     <div key={i}>
                         <p className="text-[10px] font-semibold uppercase tracking-wider text-white/70 mb-0.5">
