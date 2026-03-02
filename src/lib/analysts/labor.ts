@@ -1,4 +1,4 @@
-import { getSystemInstructions, getFilteredLaborContexts } from '../utils';
+import { getSystemInstructions, getFilteredLaborContexts } from '../server-utils';
 
 export function buildLaborSystemPrompt(careerPathTitle: string): string {
   const baseInstructions = getSystemInstructions('labor_analyst.md');
