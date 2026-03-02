@@ -11,6 +11,18 @@ interface AgentDetailPanelProps {
     isFullscreen?: boolean;
 }
 
+/** Strip technical source references so labels read naturally for counselors */
+function cleanLabel(raw: string): string {
+    return raw
+        // (per something context)
+        .replace(/\s*\(per\s+\S+\s+context\)/gi, "")
+        // per snake_case_var and snake_case_var (no parens, variable names with underscores)
+        .replace(/\s*\(?per\s+[\w]+(?:\s+and\s+[\w]+)*(?:\s+context)?\)?/gi, "")
+        // trailing period left over after stripping
+        .replace(/\.\s*$/, "")
+        .trim();
+}
+
 function SignalIcon({ type }: { type: "up" | "down" | "neutral" }) {
     if (type === "up") return <TrendingUp size={14} className="text-forest" />;
     if (type === "down") return <TrendingDown size={14} className="text-red-500" />;
@@ -69,7 +81,7 @@ export default function AgentDetailPanel({ data, onFullscreen, isFullscreen = fa
                                 <span className="text-sm font-semibold text-ink text-right">{signal.value}</span>
                             </div>
                             {signal.subNote && (
-                                <p className="mt-0.5 ml-6 text-xs text-muted-text">↳ {signal.subNote}</p>
+                                <p className="mt-0.5 ml-6 text-xs text-muted-text text-justify">↳ {signal.subNote}</p>
                             )}
                         </div>
                     ))}
@@ -81,7 +93,7 @@ export default function AgentDetailPanel({ data, onFullscreen, isFullscreen = fa
                 <p className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-forest">
                     ✦ What This Means
                 </p>
-                <p className="text-sm leading-relaxed text-ink">{data.summary}</p>
+                <p className="text-sm leading-relaxed text-ink text-justify">{data.summary}</p>
             </div>
 
             {/* Supporting Data */}
@@ -89,19 +101,21 @@ export default function AgentDetailPanel({ data, onFullscreen, isFullscreen = fa
                 <>
                     {isFullscreen ? (
                         /* In fullscreen: always show, no toggle */
-                        <div className="space-y-3">
+                        <div className="space-y-2">
                             <p className="text-[10px] font-semibold uppercase tracking-widest text-muted-text">
                                 Supporting Data
                             </p>
-                            {data.supportingData.map((row, i) => (
-                                <div key={i} className="flex items-center justify-between">
-                                    <div className="flex items-center gap-2">
-                                        <SignalIcon type={row.icon} />
-                                        <span className="text-sm text-ink">{row.label}</span>
+                            <div className="divide-y divide-black/[0.04]">
+                                {data.supportingData.map((row, i) => (
+                                    <div key={i} className="grid grid-cols-[160px_1fr] gap-x-3 py-2.5 first:pt-0">
+                                        <div className="flex items-start gap-1.5 pt-0.5">
+                                            <SignalIcon type={row.icon} />
+                                            <span className="text-sm font-semibold text-ink">{cleanLabel(row.label)}</span>
+                                        </div>
+                                        <p className="text-sm leading-relaxed text-muted-text">{cleanLabel(row.value)}</p>
                                     </div>
-                                    <span className="text-sm font-semibold text-forest">{row.value}</span>
-                                </div>
-                            ))}
+                                ))}
+                            </div>
                         </div>
                     ) : (
                         /* Normal: collapsible toggle */
@@ -114,14 +128,14 @@ export default function AgentDetailPanel({ data, onFullscreen, isFullscreen = fa
                                 {showSupporting ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                             </button>
                             {showSupporting && (
-                                <div className="mt-3 space-y-3">
+                                <div className="mt-3 space-y-0 divide-y divide-black/[0.04]">
                                     {data.supportingData.map((row, i) => (
-                                        <div key={i} className="flex items-center justify-between">
-                                            <div className="flex items-center gap-2">
+                                        <div key={i} className="grid grid-cols-[160px_1fr] gap-x-3 py-2.5 first:pt-0">
+                                            <div className="flex items-start gap-1.5 pt-0.5">
                                                 <SignalIcon type={row.icon} />
-                                                <span className="text-sm text-ink">{row.label}</span>
+                                                <span className="text-sm font-semibold text-ink">{cleanLabel(row.label)}</span>
                                             </div>
-                                            <span className="text-sm font-semibold text-forest">{row.value}</span>
+                                            <p className="text-sm leading-relaxed text-muted-text text-justify">{cleanLabel(row.value)}</p>
                                         </div>
                                     ))}
                                 </div>
