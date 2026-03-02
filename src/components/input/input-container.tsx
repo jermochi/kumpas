@@ -128,7 +128,7 @@ export default function InputContainer() {
     }, 1100);
   };
 
-  let helperText = "Upload your counselor notes photo to enable analysis";
+  let helperText = "Upload the counselor's notes photo to enable analysis";
   if (scanning) helperText = "Scanning your notes with AI Vision…";
   else if (scanError) helperText = "Fix the notes image to enable analysis";
   else if (sectionsReady && !hasDocs) helperText = "";
@@ -188,7 +188,7 @@ export default function InputContainer() {
               <h3 className="text-sm font-semibold text-ink">Download &amp; Print the Notes Form</h3>
               <p className="text-xs text-muted-text">Pre-structured form you can fill out by hand during the session</p>
             </div>
-            <a href="/counselor_guide.pdf" download className="inline-flex items-center gap-1.5 rounded-lg bg-sage px-4 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-sage/80 whitespace-nowrap">
+            <a href="/kumpas_career_interview_notes.pdf" download className="inline-flex items-center gap-1.5 rounded-lg bg-sage px-4 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-sage/80 whitespace-nowrap">
               <Download size={16} /> Download PDF
             </a>
           </div>
@@ -288,7 +288,7 @@ export default function InputContainer() {
                 Supporting Documents
                 <span className="rounded-full bg-black/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-text">Optional — Max 2</span>
               </h2>
-              <p className="mt-1 text-xs text-muted-text leading-relaxed">Upload student records to improve AI accuracy. Select the document type or let AI detect it.</p>
+              <p className="mt-1 text-xs text-muted-text leading-relaxed">Upload student records to improve AI accuracy. Select the document type.</p>
             </div>
           </div>
 
