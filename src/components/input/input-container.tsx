@@ -10,6 +10,7 @@ import {
 import WysiwygField from "./wysiwyg-field";
 import FileSlot from "./file-slot";
 import { toast } from "sonner";
+import { ExtractedNotes, EMPTY_NOTES } from "@/lib/analysis-types";
 
 /* ─── section config ─── */
 const SECTIONS = [
@@ -51,7 +52,7 @@ export default function InputContainer() {
   const [scanning, setScanning]         = useState(false);
   const [scanError, setScanError]       = useState<string | null>(null);
   const [sectionsReady, setSectionsReady] = useState(false);
-  const [sectionHtml, setSectionHtml]   = useState<SectionHtml>({ careerGoal: "", interests: "", financial: "", concerns: "", impression: "" });
+  const [sectionHtml, setSectionHtml]   = useState<ExtractedNotes>(EMPTY_NOTES);
   const [slotFiles, setSlotFiles]       = useState<{ 1: File | null; 2: File | null }>({ 1: null, 2: null });
   const [slotTypes, setSlotTypes]       = useState<{ 1: string; 2: string }>({ 1: "", 2: "" });
   const [analyzing, setAnalyzing]       = useState(false);
@@ -65,7 +66,7 @@ export default function InputContainer() {
   const resetAll = () => {
     setNotesFile(null); setScanning(false); setScanError(null);
     setSectionsReady(false);
-    setSectionHtml({ careerGoal: "", interests: "", financial: "", concerns: "", impression: "" });
+    setSectionHtml(EMPTY_NOTES);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -83,13 +84,14 @@ export default function InputContainer() {
         if (!res.ok) throw new Error("Extraction failed");
         const data = await res.json();
         if (data.error) throw new Error(data.error);
-        setSectionHtml({
-          careerGoal: data.careerGoal || "<p></p>",
-          interests:  data.interests  || "<p></p>",
-          financial:  data.financial  || "<p></p>",
-          concerns:   data.concerns   || "<p></p>",
-          impression: data.impression || "<p></p>",
-        });
+        const notes: ExtractedNotes = {
+          careerGoal: data.careerGoal || "",
+          interests:  data.interests  || "",
+          financial:  data.financial  || "",
+          concerns:   data.concerns   || "",
+          impression: data.impression || "",
+        };
+        setSectionHtml(notes);
         setSectionsReady(true);
       } catch { setScanError("Could not read the notes. Please ensure the image is clear and well-lit, then try again."); }
       finally { setScanning(false); }
