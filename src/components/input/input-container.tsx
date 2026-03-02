@@ -13,6 +13,7 @@ import FileSlot from "./file-slot";
 import { toast } from "sonner";
 import { ExtractedNotes, EMPTY_NOTES } from "@/lib/analysis-types";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import inputStyles from "@/styles/input.module.css";
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel,
   AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
@@ -203,7 +204,7 @@ export default function InputContainer() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-2xl px-4 sm:px-6 relative">
+    <section className="mx-auto w-full max-w-4xl px-4 sm:px-6 relative">
       <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-cream-light shadow-card">
 
         <div className="p-6 sm:p-8">
@@ -330,8 +331,8 @@ export default function InputContainer() {
                       <div className="p-4 space-y-6">
                         {[37, 50, 42, 58, 65].map((w, i) => (
                           <div key={i} className="space-y-2">
-                            <div className="h-3.5 rounded animate-shimmer" style={{ width: `${w}%` }} />
-                            <div className="rounded animate-shimmer" style={{ height: `${74 + i * 4}px` }} />
+                            <div className={`h-3.5 rounded ${inputStyles.shimmer}`} style={{ width: `${w}%` }} />
+                            <div className={`rounded ${inputStyles.shimmer}`} style={{ height: `${74 + i * 4}px` }} />
                           </div>
                         ))}
                       </div>
