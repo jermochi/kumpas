@@ -169,73 +169,9 @@
 }
 
 @layer utilities {
-  .grain::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 999;
-    opacity: 0.4;
-  }
-
-  .wave-bar {
-    width: 4px; background: var(--sage); border-radius: 2px;
-    transform-origin: bottom;
-  }
-
-  .animate-spin-slow {
-    animation: spin 3s linear infinite;
-  }
-
-  .animate-spin-slow-reverse {
-    animation: spin-reverse 2.5s linear infinite;
-  }
-
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out forwards;
   }
-
-  .animate-shimmer {
-    background: linear-gradient(90deg, #f0eeea 25%, #e4e1db 37%, #f0eeea 63%);
-    background-size: 400% 100%;
-    animation: shimmer 1.4s ease infinite;
-  }
-}
-
-@keyframes shimmer {
-  0% { background-position: 100% 50%; }
-  100% { background-position: 0 50%; }
-}
-
-@keyframes wave-bar {
-  0%, 100% { transform: scaleY(0.3); }
-  50% { transform: scaleY(1); }
-}
-
-/* Modal animations */
-@keyframes modalFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes modalScaleIn {
-  from { opacity: 0; transform: scale(0.95) translateY(8px); }
-  to   { opacity: 1; transform: scale(1)    translateY(0);   }
-}
-
-/* Scrollbar utility */
-.scrollbar-thin {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255 255 255 / 0.15) transparent;
-}
-.scrollbar-thin::-webkit-scrollbar { width: 4px; }
-.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
-.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255 255 255 / 0.15); border-radius: 2px; }
-
-@keyframes spin-reverse {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
 }
 
 @keyframes fadeIn {
