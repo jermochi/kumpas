@@ -1,0 +1,14 @@
+/* Audio component — scoped module */
+
+/* ── waveform bars ── */
+.waveBar {
+  width: 4px;
+  background: var(--sage);
+  border-radius: 2px;
+  transform-origin: bottom;
+}
+
+@keyframes waveBar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
