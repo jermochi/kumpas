@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
-import { getSystemInstructions } from "@/lib/utils";
+import { getSystemInstructions } from "@/lib/server-utils";
 import type { ExtractedNotes } from "@/lib/analysis-types";
 
 export const maxDuration = 60;

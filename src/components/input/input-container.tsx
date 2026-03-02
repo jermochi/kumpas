@@ -6,11 +6,18 @@ import {
   FileText, Target, Heart, Wallet, Flag, MessageSquare,
   ChevronDown, Download, Image as ImageIcon, Loader2,
   AlertTriangle, X, ScanText, Check, FolderOpen, Info, Sparkles,
+  PenLine,
 } from "lucide-react";
 import WysiwygField from "./wysiwyg-field";
 import FileSlot from "./file-slot";
 import { toast } from "sonner";
 import { ExtractedNotes, EMPTY_NOTES } from "@/lib/analysis-types";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel,
+  AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
+  AlertDialogHeader, AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 /* ─── section config ─── */
 const SECTIONS = [
@@ -39,39 +46,94 @@ const OVERLAY_STEPS = [
   { title: "Generating guidance roadmap…",    sub: "Synthesizing all three agent outputs" },
 ];
 
-type SectionHtml = Record<string, string>;
+type InputMode = "image" | "manual";
 
 export default function InputContainer() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  /* state */
+  /* ─── shared state ─── */
   const [guideOpen, setGuideOpen]       = useState(false);
-  const [notesFile, setNotesFile]       = useState<File | null>(null);
-  const [drag, setDrag]                 = useState(false);
-  const [scanning, setScanning]         = useState(false);
-  const [scanError, setScanError]       = useState<string | null>(null);
-  const [sectionsReady, setSectionsReady] = useState(false);
-  const [sectionHtml, setSectionHtml]   = useState<ExtractedNotes>(EMPTY_NOTES);
   const [slotFiles, setSlotFiles]       = useState<{ 1: File | null; 2: File | null }>({ 1: null, 2: null });
   const [slotTypes, setSlotTypes]       = useState<{ 1: string; 2: string }>({ 1: "", 2: "" });
   const [analyzing, setAnalyzing]       = useState(false);
   const [analyzeStep, setAnalyzeStep]   = useState(0);
 
-  /* helpers */
-  const hasDocs   = !!(slotFiles[1] || slotFiles[2]);
-  const canAnalyze = sectionsReady && !scanning && !scanError;
+  /* ─── tab state ─── */
+  const [activeTab, setActiveTab]             = useState<InputMode>("image");
+  const [pendingTab, setPendingTab]           = useState<InputMode | null>(null);
+  const [showSwitchDialog, setShowSwitchDialog] = useState(false);
 
-  /* ─── extraction ─── */
-  const resetAll = () => {
+  /* ─── image analysis state ─── */
+  const [notesFile, setNotesFile]       = useState<File | null>(null);
+  const [drag, setDrag]                 = useState(false);
+  const [scanning, setScanning]         = useState(false);
+  const [scanError, setScanError]       = useState<string | null>(null);
+  const [imageSectionsReady, setImageSectionsReady] = useState(false);
+  const [imageSectionHtml, setImageSectionHtml]     = useState<ExtractedNotes>(EMPTY_NOTES);
+
+  /* ─── manual input state ─── */
+  const [manualSectionHtml, setManualSectionHtml] = useState<ExtractedNotes>(EMPTY_NOTES);
+
+  /* ─── derived ─── */
+  const sectionHtml    = activeTab === "image" ? imageSectionHtml : manualSectionHtml;
+  const sectionsReady  = activeTab === "image" ? imageSectionsReady : true; // manual is always "ready"
+  const hasDocs        = !!(slotFiles[1] || slotFiles[2]);
+  const canAnalyze     = activeTab === "image"
+    ? imageSectionsReady && !scanning && !scanError
+    : Object.values(manualSectionHtml).some(v => v.trim() !== "");
+
+  /** Check if a tab has data entered */
+  const tabHasData = (tab: InputMode): boolean => {
+    if (tab === "image") {
+      return !!(notesFile || Object.values(imageSectionHtml).some(v => v.trim() !== ""));
+    }
+    return Object.values(manualSectionHtml).some(v => v.trim() !== "");
+  };
+
+  /* ─── tab switching ─── */
+  const handleTabChange = (newTab: string) => {
+    const target = newTab as InputMode;
+    if (target === activeTab) return;
+
+    if (tabHasData(activeTab)) {
+      setPendingTab(target);
+      setShowSwitchDialog(true);
+    } else {
+      setActiveTab(target);
+    }
+  };
+
+  const confirmTabSwitch = () => {
+    if (!pendingTab) return;
+
+    // Clear the current tab's data
+    if (activeTab === "image") {
+      resetImageState();
+    } else {
+      setManualSectionHtml(EMPTY_NOTES);
+    }
+
+    setActiveTab(pendingTab);
+    setPendingTab(null);
+    setShowSwitchDialog(false);
+  };
+
+  const cancelTabSwitch = () => {
+    setPendingTab(null);
+    setShowSwitchDialog(false);
+  };
+
+  /* ─── image extraction helpers ─── */
+  const resetImageState = () => {
     setNotesFile(null); setScanning(false); setScanError(null);
-    setSectionsReady(false);
-    setSectionHtml(EMPTY_NOTES);
+    setImageSectionsReady(false);
+    setImageSectionHtml(EMPTY_NOTES);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   const extractSections = (file: File) => {
-    setScanning(true); setScanError(null); setSectionsReady(false);
+    setScanning(true); setScanError(null); setImageSectionsReady(false);
     const reader = new FileReader();
     reader.onload = async (e) => {
       try {
@@ -91,8 +153,8 @@ export default function InputContainer() {
           concerns:   data.concerns   || "",
           impression: data.impression || "",
         };
-        setSectionHtml(notes);
-        setSectionsReady(true);
+        setImageSectionHtml(notes);
+        setImageSectionsReady(true);
       } catch { setScanError("Could not read the notes. Please ensure the image is clear and well-lit, then try again."); }
       finally { setScanning(false); }
     };
@@ -101,7 +163,7 @@ export default function InputContainer() {
   };
 
   const handleNotesSelect = (f: File | null) => {
-    if (!f) { resetAll(); return; }
+    if (!f) { resetImageState(); return; }
     if (!f.type.startsWith("image/")) {
       toast.error("Invalid file type", { description: "Please upload an image file (JPG, PNG, etc.)", position: "top-center" });
       return;
@@ -128,11 +190,17 @@ export default function InputContainer() {
     }, 1100);
   };
 
-  let helperText = "Upload your counselor notes photo to enable analysis";
-  if (scanning) helperText = "Scanning your notes with AI Vision…";
-  else if (scanError) helperText = "Fix the notes image to enable analysis";
-  else if (sectionsReady && !hasDocs) helperText = "";
-  else if (sectionsReady && hasDocs) helperText = "";
+  let helperText = "Upload the counselor's notes photo to enable analysis";
+  if (activeTab === "manual") {
+    helperText = canAnalyze
+      ? ""
+      : "Type your notes in the sections above to enable analysis";
+  } else {
+    if (scanning) helperText = "Scanning your notes with AI Vision…";
+    else if (scanError) helperText = "Fix the notes image to enable analysis";
+    else if (imageSectionsReady && !hasDocs) helperText = "";
+    else if (imageSectionsReady && hasDocs) helperText = "";
+  }
 
   return (
     <section className="mx-auto w-full max-w-2xl px-4 sm:px-6 relative">
@@ -148,7 +216,7 @@ export default function InputContainer() {
                 Counselor Notes
                 <span className="ml-2 inline-block align-middle rounded-full bg-sage px-2 py-0.5 text-[10px] font-bold uppercase text-white">Required</span>
               </h2>
-              <p className="mt-1 text-xs leading-relaxed text-muted-text">Write your interview notes, take a clear photo, and upload it. The AI will populate each section — edit directly like a document.</p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-text">Write your interview notes, take a clear photo, and upload it — or type them directly. The AI will populate each section.</p>
             </div>
           </div>
 
@@ -188,77 +256,128 @@ export default function InputContainer() {
               <h3 className="text-sm font-semibold text-ink">Download &amp; Print the Notes Form</h3>
               <p className="text-xs text-muted-text">Pre-structured form you can fill out by hand during the session</p>
             </div>
-            <a href="/counselor_guide.pdf" download className="inline-flex items-center gap-1.5 rounded-lg bg-sage px-4 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-sage/80 whitespace-nowrap">
+            <a href="/kumpas_career_interview_notes.pdf" download className="inline-flex items-center gap-1.5 rounded-lg bg-sage px-4 py-2 text-[13px] font-semibold text-white transition-colors hover:bg-sage/80 whitespace-nowrap">
               <Download size={16} /> Download PDF
             </a>
           </div>
 
-          {/* ─ Upload / Pill ─ */}
-          {!notesFile ? (
-            <div
-              className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-12 text-center cursor-pointer transition-all ${drag ? "border-sage bg-sage/[0.04]" : "border-black/10 bg-cream/40 hover:border-black/20"}`}
-              onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
-              onDragLeave={() => setDrag(false)}
-              onDrop={(e) => { e.preventDefault(); setDrag(false); handleNotesSelect(e.dataTransfer.files?.[0] || null); }}
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm text-sage"><ImageIcon size={24} /></div>
-              <p className="text-[15px] font-semibold text-ink">Upload photo of your notes</p>
-              <p className="mt-1 text-[13px] text-muted-text"><span className="text-sage font-medium">Tap to choose</span> or drag &amp; drop an image here</p>
-              <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={(e) => handleNotesSelect(e.target.files?.[0] || null)} />
-            </div>
-          ) : (
-            <>
-              {/* Notes Pill */}
-              <div className="flex items-center gap-3 rounded-xl border border-sage/20 bg-sage/[0.04] p-3">
-                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white ${scanning ? "bg-amber" : scanError ? "bg-red-soft" : "bg-sage"}`}>
-                  {scanning ? <Loader2 size={20} className="animate-spin" /> : scanError ? <AlertTriangle size={20} /> : <ImageIcon size={20} />}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="truncate text-[13px] font-semibold text-ink">{notesFile.name}</p>
-                  <p className={`text-[11px] ${scanError ? "text-red-soft" : "text-muted-text"}`}>
-                    {scanning ? "Reading handwriting with AI Vision…" : scanError ? scanError : `${(notesFile.size / 1024).toFixed(0)} KB · Extracted & ready to edit`}
-                  </p>
-                </div>
-                <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold ${scanning ? "bg-amber/15 text-amber" : scanError ? "bg-red-soft/15 text-red-soft" : "bg-white border border-sage/20 text-sage"}`}>
-                  {scanning ? "Scanning" : scanError ? "Error" : <><Check size={12} /> Scanned</>}
-                </span>
-                <button type="button" onClick={resetAll} className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-black/30 hover:text-charcoal-2 cursor-pointer"><X size={14} /></button>
-              </div>
+          {/* ═══════ INPUT MODE TABS ═══════ */}
+          <Tabs value={activeTab} onValueChange={handleTabChange} className="gap-0">
+            <TabsList className="w-full h-auto p-1 rounded-xl bg-cream-dark/80 border border-black/[0.06] mb-4">
+              <TabsTrigger
+                value="image"
+                className="flex-1 gap-2 rounded-lg px-4 py-2.5 text-[13px] font-semibold transition-all data-[state=active]:bg-white data-[state=active]:text-sage data-[state=active]:shadow-sm data-[state=inactive]:text-muted-text data-[state=inactive]:hover:text-charcoal-2"
+              >
+                <ImageIcon size={15} />
+                Image Analysis
+              </TabsTrigger>
+              <TabsTrigger
+                value="manual"
+                className="flex-1 gap-2 rounded-lg px-4 py-2.5 text-[13px] font-semibold transition-all data-[state=active]:bg-white data-[state=active]:text-sage data-[state=active]:shadow-sm data-[state=inactive]:text-muted-text data-[state=inactive]:hover:text-charcoal-2"
+              >
+                <PenLine size={15} />
+                Manual Input
+              </TabsTrigger>
+            </TabsList>
 
-              {/* Extraction Panel */}
-              <div className="mt-4 overflow-hidden rounded-2xl border border-black/[0.06] animate-fade-in">
-                {/* panel header */}
-                <div className={`flex items-center gap-2.5 px-4 py-3 border-b text-[13px] font-semibold ${scanError ? "bg-red-light border-red-soft/30 text-red-soft" : "bg-black/[0.015] border-black/[0.06] text-charcoal-2"}`}>
-                  <ScanText size={16} className={scanning ? "text-amber" : scanError ? "text-red-soft" : "text-sage"} />
-                  {scanning ? "Extracting your notes…" : scanError ? "Extraction failed" : "Extracted Notes — Edit Below"}
-                  {!scanning && !scanError && (
-                    <span className="ml-auto flex items-center gap-1 text-[11px] font-medium text-muted-text"><Check size={14} className="text-sage" /> AI-extracted · editable</span>
-                  )}
+            {/* ── Image Analysis Tab ── */}
+            <TabsContent value="image" className="mt-0">
+              {!notesFile ? (
+                <div
+                  className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-12 text-center cursor-pointer transition-all ${drag ? "border-sage bg-sage/[0.04]" : "border-black/10 bg-cream/40 hover:border-black/20"}`}
+                  onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
+                  onDragLeave={() => setDrag(false)}
+                  onDrop={(e) => { e.preventDefault(); setDrag(false); handleNotesSelect(e.dataTransfer.files?.[0] || null); }}
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm text-sage"><ImageIcon size={24} /></div>
+                  <p className="text-[15px] font-semibold text-ink">Upload photo of your notes</p>
+                  <p className="mt-1 text-[13px] text-muted-text"><span className="text-sage font-medium">Tap to choose</span> or drag &amp; drop an image here</p>
+                  <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={(e) => handleNotesSelect(e.target.files?.[0] || null)} />
                 </div>
+              ) : (
+                <>
+                  {/* Notes Pill */}
+                  <div className="flex items-center gap-3 rounded-xl border border-sage/20 bg-sage/[0.04] p-3">
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white ${scanning ? "bg-amber" : scanError ? "bg-red-soft" : "bg-sage"}`}>
+                      {scanning ? <Loader2 size={20} className="animate-spin" /> : scanError ? <AlertTriangle size={20} /> : <ImageIcon size={20} />}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="truncate text-[13px] font-semibold text-ink">{notesFile.name}</p>
+                      <p className={`text-[11px] ${scanError ? "text-red-soft" : "text-muted-text"}`}>
+                        {scanning ? "Reading handwriting with AI Vision…" : scanError ? scanError : `${(notesFile.size / 1024).toFixed(0)} KB · Extracted & ready to edit`}
+                      </p>
+                    </div>
+                    <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold ${scanning ? "bg-amber/15 text-amber" : scanError ? "bg-red-soft/15 text-red-soft" : "bg-white border border-sage/20 text-sage"}`}>
+                      {scanning ? "Scanning" : scanError ? "Error" : <><Check size={12} /> Scanned</>}
+                    </span>
+                    <button type="button" onClick={resetImageState} className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-black/30 hover:text-charcoal-2 cursor-pointer"><X size={14} /></button>
+                  </div>
 
-                {/* skeletons */}
-                {scanning && (
-                  <div className="p-4 space-y-6">
-                    {[37, 50, 42, 58, 65].map((w, i) => (
-                      <div key={i} className="space-y-2">
-                        <div className="h-3.5 rounded animate-shimmer" style={{ width: `${w}%` }} />
-                        <div className="rounded animate-shimmer" style={{ height: `${74 + i * 4}px` }} />
+                  {/* Extraction Panel */}
+                  <div className="mt-4 overflow-hidden rounded-2xl border border-black/[0.06] animate-fade-in">
+                    {/* panel header */}
+                    <div className={`flex items-center gap-2.5 px-4 py-3 border-b text-[13px] font-semibold ${scanError ? "bg-red-light border-red-soft/30 text-red-soft" : "bg-black/[0.015] border-black/[0.06] text-charcoal-2"}`}>
+                      <ScanText size={16} className={scanning ? "text-amber" : scanError ? "text-red-soft" : "text-sage"} />
+                      {scanning ? "Extracting your notes…" : scanError ? "Extraction failed" : "Extracted Notes — Edit Below"}
+                      {!scanning && !scanError && (
+                        <span className="ml-auto flex items-center gap-1 text-[11px] font-medium text-muted-text"><Check size={14} className="text-sage" /> AI-extracted · editable</span>
+                      )}
+                    </div>
+
+                    {/* skeletons */}
+                    {scanning && (
+                      <div className="p-4 space-y-6">
+                        {[37, 50, 42, 58, 65].map((w, i) => (
+                          <div key={i} className="space-y-2">
+                            <div className="h-3.5 rounded animate-shimmer" style={{ width: `${w}%` }} />
+                            <div className="rounded animate-shimmer" style={{ height: `${74 + i * 4}px` }} />
+                          </div>
+                        ))}
                       </div>
+                    )}
+
+                    {/* error */}
+                    {scanError && (
+                      <div className="flex items-start gap-3 p-4 bg-red-light text-red-soft text-[13px] leading-snug">
+                        <AlertTriangle size={18} className="shrink-0 mt-0.5" />
+                        Could not read the notes. Please ensure the image is clear and well-lit, then try again.
+                      </div>
+                    )}
+
+                    {/* editors */}
+                    {imageSectionsReady && SECTIONS.map((s) => (
+                      <WysiwygField
+                        key={s.key}
+                        label={s.label}
+                        icon={<s.icon size={12} />}
+                        iconBg={s.iconBg}
+                        iconFg={s.iconFg}
+                        labelColor={s.labelColor}
+                        placeholder={s.ph}
+                        htmlValue={imageSectionHtml[s.key]}
+                        onChange={(h) => setImageSectionHtml(prev => ({ ...prev, [s.key]: h }))}
+                      />
                     ))}
                   </div>
-                )}
+                </>
+              )}
+            </TabsContent>
 
-                {/* error */}
-                {scanError && (
-                  <div className="flex items-start gap-3 p-4 bg-red-light text-red-soft text-[13px] leading-snug">
-                    <AlertTriangle size={18} className="shrink-0 mt-0.5" />
-                    Could not read the notes. Please ensure the image is clear and well-lit, then try again.
-                  </div>
-                )}
+            {/* ── Manual Input Tab ── */}
+            <TabsContent value="manual" className="mt-0">
+              <div className="overflow-hidden rounded-2xl border border-black/[0.06] animate-fade-in">
+                {/* panel header */}
+                <div className="flex items-center gap-2.5 px-4 py-3 border-b bg-black/[0.015] border-black/[0.06] text-charcoal-2 text-[13px] font-semibold">
+                  <PenLine size={16} className="text-sage" />
+                  Manual Notes — Type Below
+                  <span className="ml-auto flex items-center gap-1 text-[11px] font-medium text-muted-text">
+                    <PenLine size={14} className="text-sage" /> Type directly · editable
+                  </span>
+                </div>
 
                 {/* editors */}
-                {sectionsReady && SECTIONS.map((s) => (
+                {SECTIONS.map((s) => (
                   <WysiwygField
                     key={s.key}
                     label={s.label}
@@ -267,13 +386,13 @@ export default function InputContainer() {
                     iconFg={s.iconFg}
                     labelColor={s.labelColor}
                     placeholder={s.ph}
-                    htmlValue={sectionHtml[s.key]}
-                    onChange={(h) => setSectionHtml(prev => ({ ...prev, [s.key]: h }))}
+                    htmlValue={manualSectionHtml[s.key]}
+                    onChange={(h) => setManualSectionHtml(prev => ({ ...prev, [s.key]: h }))}
                   />
                 ))}
               </div>
-            </>
-          )}
+            </TabsContent>
+          </Tabs>
         </div>
 
         {/* ══════ Separator ══════ */}
@@ -288,7 +407,7 @@ export default function InputContainer() {
                 Supporting Documents
                 <span className="rounded-full bg-black/[0.04] px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-text">Optional — Max 2</span>
               </h2>
-              <p className="mt-1 text-xs text-muted-text leading-relaxed">Upload student records to improve AI accuracy. Select the document type or let AI detect it.</p>
+              <p className="mt-1 text-xs text-muted-text leading-relaxed">Upload student records to improve AI accuracy. Select the document type.</p>
             </div>
           </div>
 
@@ -315,12 +434,37 @@ export default function InputContainer() {
             Begin Multi Agent Analysis
           </button>
           <p className="mt-3 text-center text-xs font-medium text-muted-text">
-            {sectionsReady && !hasDocs ? <><span className="text-sage">Notes extracted!</span> Add supporting documents for a more accurate analysis (optional)</> :
+            {sectionsReady && !hasDocs ? <><span className="text-sage">{activeTab === "image" ? "Notes extracted!" : "Notes ready!"}</span> Add supporting documents for a more accurate analysis (optional)</> :
              sectionsReady && hasDocs  ? <span className="text-sage">All inputs ready. Click above to begin the analysis.</span> :
              helperText}
           </p>
         </div>
       </div>
+
+      {/* ══════ Tab Switch Confirmation Dialog ══════ */}
+      <AlertDialog open={showSwitchDialog} onOpenChange={setShowSwitchDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Switch input method?</AlertDialogTitle>
+            <AlertDialogDescription>
+              You have unsaved notes in the{" "}
+              <strong>{activeTab === "image" ? "Image Analysis" : "Manual Input"}</strong>{" "}
+              tab. Switching will discard your current input. This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={cancelTabSwitch}>
+              Stay here
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmTabSwitch}
+              className="bg-red-600 text-white hover:bg-red-700"
+            >
+              Discard &amp; switch
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
       {/* ══════ Loading Overlay ══════ */}
       {analyzing && (
