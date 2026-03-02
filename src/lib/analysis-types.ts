@@ -1,3 +1,20 @@
+// ─── Notes Extraction (Gemini Vision) ───────────────────────────────
+export interface ExtractedNotes {
+    careerGoal: string;
+    interests: string;
+    financial: string;
+    concerns: string;
+    impression: string;
+}
+
+export const EMPTY_NOTES: ExtractedNotes = {
+    careerGoal: "",
+    interests: "",
+    financial: "",
+    concerns: "",
+    impression: "",
+};
+
 // ─── Transcription Layer ────────────────────────────────────────────
 export interface StructuredTranscript {
     participants: { student: string; counselor: string };
