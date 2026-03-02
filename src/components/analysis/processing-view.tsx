@@ -20,8 +20,8 @@ const STAGE_META: Record<StageName, { label: string; description: string }> = {
         label: "Job Demand Analyst",
         description: "Extracting genuine interests and aptitudes...",
     },
-    verdict: {
-        label: "Verdict Generator",
+    adjacentCareer: {
+        label: "Adjacent Career Finder",
         description: "Synthesizing all agents into final report...",
     },
 };
@@ -31,7 +31,7 @@ const STAGE_ORDER: StageName[] = [
     "feasibility",
     "laborMarket",
     "jobDemand",
-    "verdict",
+    "adjacentCareer",
 ];
 
 export { STAGE_ORDER };

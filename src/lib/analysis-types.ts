@@ -104,7 +104,7 @@ export type StageName =
     | "feasibility"
     | "laborMarket"
     | "jobDemand"
-    | "verdict";
+    | "adjacentCareer";
 
 export type AnalysisState =
     | { phase: "processing"; completedStages: StageName[] }

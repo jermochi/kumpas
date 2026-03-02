@@ -7,11 +7,11 @@ import { Brain, Shield, BarChart3, BotMessageSquare, CheckCircle2, CircleDashed,
 export default function LoadingScreen({ completedStages = [] }: { completedStages?: string[] }) {
     const [transcriptionProgress, setTranscriptionProgress] = useState(0);
     const [agentProgress, setAgentProgress] = useState({ labor: 0, feasi: 0, job: 0 });
-    const [verdictProgress, setVerdictProgress] = useState(0);
+    const [adjacentCareerProgress, setAdjacentCareerProgress] = useState(0);
 
     const hasTranscription = completedStages.includes("transcriptionLayer");
     const hasParallel = completedStages.includes("laborMarket");
-    const hasVerdict = completedStages.includes("verdict");
+    const hasAdjacentCareer = completedStages.includes("adjacentCareer");
 
     // Transcription Placebo
     useEffect(() => {
@@ -42,18 +42,18 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
         return () => clearInterval(t);
     }, [hasTranscription, hasParallel]);
 
-    // Verdict Placebo
+    // Adjacent Career Placebo
     useEffect(() => {
         if (!hasParallel) return;
-        if (hasVerdict) {
-            setVerdictProgress(100);
+        if (hasAdjacentCareer) {
+            setAdjacentCareerProgress(100);
             return;
         }
         const t = setInterval(() => {
-            setVerdictProgress(p => Math.min(p + Math.random() * 6, 99));
+            setAdjacentCareerProgress(p => Math.min(p + Math.random() * 6, 99));
         }, 250);
         return () => clearInterval(t);
-    }, [hasParallel, hasVerdict]);
+    }, [hasParallel, hasAdjacentCareer]);
 
     const ProgressRow = ({ label, progress, isDone, icon: Icon, active }: { label: string, progress: number, isDone: boolean, icon: any, active: boolean }) => (
         <div className={`flex items-center gap-4 w-full max-w-xl p-4 rounded-2xl border transition-all duration-700 ${active ? "bg-white border-[var(--sage)]/20 shadow-sm" : "bg-[var(--cream-mid)] border-transparent opacity-50"}`}>
@@ -130,9 +130,9 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
                     </div>
 
                     <ProgressRow
-                        label="Final Verdict Synthesis"
-                        progress={verdictProgress}
-                        isDone={hasVerdict}
+                        label="Adjacent Career Finder"
+                        progress={adjacentCareerProgress}
+                        isDone={hasAdjacentCareer}
                         active={hasParallel}
                         icon={CheckCircle2}
                     />

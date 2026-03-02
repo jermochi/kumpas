@@ -131,8 +131,8 @@ function AnalysisContent() {
                 completedStages: ["transcriptionLayer", "feasibility", "laborMarket", "jobDemand"],
             }));
 
-            // ── Stage 5: Verdict ────────────────────────────────────
-            const verdictRes = await fetch("/api/analyze/verdict", {
+            // ── Stage 5: Adjacent Career Finder ──────────────────────
+            const adjacentCareerRes = await fetch("/api/analyze/adjacent-career", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -143,8 +143,8 @@ function AnalysisContent() {
                     job_demand: jobDemand,
                 }),
             });
-            if (!verdictRes.ok) throw new Error("Verdict generation failed");
-            const report = await verdictRes.json() as AdjacentCareerReport;
+            if (!adjacentCareerRes.ok) throw new Error("Adjacent career generation failed");
+            const report = await adjacentCareerRes.json() as AdjacentCareerReport;
 
             // Prepend original career to allow navigating back
             if (session.originalCareer && session.originalCareer !== structured.career_path) {
@@ -161,7 +161,7 @@ function AnalysisContent() {
 
             const agentData = buildAgentPanels(feasibility, labor, jobDemand);
 
-            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer", "feasibility", "laborMarket", "jobDemand", "verdict"] }));
+            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer", "feasibility", "laborMarket", "jobDemand", "adjacentCareer"] }));
             // Give the UI a moment to show 100% completion before switching
             await new Promise((r) => setTimeout(r, 1000));
 
