@@ -5,14 +5,14 @@ import { getSystemInstructions } from "@/lib/utils";
 export async function POST(req: Request) {
     try {
         const body = await req.json() as {
-            labor?: unknown;
             feasibility?: unknown;
-            psychological?: unknown;
+            labor?: unknown;
+            job_demand?: unknown;
             career_path?: string;
             career_path_source?: string;
         };
 
-        if (!body.labor || !body.feasibility || !body.psychological) {
+        if (!body.feasibility || !body.labor || !body.job_demand) {
             return NextResponse.json(
                 { error: "All three agent outputs are required" },
                 { status: 400 }
@@ -26,9 +26,9 @@ export async function POST(req: Request) {
         const agentInput = JSON.stringify({
             career_path_detected: body.career_path,
             career_path_source: body.career_path_source,
-            labor_market_analysis: body.labor,
             feasibility_analysis: body.feasibility,
-            psychological_analysis: body.psychological,
+            labor_market_analysis: body.labor,
+            job_demand_analysis: body.job_demand,
         });
 
         const result = await callAgent(

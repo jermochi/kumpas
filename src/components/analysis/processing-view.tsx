@@ -8,16 +8,16 @@ const STAGE_META: Record<StageName, { label: string; description: string }> = {
         label: "Transcription Layer",
         description: "Redacting session and detecting career path...",
     },
-    laborMarket: {
-        label: "Labor Market Analyst",
-        description: "Mapping career paths to PH market demand...",
-    },
     feasibility: {
         label: "Feasibility Analyst",
         description: "Evaluating real-world barriers and constraints...",
     },
-    psychological: {
-        label: "Psychological Analyst",
+    laborMarket: {
+        label: "Labor Market Analyst",
+        description: "Mapping career paths to PH market demand...",
+    },
+    jobDemand: {
+        label: "Job Demand Analyst",
         description: "Extracting genuine interests and aptitudes...",
     },
     verdict: {
@@ -28,9 +28,9 @@ const STAGE_META: Record<StageName, { label: string; description: string }> = {
 
 const STAGE_ORDER: StageName[] = [
     "transcriptionLayer",
-    "laborMarket",
     "feasibility",
-    "psychological",
+    "laborMarket",
+    "jobDemand",
     "verdict",
 ];
 
@@ -62,10 +62,10 @@ export default function ProcessingView({ completedStages }: ProcessingViewProps)
                         <div
                             key={stage}
                             className={`flex items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-300 ${done
-                                    ? "border-forest/20 bg-forest/[0.04]"
-                                    : running
-                                        ? "border-black/10 bg-white shadow-sm"
-                                        : "border-black/[0.06] bg-white/50"
+                                ? "border-forest/20 bg-forest/[0.04]"
+                                : running
+                                    ? "border-black/10 bg-white shadow-sm"
+                                    : "border-black/[0.06] bg-white/50"
                                 }`}
                         >
                             {done ? (

@@ -4,39 +4,15 @@ import type { AgentPanelData, AgentKey, AdjacentCareerReport, RawAgentResponse }
  * Build agent-panel detail data keyed by agent from raw agent outputs.
  */
 export function buildAgentPanels(
-    labor: RawAgentResponse,
     feasibility: RawAgentResponse,
-    psychological: RawAgentResponse
+    labor_market: RawAgentResponse,
+    job_demand: RawAgentResponse
 ): Record<AgentKey, AgentPanelData> {
-    console.log("Labor:", labor);
     console.log("Feasibility:", feasibility);
-    console.log("Psychological:", psychological);
+    console.log("Labor Market:", labor_market);
+    console.log("Job Demand:", job_demand);
+
     return {
-        labor_market: {
-            key: "labor_market",
-            label: "Labor Market",
-            framework: "LMI Framework",
-            frameworkCite: "LMI Framework · Arulmani et al., 2014",
-            score: labor.score,
-            verdict: labor.verdict,
-            keySignals: labor.key_signals.map(s => ({
-                icon: s.icon,
-                label: s.label,
-                value: s.value,
-                subNote: s.sub_note,
-            })),
-            summary: labor.summary,
-            scoreBreakdown: labor.score_breakdown ? labor.score_breakdown.map(b => ({
-                label: b.label,
-                value: b.value,
-                weight: b.weight,
-            })) : [],
-            supportingData: labor.supporting_data.map(d => ({
-                icon: d.icon,
-                label: d.label,
-                value: d.value,
-            })),
-        },
         feasibility: {
             key: "feasibility",
             label: "Feasibility",
@@ -62,26 +38,51 @@ export function buildAgentPanels(
                 value: d.value,
             })),
         },
-        psychological: {
-            key: "psychological",
-            label: "Psychological",
-            framework: "JD-R Model",
-            frameworkCite: "JD-R Model · Demerouti et al., 2001",
-            score: psychological.score,
-            verdict: psychological.verdict,
-            keySignals: psychological.key_signals.map(s => ({
+        labor_market: {
+            key: "labor_market",
+            label: "Labor Market",
+            framework: "LMI Framework",
+            frameworkCite: "LMI Framework · Arulmani et al., 2014",
+            score: labor_market.score,
+            verdict: labor_market.verdict,
+            keySignals: labor_market.key_signals.map(s => ({
                 icon: s.icon,
                 label: s.label,
                 value: s.value,
                 subNote: s.sub_note,
             })),
-            summary: psychological.summary,
-            scoreBreakdown: psychological.score_breakdown ? psychological.score_breakdown.map(b => ({
+            summary: labor_market.summary,
+            scoreBreakdown: labor_market.score_breakdown ? labor_market.score_breakdown.map(b => ({
                 label: b.label,
                 value: b.value,
                 weight: b.weight,
             })) : [],
-            supportingData: psychological.supporting_data.map(d => ({
+            supportingData: labor_market.supporting_data.map(d => ({
+                icon: d.icon,
+                label: d.label,
+                value: d.value,
+            })),
+        },
+        job_demand: {
+            key: "job_demand",
+            label: "Job Demand",
+            framework: "JD-R Model",
+            frameworkCite: "JD-R Model · Demerouti et al., 2001",
+            score: job_demand.score,
+            verdict: job_demand.verdict,
+            keySignals: job_demand.key_signals.map(s => ({
+                icon: s.icon,
+                label: s.label,
+                value: s.value,
+                subNote: s.sub_note,
+            })),
+            summary: job_demand.summary,
+            scoreBreakdown: job_demand.score_breakdown ? job_demand.score_breakdown.map(b => ({
+                label: b.label,
+                value: b.value,
+                weight: b.weight,
+            })) : [],
+            supportingData: job_demand.supporting_data.map(d => ({
                 icon: d.icon,
                 label: d.label,
                 value: d.value,

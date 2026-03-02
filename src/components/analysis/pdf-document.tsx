@@ -10,7 +10,7 @@ interface PdfDocumentProps {
 export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
     ({ report, structured, agentData }, ref) => {
         // Prepare some structured score and verdict bindings
-        const agents: AgentKey[] = ["labor_market", "feasibility", "psychological"];
+        const agents: AgentKey[] = ["feasibility", "labor_market", "job_demand"];
 
         return (
             <div
@@ -95,7 +95,7 @@ export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
                                                     </span>
                                                     <div style={{ display: "flex", alignItems: "center", gap: "6px", flex: 1, minWidth: 0 }}>
                                                         <span style={{ color: "#6b7280", width: "24px", textAlign: "right", lineHeight: "1.4", padding: "2px 0", flexShrink: 0 }}>{item.weight}</span>
-                                                        <div style={{ height: "6px", width: "66px", backgroundColor: "rgba(0,0,0,0.06)", borderRadius: "9999px", overflow: "hidden", flexShrink: 0}}>
+                                                        <div style={{ height: "6px", width: "66px", backgroundColor: "rgba(0,0,0,0.06)", borderRadius: "9999px", overflow: "hidden", flexShrink: 0 }}>
                                                             <div
                                                                 style={{ height: "100%", backgroundColor: "#6b8f71", borderRadius: "9999px", width: `${Math.max(0, Math.min(100, item.value))}%` }}
                                                             />

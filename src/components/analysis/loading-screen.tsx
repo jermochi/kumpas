@@ -6,7 +6,7 @@ import { Brain, Shield, BarChart3, BotMessageSquare, CheckCircle2, CircleDashed,
 
 export default function LoadingScreen({ completedStages = [] }: { completedStages?: string[] }) {
     const [transcriptionProgress, setTranscriptionProgress] = useState(0);
-    const [agentProgress, setAgentProgress] = useState({ labor: 0, feasi: 0, psych: 0 });
+    const [agentProgress, setAgentProgress] = useState({ labor: 0, feasi: 0, job: 0 });
     const [verdictProgress, setVerdictProgress] = useState(0);
 
     const hasTranscription = completedStages.includes("transcriptionLayer");
@@ -27,16 +27,16 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
 
     // Agents Placebo
     useEffect(() => {
-        if (!hasTranscription) return; 
+        if (!hasTranscription) return;
         if (hasParallel) {
-            setAgentProgress({ labor: 100, feasi: 100, psych: 100 });
+            setAgentProgress({ labor: 100, feasi: 100, job: 100 });
             return;
         }
         const t = setInterval(() => {
             setAgentProgress(prev => ({
-                labor: Math.min(prev.labor + Math.random() * 3, 98),
                 feasi: Math.min(prev.feasi + Math.random() * 2, 94),
-                psych: Math.min(prev.psych + Math.random() * 4, 96),
+                labor: Math.min(prev.labor + Math.random() * 3, 98),
+                job: Math.min(prev.job + Math.random() * 4, 96),
             }));
         }, 300);
         return () => clearInterval(t);
@@ -66,7 +66,7 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
                     {active && <span className="text-xs text-gray-500 font-mono">{Math.round(progress)}%</span>}
                 </div>
                 <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
-                    <div 
+                    <div
                         className="h-full bg-[var(--sage)] rounded-full transition-all duration-300 ease-out"
                         style={{ width: `${progress}%` }}
                     />
@@ -86,10 +86,10 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
                 </h2>
 
                 <div className="flex flex-col gap-4 w-full items-center">
-                    <ProgressRow 
-                        label="Transcription Layer" 
-                        progress={transcriptionProgress} 
-                        isDone={hasTranscription} 
+                    <ProgressRow
+                        label="Transcription Layer"
+                        progress={transcriptionProgress}
+                        isDone={hasTranscription}
                         active={true}
                         icon={BotMessageSquare}
                     />
@@ -102,37 +102,37 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
                             <span className={`text-sm font-medium ${hasTranscription ? "text-[var(--charcoal)]" : "text-gray-400"}`}>Parallel Agent Analysis</span>
                         </div>
                         <div className="pl-[2.25rem] flex flex-col gap-4">
-                            <AgentSubProgress 
-                                label="Labor Market Analyst" 
-                                icon={BarChart3} 
-                                progress={agentProgress.labor} 
-                                color="#6B8C6B" 
-                                active={hasTranscription && !hasParallel} 
-                                done={hasParallel} 
-                            />
-                            <AgentSubProgress 
-                                label="Feasibility Assessor" 
-                                icon={Shield} 
-                                progress={agentProgress.feasi} 
-                                color="#C4861C" 
-                                active={hasTranscription && !hasParallel} 
+                            <AgentSubProgress
+                                label="Feasibility Assessor"
+                                icon={Shield}
+                                progress={agentProgress.feasi}
+                                color="#C4861C"
+                                active={hasTranscription && !hasParallel}
                                 done={hasParallel}
                             />
-                            <AgentSubProgress 
-                                label="Psychological Profiler" 
-                                icon={Brain} 
-                                progress={agentProgress.psych} 
-                                color="#5B7FA6" 
-                                active={hasTranscription && !hasParallel} 
-                                done={hasParallel} 
+                            <AgentSubProgress
+                                label="Labor Market Analyst"
+                                icon={BarChart3}
+                                progress={agentProgress.labor}
+                                color="#6B8C6B"
+                                active={hasTranscription && !hasParallel}
+                                done={hasParallel}
+                            />
+                            <AgentSubProgress
+                                label="Job Demand Profiler"
+                                icon={Brain}
+                                progress={agentProgress.job}
+                                color="#5B7FA6"
+                                active={hasTranscription && !hasParallel}
+                                done={hasParallel}
                             />
                         </div>
                     </div>
 
-                    <ProgressRow 
-                        label="Final Verdict Synthesis" 
-                        progress={verdictProgress} 
-                        isDone={hasVerdict} 
+                    <ProgressRow
+                        label="Final Verdict Synthesis"
+                        progress={verdictProgress}
+                        isDone={hasVerdict}
                         active={hasParallel}
                         icon={CheckCircle2}
                     />
@@ -154,7 +154,7 @@ function AgentSubProgress({ label, icon: Icon, progress, color, active, done }: 
                     {(active || done) && <span className="font-mono text-gray-400">{Math.round(progress)}%</span>}
                 </div>
                 <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
-                    <div className="h-full transition-all duration-300 ease-out rounded-full" style={{ width: `${progress}%`, backgroundColor: color }}/>
+                    <div className="h-full transition-all duration-300 ease-out rounded-full" style={{ width: `${progress}%`, backgroundColor: color }} />
                 </div>
             </div>
         </div>

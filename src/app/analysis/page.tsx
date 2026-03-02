@@ -98,37 +98,37 @@ function AnalysisContent() {
             // ── Stage 2–4: Three agents in parallel ─────────────────
             const careerPathTitle = session.careerOverride || structured.career_path;
 
-            const [laborRes, feasibilityRes, psychologicalRes] = await Promise.all([
-                fetch("/api/analyze/labor", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
-                }).then((r) => r.json()),
-
+            const [feasibilityRes, laborRes, jobDemandRes] = await Promise.all([
                 fetch("/api/analyze/feasibility", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
                 }).then((r) => r.json()),
 
-                fetch("/api/analyze/psychological", {
+                fetch("/api/analyze/labor", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
+                }).then((r) => r.json()),
+
+                fetch("/api/analyze/job-demand", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
                 }).then((r) => r.json()),
             ]);
 
-            if (laborRes.error) throw new Error(laborRes.error);
             if (feasibilityRes.error) throw new Error(feasibilityRes.error);
-            if (psychologicalRes.error) throw new Error(psychologicalRes.error);
+            if (laborRes.error) throw new Error(laborRes.error);
+            if (jobDemandRes.error) throw new Error(jobDemandRes.error);
 
-            const labor = laborRes.data;
             const feasibility = feasibilityRes.data;
-            const psychological = psychologicalRes.data;
+            const labor = laborRes.data;
+            const jobDemand = jobDemandRes.data;
 
             setState(prev => ({
                 ...prev,
-                completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "psychological"],
+                completedStages: ["transcriptionLayer", "feasibility", "laborMarket", "jobDemand"],
             }));
 
             // ── Stage 5: Verdict ────────────────────────────────────
@@ -138,9 +138,9 @@ function AnalysisContent() {
                 body: JSON.stringify({
                     career_path: session.careerOverride || structured.career_path,
                     career_path_source: session.careerOverride ? "derived" : structured.career_path_source,
-                    labor,
                     feasibility,
-                    psychological,
+                    labor,
+                    job_demand: jobDemand,
                 }),
             });
             if (!verdictRes.ok) throw new Error("Verdict generation failed");
@@ -159,9 +159,9 @@ function AnalysisContent() {
                 }
             }
 
-            const agentData = buildAgentPanels(labor, feasibility, psychological);
+            const agentData = buildAgentPanels(feasibility, labor, jobDemand);
 
-            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "psychological", "verdict"] }));
+            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer", "feasibility", "laborMarket", "jobDemand", "verdict"] }));
             // Give the UI a moment to show 100% completion before switching
             await new Promise((r) => setTimeout(r, 1000));
 

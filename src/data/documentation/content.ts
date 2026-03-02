@@ -39,7 +39,7 @@ export const documentationContent: DocumentationSectionType[] = [
     ]
   },
   {
-    title: "Psychological Analysis (JD-R Model)",
+    title: "Job Demand Analysis (JD-R Model)",
     paragraphs: [
       "To ensure comprehensive student well-being, the system incorporates the Job Demands-Resources (JD-R) model. Originally designed to measure occupational stress and motivation, this framework is adapted to evaluate the educational demands placed on students versus the resources (academic, emotional, and social) available to them.",
       "By recognizing patterns in the client's voice, including tone and expressed anxieties, the AI assesses the balance between student 'demands' (academic pressure, expectations) and 'resources' (counseling support, coping mechanisms). This psychological analysis capability translates broad student development goals into practical criteria for mental health and career readiness, helping to standardize the quality of care across institutions."

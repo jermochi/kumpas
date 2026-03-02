@@ -16,9 +16,9 @@ import PdfModal from "@/components/analysis/pdf-modal";
 import { PdfDocument } from "@/components/analysis/pdf-document";
 
 interface ReportViewProps {
-    report:       AdjacentCareerReport;
-    structured:   StructuredTranscript;
-    agentData:    Record<AgentKey, AgentPanelData>;
+    report: AdjacentCareerReport;
+    structured: StructuredTranscript;
+    agentData: Record<AgentKey, AgentPanelData>;
     onNewSession: () => void;
 }
 
@@ -72,9 +72,9 @@ export default function ReportView({ report, structured, agentData, onNewSession
     const wordCount = structured.turns.reduce((n, t) => n + t.text.split(/\s+/).length, 0);
 
     const scores: Record<AgentKey, number> = {
-        labor_market:  agentData.labor_market.score,
-        feasibility:   agentData.feasibility.score,
-        psychological: agentData.psychological.score,
+        feasibility: agentData.feasibility.score,
+        labor_market: agentData.labor_market.score,
+        job_demand: agentData.job_demand.score,
     };
 
     const activePanel = agentData[activeAgent];
@@ -93,9 +93,9 @@ export default function ReportView({ report, structured, agentData, onNewSession
     }, [activeAgent]);
 
     const verdicts: Record<AgentKey, string> = {
-        labor_market:  agentData.labor_market.verdict,
-        feasibility:   agentData.feasibility.verdict,
-        psychological: agentData.psychological.verdict,
+        feasibility: agentData.feasibility.verdict,
+        labor_market: agentData.labor_market.verdict,
+        job_demand: agentData.job_demand.verdict,
     };
 
     return (
@@ -140,8 +140,8 @@ export default function ReportView({ report, structured, agentData, onNewSession
                     {/* Frameworks line */}
                     <p className="mt-1 text-xs text-muted-text">
                         Three agents ·{" "}
-                        <span className="font-semibold text-ink">LMI Framework</span> ·{" "}
                         <span className="font-semibold text-ink">SCCT</span> ·{" "}
+                        <span className="font-semibold text-ink">LMI Framework</span> ·{" "}
                         <span className="font-semibold text-ink">JD-R Model</span>
                     </p>
                 </header>
@@ -225,7 +225,7 @@ export default function ReportView({ report, structured, agentData, onNewSession
                     </div>
                 </FullscreenModal>
 
-                {(["labor_market", "feasibility", "psychological"] as AgentKey[]).map((key) => (
+                {(["feasibility", "labor_market", "job_demand"] as AgentKey[]).map((key) => (
                     <FullscreenModal
                         key={key}
                         isOpen={modalContent === key}
@@ -234,7 +234,7 @@ export default function ReportView({ report, structured, agentData, onNewSession
                     >
                         <AgentDetailPanel
                             data={agentData[key]}
-                            onFullscreen={() => {}}
+                            onFullscreen={() => { }}
                             isFullscreen
                         />
                     </FullscreenModal>

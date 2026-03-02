@@ -25,7 +25,7 @@ export interface RelatedCareer {
 }
 
 // ─── Agent Detail Panel (dummy-data shape) ──────────────────────────
-export type AgentKey = "labor_market" | "feasibility" | "psychological";
+export type AgentKey = "feasibility" | "labor_market" | "job_demand";
 
 export interface ScoreBreakdownItem {
     label: string;
@@ -84,9 +84,9 @@ export interface SupportingRow {
 // ─── Pipeline State ─────────────────────────────────────────────────
 export type StageName =
     | "transcriptionLayer"
-    | "laborMarket"
     | "feasibility"
-    | "psychological"
+    | "laborMarket"
+    | "jobDemand"
     | "verdict";
 
 export type AnalysisState =
