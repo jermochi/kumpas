@@ -1,4 +1,4 @@
-import { getSystemInstructions, getFilteredFeasibilityContexts } from '../utils';
+import { getSystemInstructions, getFilteredFeasibilityContexts } from '../server-utils';
 
 export function buildFeasibilitySystemPrompt(careerPathTitle: string): string {
   const baseInstructions = getSystemInstructions('feasibility_analyst.md');
