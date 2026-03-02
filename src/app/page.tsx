@@ -93,7 +93,7 @@ export default function LandingPage() {
           style={{ animationDelay: "0.1s" }}
         >
           <Sparkles size={14} className="text-forest" />
-          Powered by Multi-Agent AI
+          Powered by Multi-AI Specialists
         </div>
 
         {/* main heading */}
@@ -113,7 +113,7 @@ export default function LandingPage() {
           className={`${styles.fadeUp} mt-6 max-w-lg text-sm leading-6 text-muted-text sm:text-base sm:leading-7`}
           style={{ animationDelay: "0.4s" }}
         >
-          Three specialized AI agents analyze labor markets,
+          Three AI specialists analyze labor markets,
           student feasibility, and emotional aspects to craft a personalized
           guidance roadmap.
         </p>
