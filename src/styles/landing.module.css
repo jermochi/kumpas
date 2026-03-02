@@ -41,18 +41,18 @@
 .floatIcon {
   position: absolute;
   z-index: 1;
-  color: var(--color-forest);
-  opacity: 0.15;
+  opacity: 0.4;
   pointer-events: none;
   animation: floatIcon 7s ease-in-out infinite;
   animation-fill-mode: both;
 }
 
 @keyframes floatIcon {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25%      { transform: translateY(-14px) rotate(4deg); }
-  50%      { transform: translateY(-6px) rotate(-3deg); }
-  75%      { transform: translateY(-18px) rotate(2deg); }
+  0%   { transform: translateY(0) rotate(0deg); }
+  25%  { transform: translateY(-14px) rotate(10deg); }
+  50%  { transform: translateY(-6px) rotate(-8deg); }
+  75%  { transform: translateY(-18px) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0deg); }
 }
 
 /* ── bubble phrases ── */
@@ -60,20 +60,34 @@
   position: absolute;
   z-index: 1;
   max-width: 220px;
-  padding: 10px 16px;
+  padding: 12px 18px;
   border-radius: 20px;
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   font-size: 0.75rem;
   font-style: italic;
-  color: var(--color-muted-text);
+  font-weight: 500;
+  color: var(--color-charcoal-2);
   line-height: 1.4;
   pointer-events: none;
-  opacity: 0.65;
+  opacity: 0.95;
   animation: bubbleFloat 8s ease-in-out infinite;
   animation-fill-mode: both;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 24px;
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transform: rotate(45deg);
 }
 
 @keyframes bubbleFloat {
@@ -94,7 +108,17 @@
 
 /* ── responsive adjustments ── */
 @media (max-width: 640px) {
-  .bubble      { display: none; }
-  .floatIcon   { opacity: 0.08 !important; }
-  .blob        { opacity: 0.2; }
+  .bubble { 
+    display: none;
+  }
+  .floatIcon { opacity: 0.25 !important; }
+  .blob { opacity: 0.2; }
+  .ctaButton {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 0.875rem !important; /* text-sm equivalent */
+  }
+  .heroHeading {
+    font-size: 2.5rem !important; /* slightly smaller on narrow screens */
+    line-height: 1.1 !important;
+  }
 }
