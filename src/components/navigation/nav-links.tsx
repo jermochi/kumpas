@@ -10,6 +10,13 @@ export default function NavLinks() {
             >
                 Documentation
             </Link>
+            •
+            <Link
+                href="/privacy"
+                className="text-sm font-medium text-muted-text transition-colors hover:text-ink"
+            >
+                Privacy
+            </Link>
             {/* to be linked to our github*/}
             <a
                 href="https://github.com/jermochi/kumpas.git"

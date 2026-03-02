@@ -1,3 +1,4 @@
+import Link from "next/link";
 import InputContainer from "@/components/input/input-container";
 import { Sparkles } from "lucide-react";
 
@@ -30,8 +31,20 @@ export default function Home() {
       {/* Input Container */}
       <InputContainer />
 
-      {/* Bottom spacer */}
-      <div className="pb-20" />
+      {/* Footer */}
+      <footer className="pb-10 flex flex-col items-center gap-2">
+        <div className="h-px w-48 bg-black/[0.06]" />
+        <p className="text-xs text-muted-text">
+          By using Kumpas, you agree to our{" "}
+          <Link
+            href="/privacy"
+            className="font-medium text-ink underline-offset-4 hover:underline transition-colors"
+          >
+            Privacy Policy
+          </Link>
+          {" "}·{" "}RA 10173 Compliant
+        </p>
+      </footer>
     </div>
   );
 }
