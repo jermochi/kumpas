@@ -1,4 +1,5 @@
 import { GoogleGenAI, HarmCategory, HarmBlockThreshold, Part } from '@google/genai';
+import { logTokenUsage } from '@/lib/server-utils';
 
 /**
  * Sanitize a raw LLM output string so it can be safely JSON.parsed.
@@ -103,24 +104,10 @@ export async function callAgent(
 
     const textOutput = response.text;
 
-    console.log(`Text output: ${textOutput}`);
-    console.log(`User context: ${inputData}`);
+    // console.log(`Text output: ${textOutput}`);
+    // console.log(`User context: ${inputData}`);
 
-    // Token metadata for estimating costs and monitoring usage
-    const usage = response.usageMetadata;
-    const pad = (s: string | number, n: number) => String(s).padEnd(n);
-    const lines = [
-      `\nToken Usage — ${agentName}`,
-      `${"─".repeat(35)}`,
-      `${pad("Prompt (input)", 25)} ${pad(usage?.promptTokenCount ?? 0, 8)}`,
-      `${pad("Response (output)", 25)} ${pad(usage?.candidatesTokenCount ?? 0, 8)}`,
-      `${pad("Thinking", 25)} ${pad(usage?.thoughtsTokenCount ?? 0, 8)}`,
-      `${pad("Cached input", 25)} ${pad(usage?.cachedContentTokenCount ?? 0, 8)}`,
-      `${"─".repeat(35)}`,
-      `${pad("Total", 25)} ${pad(usage?.totalTokenCount ?? 0, 8)}`,
-    ];
-
-    console.log(lines.join("\n"));
+    logTokenUsage(response, agentName);
 
     if (!textOutput) {
       console.error("Gemini rejected generation. Safety settings limits reached? Candidates info:", JSON.stringify(response));
@@ -182,6 +169,7 @@ export async function extractDocumentData(
     });
 
     const textOutput = response.text;
+    logTokenUsage(response, "Document Extraction");
 
     if (!textOutput) {
       console.error("Gemini rejected generation. Safety settings limits reached? Candidates info:", JSON.stringify(response));

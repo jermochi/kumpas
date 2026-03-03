@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
-import { getSystemInstructions } from "@/lib/server-utils";
+import { getSystemInstructions, logTokenUsage } from "@/lib/server-utils";
 import type { ExtractedNotes } from "@/lib/analysis-types";
 
 export const maxDuration = 60;
@@ -36,6 +36,8 @@ export async function POST(req: Request) {
       },
     });
 
+    logTokenUsage(response, "Notes Extraction");
+
     const text = response.text;
     if (!text)
       return NextResponse.json({ error: "No response from vision model" }, { status: 500 });
@@ -56,9 +58,9 @@ export async function POST(req: Request) {
 
     const result: ExtractedNotes = {
       careerGoal: wrapHtml(parsed.careerGoal),
-      interests:  wrapHtml(parsed.interests),
-      financial:  wrapHtml(parsed.financial),
-      concerns:   wrapHtml(parsed.concerns),
+      interests: wrapHtml(parsed.interests),
+      financial: wrapHtml(parsed.financial),
+      concerns: wrapHtml(parsed.concerns),
       impression: wrapHtml(parsed.impression),
     };
 
