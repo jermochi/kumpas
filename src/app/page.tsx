@@ -22,21 +22,21 @@ import styles from "@/styles/landing.module.css";
 
 /* ─── floating icon config ─── */
 const FLOATING_ICONS = [
-  { Icon: GraduationCap, x: "10%", y: "20%", size: 30, delay: 0,   dur: 7,   colorClass: "text-forest" },
-  { Icon: Target,        x: "82%", y: "26%", size: 28, delay: 1.2, dur: 8,   colorClass: "text-gold" },
-  { Icon: Lightbulb,     x: "15%", y: "65%", size: 26, delay: 0.6, dur: 9,   colorClass: "text-amber" },
-  { Icon: Compass,       x: "78%", y: "68%", size: 28, delay: 1.8, dur: 7.5, colorClass: "text-sage" },
-  { Icon: Users,         x: "35%", y: "85%", size: 24, delay: 2.4, dur: 8.5, colorClass: "text-ochre" },
-  { Icon: Heart,         x: "65%", y: "15%", size: 24, delay: 1.5, dur: 8,   colorClass: "text-red-soft" },
-  { Icon: TrendingUp,    x: "50%", y: "88%", size: 28, delay: 0.9, dur: 7.5, colorClass: "text-forest-light" },
+  { Icon: GraduationCap, x: "10%", y: "20%", size: 30, delay: 0, dur: 7, colorClass: "text-forest" },
+  { Icon: Target, x: "82%", y: "26%", size: 28, delay: 1.2, dur: 8, colorClass: "text-gold" },
+  { Icon: Lightbulb, x: "15%", y: "65%", size: 26, delay: 0.6, dur: 9, colorClass: "text-amber" },
+  { Icon: Compass, x: "78%", y: "68%", size: 28, delay: 1.8, dur: 7.5, colorClass: "text-sage" },
+  { Icon: Users, x: "35%", y: "85%", size: 24, delay: 2.4, dur: 8.5, colorClass: "text-ochre" },
+  { Icon: Heart, x: "65%", y: "15%", size: 24, delay: 1.5, dur: 8, colorClass: "text-red-soft" },
+  { Icon: TrendingUp, x: "50%", y: "88%", size: 28, delay: 0.9, dur: 7.5, colorClass: "text-forest-light" },
 ];
 
 /* ─── bubble phrases ─── */
 const BUBBLE_PHRASES = [
   { text: "\"Where do you see yourself in 5 years?\"", x: "70%", y: "17%", delay: 1.8 },
-  { text: "\"What are your strengths?\"",             x: "8%",  y: "35%", delay: 0.5 },
-  { text: "\"Describe a challenge you overcame.\"",   x: "12%",  y: "65%", delay: 2.2 },
-  { text: "\"What motivates you?\"",                  x: "75%", y: "70%", delay: 0.8 },
+  { text: "\"What are your strengths?\"", x: "8%", y: "35%", delay: 0.5 },
+  { text: "\"Describe a challenge you overcame.\"", x: "12%", y: "65%", delay: 2.2 },
+  { text: "\"What motivates you?\"", x: "75%", y: "70%", delay: 0.8 },
 ];
 
 export default function LandingPage() {
@@ -131,6 +131,21 @@ export default function LandingPage() {
           />
         </Link>
       </section>
+
+      {/* Footer */}
+      <footer className="pb-10 flex flex-col items-center gap-2">
+        <div className="h-px w-48 bg-black/[0.06]" />
+        <p className="text-xs text-muted-text">
+          By using Kumpas, you agree to our{" "}
+          <Link
+            href="/privacy"
+            className="font-medium text-ink underline-offset-4 hover:underline transition-colors"
+          >
+            Privacy Policy
+          </Link>
+          {" "}·{" "}RA 10173 Compliant
+        </p>
+      </footer>
     </div>
   );
 }

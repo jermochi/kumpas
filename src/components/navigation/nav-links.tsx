@@ -13,6 +13,13 @@ export default function NavLinks() {
                 <BookOpen size={18} />
                 <span className="hidden sm:inline">Documentation</span>
             </Link>
+            •
+            <Link
+                href="/privacy"
+                className="text-sm font-medium text-muted-text transition-colors hover:text-ink"
+            >
+                Privacy
+            </Link>
             {/* to be linked to our github*/}
             <a
                 href="https://github.com/jermochi/kumpas.git"
