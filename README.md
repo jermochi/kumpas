@@ -65,7 +65,7 @@ Gemini's native multimodal vision reads and parses all uploaded documents — ex
 | AI Specialist | Framework | Question Answered |
 |---|---|---|
 | Feasibility Analyst | SCCT (Social Cognitive Career Theory) | Can this student realistically get there? |
-| Labor Analyst | LMI (Labor Market Information) | Is this career viable in the Philippine job market? |
+| Labor Market Analyst | LMI (Labor Market Information) | Is this career viable in the Philippine job market? |
 | Job Demand Analyst | JD-R (Job Demands-Resources Model) | Will this career burn them out? |
 
 Each AI specialist is independently prompted and grounded in its own framework and dataset.
