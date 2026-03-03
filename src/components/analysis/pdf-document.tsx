@@ -11,7 +11,7 @@ interface PdfDocumentProps {
 export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
     ({ report, sessionIntake, counselorNotes, agentData }, ref) => {
         // Prepare some structured score and verdict bindings
-        const agents: AgentKey[] = ["labor_market", "feasibility", "psychological"];
+        const agents: AgentKey[] = ["feasibility", "labor_market", "jobDemand"];
 
         return (
             <div

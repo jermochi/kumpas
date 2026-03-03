@@ -71,9 +71,9 @@ export default function ReportView({ report, sessionIntake, counselorNotes, agen
     const relatedCareers = useMemo(() => buildRelatedCareers(report), [report]);
 
     const scores: Record<AgentKey, number> = {
-        labor_market: agentData.labor_market.score,
         feasibility: agentData.feasibility.score,
-        psychological: agentData.psychological.score,
+        labor_market: agentData.labor_market.score,
+        jobDemand: agentData.jobDemand.score,
     };
 
     const activePanel = agentData[activeAgent];
@@ -92,9 +92,9 @@ export default function ReportView({ report, sessionIntake, counselorNotes, agen
     }, [activeAgent]);
 
     const verdicts: Record<AgentKey, string> = {
-        labor_market: agentData.labor_market.verdict,
         feasibility: agentData.feasibility.verdict,
-        psychological: agentData.psychological.verdict,
+        labor_market: agentData.labor_market.verdict,
+        jobDemand: agentData.jobDemand.verdict,
     };
 
     const formattedNotes = counselorNotes.replace(/(?!^)<h3>/g, '<br><h3>');
@@ -218,7 +218,7 @@ export default function ReportView({ report, sessionIntake, counselorNotes, agen
                     />
                 </FullscreenModal>
 
-                {(["labor_market", "feasibility", "psychological"] as AgentKey[]).map((key) => (
+                {(["feasibility", "labor_market", "jobDemand"] as AgentKey[]).map((key) => (
                     <FullscreenModal
                         key={key}
                         isOpen={modalContent === key}

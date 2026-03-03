@@ -98,53 +98,53 @@ function AnalysisContent() {
             const careerPathTitle = session.careerOverride || sessionIntake.career_goal.title;
             const structuredStr = JSON.stringify(sessionIntake);
 
-            const [laborRes, feasibilityRes, psychologicalRes] = await Promise.all([
-                fetch("/api/analyze/labor", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ sessionIntakeOutput: structuredStr, careerPathTitle }),
-                }).then((r) => r.json()),
-
+            const [feasibilityRes, laborRes, jobDemandRes] = await Promise.all([
                 fetch("/api/analyze/feasibility", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ sessionIntakeOutput: structuredStr, careerPathTitle }),
                 }).then((r) => r.json()),
 
-                fetch("/api/analyze/psychological", {
+                fetch("/api/analyze/labor", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ sessionIntakeOutput: structuredStr, careerPathTitle }),
+                }).then((r) => r.json()),
+
+                fetch("/api/analyze/jobDemand", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ sessionIntakeOutput: structuredStr, careerPathTitle }),
                 }).then((r) => r.json()),
             ]);
 
-            if (laborRes.error) throw new Error(laborRes.error);
             if (feasibilityRes.error) throw new Error(feasibilityRes.error);
-            if (psychologicalRes.error) throw new Error(psychologicalRes.error);
+            if (laborRes.error) throw new Error(laborRes.error);
+            if (jobDemandRes.error) throw new Error(jobDemandRes.error);
 
-            const labor = laborRes.data;
             const feasibility = feasibilityRes.data;
-            const psychological = psychologicalRes.data;
+            const labor = laborRes.data;
+            const jobDemand = jobDemandRes.data;
 
             setState(prev => ({
                 ...prev,
-                completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "psychological"],
+                completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "jobDemand"],
             }));
 
-            // ── Stage 5: Verdict ────────────────────────────────────
-            const verdictRes = await fetch("/api/analyze/verdict", {
+            // ── Stage 5: Adjacent Career Finder ─────────────────────
+            const adjacentCareerRes = await fetch("/api/analyze/adjacentCareer", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     career_path: session.careerOverride || sessionIntake.career_goal.title,
                     career_path_source: session.careerOverride ? "derived" : sessionIntake.career_goal.source,
-                    labor,
                     feasibility,
-                    psychological,
+                    labor,
+                    jobDemand,
                 }),
             });
-            if (!verdictRes.ok) throw new Error("Verdict generation failed");
-            const report = await verdictRes.json() as AdjacentCareerReport;
+            if (!adjacentCareerRes.ok) throw new Error("Adjacent Career generation failed");
+            const report = await adjacentCareerRes.json() as AdjacentCareerReport;
 
             // Prepend original career to allow navigating back
             if (session.originalCareer && session.originalCareer !== sessionIntake.career_goal.title) {
@@ -159,9 +159,9 @@ function AnalysisContent() {
                 }
             }
 
-            const agentData = buildAgentPanels(labor, feasibility, psychological);
+            const agentData = buildAgentPanels(labor, feasibility, jobDemand);
 
-            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "psychological", "verdict"] }));
+            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "jobDemand", "adjacentCareer"] }));
             // Give the UI a moment to show 100% completion before switching
             await new Promise((r) => setTimeout(r, 1000));
 

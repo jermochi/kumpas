@@ -11,15 +11,15 @@ interface ScoreCardsRowProps {
 }
 
 const AGENT_CONFIG: { key: AgentKey; label: string; icon: React.ReactNode }[] = [
-    { key: "labor_market", label: "LABOR MARKET", icon: <BarChart3 size={16} /> },
     { key: "feasibility", label: "FEASIBILITY", icon: <Compass size={16} /> },
-    { key: "psychological", label: "PSYCHOLOGICAL", icon: <Brain size={16} /> },
+    { key: "labor_market", label: "LABOR MARKET", icon: <BarChart3 size={16} /> },
+    { key: "jobDemand", label: "JOB DEMAND", icon: <Brain size={16} /> },
 ];
 
 const FRAMEWORK_LABELS: Record<AgentKey, string> = {
-    labor_market: "LMI Framework · Arulmani et al., 2014",
     feasibility: "SCCT · Lent, Brown & Hackett, 1994",
-    psychological: "JD-R Model · Demerouti et al., 2001",
+    labor_market: "LMI Framework · Arulmani et al., 2014",
+    jobDemand: "JD-R Model · Demerouti et al., 2001",
 };
 
 export default function ScoreCardsRow({ verdicts, scores, activeAgent, onSelect }: ScoreCardsRowProps) {

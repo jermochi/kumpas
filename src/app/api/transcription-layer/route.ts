@@ -31,7 +31,7 @@ export async function POST(req: Request) {
             systemPrompt,
             combinedInput,
             process.env.TRANSCRIPTION_LAYER_API_KEY as string,
-            "Verdict Agent: Transcription Layer"
+            "Transcription Layer Agent"
         );
 
         if (structured.error) {
