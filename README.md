@@ -31,6 +31,20 @@ Built for guidance counselors. Paid for by schools. Free for students.
 ![Kumpas Input Page](docs/assets/input-page.png)
 *Upload interface for NCAE/NAT documents and counselor notes.*
 
+### Analysis Page
+![Kumpas Analysis Page](docs/assets/analysis-page.png)
+*Analysis results page.*
+
+### Mobile UI
+<div align="center">
+  <img src="docs/assets/mobile/landing-page.png" alt="Mobile UI 1" width="200"/>
+  <img src="docs/assets/mobile/input-page.png" alt="Mobile UI 2" width="200"/>
+  <img src="docs/assets/mobile/input-page-2.png" alt="Mobile UI 3" width="200"/>
+  <img src="docs/assets/mobile/analysis-page.png" alt="Mobile UI 4" width="200"/>
+</div>
+
+*Mobile application interface preview.*
+
 ---
 
 ## How It Works
@@ -50,8 +64,8 @@ Gemini's native multimodal vision reads and parses all uploaded documents — ex
 
 | AI Specialist | Framework | Question Answered |
 |---|---|---|
-| Labor Analyst | LMI (Labor Market Information) | Is this career viable in the Philippine job market? |
 | Feasibility Analyst | SCCT (Social Cognitive Career Theory) | Can this student realistically get there? |
+| Labor Analyst | LMI (Labor Market Information) | Is this career viable in the Philippine job market? |
 | Job Demand Analyst | JD-R (Job Demands-Resources Model) | Will this career burn them out? |
 
 Each AI specialist is independently prompted and grounded in its own framework and dataset.
