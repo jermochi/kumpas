@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { callAgent } from "@/lib/llm";
+import { sessionIntakeSchema } from "@/lib/agent-schemas";
 import fs from "fs";
 import path from "path";
 
@@ -31,7 +32,8 @@ export async function POST(req: Request) {
             systemPrompt,
             combinedInput,
             process.env.TRANSCRIPTION_LAYER_API_KEY as string,
-            "Transcription Layer Agent"
+            "Transcription Layer Agent",
+            sessionIntakeSchema
         );
 
         if (structured.error) {

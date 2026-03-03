@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { callAgent } from '@/lib/llm';
 import { buildFeasibilitySystemPrompt } from '@/lib/analysts/feasibility';
+import { feasibilitySchema } from '@/lib/agent-schemas';
 
 export async function POST(req: Request) {
   try {
@@ -9,7 +10,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Session Intake Output and careerPathTitle required' }, { status: 400 });
 
     const feasibilityPrompt = buildFeasibilitySystemPrompt(careerPathTitle);
-    const feasibilityAnalysis = await callAgent(feasibilityPrompt, sessionIntakeOutput, process.env.FEASIBILITY_AGENT_API_KEY as string, "Feasibility Analyst");
+    const feasibilityAnalysis = await callAgent(feasibilityPrompt, sessionIntakeOutput, process.env.FEASIBILITY_AGENT_API_KEY as string, "Feasibility Analyst", feasibilitySchema);
 
     return NextResponse.json({ status: 'success', data: feasibilityAnalysis });
   } catch (error) {

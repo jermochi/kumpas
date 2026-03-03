@@ -1,4 +1,4 @@
-import { GoogleGenAI, HarmCategory, HarmBlockThreshold, Part } from '@google/genai';
+import { GoogleGenAI, HarmCategory, HarmBlockThreshold, Part, Schema } from '@google/genai';
 import { logTokenUsage } from '@/lib/server-utils';
 
 /**
@@ -62,7 +62,8 @@ export async function callAgent(
   systemInstruction: string,
   inputData: string,
   apiKey: string,
-  agentName: string = "Agent"
+  agentName: string = "Agent",
+  responseSchema?: Schema
 ) {
   if (!apiKey) {
     throw new Error(`API Key missing for ${agentName}`);
@@ -79,6 +80,7 @@ export async function callAgent(
       config: {
         systemInstruction,
         responseMimeType: 'application/json',
+        responseSchema: responseSchema || undefined,
         safetySettings: [
           {
             category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
@@ -145,7 +147,8 @@ export async function callAgent(
 export async function extractDocumentData(
   systemInstruction: string,
   parts: Part[],
-  apiKey: string
+  apiKey: string,
+  responseSchema?: Schema
 ) {
   if (!apiKey) {
     throw new Error("API key is missing for document extraction.");
@@ -164,7 +167,8 @@ export async function extractDocumentData(
       ],
       config: {
         systemInstruction,
-        responseMimeType: 'application/json'
+        responseMimeType: 'application/json',
+        responseSchema: responseSchema || undefined
       }
     });
 

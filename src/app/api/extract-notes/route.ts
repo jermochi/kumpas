@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 import { getSystemInstructions, logTokenUsage } from "@/lib/server-utils";
 import type { ExtractedNotes } from "@/lib/analysis-types";
+import { notesAnalysisSchema } from "@/lib/agent-schemas";
 
 export const maxDuration = 60;
 
@@ -33,6 +34,7 @@ export async function POST(req: Request) {
       config: {
         systemInstruction: systemPrompt,
         responseMimeType: "application/json",
+        responseSchema: notesAnalysisSchema,
       },
     });
 
