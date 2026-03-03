@@ -40,7 +40,7 @@ function AnalysisContent() {
             sessionStorage.removeItem(`kumpas-agent-data-${sessionId}`);
             deleteFilesFromIDB(sessionId).catch(() => {});
         }
-        router.push("/");
+        router.push("/input");
     }, [router, sessionId]);
 
     const runPipeline = useCallback(async () => {

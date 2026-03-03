@@ -223,9 +223,9 @@ export default function LandingPage() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Previous session found</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogDescription className="text-black">
               You have an existing analysis for{" "}
-              <strong className="text-ink">{previousSession?.careerTitle}</strong>.
+              <strong className="text-[#364839]">{previousSession?.careerTitle}</strong>.
               Would you like to resume viewing it or start a new session?
             </AlertDialogDescription>
           </AlertDialogHeader>
