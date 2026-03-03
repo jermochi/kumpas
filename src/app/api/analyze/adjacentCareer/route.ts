@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { callAgent } from "@/lib/llm";
 import { getSystemInstructions } from "@/lib/server-utils";
+import { adjacentCareerSchema } from "@/lib/agent-schemas";
 
 export async function POST(req: Request) {
     try {
@@ -35,7 +36,8 @@ export async function POST(req: Request) {
             systemPrompt,
             agentInput,
             process.env.ADJACENT_CAREER_AGENT_API_KEY as string,
-            "Adjacent Career Agent"
+            "Adjacent Career Agent",
+            adjacentCareerSchema
         );
 
         if (result.error) {

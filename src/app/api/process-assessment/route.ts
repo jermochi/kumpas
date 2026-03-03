@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSystemInstructions } from "@/lib/server-utils";
 import { extractDocumentData } from "@/lib/llm";
+import { assessmentExtractionSchema } from "@/lib/agent-schemas";
 
 export async function POST(req: NextRequest) {
     try {
@@ -46,7 +47,8 @@ export async function POST(req: NextRequest) {
         const parsedData = await extractDocumentData(
             systemPrompt,
             parts,
-            apiKey
+            apiKey,
+            assessmentExtractionSchema
         );
 
         return NextResponse.json(parsedData);

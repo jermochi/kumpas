@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { callAgent } from '@/lib/llm';
 import { buildJobDemandSystemPrompt } from '@/lib/analysts/jobDemand';
+import { jobDemandSchema } from '@/lib/agent-schemas';
 
 export async function POST(req: Request) {
   try {
@@ -9,7 +10,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Session Intake Output and careerPathTitle required' }, { status: 400 });
 
     const jobDemandPrompt = buildJobDemandSystemPrompt(careerPathTitle);
-    const jobDemandAnalysis = await callAgent(jobDemandPrompt, sessionIntakeOutput, process.env.JOB_DEMAND_AGENT_API_KEY as string, "Job Demand Analyst");
+    const jobDemandAnalysis = await callAgent(jobDemandPrompt, sessionIntakeOutput, process.env.JOB_DEMAND_AGENT_API_KEY as string, "Job Demand Analyst", jobDemandSchema);
 
     return NextResponse.json({ status: 'success', data: jobDemandAnalysis });
   } catch (error) {

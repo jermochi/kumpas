@@ -426,3 +426,25 @@ export function getFilteredFeasibilityContexts(careerPathTitle: string): string 
   console.log(`  Total feasibility context size: ${(result.length / 1024).toFixed(1)} KB`);
   return result;
 }
+
+/**
+ * Logs the token usage for a given response.
+ * @param response The response from the model.
+ * @param agentName The name of the agent.
+ */
+export function logTokenUsage(response: any, agentName: string) {
+  const usage = response.usageMetadata;
+  const pad = (s: string | number, n: number) => String(s).padEnd(n);
+  const lines = [
+    `\nToken Usage — ${agentName}`,
+    `${"─".repeat(35)}`,
+    `${pad("Prompt (input)", 25)} ${pad(usage?.promptTokenCount ?? 0, 8)}`,
+    `${pad("Response (output)", 25)} ${pad(usage?.candidatesTokenCount ?? 0, 8)}`,
+    `${pad("Thinking", 25)} ${pad(usage?.thoughtsTokenCount ?? 0, 8)}`,
+    `${pad("Cached input", 25)} ${pad(usage?.cachedContentTokenCount ?? 0, 8)}`,
+    `${"─".repeat(35)}`,
+    `${pad("Total", 25)} ${pad(usage?.totalTokenCount ?? 0, 8)}`,
+  ];
+
+  console.log(lines.join("\n"));
+}
