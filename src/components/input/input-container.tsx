@@ -12,6 +12,7 @@ import WysiwygField from "./wysiwyg-field";
 import FileSlot from "./file-slot";
 import { toast } from "sonner";
 import { ExtractedNotes, EMPTY_NOTES } from "@/lib/analysis-types";
+import { saveFilesToIDB, clearAllFilesFromIDB } from "@/lib/idb-files";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import inputStyles from "@/styles/input.module.css";
 import {
@@ -37,15 +38,7 @@ const GUIDE = [
   { icon: MessageSquare, title: "Section 5 — Counselor's Overall Impression", bullets: ["Free-form narrative — gut feel, confidence in their goals", "Anything not captured in sections above", "Recommended focus areas for AI analysis"] },
 ];
 
-const OVERLAY_STEPS = [
-  { title: "Reading counselor notes…", sub: "AI Vision is parsing your handwriting" },
-  { title: "Extracting sections…", sub: "Identifying Career Goal, Interests, Red Flags…" },
-  { title: "Processing supporting docs…", sub: "Reading NCAE scores and academic records" },
-  { title: "Labor Market Analysis…", sub: "Matching against PSA employment statistics" },
-  { title: "Feasibility Analysis…", sub: "Evaluating financial and logistical factors" },
-  { title: "Labor Demand Analysis…", sub: "Identifying passion-skill alignment" },
-  { title: "Generating guidance roadmap…", sub: "Synthesizing all three agent outputs" },
-];
+
 
 type InputMode = "image" | "manual";
 
@@ -57,8 +50,7 @@ export default function InputContainer() {
   const [guideOpen, setGuideOpen] = useState(false);
   const [slotFiles, setSlotFiles] = useState<{ 1: File | null; 2: File | null }>({ 1: null, 2: null });
   const [slotTypes, setSlotTypes] = useState<{ 1: string; 2: string }>({ 1: "", 2: "" });
-  const [analyzing, setAnalyzing] = useState(false);
-  const [analyzeStep, setAnalyzeStep] = useState(0);
+
 
   /* ─── tab state ─── */
   const [activeTab, setActiveTab] = useState<InputMode>("image");
@@ -170,56 +162,33 @@ export default function InputContainer() {
 
   /* ─── analysis ─── */
   const beginAnalysis = async () => {
-    setAnalyzing(true); setAnalyzeStep(1);
+    const combined = SECTIONS.map(s => {
+      const content = sectionHtml[s.key]?.trim() || "";
+      if (!content) return "";
+      if (content.toLowerCase().startsWith("<h3")) return content;
+      return `<h3>${s.label}</h3>\n${content}`;
+    }).filter(Boolean).join("\n\n");
 
-    // 1. Process documents first
-    const extractedDocs: any[] = [];
+    const sid = crypto.randomUUID();
+
+    // Store raw files in IndexedDB (clears previous entries first)
+    await clearAllFilesFromIDB();
+    const filesToStore: { slotIndex: number; file: File }[] = [];
     for (const key of [1, 2] as const) {
       if (slotFiles[key]) {
-        try {
-          const fd = new FormData();
-          fd.append("file", slotFiles[key]!);
-          const res = await fetch("/api/process-assessment", { method: "POST", body: fd });
-          if (res.ok) {
-            const data = await res.json();
-            extractedDocs.push(data);
-          } else {
-            toast.error(`Failed to process document ${key}`);
-          }
-        } catch (e) {
-          console.error("Doc upload error", e);
-          toast.error(`Failed to upload document ${key}`);
-        }
+        filesToStore.push({ slotIndex: key, file: slotFiles[key]! });
       }
     }
+    if (filesToStore.length > 0) {
+      await saveFilesToIDB(sid, filesToStore);
+    }
 
-    // 2. Run UI animation
-    let step = 1;
-    const iv = setInterval(() => {
-      step++;
-      if (step > OVERLAY_STEPS.length) {
-        clearInterval(iv);
-        setTimeout(() => {
-          const combined = SECTIONS.map(s => {
-            const content = sectionHtml[s.key]?.trim() || "";
-            if (!content) return "";
-            if (content.toLowerCase().startsWith("<h3")) return content;
-            return `<h3>${s.label}</h3>\n${content}`;
-          }).filter(Boolean).join("\n\n");
-          const sid = crypto.randomUUID();
-          const sessionPayload = {
-            counselorNotes: combined,
-            createdAt: new Date().toISOString(),
-            extractedDocuments: extractedDocs,
-          };
-          console.log("Final Session Payload:", sessionPayload);
-          sessionStorage.setItem(`kumpas-session-${sid}`, JSON.stringify(sessionPayload));
-          router.push(`/analysis?session=${sid}`);
-        }, 800);
-      } else {
-        setAnalyzeStep(step);
-      }
-    }, 1100);
+    const sessionPayload = {
+      counselorNotes: combined,
+      createdAt: new Date().toISOString(),
+    };
+    sessionStorage.setItem(`kumpas-session-${sid}`, JSON.stringify(sessionPayload));
+    router.push(`/analysis?session=${sid}`);
   };
 
   let helperText = "Upload the counselor's notes photo to enable analysis";
@@ -492,25 +461,7 @@ export default function InputContainer() {
         </AlertDialogContent>
       </AlertDialog>
 
-      {/* ══════ Loading Overlay ══════ */}
-      {analyzing && (
-        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-cream/90 backdrop-blur-lg p-6 text-center">
-          <div className="w-full max-w-[400px] animate-fade-in">
-            <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-lg text-sage">
-              <Loader2 size={32} className="animate-spin" />
-            </div>
-            <h3 className="text-lg font-semibold text-ink mb-2">{OVERLAY_STEPS[Math.min(analyzeStep - 1, 6)].title}</h3>
-            <p className="text-sm text-muted-text mb-8">{OVERLAY_STEPS[Math.min(analyzeStep - 1, 6)].sub}</p>
-            <div className="flex flex-wrap justify-center gap-2.5">
-              {["Labor Market", "Feasibility", "Labor Demand"].map((name, i) => (
-                <span key={name} className={`rounded-full border px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ${analyzeStep >= i + 4 ? "border-sage bg-sage/[0.06] text-sage" : "border-black/10 bg-white text-black/25"}`}>
-                  {name}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+
     </section>
   );
 }

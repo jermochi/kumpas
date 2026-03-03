@@ -111,6 +111,8 @@ export interface SupportingRow {
 
 // ─── Pipeline State ─────────────────────────────────────────────────
 export type StageName =
+    | "documentParsing"
+    | "notesParsing"
     | "transcriptionLayer"
     | "feasibility"
     | "laborMarket"

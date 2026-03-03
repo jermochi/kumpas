@@ -4,6 +4,14 @@ import { CheckCircle2, Circle, Loader2 } from "lucide-react";
 import type { StageName } from "@/lib/analysis-types";
 
 const STAGE_META: Record<StageName, { label: string; description: string }> = {
+    documentParsing: {
+        label: "Document Processing",
+        description: "Reading and extracting supporting documents...",
+    },
+    notesParsing: {
+        label: "Counselor Notes",
+        description: "Structuring interview notes for analysis...",
+    },
     transcriptionLayer: {
         label: "Transcription Layer",
         description: "Redacting session and detecting career path...",
@@ -27,6 +35,8 @@ const STAGE_META: Record<StageName, { label: string; description: string }> = {
 };
 
 const STAGE_ORDER: StageName[] = [
+    "documentParsing",
+    "notesParsing",
     "transcriptionLayer",
     "feasibility",
     "laborMarket",
