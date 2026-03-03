@@ -2,24 +2,31 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BookOpen } from "lucide-react";
 
 export default function NavLinks() {
     const pathname = usePathname();
     const isDocPage = pathname === "/documentation";
 
     return (
-        <div className="flex items-center gap-2 md:gap-4">
-            {/* to be linked to documentation page*/}
+        <div className="flex items-center gap-4 sm:gap-6">
+            {/*linked to documentation page*/}
             <Link
                 href="/documentation"
-                className={`transition-colors flex items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium ${isDocPage
-                    ? "bg-black/5 text-ink"
-                    : "text-muted-text hover:bg-black/5 hover:text-ink"
-                    }`}
+                className="flex items-center gap-2 text-sm font-medium text-muted-text transition-colors hover:text-ink"
+                title="Documentation"
             >
-                Documentation
+                <BookOpen size={18} />
+                <span className="hidden sm:inline">Documentation</span>
             </Link>
-            {/* to be linked to our github*/}
+            •
+            <Link
+                href="/privacy"
+                className="text-sm font-medium text-muted-text transition-colors hover:text-ink"
+            >
+                Privacy
+            </Link>
+            {/*linked to our github*/}
             <a
                 href="https://github.com/jermochi/kumpas.git"
                 target="_blank"

@@ -5,14 +5,14 @@ import { getSystemInstructions } from "@/lib/server-utils";
 export async function POST(req: Request) {
     try {
         const body = await req.json() as {
-            labor?: unknown;
             feasibility?: unknown;
-            psychological?: unknown;
+            labor?: unknown;
+            jobDemand?: unknown;
             career_path?: string;
             career_path_source?: string;
         };
 
-        if (!body.labor || !body.feasibility || !body.psychological) {
+        if (!body.feasibility || !body.labor || !body.jobDemand) {
             return NextResponse.json(
                 { error: "All three agent outputs are required" },
                 { status: 400 }
@@ -28,14 +28,14 @@ export async function POST(req: Request) {
             career_path_source: body.career_path_source,
             labor_market_analysis: body.labor,
             feasibility_analysis: body.feasibility,
-            psychological_analysis: body.psychological,
+            job_demand_analysis: body.jobDemand,
         });
 
         const result = await callAgent(
             systemPrompt,
             agentInput,
-            process.env.VERDICT_AGENT_API_KEY as string,
-            "Verdict Agent: Career Adjacency Finder"
+            process.env.ADJACENT_CAREER_AGENT_API_KEY as string,
+            "Adjacent Career Agent"
         );
 
         if (result.error) {
