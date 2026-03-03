@@ -1,6 +1,7 @@
 "use client";
 
 import { Maximize2, FileText } from "lucide-react";
+import styles from "@/styles/analysis.module.css";
 
 interface SessionNotesPanelProps {
     notes: string;
@@ -31,7 +32,7 @@ export default function SessionNotesPanel({ notes, onFullscreen, className = "" 
             </div>
 
             {/* Scrollable body — capped height */}
-            <div className="flex-1 overflow-y-auto space-y-3 pr-1 scrollbar-thin max-h-[350px]">
+            <div className={`flex-1 overflow-y-auto space-y-3 pr-1 max-h-[350px] ${styles.scrollbarThin}`}>
                 <div
                     className="[&_h3]:text-xs [&_h3]:font-semibold [&_h3]:uppercase [&_h3]:tracking-wider [&_h3]:text-muted-text [&_h3]:mb-1 [&_h3]:mt-6 first:[&_h3]:mt-0 [&_p]:text-sm [&_p]:leading-relaxed [&_p]:text-white/90 [&_p]:mb-4 last:[&_p]:mb-0 [&_ul]:mb-4 [&_ul]:pl-5 [&_ul]:list-disc [&_li]:text-sm [&_li]:text-white/90 [&_li]:mb-1"
                     dangerouslySetInnerHTML={{ __html: formattedNotes }}

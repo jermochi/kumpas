@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen } from "lucide-react";
+import { BookOpen, Shield } from "lucide-react";
 
 export default function NavLinks() {
     const pathname = usePathname();
@@ -22,9 +22,11 @@ export default function NavLinks() {
             •
             <Link
                 href="/privacy"
-                className="text-sm font-medium text-muted-text transition-colors hover:text-ink"
+                className="flex items-center gap-2 text-sm font-medium text-muted-text transition-colors hover:text-ink"
+                title="Privacy Policy"
             >
-                Privacy
+                <Shield size={18} />
+                <span className="hidden sm:inline">Privacy</span>
             </Link>
             {/*linked to our github*/}
             <a
