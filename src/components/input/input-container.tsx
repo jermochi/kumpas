@@ -228,9 +228,11 @@ export default function InputContainer() {
               onClick={() => setGuideOpen(!guideOpen)}
               className="flex w-full items-center justify-between px-4 py-3 bg-sage/[0.07] text-sage text-[13px] font-medium cursor-pointer hover:bg-sage/[0.12] transition-colors"
             >
-              <div className="flex items-center gap-3">
-                <Info size={16} />
-                <span className="text-left">Notes Format Guide — What to write in each section</span>
+              <div className="flex flex-1 items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <Info size={16} />
+                  <span className="text-left">Notes Format Guide - What to write in each section</span>
+                </div>
                 <ChevronDown size={16} className={`transition-transform duration-200 ${guideOpen ? "rotate-180" : ""}`} />
               </div>
               

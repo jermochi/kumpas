@@ -1,14 +1,17 @@
 import Link from "next/link";
+import { BookOpen } from "lucide-react";
 
 export default function NavLinks() {
     return (
-        <div className="flex items-center gap-2 md:gap-4">
+        <div className="flex items-center gap-4 sm:gap-6">
             {/* to be linked to documentation page*/}
             <Link
                 href="/documentation"
-                className="text-sm font-medium text-muted-text transition-colors hover:text-ink"
+                className="flex items-center gap-2 text-sm font-medium text-muted-text transition-colors hover:text-ink"
+                title="Documentation"
             >
-                Documentation
+                <BookOpen size={18} />
+                <span className="hidden sm:inline">Documentation</span>
             </Link>
             {/* to be linked to our github*/}
             <a
