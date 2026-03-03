@@ -53,7 +53,7 @@ export interface RelatedCareer {
 }
 
 // ─── Agent Detail Panel (dummy-data shape) ──────────────────────────
-export type AgentKey = "labor_market" | "feasibility" | "jobDemand";
+export type AgentKey = "feasibility" | "labor_market" | "jobDemand";
 
 export interface ScoreBreakdownItem {
     label: string;
