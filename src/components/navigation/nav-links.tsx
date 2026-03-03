@@ -1,12 +1,21 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function NavLinks() {
+    const pathname = usePathname();
+    const isDocPage = pathname === "/documentation";
+
     return (
         <div className="flex items-center gap-2 md:gap-4">
             {/* to be linked to documentation page*/}
             <Link
                 href="/documentation"
-                className="text-sm font-medium text-muted-text transition-colors hover:text-ink"
+                className={`transition-colors flex items-center justify-center rounded-md px-3 py-1.5 text-sm font-medium ${isDocPage
+                    ? "bg-black/5 text-ink"
+                    : "text-muted-text hover:bg-black/5 hover:text-ink"
+                    }`}
             >
                 Documentation
             </Link>
