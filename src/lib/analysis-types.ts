@@ -15,18 +15,29 @@ export const EMPTY_NOTES: ExtractedNotes = {
     impression: "",
 };
 
-// ─── Transcription Layer ────────────────────────────────────────────
-export interface StructuredTranscript {
-    participants: { student: string; counselor: string };
-    career_path: string;
-    career_path_source: "stated" | "implied" | "derived";
-    career_path_note: string;
-    turns: TranscriptTurn[];
-}
-
-export interface TranscriptTurn {
-    speaker: "Counselor" | "Student";
-    text: string;
+// ─── Session Intake Layer ───────────────────────────────────────────
+export interface SessionIntakeOutput {
+    career_goal: {
+        title: string;
+        source: "stated" | "implied" | "derived";
+        confidence: "High" | "Medium" | "Low";
+        note: string;
+    };
+    personal_interests_and_strengths: {
+        interests: string[];
+        strengths: string[];
+        academic_fit: string;
+    };
+    family_and_financial_situation: {
+        family_support: string;
+        financial_status: "Stable" | "Constrained" | "Unknown";
+        note: string;
+    };
+    concerns_and_red_flags: {
+        academic: string[];
+        psychological: string[];
+        other: string[];
+    };
 }
 
 // ─── Adjacent Career Report ─────────────────────────────────────────
@@ -42,7 +53,7 @@ export interface RelatedCareer {
 }
 
 // ─── Agent Detail Panel (dummy-data shape) ──────────────────────────
-export type AgentKey = "labor_market" | "feasibility" | "psychological";
+export type AgentKey = "labor_market" | "feasibility" | "jobDemand";
 
 export interface ScoreBreakdownItem {
     label: string;
@@ -101,20 +112,21 @@ export interface SupportingRow {
 // ─── Pipeline State ─────────────────────────────────────────────────
 export type StageName =
     | "transcriptionLayer"
-    | "laborMarket"
     | "feasibility"
-    | "psychological"
-    | "verdict";
+    | "laborMarket"
+    | "jobDemand"
+    | "adjacentCareer";
 
 export type AnalysisState =
     | { phase: "processing"; completedStages: StageName[] }
-    | { phase: "complete"; report: AdjacentCareerReport; structured: StructuredTranscript; agentData: Record<AgentKey, AgentPanelData> }
+    | { phase: "complete"; report: AdjacentCareerReport; sessionIntake: SessionIntakeOutput; agentData: Record<AgentKey, AgentPanelData> }
     | { phase: "error"; message: string };
 
 export interface StoredSession {
-    rawTranscript: string;
+    counselorNotes: string;
     createdAt: string;
     careerOverride?: string;
     parentSessionId?: string;
     originalCareer?: string;
+    extractedDocuments?: any[];
 }

@@ -4,39 +4,14 @@ import type { AgentPanelData, AgentKey, AdjacentCareerReport, RawAgentResponse }
  * Build agent-panel detail data keyed by agent from raw agent outputs.
  */
 export function buildAgentPanels(
-    labor: RawAgentResponse,
     feasibility: RawAgentResponse,
-    psychological: RawAgentResponse
+    labor: RawAgentResponse,
+    jobDemand: RawAgentResponse
 ): Record<AgentKey, AgentPanelData> {
-    console.log("Labor:", labor);
     console.log("Feasibility:", feasibility);
-    console.log("Psychological:", psychological);
+    console.log("Labor:", labor);
+    console.log("Job Demand:", jobDemand);
     return {
-        labor_market: {
-            key: "labor_market",
-            label: "Labor Market",
-            framework: "LMI Framework",
-            frameworkCite: "LMI Framework · Arulmani et al., 2014",
-            score: labor.score,
-            verdict: labor.verdict,
-            keySignals: labor.key_signals.map(s => ({
-                icon: s.icon,
-                label: s.label,
-                value: s.value,
-                subNote: s.sub_note,
-            })),
-            summary: labor.summary,
-            scoreBreakdown: labor.score_breakdown ? labor.score_breakdown.map(b => ({
-                label: b.label,
-                value: b.value,
-                weight: b.weight,
-            })) : [],
-            supportingData: labor.supporting_data.map(d => ({
-                icon: d.icon,
-                label: d.label,
-                value: d.value,
-            })),
-        },
         feasibility: {
             key: "feasibility",
             label: "Feasibility",
@@ -62,26 +37,51 @@ export function buildAgentPanels(
                 value: d.value,
             })),
         },
-        psychological: {
-            key: "psychological",
-            label: "Psychological",
-            framework: "JD-R Model",
-            frameworkCite: "JD-R Model · Demerouti et al., 2001",
-            score: psychological.score,
-            verdict: psychological.verdict,
-            keySignals: psychological.key_signals.map(s => ({
+        labor_market: {
+            key: "labor_market",
+            label: "Labor Market",
+            framework: "LMI Framework",
+            frameworkCite: "LMI Framework · Arulmani et al., 2014",
+            score: labor.score,
+            verdict: labor.verdict,
+            keySignals: labor.key_signals.map(s => ({
                 icon: s.icon,
                 label: s.label,
                 value: s.value,
                 subNote: s.sub_note,
             })),
-            summary: psychological.summary,
-            scoreBreakdown: psychological.score_breakdown ? psychological.score_breakdown.map(b => ({
+            summary: labor.summary,
+            scoreBreakdown: labor.score_breakdown ? labor.score_breakdown.map(b => ({
                 label: b.label,
                 value: b.value,
                 weight: b.weight,
             })) : [],
-            supportingData: psychological.supporting_data.map(d => ({
+            supportingData: labor.supporting_data.map(d => ({
+                icon: d.icon,
+                label: d.label,
+                value: d.value,
+            })),
+        },
+        jobDemand: {
+            key: "jobDemand",
+            label: "Job Demand",
+            framework: "JD-R Model",
+            frameworkCite: "JD-R Model · Demerouti et al., 2001",
+            score: jobDemand.score,
+            verdict: jobDemand.verdict,
+            keySignals: jobDemand.key_signals.map(s => ({
+                icon: s.icon,
+                label: s.label,
+                value: s.value,
+                subNote: s.sub_note,
+            })),
+            summary: jobDemand.summary,
+            scoreBreakdown: jobDemand.score_breakdown ? jobDemand.score_breakdown.map(b => ({
+                label: b.label,
+                value: b.value,
+                weight: b.weight,
+            })) : [],
+            supportingData: jobDemand.supporting_data.map(d => ({
                 icon: d.icon,
                 label: d.label,
                 value: d.value,
