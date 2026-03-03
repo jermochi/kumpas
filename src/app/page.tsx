@@ -42,10 +42,10 @@ const FLOATING_ICONS = [
 
 /* ─── bubble phrases ─── */
 const BUBBLE_PHRASES = [
-  { text: "\"Where do you see yourself in 5 years?\"", x: "70%", y: "17%", delay: 1.8 },
-  { text: "\"What are your strengths?\"", x: "8%", y: "35%", delay: 0.5 },
-  { text: "\"Describe a challenge you overcame.\"", x: "12%", y: "65%", delay: 2.2 },
-  { text: "\"What motivates you?\"", x: "75%", y: "70%", delay: 0.8 },
+  { text: "\"Where do you see yourself in 5 years?\"", x: "70%", y: "17%", delay: 0.8 },
+  { text: "\"What are your strengths?\"", x: "8%", y: "35%", delay: 0.2 },
+  { text: "\"Describe a challenge you overcame.\"", x: "12%", y: "65%", delay: 1.1 },
+  { text: "\"What motivates you?\"", x: "75%", y: "70%", delay: 0.5 },
 ];
 
 /** Scan sessionStorage for the most recent kumpas session with a completed report. */

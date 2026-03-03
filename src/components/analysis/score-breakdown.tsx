@@ -34,16 +34,16 @@ export default function ScoreBreakdown({ data }: ScoreBreakdownProps) {
                 >
                     {data.map((item, i) => (
                         <div key={i} className="flex flex-col gap-1.5 w-full relative group">
-                            <div className="flex justify-between items-center">
-                                <span className="text-sm font-medium text-ink w-1/2 md:w-1/3 shrink-0" title={item.label}>
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-4">
+                                <span className="text-sm font-medium text-ink break-words sm:w-1/3" title={item.label}>
                                     {item.label}
                                 </span>
 
-                                <div className="flex-1 flex items-center justify-end gap-3">
-                                    <span className="text-xs text-muted-text w-12 text-right">{item.weight}</span>
+                                <div className="flex items-center gap-3 justify-between sm:justify-end w-full sm:w-auto mt-1 sm:mt-0">
+                                    <span className="text-xs text-muted-text shrink-0 min-w-[3rem] sm:text-right">{item.weight}</span>
 
                                     {/* Visual simple bar for the score */}
-                                    <div className="h-1.5 w-24 sm:w-32 md:w-48 bg-black/[0.06] rounded-full overflow-hidden shrink-0">
+                                    <div className="h-1.5 flex-1 sm:flex-none sm:w-32 md:w-48 bg-black/[0.06] rounded-full overflow-hidden shrink-0">
                                         <div
                                             className="h-full bg-forest rounded-full transition-all duration-500"
                                             style={{ width: `${Math.max(0, Math.min(100, item.value))}%` }}

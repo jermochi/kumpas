@@ -71,9 +71,7 @@
   color: var(--color-charcoal-2);
   line-height: 1.4;
   pointer-events: none;
-  opacity: 0.95;
-  animation: bubbleFloat 8s ease-in-out infinite;
-  animation-fill-mode: both;
+  animation: landingFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards, bubbleFloat 8s ease-in-out infinite;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 

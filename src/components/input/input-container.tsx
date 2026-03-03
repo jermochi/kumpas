@@ -201,7 +201,7 @@ export default function InputContainer() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-4xl px-4 sm:px-6 relative">
+    <section className="mx-auto w-full max-w-4xl px-4 sm:px-6 relative animate-fade-in">
       <div className="overflow-hidden rounded-2xl border border-black/[0.06] bg-cream-light shadow-card">
 
         <div className="p-6 sm:p-8">
@@ -286,7 +286,7 @@ export default function InputContainer() {
             <TabsContent value="image" className="mt-0">
               {!notesFile ? (
                 <div
-                  className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-12 text-center cursor-pointer transition-all ${drag ? "border-sage bg-sage/[0.04]" : "border-black/10 bg-cream/40 hover:border-black/20"}`}
+                  className={`relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-12 text-center cursor-pointer transition-all animate-fade-in ${drag ? "border-sage bg-sage/[0.04]" : "border-black/10 bg-cream/40 hover:border-black/20"}`}
                   onDragOver={(e) => { e.preventDefault(); setDrag(true); }}
                   onDragLeave={() => setDrag(false)}
                   onDrop={(e) => { e.preventDefault(); setDrag(false); handleNotesSelect(e.dataTransfer.files?.[0] || null); }}
@@ -300,7 +300,7 @@ export default function InputContainer() {
               ) : (
                 <>
                   {/* Notes Pill */}
-                  <div className="flex items-center gap-3 rounded-xl border border-sage/20 bg-sage/[0.04] p-3">
+                  <div className="flex items-center gap-3 rounded-xl border border-sage/20 bg-sage/[0.04] p-3 animate-fade-in">
                     <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-white ${scanning ? "bg-amber" : scanError ? "bg-red-soft" : "bg-sage"}`}>
                       {scanning ? <Loader2 size={20} className="animate-spin" /> : scanError ? <AlertTriangle size={20} /> : <ImageIcon size={20} />}
                     </div>
