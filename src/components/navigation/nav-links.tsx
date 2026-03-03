@@ -23,12 +23,12 @@ export default function NavLinks() {
             {/* • */}
             <Link
                 href="/privacy"
-                className={`text-sm font-medium transition-colors hover:text-ink ${pathname === "/privacy" ? "text-ink underline underline-offset-4 decoration-2" : "text-muted-text"
+                className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-ink ${pathname === "/privacy" ? "text-ink underline underline-offset-4 decoration-2" : "text-muted-text"
                     }`}
-                    title="Privacy"
+                title="Privacy"
             >
-                <ShieldCheck size={18}/>
-                <span className="hidden sm:inline">Privacy/</span>
+                <ShieldCheck size={18} />
+                <span className="hidden sm:inline">Privacy</span>
             </Link>
             {/*linked to our github*/}
             <a
