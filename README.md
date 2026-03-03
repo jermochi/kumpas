@@ -2,19 +2,22 @@
   <img src="docs/assets/kumpas-logo.png" alt="Kumpas Logo" width="250"/>
 
   # Kumpas
-  **Multi-AI Career Assessment Tool**
+  **A Multi-Agent Career Assessment System Powered by Student Academic Records**
 
-  [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
-  [![Next.js](https://img.shields.io/badge/Next.js-Frontend-black.svg)](https://nextjs.org/)
+  [![Next.js](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
+  [![Gemini](https://img.shields.io/badge/Gemini-API-blue.svg)](https://ai.google.dev/)
+  [![Vercel](https://img.shields.io/badge/Deployed-Vercel-black.svg)](https://vercel.com/)
 </div>
 
 ---
 
 ## Overview
 
-Kumpas is an automated career assessment platform designed to assist guidance counselors and students. The system synthesizes quantitative and qualitative student data to provide a holistic evaluation. It accepts images of National Achievement Test (NAT) and National Career Assessment Examination (NCAE) results, alongside textual career interview notes provided by guidance counselors.
+Kumpas generates structured career assessment reports from a student's existing academic data — NCAE results, NAT scores, and counselor notes — using a five-AI pipeline built on Next.js and the Gemini API.
 
-By processing this combined data through a multi-AI architecture, the application is structured to support **UN Sustainable Development Goal 8 (SDG 8)**, promoting inclusive, sustainable economic growth and decent work through optimized, data-backed career pathing.
+By processing this combined data through a multi-agent architecture, Kumpas supports **UN Sustainable Development Goal 8 (SDG 8)** — promoting decent work and inclusive economic growth through data-backed career guidance.
+
+Built for guidance counselors. Paid for by schools. Free for students.
 
 ---
 
@@ -26,71 +29,109 @@ By processing this combined data through a multi-AI architecture, the applicatio
 
 ### Data Input Interface
 ![Kumpas Input Page](docs/assets/input-page.png)
-*Seamless upload interface for NAT/NCAE documents and counselor interview notes.*
+*Upload interface for NCAE/NAT documents and counselor notes.*
 
 ---
 
-## Core Analysis Modules
+## How It Works
 
-The application utilizes three distinct analytical AI models to evaluate the ingested student data:
+### Input
+Counselors upload three things:
+- **NCAE results** — image (JPEG, PNG, PDF)
+- **Report card or NAT scores** — image (JPEG, PNG, PDF)
+- **Counselor notes** — typed freehand or uploaded as an image
 
-* **Feasibility Assessment:** Evaluates raw cognitive and aptitude metrics from the NAT and NCAE, supplemented by the counselor's notes on student interests and academic history, to determine the academic and technical viability of specific career tracks.
-* **Labor Market Analysis:** Cross-references the student's academic profile with current economic trends, industry demands, and employment forecasts to ensure recommended paths are economically viable.
-* **Job-Demands-Resources (JDR) Evaluation:** Applies the JDR psychological model to assess the occupational context. This AI heavily utilizes the qualitative counselor interview notes to gauge a student's personal resources and stress tolerance, balancing the inherent demands of a profession against available resources to recommend sustainable career paths.
+### Pipeline
 
-## System Workflow
+**1. Vision Layer**
+Gemini's native multimodal vision reads and parses all uploaded documents — extracting scores, percentiles, and qualitative notes — and structures everything into a unified format for the downstream agents.
 
-1.  **Data Ingestion:** Users upload image files (JPEG, PNG, PDF) of official NCAE and NAT documents, and input or upload qualitative career interview notes from the counselor.
-2.  **Processing & Extraction:** * The OCR engine parses the physical documents, extracting scores, percentiles, and categorical data.
-    * Concurrently, a natural language processing module parses the counselor interview notes to extract behavioral markers, personal preferences, and psychological insights.
-3.  **Data Structuring:** Both the quantitative test data and qualitative interview insights are formatted into a standardized, unified JSON payload.
-4.  **AI Routing:** The structured payload is processed concurrently by the Feasibility, Labor, and JDR AI models.
-5.  **Synthesis:** The system compiles the outputs from the three models into a cohesive, step-by-step guidance report for the user.
+**2. Core Analysis — 3 Agents in Parallel**
+
+| Agent | Framework | Question Answered |
+|---|---|---|
+| Labor Analyst | LMI (Labor Market Information) | Is this career viable in the Philippine job market? |
+| Feasibility Analyst | SCCT (Social Cognitive Career Theory) | Can this student realistically get there? |
+| Job Demand Analyst | JD-R (Job Demands-Resources Model) | Will this career burn them out? |
+
+Each agent is independently prompted and grounded in its own framework and dataset.
+
+**3. Adjacency Layer**
+Synthesizes all three agent outputs and surfaces alternative career paths for the counselor to explore with the student.
+
+**4. Output**
+- Per-agent reports with key signals, interpretations, and supporting data
+- Score breakdown by academic area
+- Counselor note review panel
+- One-click PDF summary export for the student
+
+---
 
 ## Technology Stack
 
-* **Frontend:** Next.js, TypeScript
-* **Backend:** Python
-* **Processing:** Python-based multi-AI architecture
-* **Data Extraction:** Tesseract OCR (or equivalent configured engine) and qualitative text processing modules.
+| Layer | Technology |
+|---|---|
+| Frontend & Backend | Next.js |
+| AI & Vision | Gemini API (multimodal) |
+| Deployment | Vercel |
 
-## Local Development Setup
+No separate backend server. No OCR library. Vision and analysis are handled entirely through Gemini's multimodal API via Next.js API routes.
+
+---
+
+## Local Development
 
 ### Prerequisites
+- Node.js 18 or higher
+- Gemini API key
 
-* Python 3.10 or higher
-* Node.js 18 or higher
-* Tesseract OCR installed on the host machine
+### Setup
 
-### Installation Steps
+**1. Clone the repository**
+```bash
+git clone https://github.com/your-org/kumpas.git
+cd kumpas
+```
 
-1.  **Clone the repository**
-    ```bash
-    git clone [https://github.com/your-org/kumpas.git](https://github.com/your-org/kumpas.git)
-    cd kumpas
-    ```
+**2. Install dependencies**
+```bash
+npm install
+```
 
-2.  **Configure the Backend (Python)**
-    ```bash
-    cd backend
-    python -m venv venv
-    
-    # Activate virtual environment
-    # Linux/macOS: source venv/bin/activate
-    # Windows: venv\Scripts\activate
-    
-    pip install -r requirements.txt
-    
-    # Run the backend server (replace with your specific start command)
-    python main.py 
-    ```
+**3. Configure environment variables**
 
-3.  **Configure the Frontend (Next.js)**
-    ```bash
-    cd ../frontend
-    npm install
-    npm run dev
-    ```
+Create a `.env.local` file in the root directory:
+```
+GEMINI_API_KEY=your_api_key_here
+```
 
-4.  **Environment Variables**
-    Create a `.env` file in both the `backend` and `frontend` directories. Refer to `.env.example` in each respective directory for the required API keys and database connection strings.
+**4. Run the development server**
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+---
+
+## Validation
+
+Kumpas's input structure and agent outputs have been reviewed and validated by guidance counselors at Cebu Institute of Technology – University (CIT-U).
+
+---
+
+## Business Model
+
+- **B2B SaaS** — schools subscribe, counselors use it, students pay nothing
+- **Pricing** — scaled by student enrollment
+- **Cost per session** — ₱3.50 per student analysis run
+- **Data partnerships** — anonymized career data shared with DOLE and CHED to inform national youth programs
+
+### Market
+- **SOM** — 50 private schools in Cebu (beachhead: CIT-U)
+- **SAM** — 150 schools across Region 7
+- **TAM** — 2,500 Senior High Schools nationwide
+
+---
+
+*Turning Data into Direction.*
