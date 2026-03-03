@@ -1,6 +1,16 @@
 import React from "react";
 import type { AdjacentCareerReport, SessionIntakeOutput, AgentKey, AgentPanelData } from "@/lib/analysis-types";
 
+/** Strip technical source references so labels read naturally for counselors */
+function cleanLabel(raw: string): string {
+    return raw
+        .replace(/\s*\(per\s+\S+\s+context\)/gi, "")
+        .replace(/\s*\(?per\s+[\w]+(?:\s+and\s+[\w]+)*(?:\s+context)?\)?/gi, "")
+        .replace(/\.\s*$/, "")
+        .trim();
+}
+
+
 interface PdfDocumentProps {
     report: AdjacentCareerReport;
     sessionIntake: SessionIntakeOutput;
@@ -126,8 +136,8 @@ export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
                                     <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginTop: "auto", flexShrink: 0 }}>
                                         {panel.supportingData.slice(0, 3).map((m, i) => (
                                             <div key={i} style={{ border: "1px solid #f3f4f6", borderRadius: "4px", padding: "6px 8px", backgroundColor: "#fdfdfd", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                                                <div style={{ fontSize: "9px", color: "#6b7280", textTransform: "uppercase", fontWeight: "bold", marginBottom: "3px", lineHeight: 1 }}>{m.label}</div>
-                                                <div style={{ fontWeight: "800", fontSize: "11px", lineHeight: 1.2, color: "#111827" }}>{m.value}</div>
+                                                <div style={{ fontSize: "9px", color: "#6b7280", textTransform: "uppercase", fontWeight: "bold", marginBottom: "3px", lineHeight: 1 }}>{cleanLabel(m.label)}</div>
+                                                <div style={{ fontWeight: "800", fontSize: "11px", lineHeight: 1.2, color: "#111827" }}>{cleanLabel(m.value)}</div>
                                             </div>
                                         ))}
                                     </div>
