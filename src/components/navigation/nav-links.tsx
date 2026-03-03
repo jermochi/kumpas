@@ -2,30 +2,31 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Shield } from "lucide-react";
+import { BookOpen, ShieldCheck } from "lucide-react";
 
 export default function NavLinks() {
     const pathname = usePathname();
-    const isDocPage = pathname === "/documentation";
 
     return (
         <div className="flex items-center gap-4 sm:gap-6">
             {/*linked to documentation page*/}
             <Link
                 href="/documentation"
-                className="flex items-center gap-2 text-sm font-medium text-muted-text transition-colors hover:text-ink"
+                className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-ink ${pathname?.startsWith("/documentation") ? "text-ink underline underline-offset-4 decoration-2" : "text-muted-text"
+                    }`}
                 title="Documentation"
             >
                 <BookOpen size={18} />
                 <span className="hidden sm:inline">Documentation</span>
             </Link>
-            •
+            {/* • */}
             <Link
                 href="/privacy"
-                className="flex items-center gap-2 text-sm font-medium text-muted-text transition-colors hover:text-ink"
-                title="Privacy Policy"
+                className={`flex items-center gap-2 text-sm font-medium transition-colors hover:text-ink ${pathname === "/privacy" ? "text-ink underline underline-offset-4 decoration-2" : "text-muted-text"
+                    }`}
+                title="Privacy"
             >
-                <Shield size={18} />
+                <ShieldCheck size={18} />
                 <span className="hidden sm:inline">Privacy</span>
             </Link>
             {/*linked to our github*/}
