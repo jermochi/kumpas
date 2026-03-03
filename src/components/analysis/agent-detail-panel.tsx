@@ -127,10 +127,10 @@ export default function AgentDetailPanel({ data, onFullscreen, isFullscreen = fa
                                 {showSupporting ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                             </button>
                             {showSupporting && (
-                                <div className="mt-3 space-y-3 divide-y divide-black/[0.04]">
+                                <div className="mt-3 divide-y divide-black/[0.04]">
                                     {data.supportingData.map((row, i) => (
                                         <div key={i} className="grid grid-cols-[160px_1fr] gap-x-3 py-2.5 first:pt-0">
-                                            <div className="grid grid-cols-[160px_1fr] gap-x-3 py-2.5 first:pt-0">
+                                            <div className="flex items-start gap-1.5 pt-0.5">
                                                 <SignalIcon type={row.icon} />
                                                 <span className="text-sm font-semibold text-ink">{cleanLabel(row.label)}</span>
                                             </div>
