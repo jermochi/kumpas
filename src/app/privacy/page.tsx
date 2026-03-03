@@ -58,7 +58,7 @@ OPTIONAL ACADEMIC DOCUMENTS
 WHAT WE DO NOT COLLECT
 - Audio or video recordings of any kind — Kumpas has no recording capability
 - Biometric data of any kind
-- Student names passed to AI components — names are redacted before processing
+- Student names in downstream AI components — names are removed by the first Gemini agent before any analysis step receives the data
 - Social media accounts, device data, or browsing activity
 - Medical records or clinical diagnoses`
     },
@@ -69,13 +69,13 @@ WHAT WE DO NOT COLLECT
         content: `Data entered into Kumpas is used solely to generate a career assessment report for the student. The pipeline operates as follows:
 
 1. SESSION INTAKE LAYER
-The counselor's notes and uploaded academic documents are parsed by the first AI agent (Session Intake Layer), which extracts structured information about the student's career goal, interests, strengths, family situation, and red flags — without retaining the raw text beyond the session.
+The counselor's notes and uploaded academic documents are sent to the first Gemini agent (Session Intake Layer). As part of structuring the data, this agent removes PII — student names are replaced with "the student", specific school names and sub-province locations are redacted. The resulting structured output contains no direct identifiers and is what all downstream agents receive.
 
 2. THREE-AGENT ANALYSIS
-Three specialist AI agents analyze the structured intake output in parallel: the Feasibility Analyst (SCCT framework), the Labor Market Analyst (LMI/DOLE data framework), and the Job Demand Analyst (JD-R Model). Each produces a scored assessment.
+Three specialist Gemini agents analyze the de-identified structured intake output in parallel: the Feasibility Analyst (SCCT framework), the Labor Market Analyst (LMI/DOLE data framework), and the Job Demand Analyst (JD-R Model). Each produces a scored assessment.
 
 3. ADJACENT CAREER FINDER
-A fifth agent synthesizes all three assessments to identify 3–4 adjacent career paths the student may not have considered, scored against the same frameworks.
+A fifth Gemini agent synthesizes all three assessments to identify 3–4 adjacent career paths the student may not have considered, scored against the same frameworks.
 
 4. REPORT GENERATION
 A Career Assessment Report is generated and displayed to the guidance counselor. This report is for in-session use only and is not transmitted to any third party without consent.
@@ -92,7 +92,7 @@ LEGAL BASIS FOR PROCESSING
         content: `Kumpas does not sell personal data. Data sharing with third parties is strictly limited.
 
 WHO WE SHARE DATA WITH
-- Google (Gemini API) — student session data is processed by Gemini models to generate the career assessment. Google acts as a sub-processor under data processing terms. Raw identifiers (student names, specific school names) are redacted before being passed to the API
+- Google (Gemini API) — student session data is processed by Gemini models across all five pipeline stages. The first Gemini agent (Session Intake Layer) performs PII redaction as part of its structuring task — removing student names, specific school names, and sub-province locations. All subsequent Gemini agents operate on this already de-identified output. Google acts as a sub-processor under data processing terms.
 - Research institutions and academic organizations — only anonymized, aggregated data (no individual identifiers) may be used for peer-reviewed studies on career outcomes and educational planning, and only with explicit consent
 - Government agencies (e.g., CHED, DepEd, TESDA) — where required by law or in support of national education policy
 
@@ -112,7 +112,7 @@ Students and guardians may opt out of having their anonymized data included in a
         content: `DATA STORAGE
 Kumpas is designed to minimize data persistence:
 - Session notes and uploaded documents are processed in-session and are not permanently stored on Kumpas servers beyond what is necessary to generate the report
-- Student names and precise location identifiers are redacted before data is passed to AI processing components
+- Student names and precise location identifiers are removed by the first Gemini agent during the Session Intake Layer step, before downstream agents receive any data
 - Generated reports are stored temporarily in the browser's session storage and are cleared when the browser session ends
 - All data in transit is encrypted using TLS 1.2+
 
@@ -122,7 +122,7 @@ DATA RETENTION
 - Upon written request, any residual student data will be deleted within 30 calendar days
 
 DATA LOCALIZATION
-AI inference is performed via the Gemini API, which may route requests through Google's global infrastructure. Appropriate safeguards are in place under NPC Circular No. 16-01 for cross-border data transfers. PII redaction is applied before any data leaves the school's network boundary.`
+All five pipeline agents run via the Gemini API, which may route requests through Google's global infrastructure. Appropriate safeguards are in place under NPC Circular No. 16-01 for cross-border data transfers. Raw session notes (containing PII) are only sent to the first Gemini agent. All subsequent agents receive only the de-identified structured output produced by that first call.`
     },
     {
         id: "rights",
@@ -147,7 +147,7 @@ AI inference is performed via the Gemini API, which may route requests through G
         content: `Kumpas implements technical and organizational safeguards appropriate to the sensitivity of student data:
 
 TECHNICAL SAFEGUARDS
-- PII redaction before AI processing — student names, specific school names, and precise location identifiers are removed before data is sent to Gemini API components
+- PII redaction by first Gemini agent — the Session Intake Layer agent is instructed to remove student names, specific school names, and sub-province location identifiers as part of its structuring task. Raw notes are sent only to this one agent; all downstream Gemini agents operate exclusively on the de-identified structured output
 - No audio or video capability — all input is text-based, eliminating the risk of inadvertent voice or image capture during sessions
 - Encryption of data in transit (TLS 1.2+) on all API calls
 - Session-scoped storage — report data is held in browser session storage and is not written to persistent server-side databases
