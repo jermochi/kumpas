@@ -1,10 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { BookOpen } from "lucide-react";
 
 export default function NavLinks() {
+    const pathname = usePathname();
+    const isDocPage = pathname === "/documentation";
+
     return (
         <div className="flex items-center gap-4 sm:gap-6">
-            {/* to be linked to documentation page*/}
+            {/*linked to documentation page*/}
             <Link
                 href="/documentation"
                 className="flex items-center gap-2 text-sm font-medium text-muted-text transition-colors hover:text-ink"
@@ -20,7 +26,7 @@ export default function NavLinks() {
             >
                 Privacy
             </Link>
-            {/* to be linked to our github*/}
+            {/*linked to our github*/}
             <a
                 href="https://github.com/jermochi/kumpas.git"
                 target="_blank"

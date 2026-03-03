@@ -9,10 +9,10 @@ export default function DocumentationPage() {
       {/* Page Header */}
       <header className="px-6 py-12 md:py-20 flex flex-col items-center">
         <h1 className="font-heading text-3xl font-bold tracking-tight text-ink sm:text-4xl md:text-5xl text-center">
-          Voice Analysis & Documentation
+          Documentation
         </h1>
         <p className="mt-4 max-w-2xl text-center text-sm text-muted-text sm:text-base leading-relaxed">
-          Learn how our Multi-Agent AI system analyzes counselor-client audio recordings using the DOLE/LMI, SCCT, and JD-R models to map psychological wellbeing and create personalized, sustainable career pathways aligned with the UN SDGs.
+          Learn how our Multi-AI system analyzes Counselor Career Interview Notes and NCAE/NAT results using the DOLE/LMI, SCCT, and JD-R models to create personalized, sustainable career pathways aligned with the UN SDGs.
         </p>
       </header>
 
