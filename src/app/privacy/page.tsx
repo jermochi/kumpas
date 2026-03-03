@@ -20,112 +20,109 @@ const SECTIONS = [
         id: "overview",
         icon: Shield,
         title: "Overview",
-        content: `Kumpas is a career guidance system designed to help Filipino students make informed decisions about their futures. In the course of providing this service, we collect and process certain personal information about students.
+        content: `Kumpas is a career guidance system built for Filipino guidance counselors. It helps counselors generate structured, data-backed career assessments for their students using a five-agent AI pipeline powered by the Gemini API and built on Next.js.
 
-This Privacy Policy explains what data we collect, why we collect it, how it is used, and the rights students and their guardians have under Republic Act No. 10173, also known as the Data Privacy Act of 2012 (DPA), and its Implementing Rules and Regulations.
+This Privacy Policy explains what data Kumpas processes, why it processes it, how it is protected, and the rights students and their guardians hold under Republic Act No. 10173, the Data Privacy Act of 2012 (DPA), and its Implementing Rules and Regulations.
 
-By using Kumpas, the student and/or their authorized guardian acknowledges that they have read, understood, and agreed to this policy.`
+By using Kumpas, the guidance counselor and/or their institution acknowledges that they have secured proper consent from the student or their guardian before entering any student data into the system, and that they have read and agreed to this policy.`
     },
     {
         id: "controller",
         icon: Building2,
         title: "Personal Information Controller",
-        content: `The school or institution deploying Kumpas acts as the Personal Information Controller (PIC) for the student data processed through this system. Kumpas (the platform) acts as a Personal Information Processor (PIP) on behalf of the school.
+        content: `The school or institution deploying Kumpas is the Personal Information Controller (PIC) for all student data processed through the system. Kumpas acts as a Personal Information Processor (PIP) operating on behalf of the school.
 
 As the PIC, the school is responsible for:
-- Ensuring student data is collected with proper consent
-- Determining the lawful basis for processing
-- Ensuring data is used only for career guidance purposes
-- Responding to student and guardian data subject requests
+- Securing proper student and/or guardian consent before a counseling session is processed
+- Ensuring data entered into Kumpas is limited to what is necessary for career guidance
+- Designating a Data Protection Officer (DPO) as the student's primary point of contact for all data requests
+- Ensuring counselors are trained on responsible data handling under RA 10173
 
-The school's Data Protection Officer (DPO) is the primary point of contact for all data privacy concerns related to this system.`
+Kumpas does not independently collect or solicit student data — all data enters the system through the guidance counselor's input.`
     },
     {
         id: "what-we-collect",
         icon: Eye,
         title: "What Data We Collect",
-        content: `Kumpas collects only the minimum personal data necessary to deliver accurate career guidance. This includes:
-
-STUDENT PERSONAL INFORMATION
-- Name, age, and grade level
-- Senior High School strand or track
-- Academic performance signals (grades, subject strengths/weaknesses)
-- Region or province of residence
-- General financial situation (income level, scholarship status)
+        content: `Kumpas processes only the data that a guidance counselor actively enters into the system. No data is collected passively. This includes:
 
 COUNSELOR SESSION NOTES
-- Notes typed by the guidance counselor during or after the session
-- Career interests, aspirations, and stated goals as reported by the student
-- Family context and dynamics as relevant to career guidance
-- Optional academic documents uploaded by the counselor: Report Card, NCAE Results, or NAT Results
+- Typed notes written by the guidance counselor describing the student's career interests, aspirations, academic situation, family context, and any concerns raised during the session
+- These notes are the primary input for the AI pipeline
+
+OPTIONAL ACADEMIC DOCUMENTS
+- NCAE (National Career Assessment Examination) results — uploaded as a document image or PDF
+- NAT (National Achievement Test) scores — uploaded as a document image or PDF
+- Report Card excerpts — uploaded by the counselor to provide academic context
 
 WHAT WE DO NOT COLLECT
-- Audio or video recordings of counseling sessions
+- Audio or video recordings of any kind — Kumpas has no recording capability
 - Biometric data of any kind
-- Social media accounts or online activity
+- Student names passed to AI components — names are redacted before processing
+- Social media accounts, device data, or browsing activity
 - Medical records or clinical diagnoses`
     },
     {
         id: "how-we-use",
         icon: Lock,
         title: "How We Use Your Data",
-        content: `Data collected through Kumpas is used solely for the following purposes:
+        content: `Data entered into Kumpas is used solely to generate a career assessment report for the student. The pipeline operates as follows:
 
-1. CAREER GUIDANCE ANALYSIS
-Session notes and academic documents are processed by Kumpas's AI agents to generate a structured career assessment covering labor market fit, academic feasibility, and psychological alignment.
+1. SESSION INTAKE LAYER
+The counselor's notes and uploaded academic documents are parsed by the first AI agent (Session Intake Layer), which extracts structured information about the student's career goal, interests, strengths, family situation, and red flags — without retaining the raw text beyond the session.
 
-2. REPORT GENERATION
-A Career Assessment Report is generated for use by the guidance counselor in their session with the student. This report is not shared with third parties without consent.
+2. THREE-AGENT ANALYSIS
+Three specialist AI agents analyze the structured intake output in parallel: the Feasibility Analyst (SCCT framework), the Labor Market Analyst (LMI/DOLE data framework), and the Job Demand Analyst (JD-R Model). Each produces a scored assessment.
 
-3. SYSTEM IMPROVEMENT & RESEARCH
-Anonymized, aggregated data (no personally identifiable information) may be used to improve the accuracy and relevance of the Kumpas system, and may be shared with partner schools and research institutions for educational research purposes.
+3. ADJACENT CAREER FINDER
+A fifth agent synthesizes all three assessments to identify 3–4 adjacent career paths the student may not have considered, scored against the same frameworks.
+
+4. REPORT GENERATION
+A Career Assessment Report is generated and displayed to the guidance counselor. This report is for in-session use only and is not transmitted to any third party without consent.
 
 LEGAL BASIS FOR PROCESSING
-Processing is carried out on the basis of:
 - Consent — the student or guardian has given express consent (Section 12(a), RA 10173)
 - Legitimate purpose — career guidance is a core educational function (Section 12(b), RA 10173)
-- Proportionality — only data necessary for guidance is collected and processed`
+- Proportionality — only data necessary for the guidance session is processed`
     },
     {
         id: "data-sharing",
         icon: Share2,
         title: "Data Sharing",
-        content: `Kumpas may share data with third parties only in the limited circumstances described below. We do not sell personal data.
+        content: `Kumpas does not sell personal data. Data sharing with third parties is strictly limited.
 
 WHO WE SHARE DATA WITH
-- Partner schools and educational institutions — to support network-wide career guidance research and program evaluation
-- Research institutions and academic organizations — for peer-reviewed studies on career outcomes, labor market alignment, and educational planning
-- Government agencies (e.g., CHED, DepEd, TESDA) — where required by law or in support of national education policy research
+- Google (Gemini API) — student session data is processed by Gemini models to generate the career assessment. Google acts as a sub-processor under data processing terms. Raw identifiers (student names, specific school names) are redacted before being passed to the API
+- Research institutions and academic organizations — only anonymized, aggregated data (no individual identifiers) may be used for peer-reviewed studies on career outcomes and educational planning, and only with explicit consent
+- Government agencies (e.g., CHED, DepEd, TESDA) — where required by law or in support of national education policy
 
-WHAT IS SHARED
-Only anonymized, aggregated data is shared with external parties. This means:
-- All personal identifiers (names, student numbers, school names, specific locations) are removed
-- Data is aggregated across multiple students so that no individual can be identified
-- Raw session notes, uploaded documents, and individual career reports are never shared
+WHAT IS NEVER SHARED
+- Raw counselor session notes
+- Uploaded academic documents (NCAE, NAT, Report Card)
+- Individual career assessment reports
+- Any data that could identify a specific student
 
 OPT-OUT
-Students and guardians may opt out of having their anonymized data included in external sharing at any time by submitting a written request to the school's Data Protection Officer. Opting out does not affect access to the Kumpas career guidance service.
-
-LEGAL BASIS
-External data sharing is conducted on the basis of consent and legitimate educational research purpose under Section 12 of RA 10173. Data processing agreements are in place with all external recipients.`
+Students and guardians may opt out of having their anonymized data included in any external research sharing by submitting a written request to the school's Data Protection Officer. Opting out does not affect access to the Kumpas career guidance service.`
     },
     {
         id: "storage",
         icon: Shield,
         title: "Data Storage & Retention",
         content: `DATA STORAGE
-Student data processed through Kumpas is handled with the following safeguards:
+Kumpas is designed to minimize data persistence:
 - Session notes and uploaded documents are processed in-session and are not permanently stored on Kumpas servers beyond what is necessary to generate the report
-- Personal identifiers (names, specific locations) are removed from data passed to AI processing components
-- All data in transit is encrypted using industry-standard protocols (TLS 1.2+)
+- Student names and precise location identifiers are redacted before data is passed to AI processing components
+- Generated reports are stored temporarily in the browser's session storage and are cleared when the browser session ends
+- All data in transit is encrypted using TLS 1.2+
 
 DATA RETENTION
-- Generated reports are retained for the duration of the student's enrollment at the institution, or as specified by the school's data retention policy
-- Raw session notes are subject to the school's own document retention rules
-- Upon written request, student data will be deleted within 30 calendar days
+- Kumpas does not maintain a persistent database of student records beyond the active session
+- The school's own document retention policies govern how long counselor notes and printed reports are kept
+- Upon written request, any residual student data will be deleted within 30 calendar days
 
 DATA LOCALIZATION
-Kumpas complies with the NPC's guidelines on cross-border data transfers. Where AI processing components operate on servers outside the Philippines, appropriate safeguards are in place in accordance with NPC Circular No. 16-01.`
+AI inference is performed via the Gemini API, which may route requests through Google's global infrastructure. Appropriate safeguards are in place under NPC Circular No. 16-01 for cross-border data transfers. PII redaction is applied before any data leaves the school's network boundary.`
     },
     {
         id: "rights",
@@ -135,11 +132,11 @@ Kumpas complies with the NPC's guidelines on cross-border data transfers. Where 
         rights: [
             { name: "Right to Be Informed", desc: "You have the right to know what personal data is collected, why, and how it will be used — which is the purpose of this document." },
             { name: "Right to Access", desc: "Request a copy of the personal data Kumpas holds about the student at any time via the school's DPO." },
-            { name: "Right to Rectification", desc: "If any personal data is inaccurate or incomplete, you may request it be corrected." },
-            { name: "Right to Erasure / Blocking", desc: "Request deletion or blocking of personal data if collected unlawfully, no longer necessary, or consent is withdrawn." },
-            { name: "Right to Object", desc: "Object to the processing of personal data for purposes other than those stated in this policy." },
-            { name: "Right to Data Portability", desc: "Request a copy of your data in a structured, commonly used and machine-readable format." },
-            { name: "Right to File a Complaint", desc: "File a complaint with the National Privacy Commission at complaints@privacy.gov.ph or privacy.gov.ph if your rights are violated." },
+            { name: "Right to Rectification", desc: "If any personal data entered into the system is inaccurate or incomplete, you may request it be corrected before or after report generation." },
+            { name: "Right to Erasure / Blocking", desc: "Request deletion or blocking of personal data if it was collected unlawfully, is no longer necessary, or if consent is withdrawn." },
+            { name: "Right to Object", desc: "Object to the processing of personal data for purposes beyond career guidance as stated in this policy." },
+            { name: "Right to Data Portability", desc: "Request a copy of your career assessment data in a structured, human-readable format." },
+            { name: "Right to File a Complaint", desc: "File a complaint with the National Privacy Commission at complaints@privacy.gov.ph or privacy.gov.ph if you believe your rights have been violated." },
         ],
         content: ``
     },
@@ -147,30 +144,30 @@ Kumpas complies with the NPC's guidelines on cross-border data transfers. Where 
         id: "security",
         icon: Lock,
         title: "Security Measures",
-        content: `Kumpas implements appropriate technical and organizational measures to protect student data:
+        content: `Kumpas implements technical and organizational safeguards appropriate to the sensitivity of student data:
 
 TECHNICAL SAFEGUARDS
-- Encryption of data in transit (TLS) and at rest
-- PII removal before data is passed to AI processing components — names, specific schools, and precise locations are replaced with anonymized tokens
-- Access controls ensuring only authorized counselors can view session data
-- No audio or video recording capability — all input is text-based to protect student privacy during sessions
+- PII redaction before AI processing — student names, specific school names, and precise location identifiers are removed before data is sent to Gemini API components
+- No audio or video capability — all input is text-based, eliminating the risk of inadvertent voice or image capture during sessions
+- Encryption of data in transit (TLS 1.2+) on all API calls
+- Session-scoped storage — report data is held in browser session storage and is not written to persistent server-side databases
 
 ORGANIZATIONAL SAFEGUARDS
-- Counselors are trained on data handling responsibilities under RA 10173
-- Data processing is limited to career guidance purposes only
-- Third-party AI service providers are bound by data processing agreements
+- Kumpas is operated by guidance counselors, who are bound by their institution's data handling policies and RA 10173
+- AI sub-processors (Google Gemini) operate under data processing agreements
+- System access is limited to the guidance counselor actively running the session
 
 BREACH NOTIFICATION
-In the event of a personal data breach, affected individuals and the National Privacy Commission will be notified within 72 hours of discovery, in accordance with NPC Circular No. 16-03.`
+In the event of a personal data breach affecting student records, affected individuals and the National Privacy Commission will be notified within 72 hours of discovery, in accordance with NPC Circular No. 16-03.`
     },
     {
         id: "contact",
         icon: Mail,
         title: "Contact & Complaints",
-        content: `For questions, requests, or complaints about how Kumpas handles your personal data, please contact:
+        content: `For questions, requests, or complaints about how Kumpas handles personal data, please contact:
 
 YOUR SCHOOL'S DATA PROTECTION OFFICER
-The school deploying Kumpas is your primary point of contact for all data subject requests.
+The school deploying Kumpas is the primary point of contact for all data subject requests. The school's DPO is responsible for receiving and acting on requests within the timelines required by RA 10173.
 
 NATIONAL PRIVACY COMMISSION (NPC)
 National Privacy Commission
@@ -182,7 +179,7 @@ Email: complaints@privacy.gov.ph
 Website: privacy.gov.ph
 Hotline: (02) 8234-2228
 
-This Privacy Policy was last reviewed in 2025 and will be updated as necessary to reflect changes in Kumpas's data practices or applicable law.`
+This Privacy Policy was last reviewed in 2025 and will be updated as necessary to reflect changes in Kumpas's data practices, the Gemini API's data handling terms, or applicable Philippine law.`
     }
 ];
 
