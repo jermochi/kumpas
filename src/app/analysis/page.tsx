@@ -38,7 +38,7 @@ function AnalysisContent() {
             sessionStorage.removeItem(`kumpas-session-intake-${sessionId}`);
             sessionStorage.removeItem(`kumpas-report-${sessionId}`);
             sessionStorage.removeItem(`kumpas-agent-data-${sessionId}`);
-            deleteFilesFromIDB(sessionId).catch(() => {});
+            deleteFilesFromIDB(sessionId).catch(() => { });
         }
         router.push("/input");
     }, [router, sessionId]);
@@ -168,7 +168,7 @@ function AnalysisContent() {
 
             setState(prev => ({
                 ...prev,
-                completedStages: ["documentParsing", "notesParsing", "transcriptionLayer", "laborMarket", "feasibility", "jobDemand"],
+                completedStages: ["documentParsing", "notesParsing", "transcriptionLayer", "feasibility", "laborMarket", "jobDemand"],
             }));
 
             // ── Stage 5: Adjacent Career Finder ─────────────────────
@@ -199,9 +199,9 @@ function AnalysisContent() {
                 }
             }
 
-            const agentData = buildAgentPanels(labor, feasibility, jobDemand);
+            const agentData = buildAgentPanels(feasibility, labor, jobDemand);
 
-            setState(prev => ({ ...prev, completedStages: ["documentParsing", "notesParsing", "transcriptionLayer", "laborMarket", "feasibility", "jobDemand", "adjacentCareer"] }));
+            setState(prev => ({ ...prev, completedStages: ["documentParsing", "notesParsing", "transcriptionLayer", "feasibility", "laborMarket", "jobDemand", "adjacentCareer"] }));
             // Give the UI a moment to show 100% completion before switching
             await new Promise((r) => setTimeout(r, 1000));
 

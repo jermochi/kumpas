@@ -24,7 +24,7 @@ interface ReportViewProps {
 }
 
 export default function ReportView({ report, sessionIntake, counselorNotes, agentData, onNewSession }: ReportViewProps) {
-    const [activeAgent, setActiveAgent] = useState<AgentKey>("labor_market");
+    const [activeAgent, setActiveAgent] = useState<AgentKey>("feasibility");
     const [modalContent, setModalContent] = useState<"transcript" | AgentKey | null>(null);
 
     // PDF Generation State

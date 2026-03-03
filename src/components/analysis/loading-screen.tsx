@@ -51,7 +51,7 @@ const HEADERS: Record<string, { title: string; subtitle: string }> = {
     documentParsing: { title: "Preparing Your Data", subtitle: "Extracting information from your documents..." },
     notesParsing: { title: "Reading Your Notes", subtitle: "Structuring counselor observations..." },
     transcriptionLayer: { title: "Understanding the Session", subtitle: "AI is analyzing career intentions and context..." },
-    parallel: { title: "Running Multi-Agent Analysis", subtitle: "Three specialist AIs are evaluating simultaneously..." },
+    parallel: { title: "Running Multi-AI Specialist Analysis", subtitle: "Three specialist AIs are evaluating simultaneously..." },
     adjacentCareer: { title: "Generating Career Insights", subtitle: "Discovering alternative career pathways..." },
     done: { title: "Analysis Complete", subtitle: "Finalizing your career guidance report..." },
 };
@@ -137,22 +137,20 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
         pct: number; isDone: boolean; isActive: boolean;
     }) => (
         <div
-            className={`flex items-center gap-4 w-full p-4 rounded-2xl border transition-all duration-500 ${
-                isDone
+            className={`flex items-center gap-4 w-full p-4 rounded-2xl border transition-all duration-500 ${isDone
                     ? "bg-white/80 border-[var(--sage)]/15"
                     : isActive
                         ? "bg-white border-[var(--sage)]/25 shadow-md ring-1 ring-[var(--sage)]/10"
                         : "bg-[var(--cream-mid)]/60 border-transparent opacity-40"
-            }`}
+                }`}
         >
             <div
-                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-500 ${
-                    isDone
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-500 ${isDone
                         ? "bg-[var(--charcoal)] text-white"
                         : isActive
                             ? "text-white shadow-sm"
                             : "bg-gray-200 text-gray-400"
-                }`}
+                    }`}
                 style={isActive && !isDone ? { backgroundColor: color } : undefined}
             >
                 {isDone ? (
@@ -257,21 +255,19 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
                     />
 
                     {/* 4. Parallel Agent Group */}
-                    <div className={`w-full p-5 rounded-2xl border transition-all duration-500 ${
-                        hasTranscription && !hasParallel
+                    <div className={`w-full p-5 rounded-2xl border transition-all duration-500 ${hasTranscription && !hasParallel
                             ? "bg-white border-[var(--sage)]/25 shadow-md ring-1 ring-[var(--sage)]/10"
                             : hasParallel
                                 ? "bg-white/80 border-[var(--sage)]/15"
                                 : "bg-[var(--cream-mid)]/60 border-transparent opacity-40"
-                    }`}>
+                        }`}>
                         <div className="flex items-center gap-3 mb-4">
-                            <div className={`flex h-7 w-7 items-center justify-center rounded-lg ${
-                                hasParallel
+                            <div className={`flex h-7 w-7 items-center justify-center rounded-lg ${hasParallel
                                     ? "bg-[var(--charcoal)] text-white"
                                     : hasTranscription
                                         ? "bg-[var(--sage)]/10 text-[var(--sage)]"
                                         : "bg-gray-200 text-gray-400"
-                            }`}>
+                                }`}>
                                 {hasParallel ? (
                                     <CheckCircle2 size={14} />
                                 ) : hasTranscription ? (
@@ -281,7 +277,7 @@ export default function LoadingScreen({ completedStages = [] }: { completedStage
                                 )}
                             </div>
                             <span className={`text-sm font-semibold ${hasTranscription ? "text-[var(--charcoal)]" : "text-gray-400"}`}>
-                                Multi-Agent Analysis
+                                Multi-AI Specialist Analysis
                             </span>
                             {hasTranscription && !hasParallel && (
                                 <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-[var(--sage)]/8 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--sage)]">
