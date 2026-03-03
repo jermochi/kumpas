@@ -2,13 +2,13 @@
 
 import { useState, useMemo, useRef, useEffect } from "react";
 import { RotateCcw } from "lucide-react";
-import type { AdjacentCareerReport, StructuredTranscript, AgentKey, AgentPanelData } from "@/lib/analysis-types";
+import type { AdjacentCareerReport, SessionIntakeOutput, AgentKey, AgentPanelData } from "@/lib/analysis-types";
 import { buildRelatedCareers } from "@/lib/analysis-helpers";
 
 import ScoreCardsRow from "@/components/analysis/score-cards-row";
 import AgentDetailPanel from "@/components/analysis/agent-detail-panel";
 import ScoreBreakdown from "@/components/analysis/score-breakdown";
-import TranscriptPanel from "@/components/analysis/transcript-panel";
+import SessionNotesPanel from "@/components/analysis/session-notes-panel";
 import RelatedCareersPanel from "@/components/analysis/related-careers-panel";
 import PdfFooter from "@/components/analysis/pdf-footer";
 import FullscreenModal from "@/components/analysis/fullscreen-modal";
@@ -17,12 +17,13 @@ import { PdfDocument } from "@/components/analysis/pdf-document";
 
 interface ReportViewProps {
     report: AdjacentCareerReport;
-    structured: StructuredTranscript;
+    sessionIntake: SessionIntakeOutput;
+    counselorNotes: string;
     agentData: Record<AgentKey, AgentPanelData>;
     onNewSession: () => void;
 }
 
-export default function ReportView({ report, structured, agentData, onNewSession }: ReportViewProps) {
+export default function ReportView({ report, sessionIntake, counselorNotes, agentData, onNewSession }: ReportViewProps) {
     const [activeAgent, setActiveAgent] = useState<AgentKey>("labor_market");
     const [modalContent, setModalContent] = useState<"transcript" | AgentKey | null>(null);
 
@@ -42,7 +43,7 @@ export default function ReportView({ report, structured, agentData, onNewSession
 
             const opt = {
                 margin: 0,
-                filename: `Kumpas_Assessment_${structured.career_path || "Report"}.pdf`,
+                filename: `Kumpas_Assessment_${sessionIntake.career_goal.title || "Report"}.pdf`,
                 image: { type: 'jpeg' as const, quality: 0.98 },
                 html2canvas: {
                     scale: 2,
@@ -68,8 +69,6 @@ export default function ReportView({ report, structured, agentData, onNewSession
     };
 
     const relatedCareers = useMemo(() => buildRelatedCareers(report), [report]);
-
-    const wordCount = structured.turns.reduce((n, t) => n + t.text.split(/\s+/).length, 0);
 
     const scores: Record<AgentKey, number> = {
         feasibility: agentData.feasibility.score,
@@ -98,6 +97,8 @@ export default function ReportView({ report, structured, agentData, onNewSession
         job_demand: agentData.job_demand.verdict,
     };
 
+    const formattedNotes = counselorNotes.replace(/(?!^)<h3>/g, '<br><h3>');
+
     return (
         <>
             <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10 space-y-6">
@@ -113,7 +114,7 @@ export default function ReportView({ report, structured, agentData, onNewSession
                     <div className="mt-1 flex items-baseline justify-between gap-4">
                         <h1 className="font-heading text-3xl font-bold leading-tight text-ink sm:text-4xl">
                             Assessment for{" "}
-                            <em className="text-forest">{structured.career_path || "Career"}</em>
+                            <em className="text-forest">{sessionIntake.career_goal.title || "Career"}</em>
                         </h1>
 
                         {/* New Session — sits on the h1 baseline, calm secondary style */}
@@ -171,9 +172,8 @@ export default function ReportView({ report, structured, agentData, onNewSession
                         className="flex flex-col gap-4 overflow-hidden"
                         style={sidebarMaxH ? { maxHeight: sidebarMaxH } : undefined}
                     >
-                        <TranscriptPanel
-                            turns={structured.turns}
-                            wordCount={wordCount}
+                        <SessionNotesPanel
+                            notes={counselorNotes}
                             onFullscreen={() => setModalContent("transcript")}
                             className="flex-1 min-h-0"
                         />
@@ -192,7 +192,8 @@ export default function ReportView({ report, structured, agentData, onNewSession
                     <PdfDocument
                         ref={pdfContentRef}
                         report={report}
-                        structured={structured}
+                        sessionIntake={sessionIntake}
+                        counselorNotes={counselorNotes}
                         agentData={agentData}
                     />
                 </div>
@@ -205,24 +206,16 @@ export default function ReportView({ report, structured, agentData, onNewSession
                     pdfUrl={pdfBlobUrl}
                 />
 
-                {/* Transcript Modal */}
+                {/* Counselor Notes Modal */}
                 <FullscreenModal
                     isOpen={modalContent === "transcript"}
                     onClose={() => setModalContent(null)}
-                    title="Counseling Session Transcript"
+                    title="Counseling Session Notes"
                 >
-                    <div className="space-y-4">
-                        {structured.turns.map((turn, i) => (
-                            <div key={i}>
-                                <p className="text-xs font-semibold uppercase tracking-wider text-muted-text mb-0.5">
-                                    {turn.speaker}
-                                </p>
-                                <p className="text-sm leading-relaxed text-ink">
-                                    {turn.text}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
+                    <div
+                        className="[&_h3]:text-xs [&_h3]:font-semibold [&_h3]:uppercase [&_h3]:tracking-wider [&_h3]:text-muted-text [&_h3]:mb-1 [&_h3]:mt-6 first:[&_h3]:mt-0 [&_p]:text-sm [&_p]:leading-relaxed [&_p]:text-ink [&_p]:mb-4 last:[&_p]:mb-0 [&_ul]:mb-4 [&_ul]:pl-5 [&_ul]:list-disc [&_li]:text-sm [&_li]:text-ink [&_li]:mb-1"
+                        dangerouslySetInnerHTML={{ __html: formattedNotes }}
+                    />
                 </FullscreenModal>
 
                 {(["feasibility", "labor_market", "job_demand"] as AgentKey[]).map((key) => (

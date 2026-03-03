@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { callAgent } from "@/lib/llm";
-import { getSystemInstructions } from "@/lib/utils";
+import { getSystemInstructions } from "@/lib/server-utils";
 
 export async function POST(req: Request) {
     try {

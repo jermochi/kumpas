@@ -7,7 +7,7 @@ import LoadingScreen from "@/components/analysis/loading-screen";
 
 import type {
     AnalysisState,
-    StructuredTranscript,
+    SessionIntakeOutput,
     AdjacentCareerReport,
     StoredSession,
     RawAgentResponse,
@@ -51,70 +51,70 @@ function AnalysisContent() {
         setState({ phase: "processing", completedStages: [] });
 
         try {
-            // ── Stage 1: Transcription Layer ────────────────────────
-            let structured: StructuredTranscript | null = null;
+            // ── Stage 1: Session Intake Layer ────────────────────────
+            let sessionIntake: SessionIntakeOutput | null = null;
             if (session.parentSessionId) {
-                const parentStructuredStr = sessionStorage.getItem(`kumpas-structured-${session.parentSessionId}`);
-                if (parentStructuredStr) {
-                    structured = JSON.parse(parentStructuredStr);
+                const parentSessionIntakeStr = sessionStorage.getItem(`kumpas-session-intake-${session.parentSessionId}`);
+                if (parentSessionIntakeStr) {
+                    sessionIntake = JSON.parse(parentSessionIntakeStr);
                 }
             }
 
-            if (!structured) {
-                console.log("Transcription layer API called");
+            if (!sessionIntake) {
+                console.log("Session Intake API called");
                 const tlRes = await fetch("/api/transcription-layer", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transcript: session.rawTranscript }),
+                    body: JSON.stringify({
+                        counselorNotes: session.counselorNotes,
+                        extractedDocuments: session.extractedDocuments
+                    }),
                 });
                 if (!tlRes.ok) {
                     const errData = await tlRes.json().catch(() => null);
-                    throw new Error(errData?.error || "Transcription layer failed");
+                    throw new Error(errData?.error || "Session Intake layer failed");
                 }
-                structured = (await tlRes.json()) as StructuredTranscript;
+                sessionIntake = (await tlRes.json()) as SessionIntakeOutput;
             }
 
-            // Override the career title in structured so ReportView shows the correct title
+            // Override the career title in sessionIntake so ReportView shows the correct title
             if (session.careerOverride) {
                 if (!session.originalCareer) {
-                    session.originalCareer = structured.career_path;
+                    session.originalCareer = sessionIntake.career_goal.title;
                     sessionStorage.setItem(`kumpas-session-${sessionId}`, JSON.stringify(session));
                 }
-                structured.career_path = session.careerOverride;
-                structured.career_path_source = "derived";
+                sessionIntake.career_goal.title = session.careerOverride;
+                sessionIntake.career_goal.source = "derived";
             }
 
             setState(prev => ({ ...prev, completedStages: ["transcriptionLayer"] }));
 
             sessionStorage.setItem(
-                `kumpas-structured-${sessionId}`,
-                JSON.stringify(structured),
+                `kumpas-session-intake-${sessionId}`,
+                JSON.stringify(sessionIntake),
             );
 
-            const redactedText = structured.turns
-                .map((t) => `${t.speaker}: ${t.text}`)
-                .join("\n");
-
             // ── Stage 2–4: Three agents in parallel ─────────────────
-            const careerPathTitle = session.careerOverride || structured.career_path;
+            const careerPathTitle = session.careerOverride || sessionIntake.career_goal.title;
+            const structuredStr = JSON.stringify(sessionIntake);
 
             const [feasibilityRes, laborRes, jobDemandRes] = await Promise.all([
                 fetch("/api/analyze/feasibility", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
+                    body: JSON.stringify({ sessionIntakeOutput: structuredStr, careerPathTitle }),
                 }).then((r) => r.json()),
 
                 fetch("/api/analyze/labor", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
+                    body: JSON.stringify({ sessionIntakeOutput: structuredStr, careerPathTitle }),
                 }).then((r) => r.json()),
 
                 fetch("/api/analyze/job-demand", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ transcript: redactedText, careerPathTitle }),
+                    body: JSON.stringify({ sessionIntakeOutput: structuredStr, careerPathTitle }),
                 }).then((r) => r.json()),
             ]);
 
@@ -136,8 +136,9 @@ function AnalysisContent() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    career_path: session.careerOverride || structured.career_path,
-                    career_path_source: session.careerOverride ? "derived" : structured.career_path_source,
+                    career_path: session.careerOverride || sessionIntake.career_goal.title,
+                    career_path_source: session.careerOverride ? "derived" : sessionIntake.career_goal.source,
+                    labor,
                     feasibility,
                     labor,
                     job_demand: jobDemand,
@@ -147,7 +148,7 @@ function AnalysisContent() {
             const report = await adjacentCareerRes.json() as AdjacentCareerReport;
 
             // Prepend original career to allow navigating back
-            if (session.originalCareer && session.originalCareer !== structured.career_path) {
+            if (session.originalCareer && session.originalCareer !== sessionIntake.career_goal.title) {
                 const alreadyExists = report.related_careers.some(c => c.career_path === session.originalCareer);
                 if (!alreadyExists) {
                     report.related_careers.unshift({
@@ -168,7 +169,7 @@ function AnalysisContent() {
             sessionStorage.setItem(`kumpas-report-${sessionId}`, JSON.stringify(report));
             sessionStorage.setItem(`kumpas-agent-data-${sessionId}`, JSON.stringify(agentData));
 
-            setState({ phase: "complete", report, structured, agentData });
+            setState({ phase: "complete", report, sessionIntake, agentData });
 
         } catch (err) {
             console.error("Pipeline error:", err);
@@ -185,14 +186,14 @@ function AnalysisContent() {
             if (raw) setSessionData(JSON.parse(raw));
 
             const cachedReport = sessionStorage.getItem(`kumpas-report-${sessionId}`);
-            const cachedStructured = sessionStorage.getItem(`kumpas-structured-${sessionId}`);
+            const cachedSessionIntake = sessionStorage.getItem(`kumpas-session-intake-${sessionId}`);
             const cachedAgentData = sessionStorage.getItem(`kumpas-agent-data-${sessionId}`);
 
-            if (cachedReport && cachedStructured && cachedAgentData) {
+            if (cachedReport && cachedSessionIntake && cachedAgentData) {
                 setState({
                     phase: "complete",
                     report: JSON.parse(cachedReport) as AdjacentCareerReport,
-                    structured: JSON.parse(cachedStructured) as StructuredTranscript,
+                    sessionIntake: JSON.parse(cachedSessionIntake) as SessionIntakeOutput,
                     agentData: JSON.parse(cachedAgentData),
                 });
                 return;
@@ -214,7 +215,7 @@ function AnalysisContent() {
                 <LoadingScreen completedStages={state.completedStages} />
             )}
             {state.phase === "complete" && (
-                <ReportView report={state.report} structured={state.structured} agentData={state.agentData} onNewSession={onNewSession} />
+                <ReportView report={state.report} sessionIntake={state.sessionIntake} counselorNotes={sessionData?.counselorNotes || ""} agentData={state.agentData} onNewSession={onNewSession} />
             )}
             {state.phase === "error" && (
                 <ErrorView

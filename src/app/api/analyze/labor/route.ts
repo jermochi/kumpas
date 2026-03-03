@@ -4,12 +4,12 @@ import { buildLaborSystemPrompt } from '@/lib/analysts/labor';
 
 export async function POST(req: Request) {
   try {
-    const { transcript, careerPathTitle } = await req.json();
-    if (!transcript || !careerPathTitle)
-      return NextResponse.json({ error: 'Transcript and careerPathTitle required' }, { status: 400 });
+    const { sessionIntakeOutput, careerPathTitle } = await req.json();
+    if (!sessionIntakeOutput || !careerPathTitle)
+      return NextResponse.json({ error: 'Session Intake Output and careerPathTitle required' }, { status: 400 });
 
     const laborPrompt = buildLaborSystemPrompt(careerPathTitle);
-    const laborAnalysis = await callAgent(laborPrompt, transcript, process.env.LABOR_AGENT_API_KEY as string, "Labor Market Analyst");
+    const laborAnalysis = await callAgent(laborPrompt, sessionIntakeOutput, process.env.LABOR_AGENT_API_KEY as string, "Labor Market Analyst");
 
     return NextResponse.json({ status: 'success', data: laborAnalysis });
   } catch (error) {

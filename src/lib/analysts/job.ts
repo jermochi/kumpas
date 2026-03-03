@@ -1,4 +1,4 @@
-import { getSystemInstructions, getFilteredJsonContexts } from '../utils';
+import { getSystemInstructions, getFilteredJsonContexts } from '../server-utils';
 
 export function buildJobSystemPrompt(careerPathTitle: string): string {
   const baseInstructions = getSystemInstructions('job_analyst.md');

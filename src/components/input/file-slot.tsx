@@ -36,34 +36,36 @@ export default function FileSlot({ index, file, docType, excludeTypes = [], onFi
   return (
     <div className={`rounded-xl border bg-white overflow-hidden transition-colors ${file ? "border-sage" : "border-black/[0.08]"}`}>
       {/* Header */}
-      <div className="flex items-center gap-3 p-3 bg-black/[0.015]">
-        <div className="flex items-center gap-2 min-w-[100px]">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-black/[0.015]">
+        <div className="flex items-center gap-2 sm:min-w-[100px]">
           <span className={`flex h-[22px] w-[22px] items-center justify-center rounded-full text-[11px] font-bold ${file ? "bg-sage text-white" : "bg-black/[0.06] text-charcoal-3"}`}>
             {file ? <Check size={13} /> : index}
           </span>
           <span className="text-[13px] font-semibold text-charcoal-2">Document {index}</span>
         </div>
 
-        <select
-          className="flex-1 rounded-md border border-black/[0.1] bg-white px-2.5 py-1.5 text-[13px] text-charcoal-2 outline-none focus:border-sage"
-          value={docType}
-          onChange={(e) => onTypeChange(e.target.value)}
-        >
-          <option value="">Select document type…</option>
-          {availableTypes.map(t => (
-            <option key={t.value} value={t.value}>{t.label}</option>
-          ))}
-        </select>
-
-        {!file && (
-          <button
-            type="button"
-            className="inline-flex items-center gap-1.5 rounded-md border border-black/[0.1] bg-white px-3 py-1.5 text-xs font-medium text-charcoal-2 transition-colors hover:bg-black/[0.02] cursor-pointer"
-            onClick={() => inputRef.current?.click()}
+        <div className="flex w-full sm:flex-1 items-center gap-2">
+          <select
+            className="flex-1 w-0 min-w-0 rounded-md border border-black/[0.1] bg-white px-2.5 py-1.5 text-[13px] text-charcoal-2 outline-none focus:border-sage"
+            value={docType}
+            onChange={(e) => onTypeChange(e.target.value)}
           >
-            <Upload size={14} /> Upload
-          </button>
-        )}
+            <option value="">Select type…</option>
+            {availableTypes.map(t => (
+              <option key={t.value} value={t.value}>{t.label}</option>
+            ))}
+          </select>
+
+          {!file && (
+            <button
+              type="button"
+              className="shrink-0 inline-flex items-center gap-1.5 rounded-md border border-black/[0.1] bg-white px-3 py-1.5 text-xs font-medium text-charcoal-2 transition-colors hover:bg-black/[0.02] cursor-pointer"
+              onClick={() => inputRef.current?.click()}
+            >
+              <Upload size={14} /> Upload
+            </button>
+          )}
+        </div>
       </div>
 
       <input ref={inputRef} type="file" accept="image/*,.pdf" className="hidden" onChange={(e) => handleFile(e.target.files?.[0] ?? null)} />

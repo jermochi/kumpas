@@ -1,0 +1,43 @@
+/* Analysis page — scoped module */
+
+/* ── agent spinner ── */
+.spinSlow {
+  animation: spin 3s linear infinite;
+}
+
+.spinSlowReverse {
+  animation: spinReverse 2.5s linear infinite;
+}
+
+@keyframes spinReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* ── fullscreen modal ── */
+.modalBackdropIn {
+  animation: modalFadeIn 0.25s ease-out;
+}
+
+.modalContentIn {
+  animation: modalScaleIn 0.25s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modalScaleIn {
+  from { opacity: 0; transform: scale(0.95) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}
+
+/* ── scrollbar ── */
+.scrollbarThin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255 255 255 / 0.15) transparent;
+}
+.scrollbarThin::-webkit-scrollbar { width: 4px; }
+.scrollbarThin::-webkit-scrollbar-track { background: transparent; }
+.scrollbarThin::-webkit-scrollbar-thumb { background: rgba(255 255 255 / 0.15); border-radius: 2px; }

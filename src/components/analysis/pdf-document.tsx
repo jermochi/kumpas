@@ -1,5 +1,5 @@
 import React from "react";
-import type { AdjacentCareerReport, StructuredTranscript, AgentKey, AgentPanelData } from "@/lib/analysis-types";
+import type { AdjacentCareerReport, SessionIntakeOutput, AgentKey, AgentPanelData } from "@/lib/analysis-types";
 
 /** Strip technical source references so labels read naturally for counselors */
 function cleanLabel(raw: string): string {
@@ -12,12 +12,13 @@ function cleanLabel(raw: string): string {
 
 interface PdfDocumentProps {
     report: AdjacentCareerReport;
-    structured: StructuredTranscript;
+    sessionIntake: SessionIntakeOutput;
+    counselorNotes: string;
     agentData: Record<AgentKey, AgentPanelData>;
 }
 
 export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
-    ({ report, structured, agentData }, ref) => {
+    ({ report, sessionIntake, counselorNotes, agentData }, ref) => {
         // Prepare some structured score and verdict bindings
         const agents: AgentKey[] = ["feasibility", "labor_market", "job_demand"];
 
@@ -47,7 +48,7 @@ export const PdfDocument = React.forwardRef<HTMLDivElement, PdfDocumentProps>(
                                 Kumpas · Career Assessment Report
                             </p>
                             <h1 style={{ fontSize: "28px", fontWeight: "900", color: "#000", margin: 0, lineHeight: 1.1 }}>
-                                {structured.career_path || "Career"}
+                                {sessionIntake.career_goal.title || "Career"}
                             </h1>
                         </div>
                         <div style={{ textAlign: "right" }}>
