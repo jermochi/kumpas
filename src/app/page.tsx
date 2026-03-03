@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   Sparkles,
@@ -17,8 +17,17 @@ import {
   Award,
   BarChart3,
   ArrowRight,
+  RotateCcw,
+  Plus,
 } from "lucide-react";
+import Link from "next/link";
 import styles from "@/styles/landing.module.css";
+import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel,
+  AlertDialogContent, AlertDialogDescription, AlertDialogFooter,
+  AlertDialogHeader, AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { clearAllFilesFromIDB } from "@/lib/idb-files";
 
 /* ─── floating icon config ─── */
 const FLOATING_ICONS = [
@@ -39,12 +48,74 @@ const BUBBLE_PHRASES = [
   { text: "\"What motivates you?\"", x: "75%", y: "70%", delay: 0.8 },
 ];
 
+/** Scan sessionStorage for the most recent kumpas session with a completed report. */
+function findPreviousSession(): { sessionId: string; careerTitle: string } | null {
+  try {
+    for (let i = 0; i < sessionStorage.length; i++) {
+      const key = sessionStorage.key(i);
+      if (key && key.startsWith("kumpas-report-")) {
+        const sessionId = key.replace("kumpas-report-", "");
+        // Check that session data also exists
+        const sessionRaw = sessionStorage.getItem(`kumpas-session-${sessionId}`);
+        const intakeRaw = sessionStorage.getItem(`kumpas-session-intake-${sessionId}`);
+        if (sessionRaw && intakeRaw) {
+          try {
+            const intake = JSON.parse(intakeRaw);
+            return {
+              sessionId,
+              careerTitle: intake?.career_goal?.title || "Previous Session",
+            };
+          } catch {
+            return { sessionId, careerTitle: "Previous Session" };
+          }
+        }
+      }
+    }
+  } catch {
+    // sessionStorage not available
+  }
+  return null;
+}
+
 export default function LandingPage() {
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const [showResumeDialog, setShowResumeDialog] = useState(false);
+  const [previousSession, setPreviousSession] = useState<{ sessionId: string; careerTitle: string } | null>(null);
 
   useEffect(() => {
     setMounted(true);
+    setPreviousSession(findPreviousSession());
   }, []);
+
+  const handleGetStarted = () => {
+    if (previousSession) {
+      setShowResumeDialog(true);
+    } else {
+      router.push("/input");
+    }
+  };
+
+  const handleResume = () => {
+    setShowResumeDialog(false);
+    if (previousSession) {
+      router.push(`/analysis?session=${previousSession.sessionId}`);
+    }
+  };
+
+  const handleNewSession = () => {
+    setShowResumeDialog(false);
+    // Clear old session data
+    if (previousSession) {
+      const sid = previousSession.sessionId;
+      sessionStorage.removeItem(`kumpas-session-${sid}`);
+      sessionStorage.removeItem(`kumpas-session-intake-${sid}`);
+      sessionStorage.removeItem(`kumpas-report-${sid}`);
+      sessionStorage.removeItem(`kumpas-agent-data-${sid}`);
+      clearAllFilesFromIDB().catch(() => {});
+    }
+    router.push("/input");
+  };
 
   return (
     <div className="relative min-h-[calc(100vh-64px)] overflow-hidden bg-background font-sans">
@@ -119,9 +190,9 @@ export default function LandingPage() {
         </p>
 
         {/* CTA button */}
-        <Link
-          href="/input"
-          className={`${styles.fadeUp} ${styles.ctaButton} group mt-10 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-sm font-semibold text-cream shadow-btn transition-all duration-300 hover:scale-[1.04] hover:shadow-lg active:scale-[0.98] sm:text-base`}
+        <button
+          onClick={handleGetStarted}
+          className={`${styles.fadeUp} ${styles.ctaButton} group mt-10 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-sm font-semibold text-cream shadow-btn transition-all duration-300 hover:scale-[1.04] hover:shadow-lg active:scale-[0.98] sm:text-base cursor-pointer`}
           style={{ animationDelay: "0.55s" }}
         >
           Get Started
@@ -129,7 +200,7 @@ export default function LandingPage() {
             size={18}
             className="transition-transform duration-300 group-hover:translate-x-1"
           />
-        </Link>
+        </button>
       </section>
 
       {/* Footer */}
@@ -146,6 +217,39 @@ export default function LandingPage() {
           {" "}·{" "}RA 10173 Compliant
         </p>
       </footer>
+
+      {/* ── Resume Session Dialog ── */}
+      <AlertDialog open={showResumeDialog} onOpenChange={setShowResumeDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Previous session found</AlertDialogTitle>
+            <AlertDialogDescription className="text-black">
+              You have an existing analysis for{" "}
+              <strong className="text-[#364839]">{previousSession?.careerTitle}</strong>.
+              Would you like to resume viewing it or start a new session?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setShowResumeDialog(false)}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleNewSession}
+              className="bg-[var(--charcoal)] text-white border border-black/10 hover:bg-[var(--charcoal)]/90"
+            >
+              <Plus size={14} className="mr-1.5" />
+              New Session
+            </AlertDialogAction>
+            <AlertDialogAction
+              onClick={handleResume}
+              className="bg-[var(--sage)] text-white hover:bg-[var(--sage)]/90"
+            >
+              <RotateCcw size={14} className="mr-1.5" />
+              Resume Analysis
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

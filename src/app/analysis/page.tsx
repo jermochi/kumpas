@@ -17,6 +17,7 @@ import { buildAgentPanels } from "@/lib/analysis-helpers";
 import { STAGE_ORDER } from "@/components/analysis/processing-view";
 import ReportView from "@/components/analysis/report-view";
 import ErrorView from "@/components/analysis/error-view";
+import { getFilesFromIDB, deleteFilesFromIDB } from "@/lib/idb-files";
 
 function AnalysisContent() {
     const [state, setState] = useState<AnalysisState>({
@@ -31,8 +32,16 @@ function AnalysisContent() {
     const sessionId = searchParams.get("session");
 
     const onNewSession = useCallback(() => {
-        router.push("/");
-    }, [router]);
+        // Clear all session data for a fresh start
+        if (sessionId) {
+            sessionStorage.removeItem(`kumpas-session-${sessionId}`);
+            sessionStorage.removeItem(`kumpas-session-intake-${sessionId}`);
+            sessionStorage.removeItem(`kumpas-report-${sessionId}`);
+            sessionStorage.removeItem(`kumpas-agent-data-${sessionId}`);
+            deleteFilesFromIDB(sessionId).catch(() => {});
+        }
+        router.push("/input");
+    }, [router, sessionId]);
 
     const runPipeline = useCallback(async () => {
         if (!sessionId) {
@@ -51,6 +60,37 @@ function AnalysisContent() {
         setState({ phase: "processing", completedStages: [] });
 
         try {
+            // ── Stage 0: Document Parsing ────────────────────────────
+            const storedFiles = await getFilesFromIDB(sessionId);
+            const extractedDocs: any[] = [];
+
+            if (Object.keys(storedFiles).length > 0) {
+                for (const [slotIndex, stored] of Object.entries(storedFiles)) {
+                    try {
+                        const fd = new FormData();
+                        fd.append("file", stored.blob, stored.name);
+                        const res = await fetch("/api/process-assessment", { method: "POST", body: fd });
+                        if (res.ok) {
+                            const data = await res.json();
+                            extractedDocs.push(data);
+                        } else {
+                            console.error(`Failed to process document ${slotIndex}`);
+                        }
+                    } catch (e) {
+                        console.error("Doc processing error", e);
+                    }
+                }
+                // Clean up IndexedDB after processing
+                await deleteFilesFromIDB(sessionId);
+            }
+
+            setState(prev => ({ ...prev, completedStages: ["documentParsing"] }));
+
+            // ── Stage 0.5: Notes Parsing (visual stage) ──────────────
+            // Small delay for the placebo effect — notes are already structured
+            await new Promise(r => setTimeout(r, 800));
+            setState(prev => ({ ...prev, completedStages: ["documentParsing", "notesParsing"] }));
+
             // ── Stage 1: Session Intake Layer ────────────────────────
             let sessionIntake: SessionIntakeOutput | null = null;
             if (session.parentSessionId) {
@@ -67,7 +107,7 @@ function AnalysisContent() {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
                         counselorNotes: session.counselorNotes,
-                        extractedDocuments: session.extractedDocuments
+                        extractedDocuments: extractedDocs.length > 0 ? extractedDocs : session.extractedDocuments,
                     }),
                 });
                 if (!tlRes.ok) {
@@ -87,7 +127,7 @@ function AnalysisContent() {
                 sessionIntake.career_goal.source = "derived";
             }
 
-            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer"] }));
+            setState(prev => ({ ...prev, completedStages: ["documentParsing", "notesParsing", "transcriptionLayer"] }));
 
             sessionStorage.setItem(
                 `kumpas-session-intake-${sessionId}`,
@@ -128,7 +168,7 @@ function AnalysisContent() {
 
             setState(prev => ({
                 ...prev,
-                completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "jobDemand"],
+                completedStages: ["documentParsing", "notesParsing", "transcriptionLayer", "laborMarket", "feasibility", "jobDemand"],
             }));
 
             // ── Stage 5: Adjacent Career Finder ─────────────────────
@@ -161,7 +201,7 @@ function AnalysisContent() {
 
             const agentData = buildAgentPanels(labor, feasibility, jobDemand);
 
-            setState(prev => ({ ...prev, completedStages: ["transcriptionLayer", "laborMarket", "feasibility", "jobDemand", "adjacentCareer"] }));
+            setState(prev => ({ ...prev, completedStages: ["documentParsing", "notesParsing", "transcriptionLayer", "laborMarket", "feasibility", "jobDemand", "adjacentCareer"] }));
             // Give the UI a moment to show 100% completion before switching
             await new Promise((r) => setTimeout(r, 1000));
 
