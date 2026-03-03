@@ -185,8 +185,8 @@ export default function LandingPage() {
           style={{ animationDelay: "0.4s" }}
         >
           Three AI specialists analyze labor markets,
-          student feasibility, and emotional aspects to craft a personalized
-          guidance roadmap.
+          student feasibility, and job demands to craft a personalized
+          career assessment.
         </p>
 
         {/* CTA button */}
