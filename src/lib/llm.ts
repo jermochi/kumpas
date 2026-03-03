@@ -1,4 +1,4 @@
-import { GoogleGenAI, HarmCategory, HarmBlockThreshold } from '@google/genai';
+import { GoogleGenAI, HarmCategory, HarmBlockThreshold, Part } from '@google/genai';
 
 /**
  * Sanitize a raw LLM output string so it can be safely JSON.parsed.
@@ -58,23 +58,25 @@ function extractJsonBlock(raw: string): string | null {
 }
 
 export async function callAgent(
-  systemPromptText: string,
-  userTranscript: string,
+  systemInstruction: string,
+  inputData: string,
   apiKey: string,
-  analyst: string = "Agent"
+  agentName: string = "Agent"
 ) {
   if (!apiKey) {
-    throw new Error("API key is missing for this agent.");
+    throw new Error(`API Key missing for ${agentName}`);
   }
 
-  const ai = new GoogleGenAI({ apiKey: apiKey });
-
   try {
-    const response = await ai.models.generateContent({
+    const ai = new GoogleGenAI({ apiKey });
+
+    // We send a unified message combining system instructions and user input
+    // because some models prefer this formatting over a separate init config
+    const req = {
       model: 'gemini-2.5-flash',
-      contents: `Analyze this session transcript: ${userTranscript}`,
+      contents: `Analyze this context provided by the user: ${inputData}`,
       config: {
-        systemInstruction: systemPromptText,
+        systemInstruction,
         responseMimeType: 'application/json',
         safetySettings: [
           {
@@ -95,28 +97,30 @@ export async function callAgent(
           },
         ]
       }
-    });
+    };
 
-  const textOutput = response.text;
+    const response = await ai.models.generateContent(req);
 
-  console.log(`Text output: ${textOutput}`);
-  console.log(`User transcript: ${userTranscript}`);
+    const textOutput = response.text;
 
-  // Token metadata for estimating costs and monitoring usage
-  const usage = response.usageMetadata;
-  const pad = (s: string | number, n: number) => String(s).padEnd(n);
-  const lines = [
-    `\nToken Usage — ${analyst}`,
-    `${"─".repeat(35)}`,
-    `${pad("Prompt (input)",          25)} ${pad(usage?.promptTokenCount        ?? 0, 8)}`,
-    `${pad("Response (output)",       25)} ${pad(usage?.candidatesTokenCount    ?? 0, 8)}`,
-    `${pad("Thinking",                25)} ${pad(usage?.thoughtsTokenCount      ?? 0, 8)}`,
-    `${pad("Cached input",            25)} ${pad(usage?.cachedContentTokenCount ?? 0, 8)}`,
-    `${"─".repeat(35)}`,
-    `${pad("Total",                   25)} ${pad(usage?.totalTokenCount         ?? 0, 8)}`,
-  ];
+    console.log(`Text output: ${textOutput}`);
+    console.log(`User context: ${inputData}`);
 
-  console.log(lines.join("\n"));
+    // Token metadata for estimating costs and monitoring usage
+    const usage = response.usageMetadata;
+    const pad = (s: string | number, n: number) => String(s).padEnd(n);
+    const lines = [
+      `\nToken Usage — ${agentName}`,
+      `${"─".repeat(35)}`,
+      `${pad("Prompt (input)", 25)} ${pad(usage?.promptTokenCount ?? 0, 8)}`,
+      `${pad("Response (output)", 25)} ${pad(usage?.candidatesTokenCount ?? 0, 8)}`,
+      `${pad("Thinking", 25)} ${pad(usage?.thoughtsTokenCount ?? 0, 8)}`,
+      `${pad("Cached input", 25)} ${pad(usage?.cachedContentTokenCount ?? 0, 8)}`,
+      `${"─".repeat(35)}`,
+      `${pad("Total", 25)} ${pad(usage?.totalTokenCount ?? 0, 8)}`,
+    ];
+
+    console.log(lines.join("\n"));
 
     if (!textOutput) {
       console.error("Gemini rejected generation. Safety settings limits reached? Candidates info:", JSON.stringify(response));
@@ -148,5 +152,65 @@ export async function callAgent(
   } catch (error) {
     console.error("Gemini API Error:", error);
     return { error: `Failed to generate or parse agent output: ${error instanceof Error ? error.message : String(error)}` };
+  }
+}
+
+export async function extractDocumentData(
+  systemInstruction: string,
+  parts: Part[],
+  apiKey: string
+) {
+  if (!apiKey) {
+    throw new Error("API key is missing for document extraction.");
+  }
+
+  const ai = new GoogleGenAI({ apiKey: apiKey });
+
+  try {
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: [
+        {
+          role: 'user',
+          parts: parts
+        }
+      ],
+      config: {
+        systemInstruction,
+        responseMimeType: 'application/json'
+      }
+    });
+
+    const textOutput = response.text;
+
+    if (!textOutput) {
+      console.error("Gemini rejected generation. Safety settings limits reached? Candidates info:", JSON.stringify(response));
+      throw new Error("Gemini returned an empty response.");
+    }
+
+    // Direct parse
+    try {
+      return JSON.parse(textOutput);
+    } catch {
+      // Sanitize and parse
+      try {
+        return JSON.parse(sanitizeJsonString(textOutput));
+      } catch {
+        // Extract JSON block
+        const extracted = extractJsonBlock(textOutput);
+        if (extracted) {
+          try {
+            return JSON.parse(extracted);
+          } catch (e3) {
+            console.error("All JSON parse attempts failed. Raw output preview:", textOutput.slice(0, 500));
+            throw e3;
+          }
+        }
+        throw new Error("No JSON object found in LLM output");
+      }
+    }
+  } catch (error) {
+    console.error("Gemini Document Extraction Error:", error);
+    throw new Error(`Extraction failed: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
