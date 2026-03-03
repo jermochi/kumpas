@@ -32,8 +32,16 @@ function AnalysisContent() {
     const sessionId = searchParams.get("session");
 
     const onNewSession = useCallback(() => {
+        // Clear all session data for a fresh start
+        if (sessionId) {
+            sessionStorage.removeItem(`kumpas-session-${sessionId}`);
+            sessionStorage.removeItem(`kumpas-session-intake-${sessionId}`);
+            sessionStorage.removeItem(`kumpas-report-${sessionId}`);
+            sessionStorage.removeItem(`kumpas-agent-data-${sessionId}`);
+            deleteFilesFromIDB(sessionId).catch(() => {});
+        }
         router.push("/");
-    }, [router]);
+    }, [router, sessionId]);
 
     const runPipeline = useCallback(async () => {
         if (!sessionId) {
