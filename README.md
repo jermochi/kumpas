@@ -11,6 +11,11 @@
 
 ---
 
+## Awards & Recognition
+🏆 **2nd Runner Up — Innovation Cup Cebu 2026** Developed during an 11-day innovation sprint, Kumpas was selected from the Top 15 university teams across Cebu for addressing UN Sustainable Development Goal 8 (Decent Work & Economic Growth) through a multi-AI specialist architecture.
+
+---
+
 ## Overview
 
 Kumpas generates structured career assessment reports from a student's existing academic data — NCAE results, NAT scores, and counselor notes — using a five-AI pipeline built on Next.js and the Gemini API.
